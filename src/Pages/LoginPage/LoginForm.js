@@ -26,7 +26,16 @@ class LoginForm extends React.Component{
     const errors = this.validate(this.state.data);
     this.setState({errors})
     if(Object.keys(errors).length === 0) {
-      this.props.submit(this.state.data);
+      this.setState({loading: true})
+      this.props
+        .submit(this.state.data)
+        .catch((error) => {
+          if (error.response) {
+            // console.log(error.response.data)
+            this.setState({ errors: error.response.data, loading: false })
+          }
+        });
+        
     }
   }
 
@@ -38,7 +47,7 @@ class LoginForm extends React.Component{
   }
 
   render(){
-    const { data, errors } = this.state
+    const { data, errors, loading } = this.state
     return (
       <div className='login-form'>
         <Grid
@@ -47,12 +56,16 @@ class LoginForm extends React.Component{
           verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
+          
+            <Image style={{marginBottom: 20}} verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
 
-            <Image verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
-
-
-            <Form size='large' onSubmit={this.onSubmit} >
-              
+            <Form size='large' onSubmit={this.onSubmit} loading={loading}>
+              {
+                errors.err && <Message negative>
+                  <Message.Header>{errors.err}</Message.Header>
+                  
+                </Message>
+              }
                 <Form.Input error={!!errors.email}
                   fluid
                   icon='user'

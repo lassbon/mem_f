@@ -14,11 +14,17 @@ import App from './App';
 import rootReducer from './rootReducer'
 
 import registerServiceWorker from './registerServiceWorker';
+import { userLoggedIn } from './actions/auth';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
+
+if (localStorage.acciJWT) {
+  const user = { token: localStorage.acciJWT }
+  store.dispatch(userLoggedIn(user))
+}
 
 render(
   <BrowserRouter>

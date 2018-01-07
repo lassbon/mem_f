@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types'
 
-import Home from './Home/Home'
+import Home from './Home/Home';
+import WelcomePage from "./WelcomePage/WelcomePage";
 
 const LandingPage = ({ isAuthenticated }) => (
   <React.Fragment>
     { isAuthenticated ? 
       <Home /> : 
-      <div>
-        <h1>hello</h1>
-        <Link to='/login'>Login</Link>
-      </div> 
+      <WelcomePage /> 
     }
   </React.Fragment>
 )

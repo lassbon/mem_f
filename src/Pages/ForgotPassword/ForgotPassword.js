@@ -19,7 +19,7 @@ class ForgotPassword extends React.Component {
     return (
       <div>
         {this.state.success ? (
-          <Message>Email has been sent.</Message>
+          <Message>Please check your email.</Message>
         ) : (
             <ForgotPasswordForm submit={this.submit} />
           )}

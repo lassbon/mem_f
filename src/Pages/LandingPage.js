@@ -11,7 +11,9 @@ const LandingPage = ({ isAuthenticated, logout }) => (
   <React.Fragment>
     { isAuthenticated ? 
       <Button onClick={() => logout()}>Logout</Button> : 
-      <Link to='/login'>Login</Link> 
+      <div>
+        <Link to='/login'>Login</Link> or <Link to="/signup">Signup</Link>
+      </div>
     }
   </React.Fragment>
 )

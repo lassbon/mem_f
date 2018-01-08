@@ -65,8 +65,8 @@ class SignupForm extends React.Component {
     if (!data.companyRepPhone2) errors.companyRepPhone2 = "company rep phone number required";
     if (!isEmail(data.companyRepEmail1)) errors.companyRepEmail1 = "invalid email";
     if (!isEmail(data.companyRepEmail2)) errors.companyRepEmail2 = "invalid email";
-    if (!data.referrer1) errors.referrer1 = "please provide referrer";
-    if (!data.referrer2) errors.referrer2 = "please provide referrer";
+    if (!isEmail(data.referrer1)) errors.referrer1 = "invalid email";
+    if (!isEmail(data.referrer2)) errors.referrer2 = "invalid email";
 
     return errors;
   };
@@ -83,7 +83,7 @@ class SignupForm extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 550 }}>
             <Image style={{ marginBottom: 20 }} verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit} loading={loading}>
               <Form.Field error={!!errors.company}>
                 <input
                   type="text"
@@ -241,10 +241,10 @@ class SignupForm extends React.Component {
               <Form.Field error={!!errors.referrer1}>
                 
                 <input
-                  type="text"
+                  type="email"
                   id="referrer1"
                   name="referrer1"
-                  placeholder="referrer"
+                  placeholder="referrer email"
                   value={data.referrer1}
                   onChange={this.onChange}
                 />
@@ -254,10 +254,10 @@ class SignupForm extends React.Component {
               <Form.Field error={!!errors.referrer2}>
                 
                 <input
-                  type="text"
+                  type="email"
                   id="referrer2"
                   name="referrer2"
-                  placeholder="referrer"
+                  placeholder="referrer email"
                   value={data.referrer2}
                   onChange={this.onChange}
                 />

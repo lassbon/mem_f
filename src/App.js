@@ -14,8 +14,8 @@ const App = ({location}) => (
   <div>
     <Route location={location} path='/' exact component={LandingPage} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
-    <Route location={location} path='/signup' exact component={SignUpPage} />
-    <Route location={location} path='/forgotpassword' exact component={ForgotPassword} />
+    <GuestRoute location={location} path='/signup' exact component={SignUpPage} />
+    <GuestRoute location={location} path='/forgotpassword' exact component={ForgotPassword} />
     <GuestRoute location={location} path='/login' exact component={LoginPage} />
     <UserRoute location={location} path='/home' exact component={Home} />
   </div>

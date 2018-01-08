@@ -1,5 +1,7 @@
 import React from 'react';
-import { Grid, Container, Segment, Image} from 'semantic-ui-react';
+import { Grid, Container, Segment, Image, Button} from 'semantic-ui-react';
+import {Link} from 'react-router-dom'
+
 import LOGO from '../../images/ACCIHD-LOGO.png'
 
 const WelcomePage = () => (
@@ -10,7 +12,8 @@ const WelcomePage = () => (
           <Image src={LOGO} alt="acci logo" />
         </Grid.Column>
         <Grid.Column computer={6} mobile={16} tablet={6}>
-          <Segment>Content</Segment>
+          <Button><Link to='/login'>Login</Link></Button>
+          <Button><Link to='/signup'>signup</Link></Button>
         </Grid.Column>
       </Grid>
     </Container>

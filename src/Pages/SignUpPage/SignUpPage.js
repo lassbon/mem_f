@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm'
 
+import { signup } from "../../actions/users";
+
 class SignupPage extends React.Component {
 
   submit = (data) => 
@@ -15,12 +17,12 @@ class SignupPage extends React.Component {
   }
 };
 
-SignupPage.PropTypes = {
+SignupPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
   signup: PropTypes.func.isRequired
 }
 
-// export default connect(null, {signup})(SignupPage);
-export default SignupPage
+export default connect(null, {signup})(SignupPage);
+// export default SignupPage

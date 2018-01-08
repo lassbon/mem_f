@@ -6,27 +6,23 @@ import PropTypes from 'prop-types'
 import * as actions from "../../actions/auth";
 import ConfirmEmailMessage from '../../components/messages/ConfirmEmailMessage';
 import PostStatus from "../../components/Post/Post";
+import Header from "semantic-ui-react/dist/commonjs/elements/Header/Header";
 
-// const Home = ({logout}) => (
 const Home = ({isConfirmed}) => (
   <React.Fragment>
-    {!isConfirmed && <ConfirmEmailMessage />}
+    <h1>Hello world</h1>
   </React.Fragment>
 )
 
-Home.propTypes = {
-  isConfirmed: PropTypes.bool.isRequired
-}
-
-function mapStateToProps(state) {
-  return {
-    isConfirmed: !!state.user.confirmed
-  }
-}
-
 // Home.propTypes = {
-//   logout: PropTypes.func.isRequired
+//   isConfirmed: PropTypes.bool.isRequired
 // }
 
-// export default connect({logout: actions.logout})(Home)
-export default connect(mapStateToProps)(Home)
+// function mapStateToProps(state) {
+//   return {
+//     isConfirmed: !!state.user.confirmed
+//   }
+// }
+
+// export default connect(mapStateToProps)(Home)
+export default Home

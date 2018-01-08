@@ -23,8 +23,8 @@ LandingPage.propTypes = {
 
 function mapStateToProps(state) {
   return{
-    // isAuthenticated: !!state.user.token
-    isAuthenticated: !!state.user.email
+    isAuthenticated: !!state.user.token
+    // isAuthenticated: !!state.user.email
   }
 }
 

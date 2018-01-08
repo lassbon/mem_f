@@ -15,6 +15,7 @@ import rootReducer from './rootReducer'
 
 import registerServiceWorker from './registerServiceWorker';
 import { userLoggedIn } from './actions/auth';
+import setAuthorizationHeader from './actions/setAuthorizationHeader';
 
 const store = createStore(
   rootReducer,
@@ -23,7 +24,8 @@ const store = createStore(
 
 if (localStorage.acciJWT) {
   const user = { token: localStorage.acciJWT }
-  store.dispatch(userLoggedIn(user))
+  store.dispatch(userLoggedIn(user)) 
+  setAuthorizationHeader(localStorage.acciJWT);
 }
 
 render(

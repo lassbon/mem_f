@@ -83,7 +83,7 @@ class SignupForm extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 550 }}>
             <Image style={{ marginBottom: 20 }} verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
-            <Form onSubmit={this.onSubmit} loading={loading}>
+            <Form onSubmit={this.onSubmit}>
               <Form.Field error={!!errors.company}>
                 <input
                   type="text"

@@ -25,7 +25,7 @@ const store = createStore(
 if (localStorage.acciJWT) {
   const user = { token: localStorage.acciJWT }
   store.dispatch(userLoggedIn(user)) 
-  setAuthorizationHeader(localStorage.acciJWT);
+  // setAuthorizationHeader(localStorage.acciJWT);
 }
 
 render(

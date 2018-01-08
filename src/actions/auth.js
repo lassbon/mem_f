@@ -11,13 +11,14 @@ export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT
 })
 
+
 export const login = (credentials) => (dispatch) => 
   api.user.login(credentials).then(user => {
-    // localStorage.acciJWT = user.token
+
     // localStorage.acciJWT = user.token
     localStorage.acciJWT = user.email
     
-    setAuthorizationHeader(user.email);
+    // setAuthorizationHeader(user.email);
     // setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user))
   })

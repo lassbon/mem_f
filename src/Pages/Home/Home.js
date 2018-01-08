@@ -10,7 +10,7 @@ import PostStatus from "../../components/Post/Post";
 // const Home = ({logout}) => (
 const Home = ({isConfirmed}) => (
   <React.Fragment>
-    <PostStatus />
+    {!isConfirmed && <ConfirmEmailMessage />}
   </React.Fragment>
 )
 

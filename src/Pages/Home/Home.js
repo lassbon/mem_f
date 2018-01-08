@@ -5,13 +5,12 @@ import PropTypes from 'prop-types'
 
 import * as actions from "../../actions/auth";
 import ConfirmEmailMessage from '../../components/messages/ConfirmEmailMessage';
+import PostStatus from "../../components/Post/Post";
 
 // const Home = ({logout}) => (
 const Home = ({isConfirmed}) => (
   <React.Fragment>
-    {/* Home
-    <Button onClick={() => logout()}>Logout</Button> */}
-    {!isConfirmed && <ConfirmEmailMessage />}
+    <PostStatus />
   </React.Fragment>
 )
 

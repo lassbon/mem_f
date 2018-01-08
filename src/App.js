@@ -4,18 +4,20 @@ import PropTypes from "prop-types";
 
 import LandingPage from './Pages/LandingPage';
 import LoginPage from './Pages/LoginPage/LoginPage'
-import Home from './Pages/Home/Home';
+import Main from './components/Main';
 import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/UserRoute';
 import SignUpPage from './Pages/SignUpPage/SignUpPage';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 
 const App = ({location}) => (
   <div>
     <Route location={location} path='/' exact component={LandingPage} />
     <Route location={location} path='/login' exact component={LoginPage} />
     <Route location={location} path='/signup' exact component={SignUpPage} />
+    <Route location={location} path='/forgotpassword' exact component={ForgotPassword} />
     {/* <GuestRoute location={location} path='/login' exact component={LoginPage} /> */}
-    <UserRoute location={location} path='/home' exact component={Home} />
+    <UserRoute location={location} path='/main' exact component={Main} />
   </div>
 );
 

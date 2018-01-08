@@ -16,6 +16,7 @@ export const login = (credentials) => (dispatch) =>
     // localStorage.acciJWT = user.token
     // localStorage.acciJWT = user.token
     localStorage.acciJWT = user.email
+    
     setAuthorizationHeader(user.email);
     // setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user))
@@ -25,3 +26,6 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem('acciJWT')
     dispatch(userLoggedOut())
   }
+
+export const resetPasswordRequest = ({ email }) => () =>
+  api.user.resetPasswordRequest(email);

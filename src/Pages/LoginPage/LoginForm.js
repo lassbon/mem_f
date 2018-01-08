@@ -91,7 +91,10 @@ class LoginForm extends React.Component{
               
             </Form>
             <Message>
-              New to us? <a href='/signup'>Sign Up</a>
+              New to us? <a href='/signup' style={{color: 'var(--main-blue)'}}>Sign Up</a>
+            </Message>
+            <Message>
+              <a href='/forgotpassword' style={{color: 'var(--main-blue)'}}>forgot password?</a>
             </Message>
           </Grid.Column>
         </Grid>

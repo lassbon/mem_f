@@ -1,0 +1,12 @@
+.TimeLine {
+  /* margin-left: calc(var(--sidebar) + 7vw) !important; */
+  width: 50vw !important;
+}
+
+div.ui.cards.TimeLine > div > div.extra.content > div > button {
+  background: transparent;
+}
+
+.time {
+	padding: 0 !important
+}

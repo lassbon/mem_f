@@ -1,0 +1,14 @@
+.add_name {
+	width: 20px;
+	margin-left: 75vw !important;
+	position: fixed !important;
+	margin-top: 3vh !important;
+	/* top: 0 !important */
+}
+
+.add_name2 {
+	position: fixed !important;
+	width: 20px;
+	margin-left: 75vw !important;
+	margin-top: 45vh !important;
+}

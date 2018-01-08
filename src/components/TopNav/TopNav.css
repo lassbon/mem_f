@@ -1,0 +1,39 @@
+.top-menu {
+  background: var(--white) !important;
+  width: 83vw !important;
+  border-bottom: 1px solid #00000038 !important;
+  margin-left: var(--sidebar) !important;
+  padding: 10px;
+  padding-right: 20px;
+  /* margin-bottom: 200px !important; */
+}
+
+.top-menu > a {
+  color: var(--white) !important;
+}
+
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > a {
+  padding: 0;
+  margin-right: 20px;
+}
+
+#root
+  > div
+  > div.ui.secondary.top.fixed.top-menu.menu
+  > div.item
+  > div
+  > input[type="text"] {
+  width: 48.5vw;
+  margin-left: 1vw;
+}
+.search-box > input {
+  background: rgba(207, 202, 202, 0.47) !important;
+}
+
+.top-menu-end > a {
+  color: var(--white) !important;
+}
+
+.top-menu-end > a {
+  color: var(--white) !important;
+}

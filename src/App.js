@@ -9,6 +9,7 @@ import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 import SignUpPage from './Pages/SignUpPage/SignUpPage';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import Main from './components/Main';
 
 const App = ({location}) => (
   <div>
@@ -17,7 +18,7 @@ const App = ({location}) => (
     <GuestRoute location={location} path='/signup' exact component={SignUpPage} />
     <GuestRoute location={location} path='/forgotpassword' exact component={ForgotPassword} />
     <GuestRoute location={location} path='/login' exact component={LoginPage} />
-    <UserRoute location={location} path='/home' exact component={Home} />
+    <UserRoute location={location} path='/app' exact component={Main} />
   </div>
 );
 

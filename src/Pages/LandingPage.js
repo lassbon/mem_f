@@ -6,28 +6,29 @@ import { Button } from 'semantic-ui-react'
 
 import WelcomePage from "./WelcomePage/WelcomePage";
 import * as actions from "../actions/auth";
+import Home from '../Pages/Home/Home'
+import { Redirect } from 'react-router-dom';
+import Main from '../components/Main';
 
-const LandingPage = ({ isAuthenticated, logout }) => (
-  <React.Fragment>
-    { isAuthenticated ? 
-      <Button onClick={() => logout()}>Logout</Button> : 
-      <div>
-        <Link to='/login'>Login</Link> or <Link to="/signup">Signup</Link>
-      </div>
-    }
-  </React.Fragment>
-)
+
+const LandingPage = ({ isAuthenticated }) => (
+  <div>
+    {isAuthenticated ? (
+      <Main />
+    ) : (
+        <WelcomePage />
+      )}
+  </div>
+);
 
 LandingPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired
-}
+};
 
 function mapStateToProps(state) {
-  return{
+  return {
     isAuthenticated: !!state.user.token
-    // isAuthenticated: !!state.user.email
-  }
+  };
 }
 
-export default connect(mapStateToProps, { logout: actions.logout })(LandingPage)
+export default connect(mapStateToProps)(LandingPage);

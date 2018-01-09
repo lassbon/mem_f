@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import TopNav from "./TopNav/TopNav";
 import SideBar from "./SideBar/SideBar";
@@ -13,29 +13,24 @@ import Library from "../Pages/Library";
 import Discussions from "../Pages/Discussion";
 import Payment from "../Pages/Payment";
 
-class Main extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <TopNav />
-        <SideBar />
-        <Advert />
-        <main className="main">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            {/* <Route exact path="/profile" component={Profile} /> */}
-            <Route path="/profile/:friend" component={Profile2} />
-            <Route exact path="/project" component={Project} />
-            <Route exact path="/library" component={Library} />
-            <Route exact path="/discuss" component={Discussions} />
-            <Route exact path="/payment" component={Payment} />
-          </Switch>
-        </main>
+const Main = ({match}) => (
+  <React.Fragment>
+    <TopNav />
+    <SideBar />
+    <Advert />
+    <main className="main">
+      <Switch>
+        <Route path={`${match.path}`} exact component={Home} />
+        {/* <Route exact path={`${match.path}/profile`} component={Profile} /> */}
+        <Route path={`${match.path}/profile:friend`} component={Profile2} />
+        <Route exact path={`${match.path}/project`} component={Project} />
+        <Route exact path={`${match.path}/library`} component={Library} />
+        <Route exact path={`${match.path}/discuss`} component={Discussions} />
+        <Route exact path={`${match.path}/payment`} component={Payment} />
+        <Redirect to={`${match.url}`} />
+      </Switch>
+    </main>
+  </React.Fragment>
+)
 
-      </React.Fragment>
-    );
-  }
-}
-
-export default Main;
+export default Main

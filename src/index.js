@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import jwt from 'jsonwebtoken';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -23,8 +24,12 @@ const store = createStore(
 )
 
 if (localStorage.acciJWT) {
-  const user = { token: localStorage.acciJWT }
-  store.dispatch(userLoggedIn(user)) 
+  const user = jwt.decode(localStorage.acciJWT);
+  const payload = {
+    user,
+    token: localStorage.acciJWT
+  }
+  store.dispatch(userLoggedIn(payload)) 
   // setAuthorizationHeader(localStorage.acciJWT);
 }
 

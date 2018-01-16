@@ -17,10 +17,20 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      this.setState({ loading: true });
+      this.props.submit(this.state.data).catch(error => {
+        if (error.response) {
+          this.setState({ errors: error.response.data, loading: false });
+        }
+      });
+    }
   }
+
 
   render() {
     return (

@@ -2,9 +2,9 @@ import api from "../api";
 import { USER_LOGGED_IN,USER_LOGGED_OUT } from "../types";
 import setAuthorizationHeader from './setAuthorizationHeader'
 
-export const userLoggedIn = (user) => ({
+export const userLoggedIn = (payload) => ({
   type: USER_LOGGED_IN,
-  user
+  payload
 })
 
 export const userLoggedOut = () => ({
@@ -13,15 +13,13 @@ export const userLoggedOut = () => ({
 
 
 export const login = (credentials) => (dispatch) => 
-  api.user.login(credentials).then(user => {
-
-    // localStorage.acciJWT = user.token
-    localStorage.acciJWT = user.email
-    
-    // setAuthorizationHeader(user.email);
-    // setAuthorizationHeader(user.token);
-    dispatch(userLoggedIn(user))
-  })
+  api.user.login(credentials).then(
+    res => {
+      localStorage.acciJWT = res.token;
+      setAuthorizationHeader(res.token);
+      dispatch(userLoggedIn(res))
+    }
+  )
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('acciJWT')

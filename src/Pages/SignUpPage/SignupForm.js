@@ -1,55 +1,74 @@
-import React from "react";
-import { Button, Form, Grid, Image, Message } from "semantic-ui-react";
-import validator from "validator";
-import PropTypes from "prop-types";
+import React from 'react'
+import axios from 'axios'
+import { compose } from 'redux'
+import { Button, Form, Grid, Image, Message } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
+import validator from 'validator'
+import PropTypes from 'prop-types'
 
-import InlineError from "../../components/messages/InlineError";
-import "../LoginPage/login.css";
+import InlineError from '../../components/messages/InlineError'
+import '../LoginPage/login.css'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 class SignupForm extends React.Component {
   state = {
     data: {
-      email: "",
-      password: "",
-      confirmPassword: ""
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     loading: false,
-    errors: {}
-  };
+    errors: {},
+  }
+
+  signup = user =>
+    axios.post(`${BASEURL}api/v1/user`, user, {
+      headers: {
+        'Content-Type': 'application/form-data',
+        Accept: 'application/form-data',
+      },
+    })
 
   onChange = e =>
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    })
 
   onSubmit = () => {
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
+    const { history } = this.props
+    const errors = this.validate(this.state.data)
+    this.setState({ errors })
     if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(error => {
-        if (error.response) {
-          // console.log(error.response.data)
-          this.setState({ errors: error.response.data, loading: false });
-        }
-      });
+      this.setState({ loading: true })
+      this.signup(this.state.data)
+        .then(res => {
+          console.log('success', res)
+          history.push('/cont')
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log(error.response.data)
+            this.setState({ errors: error.response.data, loading: false })
+          }
+        })
     }
-  };
+  }
 
   validate = data => {
-    const errors = {};
-    if (!validator.isEmail(data.email)) errors.email = "invalid email";
-    if (!data.password) errors.password = "please enter a password";
-    return errors;
-  };
+    const errors = {}
+    if (!validator.isEmail(data.email)) errors.email = 'invalid email'
+    if (!data.password) errors.password = 'please enter a password'
+    return errors
+  }
 
   render() {
-    const { data, errors, loading } = this.state;
+    const { data, errors, loading } = this.state
     return (
       <Form size="large" onSubmit={this.onSubmit} loading={loading}>
         {errors.err && (
           <Message negative>
-            <Message.Header>{errors.err}</Message.Header>
+            <Message.Header>{errors.err.summary}</Message.Header>
           </Message>
         )}
         <Form.Input
@@ -90,12 +109,12 @@ class SignupForm extends React.Component {
           Signup
         </Button>
       </Form>
-    );
+    )
   }
 }
 
 SignupForm.propTypes = {
-  submit: PropTypes.func.isRequired
-};
+  // submit: PropTypes.func.isRequired,
+}
 
-export default SignupForm;
+export default withRouter(SignupForm)

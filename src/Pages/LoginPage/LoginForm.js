@@ -48,16 +48,7 @@ class LoginForm extends React.Component{
   render(){
     const { data, errors, loading } = this.state
     return (
-      <div className='login-form'>
-        <Grid
-          textAlign='center'
-          style={{ height: '100%' }}
-          verticalAlign='middle'
-        >
-          <Grid.Column style={{ maxWidth: 450 }}>
-          
-            <Image style={{marginBottom: 20}} verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
-
+      
             <Form size='large' onSubmit={this.onSubmit} loading={loading}>
               {
                 errors.err && <Message negative>
@@ -89,9 +80,6 @@ class LoginForm extends React.Component{
                 <Button color='teal' fluid size='large'>Login</Button>
               
             </Form>
-          </Grid.Column>
-        </Grid>
-      </div>
     )
   }
 }

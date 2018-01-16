@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, Image, Icon } from "semantic-ui-react";
+import { getPostData } from "../../utils/membership-api";
 
 import "./Timeline.css";
 function generateLikeCount() {
@@ -41,25 +42,43 @@ const postList = [
 ];
 
 class Timelines extends React.Component {
+
+  constructor() {
+    super()
+    this.state = { posts: [] }
+  }
+
+  getPosts() {
+    getPostData().then((posts) => {
+      this.setState(posts)
+    })
+  }
+
+  componentDidMount(){
+    this.getPosts();
+    console.log(this.posts)
+  }
+
   render() {
+    const {posts} = this.state
     return (
       <React.Fragment>
         <Card.Group className="TimeLine">
-          {this.props.items.map(item => (
-            <Card style={{ width: "100%" }} key={item.id}>
+          {posts.map((post, id) => (
+            <Card style={{ width: "100%" }} key={id}>
               <Card.Content>
                 <Image
                   floated="left"
                   size="mini"
                   circular
-                  src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                  src={post.username}
                 />
                 <Card.Header>Chuks Festus</Card.Header>
                 <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
-                <Card.Description>{item.text}</Card.Description>
+                <Card.Description>{post.postText}</Card.Description>
                 <Card.Description>
                   <img
-                    src="http://xinature.com/wp-content/uploads/2017/01/rivers-tree-night-mist-webs-river-blue-spider-creepy-wallpapers-download.jpg"
+                    src={post.postImage}
                     alt=""
                     style={{ width: "100%", marginTop: 10 }}
                   />

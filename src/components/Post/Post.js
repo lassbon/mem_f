@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 import { Card, Grid, Image, Form, TextArea, Button, Input } from "semantic-ui-react";
 
 import Timelines from "../TimeLine/Timeline";
@@ -12,6 +13,40 @@ class PostStatus extends React.Component {
     this.state = { items: [], text: "", file: '',imagePreviewUrl: ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    axios.post('http://localhsot:1337/api/v1/social/post/', newItem)
+
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(prevState => ({
+      items: prevState.items.concat(newItem),
+      text: ""
+    }));
+  }
+  handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
   }
 
   render() {
@@ -66,38 +101,6 @@ class PostStatus extends React.Component {
         <Timelines items={this.state.items} />
       </React.Fragment>
     );
-  }
-
-  handleChange(e) {
-    this.setState({ text: e.target.value });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    
-    const newItem = {
-      text: this.state.text,
-      id: Date.now()
-    };
-    this.setState(prevState => ({
-      items: prevState.items.concat(newItem),
-      text: ""
-    }));
-  }
-  handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
   }
 }
 

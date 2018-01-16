@@ -1,79 +1,61 @@
 import React from "react";
-import { Button, Form, Grid, Image, Message } from "semantic-ui-react";
-import validator from "validator";
-import PropTypes from "prop-types";
-
-import InlineError from "../../components/messages/InlineError";
-import "./login.css";
+import { Button, Form } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
-  state = {
-    data: {
+  constructor(props) {
+    super(props);
+    this.state = {
       email: "",
       password: ""
-    },
-    loading: false,
-    errors: {}
-  };
+      // passwordConfirmation: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
-  onChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-  onSubmit = () => {
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
-    if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
-      this.props.submit(this.state.data).catch(error => {
-        if (error.response) {
-          // console.log(error.response.data)
-          this.setState({ errors: error.response.data, loading: false });
-        }
-      });
-    }
-  };
-
-  validate = data => {
-    const errors = {};
-    if (!validator.isEmail(data.email)) errors.email = "invalid email";
-    if (!data.password) errors.password = "please enter a password";
-    return errors;
-  };
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+  }
 
   render() {
-    const { data, errors, loading } = this.state;
     return (
-      <Form size="large" onSubmit={this.onSubmit} loading={loading}>
-        {errors.err && (
-          <Message negative>
-            <Message.Header>{errors.err}</Message.Header>
-          </Message>
-        )}
+      <Form size="large" onSubmit={this.onSubmit}>
         <Form.Input
-          error={!!errors.email}
           fluid
           icon="user"
+          type="email"
+          name="email"
           iconPosition="left"
           placeholder="E-mail address"
-          name="email"
-          value={data.email}
+          value={this.state.email}
           onChange={this.onChange}
         />
-        {errors.email && <InlineError text={errors.email} />}
         <Form.Input
-          error={!!errors.password}
           fluid
           icon="lock"
           iconPosition="left"
           placeholder="Password"
           type="password"
           name="password"
-          value={data.password}
+          value={this.state.password}
           onChange={this.onChange}
         />
-        {errors.password && <InlineError text={errors.password} />}
+        {/* <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
+            placeholder="Retype Password"
+            type="password"
+            name="password"
+            value={this.state.passwordConfirmation}
+            onChange={this.onChange}
+          /> */}
+
         <Button color="teal" fluid size="large">
           Login
         </Button>
@@ -81,9 +63,5 @@ class LoginForm extends React.Component {
     );
   }
 }
-
-LoginForm.propTypes = {
-  submit: PropTypes.func.isRequired
-};
 
 export default LoginForm;

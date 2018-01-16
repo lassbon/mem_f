@@ -26,7 +26,21 @@ a:hover {
 
 body {
   font-family: "Encode Sans", sans-serif;
-  background: #e2e2e2;
+  /* background: #e2e2e2; */
+}
+
+.btn {
+  background: var(--main-gold) !important;
+  padding: 15px !important;
+  color: white !important;
+  width: 110px;
+  border-radius: 60px !important
+}
+
+.btn.btn-reverse {
+  background: var(--white) !important;
+  color: var(--main-gold) !important;
+  border: 1px solid var(--main-gold);
 }
 
 .app {

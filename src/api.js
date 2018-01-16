@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASEURL = 'ttps://obscure-waters-44612.herokuapp.com/'
+const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
 
 export default {
   user: {

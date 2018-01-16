@@ -8,17 +8,29 @@ import Home from './Pages/Home/Home';
 import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 import SignUpPage from './Pages/SignUpPage/SignUpPage';
+import ContReg from './Pages/contReg/ContReg';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import Main from './components/Main';
 
-const App = ({location}) => (
+const App = ({ location }) => (
   <div>
-    <Route location={location} path='/' exact component={LandingPage} />
+    <Route location={location} path="/" exact component={LandingPage} />
+    <Route exact path="/cont" component={ContReg} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
-    <GuestRoute location={location} path='/signup' exact component={SignUpPage} />
-    <GuestRoute location={location} path='/forgotpassword' exact component={ForgotPassword} />
-    <GuestRoute location={location} path='/login' exact component={LoginPage} />
-    <UserRoute location={location} path='/app' exact component={Main} />
+    <GuestRoute
+      location={location}
+      path="/signup"
+      exact
+      component={SignUpPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/forgotpassword"
+      exact
+      component={ForgotPassword}
+    />
+    <GuestRoute location={location} path="/login" exact component={LoginPage} />
+    <UserRoute location={location} path="/app" exact component={Main} />
   </div>
 );
 

@@ -2,3 +2,18 @@ svg {
   fill: #D5C67A !important;
   height: 50px
 }
+
+.ui.segment
+{
+  background: #fff;
+}
+
+body
+{
+  background: #EDEEE97A;
+}
+
+img.ui.image {
+  display: block;
+  height: 70px;
+}

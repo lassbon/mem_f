@@ -15,6 +15,7 @@ import Main from './components/Main';
 import ContReg3 from './Pages/contReg/ContReg3';
 import ContReg4 from './Pages/contReg/ContReg4';
 import ContReg5 from './Pages/contReg/ContReg5';
+import ContReg6 from './Pages/contReg/ContReg6';
 
 const App = ({ location }) => (
   <div>
@@ -24,6 +25,7 @@ const App = ({ location }) => (
     <Route exact path="/cont3" component={ContReg3} />
     <Route exact path="/cont4" component={ContReg4} />
     <Route exact path="/cont5" component={ContReg5} />
+    <Route exact path="/cont6" component={ContReg6} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
     <GuestRoute
       location={location}

@@ -1,68 +1,163 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Image,
-  Segment,
-  Form,
-  Checkbox,
-  Button
-} from "semantic-ui-react";
-
-import logo from "../../images/ACCIHD-LOGO.png";
-import "./cont.css";
-import axios from "axios";
+import { Tab, Header, Message, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
 
-function getSteps() {
-  return [
-    "Knowing You",
-    "Category",
-    "Details",
-    "Referrals",
-    "Reg Payment",
-    "Membership Payment"
-  ];
-}
-
-const employies = [
-  "1 - 10",
-  "11 - 20",
-  "21 - 40",
-  "41 - 80",
-  "81 - 100",
-  "100 and above"
+const panes = [
+  {
+    menuItem: "CATEGORY A - GOLD MEMBERS",
+    render: () => (
+      <Tab.Pane
+        style={{
+          textAlign: "center"
+        }}
+      >
+        <Image
+          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          verticalAlign="middle"
+          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+        />
+        <Message
+          color="orange"
+          icon="checkmark"
+          header="N350,000/N50,000"
+          content="recomended"
+        />
+        <h3>BENEFITS</h3>
+        <p>Can vote and be voted for</p>
+        <p>
+          Advocacy roles on company’s related issues with the government
+          Priority
+        </p>
+        <p>
+          provision during all chamber’s activities/services as the case may be
+        </p>
+        <p>
+          20 per cent discount on space participation at Annual Abuja
+          International
+        </p>
+        <p>
+          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+        </p>
+        <p>
+          Direct link to company’s website from the official chamber’s webpage.
+        </p>
+      </Tab.Pane>
+    )
+  },
+  {
+    menuItem: "CATEGORY B - SILVER MEMBERS",
+    render: () => (
+      <Tab.Pane
+        style={{
+          textAlign: "center"
+        }}
+      >
+        <Image
+          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          verticalAlign="middle"
+          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+        />
+        <Message header="N350,000/N50,000" />
+        <h3>BENEFITS</h3>
+        <p>Can vote and be voted for</p>
+        <p>
+          Advocacy roles on company’s related issues with the government
+          Priority
+        </p>
+        <p>
+          provision during all chamber’s activities/services as the case may be
+        </p>
+        <p>
+          20 per cent discount on space participation at Annual Abuja
+          International
+        </p>
+        <p>
+          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+        </p>
+        <p>
+          Direct link to company’s website from the official chamber’s webpage.
+        </p>
+      </Tab.Pane>
+    )
+  },
+  {
+    menuItem: "CATEGORY C - BRONZE MEMBERS",
+    render: () => (
+      <Tab.Pane
+        style={{
+          textAlign: "center"
+        }}
+      >
+        <Image
+          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          verticalAlign="middle"
+          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+        />
+        <Message header="N350,000/N50,000" color="yellow" />
+        <h3>BENEFITS</h3>
+        <p>Can vote and be voted for</p>
+        <p>
+          Advocacy roles on company’s related issues with the government
+          Priority
+        </p>
+        <p>
+          provision during all chamber’s activities/services as the case may be
+        </p>
+        <p>
+          20 per cent discount on space participation at Annual Abuja
+          International
+        </p>
+        <p>
+          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+        </p>
+        <p>
+          Direct link to company’s website from the official chamber’s webpage.
+        </p>
+      </Tab.Pane>
+    )
+  },
+  {
+    menuItem: "CATEGORY D - BRASS MEMBERS",
+    render: () => (
+      <Tab.Pane
+        style={{
+          textAlign: "center"
+        }}
+      >
+        <Image
+          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          verticalAlign="middle"
+          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+        />
+        <Message header="N350,000/N50,000" color="brown" />
+        <h3>BENEFITS</h3>
+        <p>Can vote and be voted for</p>
+        <p>
+          Advocacy roles on company’s related issues with the government
+          Priority
+        </p>
+        <p>
+          provision during all chamber’s activities/services as the case may be
+        </p>
+        <p>
+          20 per cent discount on space participation at Annual Abuja
+          International
+        </p>
+        <p>
+          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+        </p>
+        <p>
+          Direct link to company’s website from the official chamber’s webpage.
+        </p>
+      </Tab.Pane>
+    )
+  }
 ];
-
-const returns = [
-  "N100,000 - N500,000",
-  "N501,000 - N1,000,000",
-  "N1,000,001 - N3,000,000",
-  "N3,000,001 - N5,000,000",
-  "N5,000,001 - N10,000,000",
-  "N100,000,001 and above"
-];
-
-const NumOfEmployees = employies.map(num => (
-  <div key={`${num} + ${num}`}>
-    <Checkbox style={{ marginBottom: 20 }} radio label={num} />
-    <br />
-  </div>
-));
-
-const AnualReturns = returns.map(aReturn => (
-  <div key={`${aReturn} + ${aReturn}`}>
-    <Checkbox style={{ marginBottom: 20 }} radio label={aReturn} />
-    <br />
-  </div>
-));
-
-const AnualProfits = returns.map(aProfit => (
-  <div key={`${aProfit} + ${aProfit}`}>
-    <Checkbox style={{ marginBottom: 20 }} radio label={aProfit} />
-    <br />
-  </div>
-));
 
 const ContReg2 = () => (
   <div
@@ -70,54 +165,29 @@ const ContReg2 = () => (
       width: "70%",
       margin: "0 auto",
       border: "1px solid #C0C0C0",
-      height: "100%",
+      minHeight: "100%",
       verticalAlign: "middle",
       marginTop: "100px",
-      marginBottom: 100
+      marginBottom: 100,
+      textAlign: "center",
+      paddingBottom: 50
     }}
   >
-    <Image
-      style={{ marginBottom: 20, marginLeft: "36%", marginTop: 30 }}
-      verticalAlign="middle"
-      src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+    <h2 style={{margin: 60}}>Select a membership category</h2>
+    <Tab
+      menu={{ fluid: true, vertical: true, tabular: "right" }}
+      panes={panes}
     />
-    <Form style={{ marginTop: 30 }}>
-      <Form.Field style={{ width: "55%", margin: "10px auto" }}>
-        <input placeholder="Company's Name" />
-      </Form.Field>
-      <Form.Field style={{ width: "55%", margin: "10px auto" }}>
-        <input placeholder="Address" />
-      </Form.Field>
-      <Form.Field style={{ width: "55%", margin: "10px auto" }}>
-        <input placeholder="Phone Number" />
-      </Form.Field>
-      <Form.Field
-        style={{ width: "55%", margin: "10px auto", marginBottom: 50 }}
-      >
-        <input placeholder="Nature of buisness" />
-      </Form.Field>
-      <Grid style={{ width: "90%", margin: "0 auto" }}>
-        <Grid.Column width={5}>
-          <h3 style={{ color: "#656768" }}>Number of Employees</h3>
-          {NumOfEmployees}
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <h3 style={{ color: "#656768" }}>Annual Return</h3>
-          {AnualReturns}
-        </Grid.Column>
-        <Grid.Column width={5}>
-          <h3 style={{ color: "#656768" }}>Annual Profits</h3>
-          {AnualProfits}
-        </Grid.Column>
-      </Grid>
-      <Button
-        as={Link}
-        to="/cont2"
-        className="btn btn-reverse"
-        content="Next"
-        style={{ marginLeft: "40%" }}
-      />
-    </Form>
+    <Button
+      as={Link}
+      to="/cont"
+      style={{ marginLeft: "10%", marginTop: 50, marginRight: 30 }}
+    >
+      Back
+    </Button>
+    <Button as={Link} to="/cont3" className="btn">
+      Next
+    </Button>
   </div>
 );
 

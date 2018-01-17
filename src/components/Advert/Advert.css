@@ -12,3 +12,7 @@
 	margin-left: 75vw !important;
 	margin-top: 45vh !important;
 }
+
+#root > div > div:nth-child(3) > div.ui.medium.rectangle.test.ad.add_name2 {
+	margin-top: 45vh !important;
+}

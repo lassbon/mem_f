@@ -12,7 +12,7 @@ import {
 import logo from "../../images/ACCIHD-LOGO.png";
 import "./cont.css";
 import axios from "axios";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function getSteps() {
   return [
@@ -64,7 +64,7 @@ const AnualProfits = returns.map(aProfit => (
   </div>
 ));
 
-const ContReg = () => (
+const ContReg2 = () => (
   <div
     style={{
       width: "70%",
@@ -115,10 +115,10 @@ const ContReg = () => (
         to="/cont2"
         className="btn btn-reverse"
         content="Next"
-        style={{marginLeft: '40%'}}
+        style={{ marginLeft: "40%" }}
       />
     </Form>
   </div>
 );
 
-export default ContReg
+export default ContReg2;

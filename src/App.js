@@ -11,6 +11,7 @@ import SignUpPage from './Pages/SignUpPage/SignUpPage';
 import ContReg from './Pages/contReg/ContReg';
 import StepOne from './Pages/contReg/StepOne';
 import StepTwo from './Pages/contReg/StepTwo';
+import ContReg2 from './Pages/contReg/ContReg2';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import Main from './components/Main';
 
@@ -18,6 +19,7 @@ const App = ({ location }) => (
   <div>
     <Route location={location} path="/" exact component={LandingPage} />
     <Route exact path="/cont" component={ContReg} />
+    <Route exact path="/cont2" component={ContReg2} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
     <GuestRoute
       location={location}

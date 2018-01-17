@@ -26,7 +26,7 @@ const Main = ({match}) => (
         <Route exact path={`${match.path}/project`} component={Project} />
         <Route exact path={`${match.path}/library`} component={Library} />
         <Route exact path={`${match.path}/discuss`} component={Discussions} />
-        <Route exact path={`${match.path}/payment`} component={Payment} />
+        {/* <Route exact path={`${match.path}/payment`} component={Payment} /> */}
         <Redirect to={`${match.url}`} />
       </Switch>
     </main>

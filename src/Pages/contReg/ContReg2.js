@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { Tab, Header, Message, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";

@@ -16,16 +16,6 @@ import {
 import logo from "../../images/ACCIHD-LOGO.png";
 import "./cont.css";
 
-
-const employies = [
-    "1 - 10",
-    "11 - 20",
-    "21 - 40",
-    "41 - 80",
-    "81 - 100",
-    "100 and above"
-  ];
-
 const membershipCategories = 
 [
     {
@@ -48,15 +38,6 @@ const membershipCategories =
     },
 ]
   
-  const returns = [
-    "N100,000 - N500,000",
-    "N501,000 - N1,000,000",
-    "N1,000,001 - N3,000,000",
-    "N3,000,001 - N5,000,000",
-    "N5,000,001 - N10,000,000",
-    "N100,000,001 and above"
-  ];
-
   const styles = theme => ({
     root: {
       width: "90%"
@@ -77,52 +58,33 @@ const membershipCategories =
         super(props);
         this.state = {
                         companyName:'',
-                        address : '',
-                        phoneNumber : '',
-                        natureBusiness : '',
-                        numberEmployees : '',
-                        annualReturns: '',
-                        annualProfits: ''
+                        active : {}
                     };
     }
 
-    handleChange = (key,value) => {
-        let newState = {}
-        newState[key] = value
-        this.setState(newState);
+    handleClick = (value) => {
+        this.setState({active:value});
+        
+        console.warn(this);
     }
     
-    saveData = ()=> console.warn(this);
-
-  
-  
-  AnualProfits = returns.map(aProfit => (
-    <div key={`${aProfit} + ${aProfit}`}>
-      <Form.Field>
-      <Radio
-        label={aProfit}
-        name='annualProfit'
-        value={aProfit}
-        onChange={this.handleChange('annualProfits',aProfit)}
-        style={{ marginBottom: 20 }}
-      />
-    </Form.Field>
-    </div>
-  ));
-
-  Categories = returns.map((cats,key) => (
-      {cats}
-  ));
-  Test = ({membershipCategories}) => (
-    <div>
-      {membershipCategories.map(station => (
-        <div className="station" key={station.id}>{station.name}</div>
-      ))}
-    </div>
-  ); 
-  
 
 
+  Categories = membershipCategories.map(
+      (key,value) => (
+          <div key={key.id} data-benefits = {key.benefits} onClick={this.handleClick.bind(this,key)} className={"category_item"} > 
+              {key.name}
+          </div>
+      )
+  )
+
+  getState = () => 
+  {
+      return this.state || ''
+  }
+    CategoryDetails = this.getState(
+       (key) => ({key})
+    )
 
       render(){
         const { classes } = this.props;
@@ -140,7 +102,15 @@ const membershipCategories =
                     <Grid.Column width={14}>
                     <Segment>
                     <div className={classes.instructions}>
-                        {this.Test}
+                    <Grid className="home-sec-one">
+                    <Grid.Column width={6}>
+                        {this.Categories}
+                    </Grid.Column>
+
+                    <Grid.Column width={6}>
+                        {this.CategoryDetails}
+                    </Grid.Column>
+                    </Grid>
                 </div>
                 </Segment>
                 </Grid.Column>

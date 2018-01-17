@@ -17,3 +17,21 @@ img.ui.image {
   display: block;
   height: 70px;
 }
+
+.category_item
+{
+  padding: 1.4rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #828282;
+  min-width: 250px;
+  margin:5px;
+  margin-top:2.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  border-left: 10px solid gold;
+}
+
+.category_item.active{
+  background: #eee;
+}

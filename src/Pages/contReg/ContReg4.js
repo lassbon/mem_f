@@ -35,7 +35,7 @@ const ContReg3 = () => (
         <Button to="/cont2" as={Link}>
           Back
         </Button>
-        <Button className="btn" to="/cont4" as={Link}>
+        <Button className="btn" to="/cont5" as={Link}>
           Next
         </Button>
       </div>

@@ -43,7 +43,7 @@ const WelcomePage = () => (
         </Header>
       </Grid.Column>
       <Grid.Column width={7}>
-        <Image src={screen} alt="" />
+        <Image style={{height: '100%'}} src={screen} alt="" />
       </Grid.Column>
     </Grid>
     <Grid style={{ height: "70vh" }}>

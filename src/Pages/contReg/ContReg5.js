@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Image, Grid, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 const ContReg5 = () => (
   <React.Fragment>
@@ -20,7 +19,7 @@ const ContReg5 = () => (
           <Grid.Column>
             <strong>N20,000</strong>
           </Grid.Column>
-          <Button className="btn" style={{ margin: "30px auto" }} to="/cont6" as={Link}>
+          <Button className="btn" style={{ margin: "30px auto" }}>
             Proceed
           </Button>
         </Card>

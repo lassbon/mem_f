@@ -57,10 +57,6 @@ class ContReg extends Component {
     const { history, location: { state: { id } } } = this.props
 
     sendDetails(this.state, id)
-      .catch(() => {
-        //handle error
-        return Promise.resolve('')
-      })
       .then(res => {
         console.log('success', res)
         history.push({
@@ -69,6 +65,10 @@ class ContReg extends Component {
             id,
           },
         })
+      })
+      .catch(() => {
+        //handle error
+        return Promise.resolve('')
       })
       .then(() => {
         this.setState({ loading: true })

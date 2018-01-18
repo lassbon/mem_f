@@ -13,6 +13,7 @@ import './cont.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import { contReg } from '../../actions/signupCont'
 
 function getSteps() {
   return [
@@ -153,6 +154,7 @@ class ContReg extends Component {
         <br />
       </div>
     ))
+
     return (
       <div
         style={{

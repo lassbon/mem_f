@@ -1,6 +1,8 @@
 import React from 'react'
 import { Grid, Segment, Form, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { update } from '../../actions/auth'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 
@@ -17,33 +19,28 @@ const sendDetails = (details, id) =>
 class ContReg3 extends React.Component {
   state = {
     loading: false,
-    rep1: {
-      name: null,
-      email: null,
-      phone: null,
-      regOfApp: null,
-      picture: null,
-      cv: null,
-    },
-    rep2: {
-      name: null,
-      email: null,
-      phone: null,
-      regOfApp: null,
-      picture: null,
-      cv: null,
-    },
+    data: {
+      companyRepName1: null,
+      companyRepPhone1: null,
+      companyRepEmail1: null,
+      companyRepPassportUrl1: null,
+      companyRepCVUrl1:null,
+      companyRepName2:null,
+      companyRepPhone2  :null,
+      companyRepEmail2:null,
+      companyRepPassportUrl2:null,
+      companyRepCVUrl2:null,
+    }
   }
 
-  handleChange1 = e => {
+  // handleChange1 = e => {
+  //   this.setState({
+  //     rep1: { ...this.state.rep1, [e.target.name]: e.target.value },
+  //   })
+  // }
+  handleChange = e => {
     this.setState({
-      rep1: { ...this.state.rep1, [e.target.name]: e.target.value },
-    })
-  }
-
-  handleChange2 = e => {
-    this.setState({
-      rep2: { ...this.state.rep1, [e.target.name]: e.target.value },
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     })
   }
 
@@ -51,17 +48,8 @@ class ContReg3 extends React.Component {
     console.log(this.state)
     this.setState({ loading: true })
     const { history, location: { state: { id } } } = this.props
+    this.props.update(this.state.data, history, "/cont4", id)
 
-    sendDetails(this.state, id)
-      .then(res => {
-        console.log('success', res)
-        history.push({
-          pathname: '/cont4',
-          state: {
-            id,
-          },
-        })
-      })
       .catch(() => {
         //handle error
         return Promise.resolve('')
@@ -99,34 +87,23 @@ class ContReg3 extends React.Component {
             <Form.Field loading={this.state.loading}>
               <Form.Input
                 placeholder="Name"
-                name="name"
-                onChange={this.handleChange1}
+                name="companyRepName1"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 type="email"
                 placeholder="email"
-                name="email"
-                onChange={this.handleChange1}
+                name="companyRepEmail1"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 placeholder="Phone number"
-                name="phone"
-                onChange={this.handleChange1}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload copy of Certificate of Incorporation or Registration of
-                Applicant
-              </label>
-              <Form.Input
-                type="file"
-                name="regOfApp"
-                onChange={this.handleChange1}
+                name="companyRepPhone1"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
@@ -135,49 +112,38 @@ class ContReg3 extends React.Component {
               </label>
               <Form.Input
                 type="file"
-                name="picture"
-                onChange={this.handleChange1}
+                name="companyRepPassportUrl1"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <label>
                 Upload curriculum Vitae of Company Representative(s)
               </label>
-              <Form.Input type="file" name="cv" onChange={this.handleChange2} />
+              <Form.Input type="file" name="companyRepCVurl" onChange={this.handleChange} />
             </Form.Field>
           </Grid.Column>
           <Grid.Column>
             <Form.Field loading={this.state.loading}>
               <Form.Input
                 placeholder="Name"
-                name="name"
-                onChange={this.handleChange2}
+                name="companyRepName2"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 type="email"
                 placeholder="email"
-                name="email"
-                onChange={this.handleChange2}
+                name="companyRepEmail2"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <Form.Input
                 placeholder="Phone number"
-                name="phone"
-                onChange={this.handleChange2}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload copy of Certificate of Incorporation or Registration of
-                Applicant
-              </label>
-              <Form.Input
-                type="file"
-                name="regOfApp"
-                onChange={this.handleChange2}
+                name="companyRepPhone2"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
@@ -186,15 +152,15 @@ class ContReg3 extends React.Component {
               </label>
               <Form.Input
                 type="file"
-                name="picture"
-                onChange={this.handleChange2}
+                name="companyRepPassportUrl2"
+                onChange={this.handleChange}
               />
             </Form.Field>
             <Form.Field>
               <label>
                 Upload curriculum Vitae of Company Representative(s)
               </label>
-              <Form.Input type="file" name="cv" onChange={this.handleChange2} />
+              <Form.Input type="file" name="companyRepCVUrl2" onChange={this.handleChange} />
             </Form.Field>
           </Grid.Column>
         </Grid>
@@ -211,4 +177,4 @@ class ContReg3 extends React.Component {
   }
 }
 
-export default ContReg3
+export default connect(null, {update})(ContReg3)

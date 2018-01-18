@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://localhost:1337/";
+// const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
 
 export default {
   user: {
@@ -35,11 +36,11 @@ export default {
           Accept: "application/form-data"
         }
       }),
-    contreg: data => {
-      axios.put(`${BASEURL}api/v1/auth/user`, data).then(res => {
-        console.log(res)
-      })
-    },
+    contreg: (data, id) =>
+      axios.put(`${BASEURL}api/v1/user/${id}`, data, {headers: {
+      'Content-Type': 'application/form-data',
+      Accept: 'application/form-data',
+    }}),
 
     // contreg2: data => {
 

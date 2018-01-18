@@ -49,3 +49,16 @@ export const signup = (data, history) => (dispatch) =>{
       })
   })
 }
+
+// update on user
+export const update = (data, history, location, id) => (dispatch) =>
+  api.signup.contreg(data, id).then(res => {
+      // dispatch(authorizeUser({ email: data.email, password: data.password }))
+      console.log('success', res)
+      history.push({
+        pathname: location,
+        state: {
+          id: id,
+        },
+      })
+  })

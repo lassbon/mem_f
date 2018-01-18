@@ -1,19 +1,20 @@
-import React, {Component} from "react";
-import { Tab, Header, Message, Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
+import React, { Component } from 'react'
+import { Tab, Header, Message, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
+import { withRouter } from 'react-router-dom'
 
 const panes = [
   {
-    menuItem: "CATEGORY A - GOLD MEMBERS",
+    menuItem: 'CATEGORY A - GOLD MEMBERS',
     render: () => (
       <Tab.Pane
         style={{
-          textAlign: "center"
+          textAlign: 'center',
         }}
       >
         <Image
-          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
           verticalAlign="middle"
           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
         />
@@ -44,18 +45,18 @@ const panes = [
           Direct link to company’s website from the official chamber’s webpage.
         </p>
       </Tab.Pane>
-    )
+    ),
   },
   {
-    menuItem: "CATEGORY B - SILVER MEMBERS",
+    menuItem: 'CATEGORY B - SILVER MEMBERS',
     render: () => (
       <Tab.Pane
         style={{
-          textAlign: "center"
+          textAlign: 'center',
         }}
       >
         <Image
-          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
           verticalAlign="middle"
           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
         />
@@ -81,18 +82,18 @@ const panes = [
           Direct link to company’s website from the official chamber’s webpage.
         </p>
       </Tab.Pane>
-    )
+    ),
   },
   {
-    menuItem: "CATEGORY C - BRONZE MEMBERS",
+    menuItem: 'CATEGORY C - BRONZE MEMBERS',
     render: () => (
       <Tab.Pane
         style={{
-          textAlign: "center"
+          textAlign: 'center',
         }}
       >
         <Image
-          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
           verticalAlign="middle"
           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
         />
@@ -118,18 +119,18 @@ const panes = [
           Direct link to company’s website from the official chamber’s webpage.
         </p>
       </Tab.Pane>
-    )
+    ),
   },
   {
-    menuItem: "CATEGORY D - BRASS MEMBERS",
+    menuItem: 'CATEGORY D - BRASS MEMBERS',
     render: () => (
       <Tab.Pane
         style={{
-          textAlign: "center"
+          textAlign: 'center',
         }}
       >
         <Image
-          style={{ marginBottom: 20, marginLeft: "10%", marginTop: 30 }}
+          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
           verticalAlign="middle"
           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
         />
@@ -155,40 +156,58 @@ const panes = [
           Direct link to company’s website from the official chamber’s webpage.
         </p>
       </Tab.Pane>
-    )
+    ),
+  },
+]
+
+const ContReg2 = props => {
+  const { location: { state }, history } = props
+  console.log(this.props)
+  if (state == null || state.id == null) {
+    history.push('/signup')
+    return null
   }
-];
 
-const ContReg2 = () => (
-  <div
-    style={{
-      width: "70%",
-      margin: "0 auto",
-      border: "1px solid #C0C0C0",
-      minHeight: "100%",
-      verticalAlign: "middle",
-      marginTop: "100px",
-      marginBottom: 100,
-      textAlign: "center",
-      paddingBottom: 50
-    }}
-  >
-    <h2 style={{margin: 60}}>Select a membership category</h2>
-    <Tab
-      menu={{ fluid: true, vertical: true, tabular: "right" }}
-      panes={panes}
-    />
-    <Button
-      as={Link}
-      to="/cont"
-      style={{ marginLeft: "10%", marginTop: 50, marginRight: 30 }}
+  return (
+    <div
+      style={{
+        width: '70%',
+        margin: '0 auto',
+        border: '1px solid #C0C0C0',
+        minHeight: '100%',
+        verticalAlign: 'middle',
+        marginTop: '100px',
+        marginBottom: 100,
+        textAlign: 'center',
+        paddingBottom: 50,
+      }}
     >
-      Back
-    </Button>
-    <Button as={Link} to="/cont3" className="btn">
-      Next
-    </Button>
-  </div>
-);
+      <h2 style={{ margin: 60 }}>Select a membership category</h2>
+      <Tab
+        menu={{ fluid: true, vertical: true, tabular: 'right' }}
+        panes={panes}
+      />
+      <Button
+        as={Link}
+        to="/cont"
+        style={{ marginLeft: '10%', marginTop: 50, marginRight: 30 }}
+      >
+        Back
+      </Button>
+      <Button
+        as={Link}
+        to={{
+          pathname: '/cont3',
+          state: {
+            id: state.id,
+          },
+        }}
+        className="btn"
+      >
+        Next
+      </Button>
+    </div>
+  )
+}
 
-export default ContReg2;
+export default withRouter(ContReg2)

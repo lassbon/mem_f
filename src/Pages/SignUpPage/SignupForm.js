@@ -44,7 +44,12 @@ class SignupForm extends React.Component {
       this.signup(this.state.data)
         .then(res => {
           console.log('success', res)
-          history.push('/cont')
+          history.push({
+            pathname: '/cont',
+            state: {
+              id: res.id,
+            },
+          })
         })
         .catch(error => {
           if (error.response) {

@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import React, { Component } from 'react'
 import { Tab, Header, Message, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
 import { withRouter } from 'react-router-dom'
-=======
-import React from "react";
-import { Tab, Header, Message, Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
->>>>>>> parent of 13fdae5... Merge pull request #3 from chiefoleka/master
 
 const panes = [
   {

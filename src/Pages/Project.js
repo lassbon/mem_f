@@ -8,8 +8,8 @@ class Project extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      currentproject: this.props.currentProjectList,
-      completedproject: this.props.completedProjectList
+      currentproject: this.props.currentProjectList || [],
+      completedproject: this.props.completedProjectList || []
     }
   }
 

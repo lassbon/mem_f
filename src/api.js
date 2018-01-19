@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const BASEURL = "http://localhost:1337/";
-// const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+// const BASEURL = "http://localhost:1337/";
+const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
 
 export default {
   user: {
@@ -66,7 +66,7 @@ export default {
   },
 
   timeline: {
-    feeds: id=> axios.get(`${BASEURL}api/v1/social/feed/${id}`),
+    feeds: id=> axios.get(`${BASEURL}api/v1/social/post/${id}`),
     makepost: data => axios.post(`${BASEURL}api/v1/social/post`, data),
     likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data)
   }

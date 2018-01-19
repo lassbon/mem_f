@@ -17,6 +17,8 @@ import ContReg4 from './Pages/contReg/ContReg4';
 import ContReg5 from './Pages/contReg/ContReg5';
 import ContReg6 from './Pages/contReg/ContReg6';
 import Payment from './Pages/Payment';
+import EventPage from './Pages/EventPage';
+import Profile from './Pages/Profile';
 
 const App = ({ location }) => (
   <div>
@@ -28,6 +30,8 @@ const App = ({ location }) => (
     <Route exact path="/cont5" component={ContReg5} />
     <Route exact path="/cont6" component={ContReg6} />
     <Route exact path="/payment" component={Payment} />
+    <Route exact path="/profile" component={Profile} />
+    <Route exact path="/events" component={EventPage} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
     <GuestRoute
       location={location}

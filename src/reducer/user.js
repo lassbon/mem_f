@@ -5,6 +5,8 @@ export default function user(state = {}, action = {}) {
     case USER_LOGGED_IN:
       return {
         email: action.payload.user.email,
+        name: action.payload.user.company,
+        picture: action.payload.user.picture,
         id: action.payload.user.id,
         role: action.payload.user.role,
         token: action.payload.token

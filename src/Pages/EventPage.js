@@ -52,7 +52,7 @@ const panes = [
             <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
             <Card.Description>
               <img
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                src="https://wallpaper.wiki/wp-content/uploads/2017/04/wallpaper.wiki-Cute-Puppy-Wallpaper-PIC-WPD0012481.jpg"
                 alt=""
                 style={{ width: "100%", marginTop: 10 }}
               />

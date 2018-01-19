@@ -63,6 +63,12 @@ export default {
     // },
 
 
+  },
+
+  timeline: {
+    feeds: id=> axios.get(`${BASEURL}api/v1/social/feed/${id}`),
+    makepost: data => axios.post(`${BASEURL}api/v1/social/post`, data),
+    likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data)
   }
 
 }

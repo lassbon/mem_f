@@ -34,7 +34,7 @@ if (localStorage.acciJWT) {
     token: localStorage.acciJWT
   }
   store.dispatch(userLoggedIn(payload)) 
-  // setAuthorizationHeader(localStorage.acciJWT);
+  setAuthorizationHeader(localStorage.acciJWT);
 }
 
 render(

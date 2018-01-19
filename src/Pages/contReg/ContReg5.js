@@ -1,8 +1,35 @@
 import React from 'react';
 import { Card, Image, Grid, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import PaystackComponent from '../../components/PaystackComponent'
 
-const ContReg5 = () => (
+class ContReg5 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.changeToNew = this.changeToNew.bind(this)
+  }
+
+  changeToNew() {
+    const { history, location: { state: { id } } } = this.props;
+    history.push({
+      pathname: '/cont6',
+      state: {
+        id: id
+      }
+    });
+
+  }
+
+  render(){
+    const { location: { state }, history } = this.props
+    console.log(this.props)
+    if (state == null || state.id == null) {
+      history.push('/signup')
+      return null
+    }
+    
+    return(
   <React.Fragment>
     <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -20,7 +47,13 @@ const ContReg5 = () => (
           <Grid.Column>
             <strong>N20,000</strong>
           </Grid.Column>
-          <Button className="btn" style={{ margin: "30px auto" }} to="/cont6" as={Link}>
+          <PaystackComponent variablename="Verfication " amount="2000000" callback={this.changeToNew} />
+          <Button
+            className="btn"
+            style={{ margin: "30px auto" }}
+            to="/cont6"
+            as={Link}
+          >
             Proceed
           </Button>
         </Card>
@@ -29,4 +62,6 @@ const ContReg5 = () => (
   </React.Fragment>
 );
 
+  }
+}
 export default ContReg5

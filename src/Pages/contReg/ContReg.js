@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {update} from '../../actions/auth'
 import {
   Container,
   Grid,
@@ -13,6 +15,7 @@ import './cont.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import { contReg } from '../../actions/signupCont'
 
 function getSteps() {
   return [
@@ -25,7 +28,8 @@ function getSteps() {
   ]
 }
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'http://localhost:1337/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 const sendDetails = (details, id) =>
   axios.put(`${BASEURL}api/v1/user/${id}`, details, {
@@ -55,29 +59,15 @@ class ContReg extends Component {
     console.log(this.state)
     this.setState({ loading: true })
     const { history, location: { state: { id } } } = this.props
-
-    sendDetails(this.state, id)
-      .catch(() => {
+    this.props.update(this.state, history, '/cont2', id)
+    .catch(() => {
         //handle error
         return Promise.resolve('')
-      })
-      .then(res => {
-        console.log('success', res)
-        history.push({
-          pathname: '/cont2',
-          state: {
-            id,
-          },
-        })
       })
       .then(() => {
         this.setState({ loading: true })
       })
-    // this.setState({ loading: true })
-
-    // setTimeout(function() {
-    //   window.location = '/cont2'
-    // }, 3000)
+    this.setState({ loading: true })
   }
 
   validate = () => {
@@ -153,6 +143,7 @@ class ContReg extends Component {
         <br />
       </div>
     ))
+
     return (
       <div
         style={{
@@ -230,4 +221,4 @@ class ContReg extends Component {
   }
 }
 
-export default withRouter(ContReg)
+export default withRouter(connect(null, {update})(ContReg))

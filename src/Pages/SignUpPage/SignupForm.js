@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { Button, Form, Grid, Image, Message } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import validator from 'validator'
@@ -41,22 +42,23 @@ class SignupForm extends React.Component {
     this.setState({ errors })
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true })
-      this.signup(this.state.data)
-        .then(res => {
-          console.log('success', res)
-          history.push({
-            pathname: '/cont',
-            state: {
-              id: res.id,
-            },
-          })
-        })
-        .catch(error => {
-          if (error.response) {
-            console.log(error.response.data)
-            this.setState({ errors: error.response.data, loading: false })
-          }
-        })
+      // this.signup(this.state.data)
+      //   .then(res => {
+      //     console.log('success', res)
+      //     history.push({
+      //       pathname: '/cont',
+      //       state: {
+      //         id: res.data.id,
+      //       },
+      //     })
+      //   })
+      //   .catch(error => {
+      //     if (error.response) {
+      //       console.log(error.response.data)
+      //       this.setState({ errors: error.response.data, loading: false })
+      //     }
+      //   })
+      this.props.registerUser(this.state.data, history)
     }
   }
 
@@ -122,4 +124,10 @@ SignupForm.propTypes = {
   // submit: PropTypes.func.isRequired,
 }
 
-export default withRouter(SignupForm)
+const mapStateToProps = state =>{
+  return {
+
+  }
+}
+
+export default withRouter(connect()(SignupForm))

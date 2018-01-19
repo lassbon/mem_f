@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Card, Image, Icon } from "semantic-ui-react";
 import { getPostData } from "../../utils/membership-api";
-
+import {connect} from 'react-redux'
+import api from '../../api'
 import "./Timeline.css";
 function generateLikeCount() {
   return Math.floor(Math.random() * 50 + 15);
@@ -49,14 +50,26 @@ class Timelines extends React.Component {
   }
 
   getPosts() {
-    getPostData().then((posts) => {
-      this.setState(posts)
+    const { currentUser } = this.props;
+    api.timeline.feeds(currentUser.id).then((posts) => {
+      console.log('step 1',posts)
+
+      this.setState({
+        posts: posts.data
+      })
+    })
+  }
+
+  likePost(postId){
+    const {currentUser} = this.props;
+    api.timeline.likepost({liker:currentUser.id, id: postId}).then(res=>{
+      console.log(res)
     })
   }
 
   componentDidMount(){
     this.getPosts();
-    console.log(this.posts)
+    // console.log(this.posts)
   }
 
   render() {
@@ -73,7 +86,7 @@ class Timelines extends React.Component {
                   circular
                   src={post.username}
                 />
-                <Card.Header>Chuks Festus</Card.Header>
+                <Card.Header>{post.owner.companyName}</Card.Header>
                 <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
                 <Card.Description>{post.postText}</Card.Description>
                 <Card.Description>
@@ -86,7 +99,7 @@ class Timelines extends React.Component {
               </Card.Content>
               <Card.Content extra className="time">
                 <div className="ui three buttons">
-                  <Button size="mini">
+                  <Button size="mini" onClick={()=>this.likePost(post.id)}>
                     <Icon name="like" />
                     20
                   </Button>
@@ -102,4 +115,9 @@ class Timelines extends React.Component {
   }
 }
 
-export default Timelines;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user
+  }
+}
+export default connect(mapStateToProps)(Timelines);

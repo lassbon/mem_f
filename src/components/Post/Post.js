@@ -2,6 +2,8 @@ import React from "react";
 import axios from 'axios'
 import { Card, Grid, Image, Form, TextArea, Button, Input } from "semantic-ui-react";
 
+import api from '../../api'
+import {connect} from 'react-redux'
 import Timelines from "../TimeLine/Timeline";
 
 import "./Post.css";
@@ -21,13 +23,17 @@ class PostStatus extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    axios.post('http://localhsot:1337/api/v1/social/post/', newItem)
-
     const newItem = {
-      text: this.state.text,
-      id: Date.now()
+      postText: this.state.text,
+      owner: this.props.currentUser.id,
+      postImage: this.state.file
+      // id: Date.now()
     };
+
+    api.timeline.makepost(newItem).then(res=>{
+      console.log(res)
+    });
+
     this.setState(prevState => ({
       items: prevState.items.concat(newItem),
       text: ""
@@ -104,4 +110,11 @@ class PostStatus extends React.Component {
   }
 }
 
-export default PostStatus;
+const mapStateToProps = state => {
+  const { user } = state
+  return { 
+    currentUser: user 
+  }
+}
+
+export default connect(mapStateToProps)(PostStatus);

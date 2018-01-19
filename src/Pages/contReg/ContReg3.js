@@ -1,44 +1,66 @@
-import React from 'react';
-import { Grid, Segment, Form, Image, Button } from "semantic-ui-react";
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Grid, Segment, Form, Image, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { update } from '../../actions/auth'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import { withRouter } from 'react-router-dom'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
+const sendDetails = (details, id) =>
+  axios.put(`${BASEURL}api/v1/user/${id}`, details, {
+    headers: {
+      'Content-Type': 'application/form-data',
+      Accept: 'application/form-data',
+    },
+  })
 
 class ContReg3 extends React.Component {
   state = {
     loading: false,
-    rep1: {
-      name: null,
-      email: null,
-      phone: null,
-      regOfApp: null,
-      picture: null,
-      cv: null
-    },
-    rep2: {
-      name: null,
-      email: null,
-      phone: null,
-      regOfApp: null,
-      picture: null,
-      cv: null
+    data: {
+      companyRepName1: null,
+      companyRepPhone1: null,
+      companyRepEmail1: null,
+      companyRepPassportUrl1: null,
+      companyRepCVUrl1:null,
+      companyRepName2:null,
+      companyRepPhone2  :null,
+      companyRepEmail2:null,
+      companyRepPassportUrl2:null,
+      companyRepCVUrl2:null,
     }
   }
 
-  handleChange1 = (e) => {
+  // handleChange1 = e => {
+  //   this.setState({
+  //     rep1: { ...this.state.rep1, [e.target.name]: e.target.value },
+  //   })
+  // }
+  handleChange = e => {
     this.setState({
-      rep1: { ...this.state.rep1, [e.target.name]: e.target.value }
-    })
-  }
-
-  handleChange2 = (e) => {
-    this.setState({
-      rep2: { ...this.state.rep1, [e.target.name]: e.target.value }
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     })
   }
 
   submit = () => {
     console.log(this.state)
     this.setState({ loading: true })
-    setTimeout(function () { window.location = "/cont4" }, 3000)
+    const { history, location: { state: { id } } } = this.props
+    this.props.update(this.state.data, history, "/cont4", id)
+
+      .catch(() => {
+        //handle error
+        return Promise.resolve('')
+      })
+      .then(() => {
+        this.setState({ loading: true })
+      })
+
+    // setTimeout(function() {
+    //   window.location = '/cont4'
+    // }, 3000)
   }
 
   validate = () => {
@@ -57,58 +79,82 @@ class ContReg3 extends React.Component {
         <Grid columns="equal">
           <Grid.Column>
             <Form.Field loading={this.state.loading}>
-              <Form.Input placeholder="Name" name="name" onChange={this.handleChange1} />
+              <Form.Input
+                placeholder="Name"
+                name="companyRepName1"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <Form.Input type="email" placeholder="email" name="email" onChange={this.handleChange1} />
+              <Form.Input
+                type="email"
+                placeholder="email"
+                name="companyRepEmail1"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <Form.Input placeholder="Phone number" name="phone" onChange={this.handleChange1} />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload copy of Certificate of Incorporation or Registration of
-                Applicant
-              </label>
-              <Form.Input type="file" name="regOfApp" onChange={this.handleChange1} />
+              <Form.Input
+                placeholder="Phone number"
+                name="companyRepPhone1"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
               <label>
                 Upload Passport Photographs of the Company Representative(s)
               </label>
-              <Form.Input type="file" name="picture" onChange={this.handleChange1} />
+              <Form.Input
+                type="file"
+                name="companyRepPassportUrl1"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <label>Upload curriculum Vitae of Company Representative(s)</label>
-              <Form.Input type="file" name="cv" onChange={this.handleChange2} />
+              <label>
+                Upload curriculum Vitae of Company Representative(s)
+              </label>
+              <Form.Input type="file" name="companyRepCVurl" onChange={this.handleChange} />
             </Form.Field>
           </Grid.Column>
           <Grid.Column>
             <Form.Field loading={this.state.loading}>
-              <Form.Input placeholder="Name" name="name" onChange={this.handleChange2} />
+              <Form.Input
+                placeholder="Name"
+                name="companyRepName2"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <Form.Input type="email" placeholder="email" name="email" onChange={this.handleChange2} />
+              <Form.Input
+                type="email"
+                placeholder="email"
+                name="companyRepEmail2"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <Form.Input placeholder="Phone number" name="phone" onChange={this.handleChange2} />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload copy of Certificate of Incorporation or Registration of
-                Applicant
-              </label>
-              <Form.Input type="file" name="regOfApp" onChange={this.handleChange2} />
+              <Form.Input
+                placeholder="Phone number"
+                name="companyRepPhone2"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
               <label>
                 Upload Passport Photographs of the Company Representative(s)
               </label>
-              <Form.Input type="file" name="picture" onChange={this.handleChange2} />
+              <Form.Input
+                type="file"
+                name="companyRepPassportUrl2"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
-              <label>Upload curriculum Vitae of Company Representative(s)</label>
-              <Form.Input type="file" name="cv" onChange={this.handleChange2} />
+              <label>
+                Upload curriculum Vitae of Company Representative(s)
+              </label>
+              <Form.Input type="file" name="companyRepCVUrl2" onChange={this.handleChange} />
             </Form.Field>
           </Grid.Column>
         </Grid>
@@ -125,4 +171,4 @@ class ContReg3 extends React.Component {
   }
 }
 
-export default ContReg3
+export default connect(null, {update})(ContReg3)

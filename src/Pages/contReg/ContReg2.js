@@ -162,7 +162,7 @@ const panes = [
 
 const ContReg2 = props => {
   const { location: { state }, history } = props
-  console.log(this.props)
+  console.log(props)
   if (state == null || state.id == null) {
     history.push('/signup')
     return null

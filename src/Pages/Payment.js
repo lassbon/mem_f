@@ -14,16 +14,32 @@ import axios from 'axios'
 //payments/memberships
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
-const panes = [
-  {
-    menuItem: 'Membership Renewal',
-    render: () => (
+class Payment extends Component {
+  state = {
+    memberships: [],
+  }
+  componentDidMount() {
+    const { user: { token, id } } = this.props
+    axios(`${BASEURL}api/v1/userpayments/memberships/${id}`, {
+      headers: {
+        authorization: token,
+      },
+    }).then(response => {
+      this.setState(
+        prevState => ({ ...prevState, ...response.data }),
+        () => console.log(this.state)
+      )
+      console.log('payments', response.data)
+    })
+  }
+  render() {
+    const memberships = this.state.memberships.map(obj => (
       <Tab.Pane attached={false}>
         <Grid>
           <Grid.Column>
             <Segment raised>
               <Label color="orange" ribbon="right">
-                member id (132465789)
+                member id ({obj.id})
               </Label>
               <Grid>
                 <Grid.Row>
@@ -31,17 +47,17 @@ const panes = [
                     <div>
                       <h3>Chukwu Nonso</h3>
                       <p>
-                        Member Since<span
+                        Payed on<span
                           style={{ color: '#34495E', marginLeft: 30 }}
                         >
-                          19/10/2017
+                          {obj.createdAt}
                         </span>
                       </p>
                       <p>
-                        Last Renewal<span
+                        Amount<span
                           style={{ color: '#34495E', marginLeft: 30 }}
                         >
-                          20/10/2017
+                          {obj.amount}
                         </span>
                       </p>
                     </div>
@@ -65,43 +81,34 @@ const panes = [
           </Grid.Column>
         </Grid>
       </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: '(1) Total Subscriptions',
-    render: () => (
-      <Tab.Pane attached={false}>
-        <Card fluid style={{ textAlign: 'center', padding: 30 }}>
-          <h3>MEMBERSHIP FEE AUTO-RENEWAL</h3>
-          <p>subscribed on 20/09/2017</p>
-          <Button
-            style={{
-              background: 'var(--main-gold)',
-              color: 'var(--white)',
-              width: '40%',
-              margin: '0 auto',
-            }}
-          >
-            UNSUBSCRIBE
-          </Button>
-        </Card>
-      </Tab.Pane>
-    ),
-  },
-]
-
-class Payment extends Component {
-  componentDidMount() {
-    const { user: { token } } = this.props
-    axios(`${BASEURL}api/v1/payments/memberships`, {
-      headers: {
-        authorization: token,
+    ))
+    const panes = [
+      {
+        menuItem: 'Membership Renewal',
+        render: () => memberships,
       },
-    }).then(response => {
-      console.log(response)
-    })
-  }
-  render() {
+      {
+        menuItem: '(1) Total Subscriptions',
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Card fluid style={{ textAlign: 'center', padding: 30 }}>
+              <h3>MEMBERSHIP FEE AUTO-RENEWAL</h3>
+              <p>subscribed on 20/09/2017</p>
+              <Button
+                style={{
+                  background: 'var(--main-gold)',
+                  color: 'var(--white)',
+                  width: '40%',
+                  margin: '0 auto',
+                }}
+              >
+                UNSUBSCRIBE
+              </Button>
+            </Card>
+          </Tab.Pane>
+        ),
+      },
+    ]
     return (
       <React.Fragment>
         <Grid>

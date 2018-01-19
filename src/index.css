@@ -129,3 +129,10 @@ div.seven.wide.column > div > p {
   background: var(--main-gold)
 }
 
+#root > div > main > a > div > div {
+  width: 100% !important
+}
+
+#root > div > main > a > div > div:nth-child(1) {
+  margin-top: 50px;
+}

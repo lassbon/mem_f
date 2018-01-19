@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 
 const centerText = {
   textAlign: "center"
@@ -31,6 +32,9 @@ class Discussions extends React.Component {
 
   render() {
     const { open, size } = this.state
+    const { match } = this.props
+    console.log(this.props);
+    
     return(
       <React.Fragment>
         <Grid>
@@ -47,9 +51,8 @@ class Discussions extends React.Component {
           basic color='green'
           size='tiny'
           onClick={this.show('mini')}>
-          <Icon name='add circle' />s
-      tart a conversation
-    </Button>
+          <Icon name='add circle' />start a conversation
+        </Button>
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Start conversation</Modal.Header>
           <Modal.Content>
@@ -67,7 +70,9 @@ class Discussions extends React.Component {
           </Modal.Actions>
         </Modal>
 
-        <Card.Group items={items} />
+        <Link to={`${match.path}/maindis`}>
+          <Card.Group items={items} />
+        </Link>
       </React.Fragment>
     )
   }

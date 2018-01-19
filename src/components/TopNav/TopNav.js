@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Menu, Icon, Label } from "semantic-ui-react";
+import { Input, Menu, Icon, Label, Dropdown } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import * as actions from "../../actions/auth";
@@ -18,30 +18,42 @@ const TopNav = ({user, logout}) => (
     <Menu.Menu position="right">
       <Menu.Item
         name="messages"
-        onClick={this.handleItemClick}
       >
         <Icon name="mail" />
         <Label color="red" floating circular size="mini">
           22
             </Label>
+          <Dropdown text='' floating>
+            <Dropdown.Menu>
+              <Dropdown.Item>Important</Dropdown.Item>
+              <Dropdown.Item>Announcement</Dropdown.Item>
+              <Dropdown.Item>Discussion</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
       </Menu.Item>
       <Menu.Item
         name="friends"
         onClick={this.handleItemClick}
       >
         <Icon name="users" />
-        <Label color="red" floating circular size="mini">
+        <Label color="red" floating circular size="mini" >
           22
             </Label>
       </Menu.Item>
       <Menu.Item
         name="notifications"
-        onClick={this.handleItemClick}
       >
         <Icon name="bell" />
         <Label color="red" floating circular size="mini">
           22
             </Label>
+            <Dropdown text='' floating>
+            <Dropdown.Menu>
+              <Dropdown.Item>Important</Dropdown.Item>
+              <Dropdown.Item>Announcement</Dropdown.Item>
+              <Dropdown.Item>Discussion</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
       </Menu.Item>
       <Menu.Item onClick={() => logout()}>
         <Icon name='external' />

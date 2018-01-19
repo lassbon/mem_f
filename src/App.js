@@ -42,7 +42,7 @@ const App = ({ location }) => (
       component={ForgotPassword}
     />
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
-    <UserRoute location={location} path="/app" exact component={Main} />
+    <UserRoute location={location} path="/app" component={Main} />
   </div>
 )
 

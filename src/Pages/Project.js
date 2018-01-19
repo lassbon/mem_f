@@ -1,52 +1,126 @@
 import React from "react";
+import { connect } from 'react-redux'
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button } from "semantic-ui-react";
+import { fetchCurrentProjects, fetchCompletedProjects } from "../actions/projects";
+// import { object } from "../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types";
 
-const panes = [
-  {
-    menuItem: "(5) Ongoing Projects",
-    render: () => <Tab.Pane attached={false}>
-      <Card.Group className="TimeLine">
-        <Card style={{ width: "100%" }}>
-          <Card.Content>
-            <Image
-              floated="left"
-              size="mini"
-              circular
-              src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
-            />
-            <Card.Header>Chuks Festus</Card.Header>
-            <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
-            <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <div className="ui three buttons">
-              <Button size="mini">
-                <Icon name="like" />
-                20
-                  </Button>
-              <Button icon="comment" size="mini" />
-              <Button icon="share" size="mini" />
-            </div>
-          </Card.Content>
-        </Card>
-      </Card.Group>
-    </Tab.Pane>
-  },
-  {
-    menuItem: "(25) Completed Projects",
-    render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>
+class Project extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { 
+      currentproject: this.props.currentProjectList,
+      completedproject: this.props.completedProjectList
+    }
   }
-];
 
-const Project = () => (
-  <React.Fragment>
-    <Grid>
-      <div className='bana'>
-        PROJECTS
-      </div>
-    </Grid>
-    <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-  </React.Fragment>
-);
+  componentDidMount() {
+    this.props.fetchCurrentProjects(this.props.user.token)
+    .then(() => {
+      this.setState({
+        currentproject: this.props.currentProjectList
+      });
+    });
+    this.props.fetchCompletedProjects(this.props.user.token)
+    .then(() => {
+      this.setState({
+        completedproject: this.props.completedProjectList
+      });
+    });
+  }
 
-export default Project;
+  render() {
+    const currentcount = this.state.currentproject.length
+    const completedcount = this.state.completedproject.length
+    const projects = this.state.currentproject.map(jobs => (
+      <Tab.Pane attached={false}>
+          <Card.Group className="TimeLine">
+            <Card style={{ width: "100%" }}>
+              <Card.Content>
+                <Image
+                  floated="left"
+                  size="mini"
+                  circular
+                  src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                />
+                <Card.Header>Chuks Festus</Card.Header>
+                <Card.Meta>{jobs.createdAt}</Card.Meta>
+                <Card.Description>{jobs.description}</Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className="ui three buttons">
+                  <Button size="mini">
+                    <Icon name="like" />
+                    {currentcount}
+                      </Button>
+                  <Button icon="comment" size="mini" />
+                  <Button icon="share" size="mini" />
+                </div>
+              </Card.Content>
+            </Card>
+          </Card.Group>
+        </Tab.Pane>        
+    ));
+
+    const completed = this.state.completedproject.map(jobs => (
+      <Tab.Pane attached={false}>
+          <Card.Group className="TimeLine">
+            <Card style={{ width: "100%" }}>
+              <Card.Content>
+                <Image
+                  floated="left"
+                  size="mini"
+                  circular
+                  src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                />
+                <Card.Header>Chuks Festus</Card.Header>
+                <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
+                <Card.Description>{jobs.description}</Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                <div className="ui three buttons">
+                  <Button size="mini">
+                    <Icon name="like" />
+                    {completedcount}
+                      </Button>
+                  <Button icon="comment" size="mini" />
+                  <Button icon="share" size="mini" />
+                </div>
+              </Card.Content>
+            </Card>
+          </Card.Group>
+        </Tab.Pane>        
+    ))
+
+    const panes = [
+      {
+        menuItem: currentcount + " Ongoing Projects",
+        render: () => projects
+      },
+      {
+        menuItem: completedcount+ " Completed Projects",
+        render: () => completed
+      }
+    ];
+    return (
+      <React.Fragment>
+        <Grid>
+          <div className='bana'>
+            PROJECTS
+          </div>
+        </Grid>
+          <Tab menu={{ secondary: true, pointing: true }} panes={panes} />          
+      </React.Fragment>
+    );
+  }
+}
+
+
+const mapStateToProps = state => ({
+  currentProjectList: state.projects.currentproject,
+  completedProjectList: state.projects.completedproject,
+  user: state.user
+});
+
+export default connect(mapStateToProps, {
+  fetchCurrentProjects, fetchCompletedProjects
+})(Project);

@@ -21,9 +21,9 @@ const Main = ({ match }) => (
     <main className="main">
       {console.log(match)}
       <Switch>
-        <Route path={`${match.path}`} exact component={Home} />
-        {/* <Route exact path={`${match.path}/profile`} render={Profile} /> */}
-        {/* <Route path={`${match.path}/profile:friend`} component={Profile2} /> */}
+        <Route path={`${match.path}`} exact component={Project} />
+        {/* <Route exact path={`${match.path}/profile`} component={Profile} /> */}
+        <Route path={`${match.path}/profile:friend`} component={Profile2} />
         <Route exact path={`${match.path}/project`} component={Project} />
         <Route exact path={`${match.path}/library`} component={Library} />
         <Route exact path={`${match.path}/discuss`} component={Discussions} />

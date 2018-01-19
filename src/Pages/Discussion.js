@@ -1,5 +1,6 @@
 import React from "react";
-import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List } from "semantic-ui-react";
+import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 
 const centerText = {
   textAlign: "center"
@@ -23,20 +24,59 @@ const items = [
   },
 ]
 
-const Discussions = () => (
-  <React.Fragment>
-    <Grid>
-      <div className='bana library'>
-        DISCUSSIONS
+class Discussions extends React.Component {
+  state = { open: false }
+
+  show = size => () => this.setState({ size, open: true })
+  close = () => this.setState({ open: false })
+
+  render() {
+    const { open, size } = this.state
+    const { match } = this.props
+    console.log(this.props);
+    
+    return(
+      <React.Fragment>
+        <Grid>
+          <div className='bana library'>
+            DISCUSSIONS
       </div>
-      <div className='sub-bana'>
-        (50) Total Discussions
+          <div className='sub-bana'>
+            (50) Total Discussions
       </div>
-      
-    </Grid>
-    <Button style={{marginTop: 30, marginLeft: '18vw'}} basic color='green' size='tiny'><Icon name='add circle' />start a conversation</Button>
-    <Card.Group items={items} />
-  </React.Fragment>
-);
+
+        </Grid>
+        <Button
+          style={{ marginTop: 30, marginLeft: '18vw' }}
+          basic color='green'
+          size='tiny'
+          onClick={this.show('mini')}>
+          <Icon name='add circle' />start a conversation
+        </Button>
+        <Modal size={size} open={open} onClose={this.close}>
+          <Modal.Header>Start conversation</Modal.Header>
+          <Modal.Content>
+            <Form>
+              <Form.Field>
+                <Form.Input></Form.Input>
+              </Form.Field>
+              <Form.Field>
+                <Form.TextArea></Form.TextArea>
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button>hdh</Button>
+          </Modal.Actions>
+        </Modal>
+
+        <Link to={`${match.path}/maindis`}>
+          <Card.Group items={items} />
+        </Link>
+      </React.Fragment>
+    )
+  }
+}
+
 
 export default Discussions;

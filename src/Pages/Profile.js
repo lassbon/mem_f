@@ -54,16 +54,16 @@ const panes = [
         <Card.Content>
           {/* <List horizontal>
             { 
-              FriendsApi.all().map(p => (
-                <List.Item key={p.memberId}>
-                  <Image circular size="tiny" src={p.image} />
+              // FriendsApi.all().map(p => (
+                <List.Item key="{p.memberId}">
+                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
                   <List.Content>
-                    <List.Header><Link to={`/profile/${p.name}`}>{p.name}</Link></List.Header>
-                    <p>{p.mutualfriends} mutual friends</p>
+                    <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
+                    <p> mutual friends</p>
                     <Button size='tiny'>Send message</Button>
                   </List.Content>
                 </List.Item>
-              ))
+              // ))
             }
           </List> */}
         </Card.Content>

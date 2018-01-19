@@ -4,19 +4,21 @@ import PropTypes from 'prop-types'
 
 import LandingPage from './Pages/LandingPage'
 import LoginPage from './Pages/LoginPage/LoginPage'
-import Home from './Pages/Home/Home'
-import UserRoute from './components/routes/UserRoute'
-import GuestRoute from './components/routes/GuestRoute'
-import SignUpPage from './Pages/SignUpPage/SignUpPage'
-import ContReg from './Pages/contReg/ContReg'
-import ContReg2 from './Pages/contReg/ContReg2'
-import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
-import Main from './components/Main'
-import ContReg3 from './Pages/contReg/ContReg3'
-import ContReg4 from './Pages/contReg/ContReg4'
-import ContReg5 from './Pages/contReg/ContReg5'
-import ContReg6 from './Pages/contReg/ContReg6'
-import Payment from './Pages/Payment'
+import Home from './Pages/Home/Home';
+import UserRoute from './components/routes/UserRoute';
+import GuestRoute from './components/routes/GuestRoute';
+import SignUpPage from './Pages/SignUpPage/SignUpPage';
+import ContReg from './Pages/contReg/ContReg';
+import ContReg2 from './Pages/contReg/ContReg2';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import Main from './components/Main';
+import ContReg3 from './Pages/contReg/ContReg3';
+import ContReg4 from './Pages/contReg/ContReg4';
+import ContReg5 from './Pages/contReg/ContReg5';
+import ContReg6 from './Pages/contReg/ContReg6';
+import Payment from './Pages/Payment';
+import EventPage from './Pages/EventPage';
+import Profile from './Pages/Profile';
 
 const App = ({ location }) => (
   <div>
@@ -28,6 +30,8 @@ const App = ({ location }) => (
     <Route exact path="/cont5" component={ContReg5} />
     <Route exact path="/cont6" component={ContReg6} />
     <Route exact path="/payment" component={Payment} />
+    <Route exact path="/profile" component={Profile} />
+    <Route exact path="/events" component={EventPage} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
     <GuestRoute
       location={location}

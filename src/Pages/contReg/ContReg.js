@@ -28,8 +28,8 @@ function getSteps() {
   ]
 }
 
-const BASEURL = 'http://localhost:1337/'
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'http://localhost:1337/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 const sendDetails = (details, id) =>
   axios.put(`${BASEURL}api/v1/user/${id}`, details, {

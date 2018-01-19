@@ -11,6 +11,8 @@ import Project from '../Pages/Project'
 import Library from '../Pages/Library'
 import Discussions from '../Pages/Discussion'
 import Payment from '../Pages/Payment'
+import EventPage from '../Pages/EventPage'
+import MainDis from '../Pages/MainDis';
 
 const Main = ({ match }) => (
   <React.Fragment>
@@ -24,7 +26,9 @@ const Main = ({ match }) => (
         <Route path={`${match.path}/profile:friend`} component={Profile2} />
         <Route exact path={`${match.path}/project`} component={Project} />
         <Route exact path={`${match.path}/library`} component={Library} />
+        <Route exact path={`${match.path}/events`} component={EventPage} />
         <Route exact path={`${match.path}/discuss`} component={Discussions} />
+        <Route exact path={`${match.path}/discuss/:name`} component={MainDis} />
         <Route exact path={`${match.path}/payment`} component={Payment} />
         <Redirect to={`${match.url}`} />
       </Switch>

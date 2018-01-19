@@ -14,7 +14,9 @@ class SideBar extends React.Component {
     this.getUserProfile = this.getUserProfile.bind(this);
   }
 
-  getUserProfile() {
+  getUserProfile(event) {
+    event.preventDefault();
+    this.props.getUserProfile(this.props.userId)
     console.log('working')
   }
 
@@ -77,5 +79,10 @@ class SideBar extends React.Component {
     )  
   }  
 }
-      
-export default connect(null, { getUserProfile })(SideBar)
+
+const mapStateToProps = (state) => {
+  return{
+    userId: state.user.id
+  }
+}
+export default connect(mapStateToProps, { getUserProfile })(SideBar)

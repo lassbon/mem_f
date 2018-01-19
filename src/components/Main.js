@@ -5,7 +5,7 @@ import TopNav from './TopNav/TopNav'
 import SideBar from './SideBar/SideBar'
 import Advert from './Advert/Advert'
 import Home from '../Pages/Home/Home'
-import Profile from '../Pages/Profile'
+import ProfileCard from '../Pages/ProfileCard'
 import Profile2 from '../Pages/Profile2'
 import Project from '../Pages/Project'
 import Library from '../Pages/Library'
@@ -18,10 +18,9 @@ const Main = ({ match }) => (
     <SideBar match={match} />
     <Advert />
     <main className="main">
-      {console.log(match)}
       <Switch>
         <Route path={`${match.path}`} exact component={Home} />
-        <Route exact path={`${match.path}/profile`} render={Profile} />
+        <Route exact path={`${match.path}/profile`} component={ProfileCard} />
         <Route path={`${match.path}/profile:friend`} component={Profile2} />
         <Route exact path={`${match.path}/project`} component={Project} />
         <Route exact path={`${match.path}/library`} component={Library} />

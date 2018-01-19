@@ -22,6 +22,11 @@ export default {
 
     resetPasswordRequest: email =>
       axios.post(`${BASEURL}api/vi/user/reset`, email),
+
+    profile: id =>
+      axios
+        .get(`${BASEURL}api/v1/user/${id}`)
+        .then(res => res.data)
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),

@@ -55,16 +55,16 @@ class Discussions extends React.Component {
           <Modal.Content>
             <Form>
               <Form.Field>
-                <label>Title</label>
-                <input placehoder="title " />
+                <Form.Input></Form.Input>
               </Form.Field>
               <Form.Field>
-                <label>Discussion</label>
-                <Form.TextArea palcehoder="content goes here..."></Form.TextArea>
+                <Form.TextArea></Form.TextArea>
               </Form.Field>
-              <Button>Submit</Button>
             </Form>
           </Modal.Content>
+          <Modal.Actions>
+            <Button>hdh</Button>
+          </Modal.Actions>
         </Modal>
 
         <Card.Group items={items} />
@@ -72,5 +72,6 @@ class Discussions extends React.Component {
     )
   }
 }
+
 
 export default Discussions;

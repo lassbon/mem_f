@@ -5,15 +5,14 @@ import TopNav from './TopNav/TopNav'
 import SideBar from './SideBar/SideBar'
 import Advert from './Advert/Advert'
 
-import Home from "../Pages/Home/Home";
-import Profile from "../Pages/Profile";
-import Profile2 from "../Pages/Profile2";
-import Project from "../Pages/Project";
-import Library from "../Pages/Library";
-import Discussions from "../Pages/Discussion";
-import Payment from "../Pages/Payment";
-import EventPage from "../Pages/EventPage";
-
+import Home from '../Pages/Home/Home'
+import Profile from '../Pages/Profile'
+import Profile2 from '../Pages/Profile2'
+import Project from '../Pages/Project'
+import Library from '../Pages/Library'
+import Discussions from '../Pages/Discussion'
+import Payment from '../Pages/Payment'
+import EventPage from '../Pages/EventPage'
 
 const Main = ({ match }) => (
   <React.Fragment>
@@ -21,7 +20,6 @@ const Main = ({ match }) => (
     <SideBar />
     <Advert />
     <main className="main">
-      {console.log(match)}
       <Switch>
         <Route path={`${match.path}`} exact component={Home} />
         <Route exact path={`${match.path}/profile`} render={Profile} />

@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Message} from 'semantic-ui-react';
+import React from 'react'
+import { Button, Message } from 'semantic-ui-react'
 
 import Post from '../../components/Post/Post'
 import Feed from '../../components/Feed/Feed'
@@ -9,38 +9,36 @@ import Timeline from '../../components/TimeLine/Timeline'
 import api from '../../api'
 
 // connect with the store
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-class Home extends React.Component{
-
+class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      feeds:null
-    };
+      feeds: null,
+    }
   }
 
-  componenetWillMount(){
+  componenetWillMount() {
     // load the feeds of the user
-    const {user} = this.props
-    api.timeline.feeds(user.id).then(res=>{
+    const { user } = this.props
+    api.timeline.feeds(user.id).then(res => {
       console.log(res)
     })
   }
 
-  render(){
+  render() {
     return (
       <React.Fragment>
         <Post />
-        <Timeline></Timeline>
       </React.Fragment>
     )
   }
 }
 
-const MapStateToProps = (state) => {
+const MapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 export default connect(MapStateToProps)(Home)

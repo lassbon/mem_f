@@ -7,8 +7,8 @@ class Events extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentEvent: this.props.currentEventList,
-      completedEvent: this.props.completedEventList
+      currentEvent: this.props.currentEventList || [],
+      completedEvent: this.props.completedEventList || []
     }
   }
 
@@ -34,7 +34,7 @@ class Events extends React.Component {
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
           <Card style={{ width: "100%" }}>
-            <Card.Content>
+            <Card.Content>              
               <Image
                 floated="left"
                 size="mini"
@@ -97,12 +97,12 @@ class Events extends React.Component {
     ))
     const panes = [
       {
-        menuItem: currentcount + "Ongoing Events",
+        menuItem: currentcount + " Ongoing Events",
         render: () => events
 
       },
       {
-        menuItem: completedcount + "Completed Events",
+        menuItem: completedcount + " Completed Events",
         render: () => completed
       }
     ];
@@ -122,8 +122,8 @@ class Events extends React.Component {
 
 
 const mapStateToProps = state => ({
-  currentEventList: state.events.currentEvent,
-  completedEventList: state.events.completedEvent,
+  currentEventList: state.events.currentevent,
+  completedEventList: state.events.completedevent,
   user: state.user
 });
 

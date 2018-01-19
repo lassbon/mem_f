@@ -31,7 +31,7 @@ class Discussions extends React.Component {
           </div>
 
         </Grid>
-       
+        {console.log(this.props)}
 
         <Card.Group items={items} />
       </React.Fragment>

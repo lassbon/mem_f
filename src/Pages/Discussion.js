@@ -1,30 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import {
-  Tab,
-  Grid,
-  Image,
-  Label,
-  Segment,
-  Card,
-  Icon,
-  Button,
-  List,
-} from 'semantic-ui-react'
-
-//api/v1/forum/post
-
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+import React from "react";
+import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 
 const centerText = {
-  textAlign: 'center',
+  textAlign: "center"
 }
 
 const items = [
   {
-    header:
-      'Abuja Chamber of Commerce and Industry (ACCI) Presents Certificate of Platinum Membership to Dangote Group on Her Special Day, 29th September, 2017',
+    header: 'Abuja Chamber of Commerce and Industry (ACCI) Presents Certificate of Platinum Membership to Dangote Group on Her Special Day, 29th September, 2017',
     description: '120 replies',
     meta: 'By Chukwu Nonso, 17/10/2017',
   },
@@ -40,37 +24,59 @@ const items = [
   },
 ]
 
-class Discussions extends Component {
-  componentDidMount() {
-    const { user: { token } } = this.props
+class Discussions extends React.Component {
+  state = { open: false }
 
-    axios(`${BASEURL}api/v1/forum/post`, {
-      headers: {
-        authorization: token,
-      },
-    }).then(response => {
-      console.log('discussion get', response)
-    })
-  }
+  show = size => () => this.setState({ size, open: true })
+  close = () => this.setState({ open: false })
+
   render() {
-    return (
+    const { open, size } = this.state
+    const { match } = this.props
+    console.log(this.props);
+    
+    return(
       <React.Fragment>
         <Grid>
-          <div className="bana library">DISCUSSIONS</div>
-          <div className="sub-bana">(50) Total Discussions</div>
+          <div className='bana library'>
+            DISCUSSIONS
+      </div>
+          <div className='sub-bana'>
+            (50) Total Discussions
+      </div>
+
         </Grid>
         <Button
           style={{ marginTop: 30, marginLeft: '18vw' }}
-          basic
-          color="green"
-          size="tiny"
-        >
-          <Icon name="add circle" />start a conversation
+          basic color='green'
+          size='tiny'
+          onClick={this.show('mini')}>
+          <Icon name='add circle' />start a conversation
         </Button>
-        <Card.Group items={items} />
+        <Modal size={size} open={open} onClose={this.close}>
+          <Modal.Header>Start conversation</Modal.Header>
+          <Modal.Content>
+            <Form>
+              <Form.Field>
+                <Form.Input></Form.Input>
+              </Form.Field>
+              <Form.Field>
+                <Form.TextArea></Form.TextArea>
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button>hdh</Button>
+          </Modal.Actions>
+        </Modal>
+
+        <Link to={`${match.path}/maindis`}>
+          <Card.Group items={items} />
+        </Link>
       </React.Fragment>
     )
   }
 }
 
-export default connect(({ user }) => ({ user }), null)(Discussions)
+
+export default Discussions;

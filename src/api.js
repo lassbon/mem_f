@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const BASEURL = "http://localhost:1337/";
-// const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+// const BASEURL = "http://localhost:1337/";
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 export default {
   user: {
@@ -32,15 +32,17 @@ export default {
     reg: data =>
       axios.post(`${BASEURL}api/v1/user`, data, {
         headers: {
-          "Content-Type": "application/form-data",
-          Accept: "application/form-data"
-        }
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
       }),
     contreg: (data, id) =>
-      axios.put(`${BASEURL}api/v1/user/${id}`, data, {headers: {
-      'Content-Type': 'application/form-data',
-      Accept: 'application/form-data',
-    }}),
+      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
+      }),
 
     // contreg2: data => {
 
@@ -61,14 +63,18 @@ export default {
     // contreg6: data => {
 
     // },
-
-
   },
 
   timeline: {
-    feeds: id=> axios.get(`${BASEURL}api/v1/social/feed/${id}`),
-    makepost: data => axios.post(`${BASEURL}api/v1/social/post`, data),
-    likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data)
-  }
-
+    feeds: id => axios.get(`${BASEURL}api/v1/social/feed/${id}`),
+    makepost: (data, token) =>
+      axios.post(`${BASEURL}api/v1/social/post`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
+    likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data),
+  },
 }

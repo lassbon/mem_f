@@ -1,22 +1,22 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import PropTypes from "prop-types";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-import LandingPage from './Pages/LandingPage';
+import LandingPage from './Pages/LandingPage'
 import LoginPage from './Pages/LoginPage/LoginPage'
-import Home from './Pages/Home/Home';
-import UserRoute from './components/routes/UserRoute';
-import GuestRoute from './components/routes/GuestRoute';
-import SignUpPage from './Pages/SignUpPage/SignUpPage';
-import ContReg from './Pages/contReg/ContReg';
-import ContReg2 from './Pages/contReg/ContReg2';
-import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
-import Main from './components/Main';
-import ContReg3 from './Pages/contReg/ContReg3';
-import ContReg4 from './Pages/contReg/ContReg4';
-import ContReg5 from './Pages/contReg/ContReg5';
-import ContReg6 from './Pages/contReg/ContReg6';
-import Payment from './Pages/Payment';
+import Home from './Pages/Home/Home'
+import UserRoute from './components/routes/UserRoute'
+import GuestRoute from './components/routes/GuestRoute'
+import SignUpPage from './Pages/SignUpPage/SignUpPage'
+import ContReg from './Pages/contReg/ContReg'
+import ContReg2 from './Pages/contReg/ContReg2'
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
+import Main from './components/Main'
+import ContReg3 from './Pages/contReg/ContReg3'
+import ContReg4 from './Pages/contReg/ContReg4'
+import ContReg5 from './Pages/contReg/ContReg5'
+import ContReg6 from './Pages/contReg/ContReg6'
+import Payment from './Pages/Payment'
 
 const App = ({ location }) => (
   <div>
@@ -44,12 +44,12 @@ const App = ({ location }) => (
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
     <UserRoute location={location} path="/app" exact component={Main} />
   </div>
-);
+)
 
 App.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 export default App

@@ -1,64 +1,61 @@
-import api from "../api";
-import { USER_LOGGED_IN,USER_LOGGED_OUT } from "../types";
+import api from '../api'
+import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types'
 import setAuthorizationHeader from './setAuthorizationHeader'
 
-export const userLoggedIn = (payload) => ({
+export const userLoggedIn = payload => ({
   type: USER_LOGGED_IN,
-  payload
+  payload,
 })
 
 export const userLoggedOut = () => ({
-  type: USER_LOGGED_OUT
+  type: USER_LOGGED_OUT,
 })
 
+export const login = credentials => dispatch =>
+  api.user.login(credentials).then(res => {
+    localStorage.acciJWT = res.token
+    setAuthorizationHeader(res.token)
+    dispatch(userLoggedIn(res))
+  })
 
-export const login = (credentials) => (dispatch) => 
-  api.user.login(credentials).then(
-    res => {
-      localStorage.acciJWT = res.token;
-      setAuthorizationHeader(res.token);
-      dispatch(userLoggedIn(res))
-    }
-  )
-
-export const authorizeUser = (credentials) => (dispatch) => {
+export const authorizeUser = credentials => dispatch => {
   api.user.login(credentials).then(res => {
     // localStorage.acciJWT = res.token;
-    setAuthorizationHeader(res.token);
-  });
+    setAuthorizationHeader(res.token)
+  })
 }
-export const logout = () => (dispatch) => {
+export const logout = () => dispatch => {
   localStorage.removeItem('acciJWT')
-    dispatch(userLoggedOut())
-  }
+  dispatch(userLoggedOut())
+}
 
 export const resetPasswordRequest = ({ email }) => () =>
-  api.user.resetPasswordRequest(email);
+  api.user.resetPasswordRequest(email)
 
-export const resetPassword = data => () => api.user.resetPassword(data);
+export const resetPassword = data => () => api.user.resetPassword(data)
 
-export const signup = (data, history) => (dispatch) =>{
+export const signup = (data, history) => dispatch => {
   api.signup.reg(data).then(res => {
-      dispatch(authorizeUser({ email: data.email, password: data.password }))
-      console.log('success', res)
-      history.push({
-        pathname: '/cont',
-        state: {
-          id: res.data.id,
-        },
-      })
+    dispatch(authorizeUser({ email: data.email, password: data.password }))
+    console.log('success', res)
+    history.push({
+      pathname: '/cont',
+      state: {
+        id: res.data.id,
+      },
+    })
   })
 }
 
 // update on user
-export const update = (data, history, location, id) => (dispatch) =>
+export const update = (data, history, location, id) => dispatch =>
   api.signup.contreg(data, id).then(res => {
-      // dispatch(authorizeUser({ email: data.email, password: data.password }))
-      console.log('success', res)
-      history.push({
-        pathname: location,
-        state: {
-          id: id,
-        },
-      })
+    // dispatch(authorizeUser({ email: data.email, password: data.password }))
+    console.log('success', res)
+    history.push({
+      pathname: location,
+      state: {
+        id: id,
+      },
+    })
   })

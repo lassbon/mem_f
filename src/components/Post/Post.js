@@ -20,7 +20,13 @@ import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon'
 class PostStatus extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { items: [], text: '', file: '', imagePreviewUrl: '' }
+    this.state = {
+      items: [],
+      text: '',
+      file: '',
+      imagePreviewUrl: '',
+      postsKey: Math.random(),
+    }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -39,12 +45,14 @@ class PostStatus extends React.Component {
     }
 
     api.timeline.makepost(newItem, this.props.currentUser.token).then(res => {
-      console.log(res)
+      console.log('make post', res)
     })
 
     this.setState(prevState => ({
+      ...prevState,
       items: prevState.items.concat(newItem),
       text: '',
+      postsKey: Math.random(),
     }))
   }
   handleImageChange(e) {
@@ -115,7 +123,7 @@ class PostStatus extends React.Component {
             </Grid.Column>
           </Grid>
         </Card>
-        <Timelines items={this.state.items} />
+        <Timelines items={this.state.items} key={this.state.postsKey} />
       </React.Fragment>
     )
   }

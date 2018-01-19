@@ -45,7 +45,15 @@ class Project extends React.Component {
                 <Card.Header>Chuks Festus</Card.Header>
                 <Card.Meta>{jobs.createdAt}</Card.Meta>
                 <Card.Description>{jobs.description}</Card.Description>
+                <Button 
+                  floated="right"
+                  size="mini"
+                >Donate to project</Button>
               </Card.Content>
+              {/* <Image
+                  size="big"
+                  src={jobs.banner}
+                /> */}
               <Card.Content extra>
                 <div className="ui three buttons">
                   <Button size="mini">
@@ -76,6 +84,10 @@ class Project extends React.Component {
                 <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
                 <Card.Description>{jobs.description}</Card.Description>
               </Card.Content>
+              <Image
+                  size="big"
+                  src={jobs.banner}
+                />
               <Card.Content extra>
                 <div className="ui three buttons">
                   <Button size="mini">

@@ -20,9 +20,7 @@ class LoginPage extends React.Component {
           verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-          
             <Image style={{marginBottom: 20}} verticalAlign='middle' src='http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png' />
-
         <LoginForm submit={this.submit} />
             <Message>
               New to us? <Link to="/signup" style={{ color: "var(--main-blue)" }}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {update} from '../../actions/auth'
+import { connect } from 'react-redux'
+import { update } from '../../actions/auth'
 import {
   Container,
   Grid,
@@ -56,11 +56,12 @@ class ContReg extends Component {
   }
 
   onSubmit = () => {
-    console.log(this.state)
+    // console.log(this.state)
     this.setState({ loading: true })
-    const { history, location: { state: { id } } } = this.props
-    this.props.update(this.state, history, '/cont2', id)
-    .catch(() => {
+    const { history, user: { id, token } } = this.props
+    this.props
+      .update({ ...this.state, regState: 1, token }, history, '/cont2', id)
+      .catch(() => {
         //handle error
         return Promise.resolve('')
       })
@@ -75,12 +76,12 @@ class ContReg extends Component {
   }
 
   render() {
-    const { location: { state }, history } = this.props
-    console.log(this.props)
-    if (state == null || state.id == null) {
-      history.push('/signup')
-      return null
-    }
+    // const { location: { state }, history } = this.props
+    // console.log(this.props)
+    // if (state == null || state.id == null) {
+    //   history.push('/signup')
+    //   return null
+    // }
     const employies = [
       '1 - 10',
       '11 - 20',
@@ -221,4 +222,6 @@ class ContReg extends Component {
   }
 }
 
-export default withRouter(connect(null, {update})(ContReg))
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(ContReg)
+)

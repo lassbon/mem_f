@@ -24,13 +24,13 @@ class ContReg3 extends React.Component {
       companyRepPhone1: null,
       companyRepEmail1: null,
       companyRepPassportUrl1: null,
-      companyRepCVUrl1:null,
-      companyRepName2:null,
-      companyRepPhone2  :null,
-      companyRepEmail2:null,
-      companyRepPassportUrl2:null,
-      companyRepCVUrl2:null,
-    }
+      companyRepCVUrl1: null,
+      companyRepName2: null,
+      companyRepPhone2: null,
+      companyRepEmail2: null,
+      companyRepPassportUrl2: null,
+      companyRepCVUrl2: null,
+    },
   }
 
   // handleChange1 = e => {
@@ -47,16 +47,21 @@ class ContReg3 extends React.Component {
   submit = () => {
     console.log(this.state)
     this.setState({ loading: true })
-    const { history, location: { state: { id } } } = this.props
-    this.props.update(this.state.data, history, "/cont4", id)
+    const { history, user: { id, token } } = this.props
+    this.props.update(
+      { ...this.state.data, token, regState: 3 },
+      history,
+      '/cont4',
+      id
+    )
 
-      .catch(() => {
-        //handle error
-        return Promise.resolve('')
-      })
-      .then(() => {
-        this.setState({ loading: true })
-      })
+    // .catch(() => {
+    //   //handle error
+    //   return Promise.resolve('')
+    // })
+    // .then(() => {
+    //   this.setState({ loading: true })
+    // })
 
     // setTimeout(function() {
     //   window.location = '/cont4'
@@ -68,12 +73,12 @@ class ContReg3 extends React.Component {
   }
 
   render() {
-    const { location: { state }, history } = this.props
-    console.log(this.props)
-    if (state == null || state.id == null) {
-      history.push('/signup')
-      return null
-    }
+    // const { location: { state }, history } = this.props
+    // console.log(this.props)
+    // if (state == null || state.id == null) {
+    //   history.push('/signup')
+    //   return null
+    // }
     return (
       <Form style={{ width: '70%', margin: '0 auto', textAlign: 'center' }}>
         <Image
@@ -120,7 +125,11 @@ class ContReg3 extends React.Component {
               <label>
                 Upload curriculum Vitae of Company Representative(s)
               </label>
-              <Form.Input type="file" name="companyRepCVurl" onChange={this.handleChange} />
+              <Form.Input
+                type="file"
+                name="companyRepCVurl"
+                onChange={this.handleChange}
+              />
             </Form.Field>
           </Grid.Column>
           <Grid.Column>
@@ -160,7 +169,11 @@ class ContReg3 extends React.Component {
               <label>
                 Upload curriculum Vitae of Company Representative(s)
               </label>
-              <Form.Input type="file" name="companyRepCVUrl2" onChange={this.handleChange} />
+              <Form.Input
+                type="file"
+                name="companyRepCVUrl2"
+                onChange={this.handleChange}
+              />
             </Form.Field>
           </Grid.Column>
         </Grid>
@@ -177,4 +190,4 @@ class ContReg3 extends React.Component {
   }
 }
 
-export default connect(null, {update})(ContReg3)
+export default connect(({ user }) => ({ user }), { update })(ContReg3)

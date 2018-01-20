@@ -24,12 +24,14 @@ class SignupForm extends React.Component {
   }
 
   signup = user =>
-    axios.post(`${BASEURL}api/v1/user`, user, {
-      headers: {
-        'Content-Type': 'application/form-data',
-        Accept: 'application/form-data',
-      },
-    })
+    axios
+      .post(`${BASEURL}api/v1/user`, user, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
+      })
+      .then(console.log)
 
   onChange = e =>
     this.setState({
@@ -124,10 +126,8 @@ SignupForm.propTypes = {
   // submit: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state =>{
-  return {
-
-  }
+const mapStateToProps = state => {
+  return {}
 }
 
 export default withRouter(connect()(SignupForm))

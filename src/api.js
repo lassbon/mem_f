@@ -8,7 +8,20 @@ export default {
     login: credentails =>
       axios
         .post(`${BASEURL}api/v1/auth/user`, credentails)
-        .then(res => res.data),
+        .then(res => {
+          const { data: { user: { id }, token } } = res
+          return Promise.all([
+            res.data,
+            axios(`${BASEURL}api/v1/user/${id}`, {
+              headers: {
+                authorization: token,
+              },
+            }),
+          ])
+        })
+        .then(responses => {
+          return Promise.resolve({ ...responses[0], ...responses[1].data })
+        }),
 
     signup: user =>
       axios
@@ -41,6 +54,7 @@ export default {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
+          authorization: data.token,
         },
       }),
 
@@ -79,25 +93,27 @@ export default {
   },
 
   projects: {
-    ongoing: (token) => {
-    return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
-      headers: {
-        'Content-Type': 'application/form-data',
-        Accept: 'application/form-data',
-        authorization: token,
-      },
-    })},
-    completed: (token) => {
+    ongoing: token => {
+      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    completed: token => {
       return axios.get(`${BASEURL}api/v1/projects/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
           authorization: token,
         },
-      })},
+      })
+    },
   },
   events: {
-    ongoing: (token) => {
+    ongoing: token => {
       return axios.get(`${BASEURL}/api/v1/event/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -106,7 +122,7 @@ export default {
         },
       })
     },
-    completed: (token) => {
+    completed: token => {
       return axios.get(`${BASEURL}api/v1/event/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -114,6 +130,6 @@ export default {
           authorization: token,
         },
       })
-    }
-  }
+    },
+  },
 }

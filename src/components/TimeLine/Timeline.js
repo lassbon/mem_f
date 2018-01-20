@@ -17,7 +17,6 @@ import './Timeline.css'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
-
 class Timelines extends React.Component {
   constructor() {
     super()
@@ -100,7 +99,7 @@ class Timelines extends React.Component {
                         size="mini"
                       >
                         <Icon name="like" />
-                        {post.likes.length}
+                        {post.likes ? post.likes.length : 0}
                       </Button>
                       {/* <Button icon="comment" size="mini" /> */}
                       {/* <Button icon="share" size="mini" /> */}

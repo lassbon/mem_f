@@ -13,9 +13,12 @@ export const userLoggedOut = () => ({
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(res => {
+    console.log(res)
+
     localStorage.acciJWT = res.token
     setAuthorizationHeader(res.token)
     dispatch(userLoggedIn(res))
+    return Promise.resolve(res)
   })
 
 export const authorizeUser = credentials => dispatch => {

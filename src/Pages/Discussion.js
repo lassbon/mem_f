@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { newForumTopic } from "../actions/forums";
 
 const centerText = {
   textAlign: "center"
@@ -29,7 +31,9 @@ class Discussions extends React.Component {
     super(props);
     this.state = {
       content: '',
-      header: '',
+      title: '',
+      creator: this.props.userId,
+      topic: '1 for now'
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,16 +46,10 @@ class Discussions extends React.Component {
   }
 
   onSubmit(event) {
-    alert('I dey')
-    // event.preventDefault();
-    // this.props
-    //   .userLoginRequest(this.state)
-    //   .then(() => this.setState({ isLogged: this.props.isLogged }))
-    //   .catch((errorData) => {
-    //     this.setState({
-    //       error: errorData.response.data
-    //     });
-    //   });
+    event.preventDefault();
+    this.props
+      .newForumTopic(this.state)
+      .then((res) => console.log('kdnkdnkvdbnkjdd'))
   }
 
   state = { open: false }
@@ -62,7 +60,6 @@ class Discussions extends React.Component {
   render() {
     const { open, size, header, content } = this.state
     const { match } = this.props
-    console.log(this.state);
 
     return(
       <React.Fragment>
@@ -87,7 +84,7 @@ class Discussions extends React.Component {
           <Modal.Content>
             <Form onSubmit={this.onSubmit}>
               <Form.Field>
-                <Form.Input name='header' onChange={this.onChange}></Form.Input>
+                <Form.Input name='title' onChange={this.onChange}></Form.Input>
               </Form.Field>
               <Form.Field>
                 <Form.TextArea name='content' onChange={this.onChange}></Form.TextArea>
@@ -107,5 +104,10 @@ class Discussions extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.id,
+  }
+}
 
-export default Discussions;
+export default connect(mapStateToProps, { newForumTopic })(Discussions)

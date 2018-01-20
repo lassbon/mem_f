@@ -150,4 +150,17 @@ export default {
         .get(`${BASEURL}api/v1/userpayments/memberships/${id}`)
         .then(res => res.data),
   },
+  forum: {
+    reg: data =>
+    axios.post(`${BASEURL}api/v1/forum/post`, data, {
+      headers: {
+        'Content-Type': 'application/form-data',
+        Accept: 'application/form-data',
+      },
+    }),
+    getForums: id =>
+    axios
+      .get(`${BASEURL}/api/v1/forum/post/`)
+      .then(res => res.data),
+  },
 }

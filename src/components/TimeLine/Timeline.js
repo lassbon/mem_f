@@ -81,7 +81,7 @@ class Timelines extends React.Component {
                       src={post.username}
                     />
                     <Card.Header>Chuks Festus</Card.Header>
-                    <Card.Meta>on {post.createdAt}</Card.Meta>
+                    <Card.Meta>on {new Date(post.createdAt).toDateString()}</Card.Meta>
                     <Card.Description>{post.postText}</Card.Description>
                     <Card.Description>
                       <img

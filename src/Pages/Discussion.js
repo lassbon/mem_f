@@ -25,16 +25,45 @@ const items = [
 ]
 
 class Discussions extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: '',
+      header: '',
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  onSubmit(event) {
+    alert('I dey')
+    // event.preventDefault();
+    // this.props
+    //   .userLoginRequest(this.state)
+    //   .then(() => this.setState({ isLogged: this.props.isLogged }))
+    //   .catch((errorData) => {
+    //     this.setState({
+    //       error: errorData.response.data
+    //     });
+    //   });
+  }
+
   state = { open: false }
 
   show = size => () => this.setState({ size, open: true })
   close = () => this.setState({ open: false })
 
   render() {
-    const { open, size } = this.state
+    const { open, size, header, content } = this.state
     const { match } = this.props
-    console.log(this.props);
-    
+    console.log(this.state);
+
     return(
       <React.Fragment>
         <Grid>
@@ -56,17 +85,17 @@ class Discussions extends React.Component {
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Start conversation</Modal.Header>
           <Modal.Content>
-            <Form>
+            <Form onSubmit={this.onSubmit}>
               <Form.Field>
-                <Form.Input></Form.Input>
+                <Form.Input name='header' onChange={this.onChange}></Form.Input>
               </Form.Field>
               <Form.Field>
-                <Form.TextArea></Form.TextArea>
+                <Form.TextArea name='content' onChange={this.onChange}></Form.TextArea>
               </Form.Field>
             </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button>hdh</Button>
+            <Button onClick={this.onSubmit}>Submit</Button>
           </Modal.Actions>
         </Modal>
 

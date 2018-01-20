@@ -130,6 +130,24 @@ export default {
           authorization: token,
         },
       })
-    }
-  }
+    },
+  },
+  payments: {
+    donations: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/donations/${id}`)
+        .then(res => res.data),
+    events: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/events/${id}`)
+        .then(res => res.data),
+    trainings: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/trainings/${id}`)
+        .then(res => res.data),
+    memberships: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/memberships/${id}`)
+        .then(res => res.data),
+  },
 }

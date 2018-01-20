@@ -1,5 +1,13 @@
 import React from 'react'
-import { Card, Image, Grid, Button } from 'semantic-ui-react'
+import {
+  Card,
+  Image,
+  Grid,
+  Button,
+  Dimmer,
+  Loader,
+  Segment,
+} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import PaystackComponent from '../../components/PaystackComponent'
 import { connect } from 'react-redux'
@@ -11,13 +19,17 @@ const BASEURL = 'https://2968008f.ngrok.io/'
 class ContReg5 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      loading: false,
+    }
     this.changeToNew = this.changeToNew.bind(this)
   }
 
   changeToNew() {
     const { history, user: { id, token } } = this.props
-
+    this.setState({
+      loading: true,
+    })
     axios
       .put(
         `${BASEURL}api/v1/user/${id}`,
@@ -31,6 +43,9 @@ class ContReg5 extends React.Component {
         }
       )
       .then(() => {
+        this.setState({
+          loading: false,
+        })
         history.push({
           pathname: '/cont6',
           state: {
@@ -41,7 +56,7 @@ class ContReg5 extends React.Component {
   }
 
   render() {
-    const { user: { id, token } } = this.props
+    const { user: { id, token, email } } = this.props
     // const { location: { state }, history } = this.props
     // console.log(this.props)
     // if (state == null || state.id == null) {
@@ -69,12 +84,13 @@ class ContReg5 extends React.Component {
               </h3>
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
-                <strong>N20,000</strong>
+                <strong>N25,000</strong>
               </Grid.Column>
               <PaystackComponent
                 variablename="Verfication "
-                amount={2000000}
+                amount={2500000}
                 callback={this.changeToNew}
+                email={email}
                 metadata={{
                   custom_fields: [
                     {
@@ -90,6 +106,13 @@ class ContReg5 extends React.Component {
                   ],
                 }}
               />
+              {this.state.loading && (
+                <Segment>
+                  <Dimmer active inverted>
+                    <Loader inverted>Loading</Loader>
+                  </Dimmer>
+                </Segment>
+              )}
               {/* <Button
                 className="btn"
                 style={{ margin: '30px auto' }}

@@ -17,6 +17,7 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
 
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {

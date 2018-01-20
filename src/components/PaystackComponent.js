@@ -10,7 +10,7 @@ class PaystackComponent extends Component {
   }
 
   callback = response => {
-    console.log(response) // card charged successfully, get reference here
+    console.log('card charged successfully', response) // card charged successfully, get reference here
     this.props.callback()
   }
 
@@ -34,16 +34,31 @@ class PaystackComponent extends Component {
     return (
       <div>
         <p>
-          <PaystackButton
-            text="Make Payment"
-            class="payButton"
-            callback={this.callback}
-            close={this.close}
-            reference={this.getReference()}
-            email={this.state.email}
-            amount={this.props.amount}
-            paystackkey={this.state.key}
-          />
+          {this.props.metadata ? (
+            <PaystackButton
+              text={this.props.text || 'Make Payment'}
+              class="payButton"
+              callback={this.callback}
+              close={this.close}
+              reference={this.getReference()}
+              email={this.props.email}
+              amount={this.props.amount}
+              paystackkey={this.state.key}
+              metadata={this.props.metadata}
+            />
+          ) : (
+            <PaystackButton
+              text={this.props.text || 'Make Payment'}
+              class="payButton"
+              callback={this.callback}
+              close={this.close}
+              reference={this.getReference()}
+              email={this.props.email}
+              amount={this.props.amount}
+              paystackkey={this.state.key}
+              plan={this.props.plan}
+            />
+          )}
         </p>
       </div>
     )

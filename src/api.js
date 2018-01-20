@@ -9,7 +9,20 @@ export default {
     login: credentails =>
       axios
         .post(`${BASEURL}api/v1/auth/user`, credentails)
-        .then(res => res.data),
+        .then(res => {
+          const { data: { user: { id }, token } } = res
+          return Promise.all([
+            res.data,
+            axios(`${BASEURL}api/v1/user/${id}`, {
+              headers: {
+                authorization: token,
+              },
+            }),
+          ])
+        })
+        .then(responses => {
+          return Promise.resolve({ ...responses[0], ...responses[1].data })
+        }),
 
     signup: user =>
       axios
@@ -55,6 +68,7 @@ export default {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
+          authorization: data.token,
         },
       }),
 

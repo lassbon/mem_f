@@ -15,8 +15,8 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {
   constructor() {
@@ -100,7 +100,7 @@ class Timelines extends React.Component {
                         size="mini"
                       >
                         <Icon name="like" />
-                        {post.likes.length}
+                        {post.likes ? post.likes.length : 0}
                       </Button>
                       {/* <Button icon="comment" size="mini" /> */}
                       {/* <Button icon="share" size="mini" /> */}

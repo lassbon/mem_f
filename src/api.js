@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
@@ -37,7 +38,17 @@ export default {
       axios.post(`${BASEURL}api/vi/user/reset`, email),
 
     profile: id =>
-      axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),
+      axios
+        .get(`${BASEURL}api/v1/user/${id}`)
+        .then(res => res.data),
+    activity: id =>
+      axios
+        .get(`${BASEURL}api/v1/useractivity/${id}`)
+        .then(res => res.data),
+    friends: id =>
+      axios
+        .get(`${BASEURL}api/v1/userfriends/${id}`)
+        .then(res => res.data)
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),
@@ -96,7 +107,7 @@ export default {
   },
 
   projects: {
-    ongoing: token => {
+    ongoing: (token) => {
       return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -105,7 +116,7 @@ export default {
         },
       })
     },
-    completed: token => {
+    completed: (token) => {
       return axios.get(`${BASEURL}api/v1/projects/completed`, {
         headers: {
           'Content-Type': 'application/form-data',

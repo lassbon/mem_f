@@ -1,14 +1,29 @@
 import {
-  USER_PROFILE
- } from "../types";
+  USER_PROFILE, USER_ACTIVITY, USER_FRIENDS
+} from "../types";
 
-export default function user(state = {}, action = {}) {
-  switch(action.type){
+const initialState = {
+  profileDetails: {},
+  userActivity: {}
+};
+
+export default function user(state = initialState, action = {}) {
+  switch (action.type) {
     case USER_PROFILE:
       return {
         profileDetails: action.payload,
       }
-    default: 
+    case USER_ACTIVITY:
+      return {
+        ...state,
+        userActivity: action.activity
+      }
+    case USER_FRIENDS:
+      return {
+        ...state,
+        userFriends: action.friends
+      }
+    default:
       return state
   }
 }

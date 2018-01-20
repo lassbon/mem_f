@@ -103,7 +103,7 @@ export default {
   },
   events: {
     ongoing: (token) => {
-      return axios.get(`${BASEURL}/api/v1/event/ongoing`, {
+      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
@@ -112,7 +112,7 @@ export default {
       })
     },
     completed: (token) => {
-      return axios.get(`${BASEURL}api/v1/event/completed`, {
+      return axios.get(`${BASEURL}api/v1/events/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',

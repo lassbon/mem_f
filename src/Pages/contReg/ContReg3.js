@@ -74,12 +74,6 @@ class ContReg3 extends React.Component {
   }
 
   render() {
-    // const { location: { state }, history } = this.props
-    // console.log(this.props)
-    // if (state == null || state.id == null) {
-    //   history.push('/signup')
-    //   return null
-    // }
     return (
       <Form style={{ width: '70%', margin: '0 auto', textAlign: 'center' }}>
         <Image

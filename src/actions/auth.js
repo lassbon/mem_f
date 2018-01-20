@@ -45,10 +45,10 @@ export const resetPassword = data => () => api.user.resetPassword(data)
 
 export const signup = (data, history) => dispatch => {
   api.signup.reg(data).then(res => {
-    dispatch(authorizeUser({ email: data.email, password: data.password }))
+    // dispatch(authorizeUser({ email: data.email, password: data.password }))
     console.log('success', res)
     history.push({
-      pathname: '/cont',
+      pathname: '/login',
       state: {
         id: res.data.id,
       },

@@ -6,7 +6,7 @@ import axios from 'axios'
 import { logout } from "../../actions/auth";
 
 import "./TopNav.css";
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class TopNav extends React.Component {
   constructor(props) {

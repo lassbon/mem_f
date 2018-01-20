@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
   user: {
@@ -36,6 +36,13 @@ export default {
 
     resetPasswordRequest: email =>
       axios.post(`${BASEURL}api/vi/user/reset`, email),
+
+    profile: id =>
+      axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),
+    activity: id =>
+      axios.get(`${BASEURL}api/v1/useractivity/${id}`).then(res => res.data),
+    friends: id =>
+      axios.get(`${BASEURL}api/v1/userfriends/${id}`).then(res => res.data),
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),
@@ -115,7 +122,7 @@ export default {
   },
   events: {
     ongoing: token => {
-      return axios.get(`${BASEURL}/api/v1/event/ongoing`, {
+      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
@@ -124,7 +131,7 @@ export default {
       })
     },
     completed: token => {
-      return axios.get(`${BASEURL}api/v1/event/completed`, {
+      return axios.get(`${BASEURL}api/v1/events/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
@@ -132,5 +139,34 @@ export default {
         },
       })
     },
+  },
+  payments: {
+    donations: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/donations/${id}`)
+        .then(res => res.data),
+    events: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/events/${id}`)
+        .then(res => res.data),
+    trainings: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/trainings/${id}`)
+        .then(res => res.data),
+    memberships: id =>
+      axios
+        .get(`${BASEURL}api/v1/userpayments/memberships/${id}`)
+        .then(res => res.data),
+  },
+  forum: {
+    reg: data =>
+      axios.post(`${BASEURL}api/v1/forum/post`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
+      }),
+    getForums: id =>
+      axios.get(`${BASEURL}/api/v1/forum/post/`).then(res => res.data),
   },
 }

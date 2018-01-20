@@ -124,7 +124,7 @@ class Project extends React.Component {
                 src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
               />
               <Card.Header>Chuks Festus</Card.Header>
-              <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
+              <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>{jobs.description}</Card.Description>
             </Card.Content>
             <Image size="big" src={jobs.banner} />

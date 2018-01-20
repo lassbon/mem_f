@@ -28,69 +28,63 @@ class Events extends React.Component {
   }
 
   render() {
+    const extra= (
+      <div className="ui three buttons">
+        <Button size="mini">
+          <Icon name="like" />
+          20
+        </Button>
+        <Button icon="comment" size="mini" />
+        <Button icon="share" size="mini" />
+      </div>
+    )
     const currentcount = this.state.currentEvent.length
     const completedcount = this.state.completedEvent.length
-    const events = this.state.currentEvent.map(jobs => (
-      <Tab.Pane attached={false}>
+    const events = this.state.currentEvent.map((jobs, i, arr) => {
+      const even = !!(i % 2)
+      return even ? <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
-          <Card style={{ width: "100%", textAlign: 'center' }}>
-            <Image
-                  size="big"
-                  src={jobs.banner}
-                />
-            <Card.Content>
-              <Card.Description>{jobs.date}</Card.Description><br />
-              <Card.Description>
-                <h3>{jobs.title}</h3>
-              </Card.Description><br />
-              <Card.Description>{jobs.description}</Card.Description><br />
-              <Card.Description>{jobs.venue}</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {currentcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
-          </Card>
-        </Card.Group>          
-      </Tab.Pane>
-    ))
+          <Card
+            image={jobs.banner}
+            header={jobs.title}
+            meta={jobs.date}
+            description={jobs.description}
+            extra={extra}
+          />
+          <Card
+            image={arr[i - 1].banner}
+            header={arr[i - 1].title}
+            meta={arr[i - 1].date}
+            description={arr[i - 1].description}
+            extra={extra}
+          />
+        </Card.Group>
+      </Tab.Pane> : null
 
-    const completed = this.state.completedEvent.map(jobs => (
-      <Tab.Pane attached={false}>
+    })
+
+    const completed = this.state.completedEvent.map((jobs, i, arr) => {
+      const even = !!(i % 2)
+      return even ? <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
-          <Card style={{ width: "100%", textAlign: 'center' }}>
-            <Image
-              size="big"
-              src={jobs.banner}
-            />
-            <Card.Content>
-              <Card.Description>{jobs.date}</Card.Description><br />
-              <Card.Description>
-                <h3>{jobs.title}</h3>
-              </Card.Description><br />
-              <Card.Description>{jobs.description}</Card.Description><br />
-              <Card.Description>{jobs.venue}</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {currentcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
-          </Card>
+          <Card
+            image={jobs.banner}
+            header={jobs.title}
+            meta={jobs.date}
+            description={jobs.description}
+            extra={extra}
+          />
+          <Card
+            image={arr[i -1].banner}
+            header={arr[i -1].title}
+            meta={arr[i -1].date}
+            description={arr[i -1].description}
+            extra={extra}
+          />
         </Card.Group>       
-      </Tab.Pane>
-    ))
+      </Tab.Pane> : null
+    
+    })
     const panes = [
       {
         menuItem: currentcount + " Ongoing Events",
@@ -107,7 +101,7 @@ class Events extends React.Component {
         <Grid>
           <div className='bana'>
             EVENTS
-      </div>
+          </div>
         </Grid>
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
       </React.Fragment>

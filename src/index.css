@@ -156,3 +156,8 @@ div.seven.wide.column > div > p {
 #root > div > main > div.ui.cards.TimeLine > div:nth-child(1) > div.extra.content.time > div.ui.comments.slide.down.visible.transition > form > button {
   margin-bottom: 10px
 }
+
+#root > div > main > div:nth-child(2) > div.ui.segment.active.tab > div > div > img {
+  height: 200px !important;
+  width: 100% !important
+}

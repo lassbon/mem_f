@@ -56,7 +56,7 @@ class ContReg5 extends React.Component {
   }
 
   render() {
-    const { user: { id, token } } = this.props
+    const { user: { id, token, email } } = this.props
     // const { location: { state }, history } = this.props
     // console.log(this.props)
     // if (state == null || state.id == null) {
@@ -84,12 +84,13 @@ class ContReg5 extends React.Component {
               </h3>
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
-                <strong>N20,000</strong>
+                <strong>N25,000</strong>
               </Grid.Column>
               <PaystackComponent
                 variablename="Verfication "
-                amount={2000000}
+                amount={2500000}
                 callback={this.changeToNew}
+                email={email}
                 metadata={{
                   custom_fields: [
                     {

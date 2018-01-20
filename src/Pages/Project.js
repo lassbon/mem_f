@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button } from "semantic-ui-react";
 import { fetchCurrentProjects, fetchCompletedProjects } from "../actions/projects";
 // import { object } from "../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types";
+import PaystackComponent from '../components/PaystackComponent'
+import './project.css'
 
 class Project extends React.Component {
   constructor(props) {
@@ -29,28 +31,59 @@ class Project extends React.Component {
   }
 
   render() {
+    const { user: { email, id } } = this.props
+
     const currentcount = this.state.currentproject.length
     const completedcount = this.state.completedproject.length
     const projects = this.state.currentproject.map(jobs => (
       <Tab.Pane attached={false}>
-          <Card.Group className="TimeLine">
-            <Card style={{ width: "100%" }}>
-              <Card.Content>
-                <Image
-                  floated="left"
-                  size="mini"
-                  circular
-                  src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+        <Card.Group className="TimeLine">
+          <Card style={{ width: '100%' }}>
+            <Card.Content>
+              <Image
+                floated="left"
+                size="mini"
+                circular
+                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+              />
+              <Card.Header>Chuks Festus</Card.Header>
+              <Card.Meta>{jobs.createdAt}</Card.Meta>
+              <Card.Description>{jobs.description}</Card.Description>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <PaystackComponent
+                  amount={5000000.0}
+                  text="Donate to project"
+                  variablename="Verfication "
+                  class="donate-button"
+                  email={email}
+                  metadata={{
+                    custom_fields: [
+                      {
+                        display_name: 'Payment For',
+                        variable_name: 'donation title',
+                        value: `donation_${id}`,
+                      },
+                      {
+                        display_name: 'Membership ID',
+                        variable_name: 'membership_id',
+                        value: id,
+                      },
+                    ],
+                  }}
+                  callback={() => {}}
+                  // email={user.email}
+                  // amount={`${plan.fee}00`}
+                  // plan={plan.paystack.data.plan_code}
+                  // callback={this.changeToNew}
                 />
-                <Card.Header>Chuks Festus</Card.Header>
-                <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
-                <Card.Description>{jobs.description}</Card.Description>
-                <Button 
-                  floated="right"
-                  size="mini"
-                >Donate to project</Button>
-              </Card.Content>
-              {/* <Image
+              </div>
+            </Card.Content>
+            {/* <Image
                   size="big"
                   src={jobs.banner}
                 /> */}

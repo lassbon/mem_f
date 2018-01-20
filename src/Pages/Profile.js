@@ -1,16 +1,27 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List } from "semantic-ui-react";
+import { Tab, Grid, Image, Label, Card, Icon, Button, List, Segment, Dimmer, Loader } from "semantic-ui-react";
 
 let mappedActivity;
 let myFriends;
 let totalFriends;
+let getPayments;
+let donations
+
+
+const spinner = <Segment>
+  <Dimmer active inverted>
+    <Loader inverted>Please wait...</Loader>
+  </Dimmer>
+</Segment>
 
 const Profile = (props) => {
+  props.activities.posts.length === 0  ?  mappedActivity = spinner :
   mappedActivity = props.activities.posts.map(activity => (
     <Tab.Pane attached={false} key={activity.createdAt}>
       <Card.Group className="TimeLine">
         <Card style={{ width: "100%" }}>
+          {getPayments = props.getTransactionHistory}
           <Card.Content>
             <Image
               floated="left"
@@ -47,7 +58,7 @@ const Profile = (props) => {
   totalFriends = props.friends.friends.length;
   myFriends = props.friends.friends.map(friend => (
     <Tab.Pane attached={false}>
-    {console.log(friend)}
+      {console.log(friend)}
       <Card fluid>
         <Card.Content>
           <List horizontal>
@@ -66,6 +77,30 @@ const Profile = (props) => {
       </Card>
     </Tab.Pane>
   ))
+
+  donations = props.donations.donations.map(donation => (
+    <Tab.Pane attached={false}>
+      <Card fluid>
+        <Card.Content>
+          <List horizontal>
+            {
+              <List.Item key="{p.memberId}">
+                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
+                <List.Content>
+                  <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
+                  'None'
+                  <Button size='tiny'>Send message</Button>
+                </List.Content>
+              </List.Item>
+            }
+          </List>
+        </Card.Content>
+      </Card>
+    </Tab.Pane>
+  ))
+  // const memberships = 
+  // const events = 
+  // const trainings = 
 
   return <React.Fragment>
     <Grid>
@@ -114,14 +149,18 @@ const panes = [
   },
   {
     menuItem: "Transaction History",
-    render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane>
+    render: () => ([
+      <Tab.Pane attached={false}><h1>Donations</h1></Tab.Pane>, 'None',
+      <Tab.Pane attached={false}><h1>Events</h1></Tab.Pane>, 'None',
+      <Tab.Pane attached={false}><h1>Trainings</h1></Tab.Pane>, 'None',
+      <Tab.Pane attached={false}><h1>Memberships</h1></Tab.Pane>, 'None',
+    ]
+    )
   },
   {
     menuItem: "Reports",
     render: () => <Tab.Pane attached={false}>
-
       <Tab menu={{ pointing: true }} panes={reportCont} />
-
     </Tab.Pane>
   }
 ];
@@ -145,8 +184,24 @@ const reportCont = [
       </Grid>
     </Tab.Pane>
   },
-  { menuItem: 'Donations', render: () => <Tab.Pane attached={false}>Donations</Tab.Pane> },
-  { menuItem: 'Tranings', render: () => <Tab.Pane attached={false}>Tranings</Tab.Pane> },
+  {
+    menuItem: 'Donations', render: () => [<Tab.Pane attached={false}>Donations</Tab.Pane>, <Grid>
+      <Grid.Row>
+        <Grid.Column width={6} style={{ textAlign: 'center' }}>
+          None
+      </Grid.Column>
+      </Grid.Row>
+    </Grid>]
+  },
+  {
+    menuItem: 'Tranings', render: () => [<Tab.Pane attached={false}>Tranings</Tab.Pane>, <Grid>
+      <Grid.Row>
+        <Grid.Column width={6} style={{ textAlign: 'center' }}>
+          None
+      </Grid.Column>
+      </Grid.Row>
+    </Grid>]
+  },
 ]
 
 export default Profile;

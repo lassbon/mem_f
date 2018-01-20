@@ -54,8 +54,8 @@ class ContReg4 extends React.Component {
     // perform validation here
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <Form style={{ width: "70%", margin: "0 auto", textAlign: "center" }} loading={this.state.loading}>
         <Image
           style={{ marginBottom: 20, marginTop: 30 }}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List } from "semantic-ui-react";
 
 // import FriendsApi from '../utils/api';
@@ -53,7 +52,7 @@ const panes = [
           </Card.Header>
         </Card.Content>
         <Card.Content>
-          <List horizontal>
+          {/* <List horizontal>
             { 
               // FriendsApi.all().map(p => (
                 <List.Item key="{p.memberId}">
@@ -66,7 +65,7 @@ const panes = [
                 </List.Item>
               // ))
             }
-          </List>
+          </List> */}
         </Card.Content>
       </Card>
     </Tab.Pane>
@@ -106,12 +105,14 @@ const reportCont = [
   { menuItem: 'Tranings', render: () => <Tab.Pane attached={false}>Tranings</Tab.Pane> },
 ]
 
-const Profile = () => (
+const Profile = (props) => (
   <React.Fragment>
     <Grid>
       <Grid.Column>
         <Segment raised>
-          <Label color='orange' ribbon='right'>member id (132465789)</Label>
+          <Label color='orange' ribbon='right'>
+            member id ({props.profile.membershipId})
+          </Label>
           <Grid>
             <Grid.Row>
               <Grid.Column width='3'>
@@ -124,9 +125,7 @@ const Profile = () => (
               <Grid.Column width='7'>
                 <div>
                   <h3>Chukwu Nonso</h3>
-                  <p>chukwunonso@gmail.com</p>
-                  <p>080123456789</p>
-                  <p>Managing Director of Chukso Enterprises</p>
+                  <p>{props.profile.email}</p>
                 </div>
               </Grid.Column>
             </Grid.Row>

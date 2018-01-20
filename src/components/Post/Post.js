@@ -40,20 +40,19 @@ class PostStatus extends React.Component {
     const newItem = {
       postText: this.state.text,
       owner: this.props.currentUser.id,
-      postImage: this.state.file,
+      postImage: this.state.imagePreviewUrl,
       // id: Date.now()
     }
 
     api.timeline.makepost(newItem, this.props.currentUser.token).then(res => {
       console.log('make post', res)
+      this.setState(prevState => ({
+        ...prevState,
+        items: prevState.items.concat(newItem),
+        text: '',
+        postsKey: Math.random(),
+      }))
     })
-
-    this.setState(prevState => ({
-      ...prevState,
-      items: prevState.items.concat(newItem),
-      text: '',
-      postsKey: Math.random(),
-    }))
   }
   handleImageChange(e) {
     e.preventDefault()

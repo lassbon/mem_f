@@ -15,7 +15,8 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {
   constructor() {

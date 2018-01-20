@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 const sendDetails = (details, id) =>
   axios.put(`${BASEURL}api/v1/user/${id}`, details, {

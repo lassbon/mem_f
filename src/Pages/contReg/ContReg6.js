@@ -1,23 +1,28 @@
 import React from 'react'
-import { Segment, Image, Grid, Button } from 'semantic-ui-react'
+import { Segment, Image, Grid, Button, Dimmer, Loader } from 'semantic-ui-react'
 import PaystackComponent from '../../components/PaystackComponent'
 import { userLoggedIn } from '../../actions/auth'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg6 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      loading: false,
+    }
     this.changeToNew = this.changeToNew.bind(this)
   }
 
   changeToNew() {
     const { history, user: { id, token }, userLoggedIn } = this.props
     // let token = axios.defaults.headers.common.authorization
-
+    this.setState({
+      loading: true,
+    })
     axios
       .put(
         `${BASEURL}api/v1/user/${id}`,
@@ -31,6 +36,9 @@ class ContReg6 extends React.Component {
         }
       )
       .then(() => {
+        this.setState({
+          loading: false,
+        })
         localStorage.acciJWT = token
         history.push({
           pathname: '/app',
@@ -103,6 +111,13 @@ class ContReg6 extends React.Component {
                   ],
                 }}
               />
+              {this.state.loading && (
+                <Segment>
+                  <Dimmer active inverted>
+                    <Loader inverted>Loading</Loader>
+                  </Dimmer>
+                </Segment>
+              )}
             </Segment>
           </Grid.Column>
         </Grid>

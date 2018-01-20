@@ -1,7 +1,8 @@
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
+export const USER_REGISTERED = 'USER_REGISTERED'
 
-// signup types 
+// signup types
 export const CONTREG = 'CONTREG'
 export const CONTREG2 = 'CONTREG2'
 export const CONTREG3 = 'CONTREG3'

@@ -1,5 +1,5 @@
 import api from '../api'
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types'
+import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_REGISTERED } from '../types'
 import setAuthorizationHeader from './setAuthorizationHeader'
 
 export const userLoggedIn = payload => ({
@@ -9,6 +9,11 @@ export const userLoggedIn = payload => ({
 
 export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT,
+})
+
+export const userRegistered = payload => ({
+  type: USER_REGISTERED,
+  payload,
 })
 
 export const login = credentials => dispatch =>
@@ -25,6 +30,7 @@ export const authorizeUser = credentials => dispatch => {
   api.user.login(credentials).then(res => {
     // localStorage.acciJWT = res.token;
     setAuthorizationHeader(res.token)
+    dispatch(userRegistered({ token: res.token, ...res.data.user }))
   })
 }
 export const logout = () => dispatch => {

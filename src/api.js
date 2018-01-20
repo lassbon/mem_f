@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
   user: {

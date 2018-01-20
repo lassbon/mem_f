@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List } from "semantic-ui-react";
 
-// import FriendsApi from '../utils/api';
-
 const panes = [
   {
     menuItem: "Activity",
@@ -124,7 +122,7 @@ const Profile = (props) => (
               </Grid.Column>
               <Grid.Column width='7'>
                 <div>
-                  <h3>Chukwu Nonso</h3>
+                  <h3>{props.profile.company}</h3>
                   <p>{props.profile.email}</p>
                 </div>
               </Grid.Column>

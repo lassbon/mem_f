@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import InlineError from '../../components/messages/InlineError'
 import '../LoginPage/login.css'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {
   state = {

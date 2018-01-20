@@ -33,66 +33,62 @@ class Events extends React.Component {
     const events = this.state.currentEvent.map(jobs => (
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
-          <Card style={{ width: "100%" }}>
-            <Card.Content>              
-              <Image
-                floated="left"
-                size="mini"
-                circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
-              />
-              <Card.Header>Chuks Festus</Card.Header>
-              <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
-              <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
-              <Card.Description>
-                <img
-                  src="https://i.imgur.com/vMOJDOk.jpg"
-                  alt=""
-                  style={{ width: "100%", marginTop: 10 }}
+          <Card style={{ width: "100%", textAlign: 'center' }}>
+            <Image
+                  size="big"
+                  src={jobs.banner}
                 />
-              </Card.Description>
+            <Card.Content>
+              <Card.Description>{jobs.date}</Card.Description><br />
+              <Card.Description>
+                <h3>{jobs.title}</h3>
+              </Card.Description><br />
+              <Card.Description>{jobs.description}</Card.Description><br />
+              <Card.Description>{jobs.venue}</Card.Description>
             </Card.Content>
             <Card.Content extra>
               <div className="ui three buttons">
-
+                <Button size="mini">
+                  <Icon name="like" />
+                  {currentcount}
+                </Button>
+                <Button icon="comment" size="mini" />
                 <Button icon="share" size="mini" />
               </div>
             </Card.Content>
           </Card>
-        </Card.Group>
+        </Card.Group>          
       </Tab.Pane>
     ))
 
     const completed = this.state.completedEvent.map(jobs => (
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
-          <Card style={{ width: "100%" }}>
+          <Card style={{ width: "100%", textAlign: 'center' }}>
+            <Image
+              size="big"
+              src={jobs.banner}
+            />
             <Card.Content>
-              <Image
-                floated="left"
-                size="mini"
-                circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
-              />
-              <Card.Header>Chuks Festus</Card.Header>
-              <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
-              <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
+              <Card.Description>{jobs.date}</Card.Description><br />
               <Card.Description>
-                <img
-                  src="https://i.imgur.com/vMOJDOk.jpg"
-                  alt=""
-                  style={{ width: "100%", marginTop: 10 }}
-                />
-              </Card.Description>
+                <h3>{jobs.title}</h3>
+              </Card.Description><br />
+              <Card.Description>{jobs.description}</Card.Description><br />
+              <Card.Description>{jobs.venue}</Card.Description>
             </Card.Content>
             <Card.Content extra>
               <div className="ui three buttons">
-
+                <Button size="mini">
+                  <Icon name="like" />
+                  {currentcount}
+                </Button>
+                <Button icon="comment" size="mini" />
                 <Button icon="share" size="mini" />
               </div>
             </Card.Content>
           </Card>
-        </Card.Group>
+        </Card.Group>       
       </Tab.Pane>
     ))
     const panes = [

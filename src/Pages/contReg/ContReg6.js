@@ -5,8 +5,8 @@ import { userLoggedIn } from '../../actions/auth'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg6 extends React.Component {
   constructor(props) {

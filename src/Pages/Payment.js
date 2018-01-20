@@ -12,8 +12,8 @@ import {
 } from 'semantic-ui-react'
 import axios from 'axios'
 //payments/memberships
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Payment extends Component {
   state = {

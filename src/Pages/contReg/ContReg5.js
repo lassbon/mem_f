@@ -13,8 +13,8 @@ import PaystackComponent from '../../components/PaystackComponent'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg5 extends React.Component {
   constructor(props) {

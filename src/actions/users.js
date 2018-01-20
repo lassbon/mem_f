@@ -11,12 +11,6 @@ export const setUserProfile = payload => ({
 
 export const getUserProfile = id => dispatch =>
   api.user.profile(id).then(res => {
-    const { email, membershipId } = res;
-    dispatch(setUserProfile({email, membershipId}));
+    dispatch(setUserProfile(res));
+    return Promise.resolve(res)
   });
-
-
-// export const signup = (data) => (dispatch) =>
-//   api.user.signup(data).then(user => {
-//     dispatch(userLoggedIn(user))
-//   });

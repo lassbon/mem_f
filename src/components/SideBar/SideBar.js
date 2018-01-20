@@ -3,21 +3,11 @@ import { Menu, Icon } from "semantic-ui-react";
 import { Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logo from "../../images/ACCIHD-LOGO.png";
-import { getUserProfile } from "../../actions/users";
 import "./Sidebar.css";
 
 class SideBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-
-    this.getUserProfile = this.getUserProfile.bind(this);
-  }
-
-  getUserProfile(event) {
-    event.preventDefault();
-    this.props.getUserProfile(this.props.userId)
-    console.log('working')
   }
 
   render() {
@@ -33,7 +23,6 @@ class SideBar extends React.Component {
               <Icon name="home" />
         </Menu.Item>
         <Menu.Item
-          onClick={this.getUserProfile}
           to={`${this.props.match.path}/profile`}
           as={Link}
         >Profile
@@ -81,8 +70,8 @@ class SideBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return{
-    userId: state.user.id
+  return {
+    userId: state.user.id,
   }
 }
-export default connect(mapStateToProps, { getUserProfile })(SideBar)
+export default connect(mapStateToProps, {})(SideBar)

@@ -31,7 +31,7 @@ class Events extends React.Component {
     const currentcount = this.state.currentEvent.length
     const completedcount = this.state.completedEvent.length
     const events = this.state.currentEvent.map(jobs => (
-      <Tab.Pane attached={false}>
+      <Tab.Pane attached={false} key={jobs.createdAt}>
         <Card.Group className="TimeLine">
           <Card style={{ width: "100%" }}>
             <Card.Content>              
@@ -42,7 +42,7 @@ class Events extends React.Component {
                 src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
               />
               <Card.Header>Chuks Festus</Card.Header>
-              <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
+              <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
               <Card.Description>
                 <img
@@ -64,7 +64,7 @@ class Events extends React.Component {
     ))
 
     const completed = this.state.completedEvent.map(jobs => (
-      <Tab.Pane attached={false}>
+      <Tab.Pane attached={false} key={jobs.createdAt}>
         <Card.Group className="TimeLine">
           <Card style={{ width: "100%" }}>
             <Card.Content>
@@ -75,7 +75,7 @@ class Events extends React.Component {
                 src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
               />
               <Card.Header>Chuks Festus</Card.Header>
-              <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
+              <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>Following the Chamber's, last meeting at the Chamber’s secretariat on the 11th of October. Members decide to make charity donations 10 selected orphanages in Wuse, Asokoro and Kuje</Card.Description>
               <Card.Description>
                 <img

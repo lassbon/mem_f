@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
   user: {
@@ -26,6 +27,10 @@ export default {
     profile: id =>
       axios
         .get(`${BASEURL}api/v1/user/${id}`)
+        .then(res => res.data),
+    activity: id =>
+      axios
+        .get(`${BASEURL}api/v1/useractivity/${id}`)
         .then(res => res.data)
   },
   // posts: {
@@ -85,13 +90,14 @@ export default {
 
   projects: {
     ongoing: (token) => {
-    return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
-      headers: {
-        'Content-Type': 'application/form-data',
-        Accept: 'application/form-data',
-        authorization: token,
-      },
-    })},
+      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
     completed: (token) => {
       return axios.get(`${BASEURL}api/v1/projects/completed`, {
         headers: {
@@ -99,7 +105,8 @@ export default {
           Accept: 'application/form-data',
           authorization: token,
         },
-      })},
+      })
+    },
   },
   events: {
     ongoing: (token) => {

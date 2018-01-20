@@ -21,7 +21,7 @@ export const fetchCurrentEvent = (token) => dispatch =>
     })
 
 export const fetchCompletedEvent = (token) => dispatch =>
-    api.projects.completed(token)
+    api.events.completed(token)
       .then(res => {
         dispatch(completedEvent(res.data))
       })

@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List } from "semantic-ui-react";
 
-let mappedActivity
+let mappedActivity;
+let myFriends;
+let totalFriends;
+
 const Profile = (props) => {
   mappedActivity = props.activities.posts.map(activity => (
     <Tab.Pane attached={false} key={activity.createdAt}>
@@ -15,7 +18,7 @@ const Profile = (props) => {
               circular
               src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
             />
-            <Card.Header>Chuks Festus</Card.Header>
+            <Card.Header>{activity.company}</Card.Header>
             <Card.Meta>{new Date(activity.createdAt).toDateString()}</Card.Meta>
             <Card.Description>{activity.postText}</Card.Description>
             <Card.Description>
@@ -30,8 +33,8 @@ const Profile = (props) => {
             <div className="ui three buttons">
               <Button size="mini">
                 <Icon name="like" />
-                {activity.likes.length}
-                </Button>
+                {/* {activity.likes.length} */}
+              </Button>
               <Button icon="comment" size="mini" />
               {/* <Button icon="share" size="mini" /> */}
             </div>
@@ -40,13 +43,36 @@ const Profile = (props) => {
       </Card.Group>
     </Tab.Pane>
   ))
+
+  totalFriends = props.friends.friends.length;
+  myFriends = props.friends.friends.map(friend => (
+    <Tab.Pane attached={false}>
+    {console.log(friend)}
+      <Card fluid>
+        <Card.Content>
+          <List horizontal>
+            {
+              <List.Item key="{p.memberId}">
+                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
+                <List.Content>
+                  <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
+                  <p>{friend.email}</p>
+                  <Button size='tiny'>Send message</Button>
+                </List.Content>
+              </List.Item>
+            }
+          </List>
+        </Card.Content>
+      </Card>
+    </Tab.Pane>
+  ))
+
   return <React.Fragment>
     <Grid>
       <Grid.Column>
         <Segment raised>
           <Label color='orange' ribbon='right'>
             member id ({props.profile.membershipId})
-            {console.log('mayowaaaaaa', props.activity)}
           </Label>
           <Grid>
             <Grid.Row>
@@ -74,71 +100,17 @@ const Profile = (props) => {
 }
 
 const panes = [
+  { menuItem: "Activity", render: () => mappedActivity },
   {
-    menuItem: "Activity",
-    render: () => mappedActivity
-    // <Tab.Pane attached={false}>
-    //   <Card.Group className="TimeLine">
-    //         <Card style={{ width: "100%" }}>
-    //           <Card.Content>
-    //             <Image
-    //               floated="left"
-    //               size="mini"
-    //               circular
-    //               src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
-    //             />
-    //             <Card.Header>Chuks Festus</Card.Header>
-    //             <Card.Meta>on Oct 10, 2017 4:21 PM</Card.Meta>
-    //             <Card.Description>some text</Card.Description>
-    //             <Card.Description>
-    //               <img
-    //                 src="http://xinature.com/wp-content/uploads/2017/01/rivers-tree-night-mist-webs-river-blue-spider-creepy-wallpapers-download.jpg"
-    //                 alt=""
-    //                 style={{ width: "100%", marginTop: 10 }}
-    //               />
-    //             </Card.Description>
-    //           </Card.Content>
-    //           <Card.Content extra>
-    //             <div className="ui three buttons">
-    //               <Button size="mini">
-    //                 <Icon name="like" />
-    //                 20
-    //               </Button>
-    //               <Button icon="comment" size="mini" />
-    //               <Button icon="share" size="mini" />
-    //             </div>
-    //           </Card.Content>
-    //         </Card>
-    //     </Card.Group>
-    // </Tab.Pane>
-  },
-  {
-    menuItem: "Friends",
-    render: () => <Tab.Pane attached={false}>
+    menuItem: "Friends", render: () => ([<Tab.Pane attached={false}>
       <Card fluid>
         <Card.Content>
           <Card.Header style={{ textAlign: 'center' }}>
-            (20) friends
-          </Card.Header>
-        </Card.Content>
-        <Card.Content>
-          {/* <List horizontal>
-            { 
-              // FriendsApi.all().map(p => (
-                <List.Item key="{p.memberId}">
-                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
-                  <List.Content>
-                    <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
-                    <p> mutual friends</p>
-                    <Button size='tiny'>Send message</Button>
-                  </List.Content>
-                </List.Item>
-              // ))
-            }
-          </List> */}
+            {totalFriends} connections
+    </Card.Header>
         </Card.Content>
       </Card>
-    </Tab.Pane>
+    </Tab.Pane>, myFriends])
   },
   {
     menuItem: "Transaction History",

@@ -1,5 +1,5 @@
 import {
-  USER_PROFILE, USER_ACTIVITY
+  USER_PROFILE, USER_ACTIVITY, USER_FRIENDS
 } from "../types";
 
 const initialState = {
@@ -14,8 +14,14 @@ export default function user(state = initialState, action = {}) {
         profileDetails: action.payload,
       }
     case USER_ACTIVITY:
-      return {...state,
+      return {
+        ...state,
         userActivity: action.activity
+      }
+    case USER_FRIENDS:
+      return {
+        ...state,
+        userFriends: action.friends
       }
     default:
       return state

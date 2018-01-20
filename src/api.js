@@ -31,6 +31,10 @@ export default {
     activity: id =>
       axios
         .get(`${BASEURL}api/v1/useractivity/${id}`)
+        .then(res => res.data),
+    friends: id =>
+      axios
+        .get(`${BASEURL}api/v1/userfriends/${id}`)
         .then(res => res.data)
   },
   // posts: {

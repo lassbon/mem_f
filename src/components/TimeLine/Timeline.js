@@ -11,7 +11,7 @@ import {
   Segment,
   Label,
 } from 'semantic-ui-react'
-import { getPostData } from '../../utils/membership-api'
+// import { getPostData } from '../../utils/membership-api'
 import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
@@ -90,9 +90,9 @@ class Timelines extends React.Component {
                       floated="left"
                       size="mini"
                       circular
-                      src={post.username}
+                      src=''
                     />
-                    <Card.Header>Chuks Festus</Card.Header>
+                    <Card.Header>{post.username}</Card.Header>
                     <Card.Meta>on {post.createdAt}</Card.Meta>
                     <Card.Description>{post.postText}</Card.Description>
                     <Card.Description>

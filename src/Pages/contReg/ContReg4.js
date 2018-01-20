@@ -1,16 +1,16 @@
-import React from "react";
-import { Grid, Segment, Form, Image, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux"
-import { update } from "../../actions/auth"
+import React from 'react'
+import { Grid, Segment, Form, Image, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { update } from '../../actions/auth'
 
 class ContReg4 extends React.Component {
   state = {
-    loading : false,
+    loading: false,
     data: {
       referrer1: null,
-      referrer2: null
-    }
+      referrer2: null,
+    },
     // rep1 : {
     //   id : null,
     //   email : null
@@ -21,33 +21,35 @@ class ContReg4 extends React.Component {
     // }
   }
 
-  handleChange1 = (e) => {
-    this.setState({ 
-    data : {...this.state.data, [e.target.name]: e.target.value}})
+  handleChange1 = e => {
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    })
   }
 
   // handleChange2 = (e) => {
-  //   this.setState({ 
+  //   this.setState({
   //   rep2 : {...this.state.rep1, [e.target.name]: e.target.value}})
   // }
 
   submit = () => {
     // console.log(this.state)
-    console.log(this.state);
-    this.setState({ loading: true });
-    const { history, location: { state: { id } } } = this.props;
-    this.props
-      .update(this.state.data, history, "/cont5", id)
-      .catch(() => {
-        //handle error
-        return Promise.resolve("");
-      })
-      .then(() => {
-        this.setState({ loading: true });
-      });
-
-    // this.setState({ loading: true })
-    // setTimeout(function() { window.location = "/cont5" }, 3000)
+    console.log(this.state)
+    this.setState({ loading: true })
+    const { history, user: { id, token } } = this.props
+    this.props.update(
+      { ...this.state.data, token, regState: 4 },
+      history,
+      '/cont5',
+      id
+    )
+    // .catch(() => {
+    //   //handle error
+    //   return Promise.resolve('')
+    // })
+    // .then(() => {
+    //   this.setState({ loading: true })
+    // })
   }
 
   validate = () => {
@@ -56,7 +58,10 @@ class ContReg4 extends React.Component {
 
   render() {
     return (
-      <Form style={{ width: "70%", margin: "0 auto", textAlign: "center" }} loading={this.state.loading}>
+      <Form
+        style={{ width: '70%', margin: '0 auto', textAlign: 'center' }}
+        loading={this.state.loading}
+      >
         <Image
           style={{ marginBottom: 20, marginTop: 30 }}
           verticalAlign="middle"
@@ -66,13 +71,23 @@ class ContReg4 extends React.Component {
         <Grid columns="equal">
           <Grid.Column>
             <Form.Field>
-              <Form.Input type="email" placeholder="email" name="referrer1" onChange={this.handleChange}/>
+              <Form.Input
+                type="email"
+                placeholder="email"
+                name="referrer1"
+                onChange={this.handleChange}
+              />
             </Form.Field>
           </Grid.Column>
           <Grid.Column>
             <Grid.Column>
               <Form.Field>
-                <Form.Input type="email" placeholder="email" name="referrer2" onChange={this.handleChange}/>
+                <Form.Input
+                  type="email"
+                  placeholder="email"
+                  name="referrer2"
+                  onChange={this.handleChange}
+                />
               </Form.Field>
             </Grid.Column>
           </Grid.Column>
@@ -90,4 +105,4 @@ class ContReg4 extends React.Component {
   }
 }
 
-export default  connect(null, {update})(ContReg4);
+export default connect(({ user }) => ({ user }), { update })(ContReg4)

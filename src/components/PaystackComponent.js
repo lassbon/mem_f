@@ -10,7 +10,7 @@ class PaystackComponent extends Component {
   }
 
   callback = response => {
-    console.log(response) // card charged successfully, get reference here
+    console.log('card charged successfully', response) // card charged successfully, get reference here
     this.props.callback()
   }
 

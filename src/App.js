@@ -4,25 +4,24 @@ import PropTypes from 'prop-types'
 
 import LandingPage from './Pages/LandingPage'
 import LoginPage from './Pages/LoginPage/LoginPage'
-import Home from './Pages/Home/Home';
-import UserRoute from './components/routes/UserRoute';
-import GuestRoute from './components/routes/GuestRoute';
-import SignUpPage from './Pages/SignUpPage/SignUpPage';
-import ContReg from './Pages/contReg/ContReg';
-import ContReg2 from './Pages/contReg/ContReg2';
-import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
-import Main from './components/Main';
-import ContReg3 from './Pages/contReg/ContReg3';
-import ContReg4 from './Pages/contReg/ContReg4';
-import ContReg5 from './Pages/contReg/ContReg5';
-import ContReg6 from './Pages/contReg/ContReg6';
-import Payment from './Pages/Payment';
-import EventPage from './Pages/EventPage';
-import Profile from './Pages/Profile';
+import Home from './Pages/Home/Home'
+import UserRoute from './components/routes/UserRoute'
+import GuestRoute from './components/routes/GuestRoute'
+import SignUpPage from './Pages/SignUpPage/SignUpPage'
+import ContReg from './Pages/contReg/ContReg'
+import ContReg2 from './Pages/contReg/ContReg2'
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
+import Main from './components/Main'
+import ContReg3 from './Pages/contReg/ContReg3'
+import ContReg4 from './Pages/contReg/ContReg4'
+import ContReg5 from './Pages/contReg/ContReg5'
+import ContReg6 from './Pages/contReg/ContReg6'
+import Payment from './Pages/Payment'
+import EventPage from './Pages/EventPage'
+import Profile from './Pages/Profile'
 
 const App = ({ location }) => (
   <div>
-    <Route location={location} path="/" exact component={LandingPage} />
     <Route exact path="/cont" component={ContReg} />
     <Route exact path="/cont2" component={ContReg2} />
     <Route exact path="/cont3" component={ContReg3} />
@@ -33,20 +32,16 @@ const App = ({ location }) => (
     <Route exact path="/profile" component={Profile} />
     <Route exact path="/events" component={EventPage} />
     {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
-    <GuestRoute
-      location={location}
-      path="/signup"
-      exact
-      component={SignUpPage}
-    />
-    <GuestRoute
+    <Route location={location} path="/signup" exact component={SignUpPage} />
+    <Route
       location={location}
       path="/forgotpassword"
       exact
       component={ForgotPassword}
     />
-    <GuestRoute location={location} path="/login" exact component={LoginPage} />
+    <Route location={location} path="/login" exact component={LoginPage} />
     <UserRoute location={location} path="/app" component={Main} />
+    <Route location={location} path="/" exact component={LandingPage} />
   </div>
 )
 

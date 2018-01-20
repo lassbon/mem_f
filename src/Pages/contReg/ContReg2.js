@@ -3,6 +3,11 @@ import { Tab, Header, Message, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
+import { connect } from 'react-redux'
+
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 const panes = [
   {
@@ -160,13 +165,15 @@ const panes = [
   },
 ]
 
-const ContReg2 = props => {
-  const { location: { state }, history } = props
-  console.log(props)
-  if (state == null || state.id == null) {
-    history.push('/signup')
-    return null
-  }
+const state = { activeIndex: 0 }
+
+const ContReg2 = ({ history, user }) => {
+  // const { location: { state }, history } = props
+  // console.log(props)
+  // if (state == null || state.id == null) {
+  //   history.push('/signup')
+  //   return null
+  // }
 
   return (
     <div
@@ -186,6 +193,10 @@ const ContReg2 = props => {
       <Tab
         menu={{ fluid: true, vertical: true, tabular: 'right' }}
         panes={panes}
+        onTabChange={(change, { activeIndex }) => {
+          state.activeIndex = activeIndex
+          console.log(state)
+        }}
       />
       <Button
         as={Link}
@@ -195,12 +206,38 @@ const ContReg2 = props => {
         Back
       </Button>
       <Button
-        as={Link}
-        to={{
-          pathname: '/cont3',
-          state: {
-            id: state.id,
-          },
+        // as={Link}
+        // to={{
+        //   pathname: '/cont3',
+        //   state: {
+        //     id: 'state.id',
+        //   },
+        // }}
+        onClick={() => {
+          axios
+            .put(
+              `${BASEURL}api/v1/user/${user.id}`,
+              {
+                membershipPlan: state.activeIndex,
+                regState: 2,
+              },
+              {
+                headers: {
+                  authorization: user.token,
+                  'Content-Type': 'application/form-data',
+                  Accept: 'application/form-data',
+                },
+              }
+            )
+            .then(() => {
+              history.push({
+                pathname: '/cont3',
+                state: {
+                  id: 'state.id',
+                },
+              })
+            })
+            .catch(console.log)
         }}
         className="btn"
       >
@@ -210,4 +247,4 @@ const ContReg2 = props => {
   )
 }
 
-export default withRouter(ContReg2)
+export default withRouter(connect(({ user }) => ({ user }))(ContReg2))

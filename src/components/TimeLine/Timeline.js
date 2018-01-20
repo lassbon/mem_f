@@ -9,11 +9,13 @@ import {
   Dimmer,
   Loader,
   Segment,
+  Label
 } from 'semantic-ui-react'
 import { getPostData } from '../../utils/membership-api'
 import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
+import Comments from '../Comments/Comments'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
@@ -92,19 +94,25 @@ class Timelines extends React.Component {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra className="time">
-                    <div className="ui three buttons">
-                      <Button
-                        onClick={() => {
-                          this.likePost(post.id)
-                        }}
-                        size="mini"
-                      >
-                        <Icon name="like" />
-                        {post.likes.length}
+                      <Button as='div' labelPosition='right'>
+                        <Button 
+                        basic color='red' 
+                          onClick={() => {
+                            this.likePost(post.id)
+                            }}
+                            size="mini">
+                            <Icon name='heart' />
+                            Like
+                          </Button>
+                        <Label as='a' basic color='red' pointing='left'>
+                          {post.likes ? post.likes.length : 0}
+                        </Label>
                       </Button>
+                      
+                      <Comments />
                       {/* <Button icon="comment" size="mini" /> */}
                       {/* <Button icon="share" size="mini" /> */}
-                    </div>
+
                   </Card.Content>
                 </Card>
               ))

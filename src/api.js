@@ -166,7 +166,9 @@ export default {
           Accept: 'application/form-data',
         },
       }),
-    getForums: id =>
-      axios.get(`${BASEURL}/api/v1/forum/post/`).then(res => res.data),
+    getForums: () =>
+      axios.get(`${BASEURL}api/v1/forum/post/`).then(res => res.data),
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/forum/post/${id}`).then(res => res.data),
   },
 }

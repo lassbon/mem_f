@@ -15,21 +15,33 @@ class TopNav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notifications : {},
-      friends : {}
+      notifications : [],
+      friends : []
     }
   }
   render() {
-    let notification = this.state.notifications
-    let requests = this.state.friends
-    const notifs = Object.keys(notification)
-                    .map((key) =>(
-                      <Dropdown.Item key={key} as={Link} to={BASEURL+"/api/v1/notifications/"+notifs[key].id}>`${notifs[key].message} from ${notifs[key].from}`</Dropdown.Item>
-                    ))
-    const friends = Object.keys(requests)
-                    .map((key) =>(
-                      <Dropdown.Item key={key}>`${requests[key].requester} sent a friend request`</Dropdown.Item>
-                    ))
+    const notification = this.state.notifications
+    let notifs
+    let friends
+    if(notification.length > 0){
+      notifs = notification.map((notif) =>(
+                <Dropdown.Item key={notif} as={Link} to={BASEURL+"/api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
+              ))
+    }
+    else {
+      notifs = <Dropdown.Item>There is no notification</Dropdown.Item>
+    }
+
+
+    const requests = this.state.friends
+    if(requests.length > 0){
+      friends = requests.map((friend) =>(
+                  <Dropdown.Item key={friend}>{friend.requester} sent a friend request</Dropdown.Item>
+                ))
+    }
+    else {
+      friends = <Dropdown.Item>You do not have any friend requests</Dropdown.Item>
+    }
     return (
       <Menu fixed="top" secondary className="top-menu">
         <Menu.Item>
@@ -49,7 +61,6 @@ class TopNav extends React.Component {
                 </Label>
               <Dropdown text='' floating>
                 <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="/home">New friend request from chuks</Dropdown.Item>
                   {friends}
                 </Dropdown.Menu>
               </Dropdown>
@@ -63,7 +74,6 @@ class TopNav extends React.Component {
                 </Label>
                 <Dropdown text='' floating>
                 <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="/home">Important</Dropdown.Item>
                   {notifs}
                 </Dropdown.Menu>
               </Dropdown>
@@ -78,20 +88,23 @@ class TopNav extends React.Component {
   componentDidMount() {
     this.fetchNotifications()
     this.fetchFriends()
-    console.log(this.state)
   }
   fetchNotifications = () => {
     let url = `${BASEURL}/api/v1/notifications`
     this.fetchApi(url)
       .then(function(arr){
-        this.state.notifications = arr
+        this.setState({
+          notifications : arr.data
+        })
       }.bind(this))
   }
   fetchFriends = () => {
     let url = `${BASEURL}/api/v1/social/requests/${this.props.user.id}`
     this.fetchApi(url)
       .then(function(arr){
-        this.state.friends = arr
+        this.setState({
+          friends : arr.data
+        })
       }.bind(this))
   }
   fetchApi = url => {

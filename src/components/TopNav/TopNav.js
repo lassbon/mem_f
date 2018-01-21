@@ -2,24 +2,33 @@ import React, { Component } from "react";
 import { Input, Menu, Icon, Label, Dropdown } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { logout } from "../../actions/auth";
 
 import "./TopNav.css";
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com'
+// const BASEURL = 'https://2968008f.ngrok.io'
 
 class TopNav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notifications : []
+      notifications : {},
+      friends : {}
     }
   }
   render() {
     let notification = this.state.notifications
+    let requests = this.state.friends
     const notifs = Object.keys(notification)
                     .map((key) =>(
-                      <Dropdown.Item key={key}>`${notifs[key].message} from ${notifs[key].from}`</Dropdown.Item>
+                      <Dropdown.Item key={key} as={Link} to={BASEURL+"/api/v1/notifications/"+notifs[key].id}>`${notifs[key].message} from ${notifs[key].from}`</Dropdown.Item>
+                    ))
+    const friends = Object.keys(requests)
+                    .map((key) =>(
+                      <Dropdown.Item key={key}>`${requests[key].requester} sent a friend request`</Dropdown.Item>
                     ))
     return (
       <Menu fixed="top" secondary className="top-menu">
@@ -33,23 +42,28 @@ class TopNav extends React.Component {
         <Menu.Menu position="right">
           <Menu.Item
             name="friends"
-            onClick={this.handleItemClick}
           >
             <Icon name="users" />
             <Label color="red" floating circular size="mini" >
-              22
+              {this.state.friends.length}
                 </Label>
+              <Dropdown text='' floating>
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/home">New friend request from chuks</Dropdown.Item>
+                  {friends}
+                </Dropdown.Menu>
+              </Dropdown>
           </Menu.Item>
           <Menu.Item
             name="notifications"
           >
             <Icon name="bell" />
             <Label color="red" floating circular size="mini">
-              22
+              {this.state.notifications.length}
                 </Label>
                 <Dropdown text='' floating>
                 <Dropdown.Menu>
-                  <Dropdown.Item>Important</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/home">Important</Dropdown.Item>
                   {notifs}
                 </Dropdown.Menu>
               </Dropdown>
@@ -62,18 +76,24 @@ class TopNav extends React.Component {
     )
   }
   componentDidMount() {
-    this.fetchNotifications
-    this.fetchMessages
+    this.fetchNotifications()
+    this.fetchFriends()
+    console.log(this.state)
   }
   fetchNotifications = () => {
-    let url = `${BASEURL}/api/v1/notification`
+    let url = `${BASEURL}/api/v1/notifications`
     this.fetchApi(url)
       .then(function(arr){
         this.state.notifications = arr
-        console.log(arr)
-      })
+      }.bind(this))
   }
-
+  fetchFriends = () => {
+    let url = `${BASEURL}/api/v1/social/requests/${this.props.user.id}`
+    this.fetchApi(url)
+      .then(function(arr){
+        this.state.friends = arr
+      }.bind(this))
+  }
   fetchApi = url => {
     return axios.get(url, {
               headers: {

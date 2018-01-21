@@ -14,7 +14,10 @@ class Comments extends Component {
   }
 
   state_setComments = comments => {
-    this.setState(state => ({ ...state, comments }))
+    let state = this.state.comments
+    state.push(comments)
+    this.setState({ comments : state })
+    console.log(state,this.state.comments)
   }
   getComments = () => {
     const { user: { token, id }, post } = this.props
@@ -32,25 +35,27 @@ class Comments extends Component {
   }
   replyComment = event => {
     const { user: { token, id}, post } = this.props
-    let data = event.target.querySelector('textarea').value
+    let parent = event.target.parentElement
+    let data = event.target.querySelector('textarea')
     this.setState({
       loading : !this.state.loading
     })
-    axios.post(`${BASEURL}api/v1/social/comment`, {'comment' : data, 'owner' : id, 'post' : post}, {
+    axios.post(`${BASEURL}api/v1/social/comment`, {'comment' : data.value, 'owner' : id, 'post' : post}, {
       headers: {
         authorization: token,
       },
     }).then(response => {
-      console.log('response', response)
       this.state_setComments(response.data)
       this.setState({
         loading : !this.state.loading
       })
+      data.value = ""
+      parent.classList.add('hidden')
+      parent.classList.remove('visible')
     })
   }
 
   componentDidMount() {
-    this.getComments()
     this.setState({
       comments : this.props.comments
     })

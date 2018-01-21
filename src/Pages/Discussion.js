@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { newForumTopic } from "../actions/forums";
 
 const centerText = {
   textAlign: "center"
@@ -25,16 +27,40 @@ const items = [
 ]
 
 class Discussions extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: '',
+      title: '',
+      creator: this.props.userId,
+      topic: '1 for now'
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props
+      .newForumTopic(this.state)
+      .then((res) => console.log('kdnkdnkvdbnkjdd'))
+  }
+
   state = { open: false }
 
   show = size => () => this.setState({ size, open: true })
   close = () => this.setState({ open: false })
 
   render() {
-    const { open, size } = this.state
+    const { open, size, header, content } = this.state
     const { match } = this.props
-    console.log(this.props);
-    
+
     return(
       <React.Fragment>
         <Grid>
@@ -56,17 +82,17 @@ class Discussions extends React.Component {
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Start conversation</Modal.Header>
           <Modal.Content>
-            <Form>
+            <Form onSubmit={this.onSubmit}>
               <Form.Field>
-                <Form.Input></Form.Input>
+                <Form.Input name='title' onChange={this.onChange}></Form.Input>
               </Form.Field>
               <Form.Field>
-                <Form.TextArea></Form.TextArea>
+                <Form.TextArea name='content' onChange={this.onChange}></Form.TextArea>
               </Form.Field>
             </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button>hdh</Button>
+            <Button onClick={this.onSubmit}>Submit</Button>
           </Modal.Actions>
         </Modal>
 
@@ -78,5 +104,10 @@ class Discussions extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.id,
+  }
+}
 
-export default Discussions;
+export default connect(mapStateToProps, { newForumTopic })(Discussions)

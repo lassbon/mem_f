@@ -1,8 +1,9 @@
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 export const USER_PROFILE = 'USER_PROFILE';
+export const USER_REGISTERED = 'USER_REGISTERED'
 
-// signup types 
+// signup types
 export const CONTREG = 'CONTREG'
 export const CONTREG2 = 'CONTREG2'
 export const CONTREG3 = 'CONTREG3'
@@ -14,4 +15,9 @@ export const COMPLETED_PROJECTS = 'COMPLETED_PROJECTS'
 export const COMPLETED_EVENTS = 'COMPLETED_EVENTS'
 export const CURRENT_EVENTS = 'CURRENT_EVENTS'
 export const USER_ACTIVITY = 'USER_ACTIVITY'
+export const USER_DONATIONS = 'USER_DONATIONS'
+export const USER_EVENTS = 'USER_EVENTS'
+export const USER_TRAININGS = 'USER_TRAININGS'
+export const USER_MEMBERSHIPS = 'USER_MEMBERSHIPS'
 export const USER_FRIENDS = 'USER_FRIENDS'
+export const NEW_FORUM_TOPIC = 'NEW_FORUM_TOPIC'

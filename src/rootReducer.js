@@ -6,6 +6,7 @@ import profile from './reducer/profile';
 import signup from './reducer/signup'
 import projects from './reducer/projects'
 import events from './reducer/events'
+import payments from './reducer/payments'
 
 export default combineReducers({
   user,
@@ -13,5 +14,6 @@ export default combineReducers({
   posts,
   signup,
   projects,
-  events
+  events,
+  payments
 })

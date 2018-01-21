@@ -9,7 +9,9 @@ import PropTypes from 'prop-types'
 
 import InlineError from '../../components/messages/InlineError'
 import '../LoginPage/login.css'
+import { userRegistered } from '../../actions/auth'
 
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {
@@ -31,7 +33,9 @@ class SignupForm extends React.Component {
           Accept: 'application/form-data',
         },
       })
-      .then(console.log)
+      .then(response => {
+        userRegistered(response.data)
+      })
 
   onChange = e =>
     this.setState({
@@ -126,8 +130,10 @@ SignupForm.propTypes = {
   // submit: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => {
-  return {}
-}
+const mapDispatchToProps = dispatch => ({
+  userRegistered: data => {
+    userRegistered(data)
+  },
+})
 
 export default withRouter(connect()(SignupForm))

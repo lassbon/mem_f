@@ -17,6 +17,7 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
 
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {
@@ -92,8 +93,8 @@ class Timelines extends React.Component {
                       circular
                       src=''
                     />
-                    <Card.Header>{post.username}</Card.Header>
-                    <Card.Meta>on {post.createdAt}</Card.Meta>
+                    <Card.Header>Chuks Festus</Card.Header>
+                    <Card.Meta>on {new Date(post.createdAt).toDateString()}</Card.Meta>
                     <Card.Description>{post.postText}</Card.Description>
                     <Card.Description>
                       <img

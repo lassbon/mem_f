@@ -8,7 +8,7 @@ import {
   Segment,
   Form,
   Button,
-  Icon
+  Icon,
 } from 'semantic-ui-react'
 
 import logo from '../../images/ACCIHD-LOGO.png'
@@ -149,98 +149,114 @@ class ContReg extends Component {
 
     return (
       <React.Fragment>
-      <div
-        style={{
-          width: '70%',
-          margin: '0 auto',
-          border: '1px solid #C0C0C0',
-          minHeight: '100%',
-          verticalAlign: 'middle',
-          marginTop: '100px',
-          marginBottom: 100,
-        }}
-      >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '36%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
-        <Form
-          style={{ marginTop: 30 }}
-          onSubmit={this.onSubmit}
-          loading={this.state.loading}
+        <div
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            border: '1px solid #C0C0C0',
+            minHeight: '100%',
+            verticalAlign: 'middle',
+            marginTop: '100px',
+            marginBottom: 100,
+          }}
         >
-          <Form.Field style={{ width: '55%', margin: '10px auto' }}>
-            <input
-              placeholder="Company's Name"
-              name="companyName"
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field style={{ width: '55%', margin: '10px auto' }}>
-            <input
-              placeholder="Address"
-              name="companyAddress"
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field style={{ width: '55%', margin: '10px auto' }}>
-            <input
-              placeholder="Phone Number"
-              name="companyPhone"
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field
-            style={{ width: '55%', margin: '10px auto', marginBottom: 50 }}
+          <Form
+            style={{ marginTop: 30 }}
+            onSubmit={this.onSubmit}
+            loading={this.state.loading}
           >
-            <input
-              placeholder="Nature of buisness"
-              name="companyBusiness"
-              onChange={this.handleChange}
+            <Form.Field style={{ width: '55%', margin: '10px auto' }}>
+              <input
+                placeholder="Company's Name"
+                name="companyName"
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field style={{ width: '55%', margin: '10px auto' }}>
+              <input
+                placeholder="Address"
+                name="companyAddress"
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field style={{ width: '55%', margin: '10px auto' }}>
+              <input
+                placeholder="Phone Number"
+                name="companyPhone"
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field
+              style={{ width: '55%', margin: '10px auto', marginBottom: 50 }}
+            >
+              <input
+                placeholder="Nature of buisness"
+                name="companyBusiness"
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Grid style={{ width: '90%', margin: '0 auto' }}>
+              <Grid.Column width={5}>
+                <h3 style={{ color: '#656768' }}>Number of Employees</h3>
+                {NumOfEmployees}
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <h3 style={{ color: '#656768' }}>Annual Return</h3>
+                {AnualReturns}
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <h3 style={{ color: '#656768' }}>Annual Profits</h3>
+                {AnualProfits}
+              </Grid.Column>
+            </Grid>
+            <Button
+              className="btn btn-reverse"
+              content="Next"
+              style={{ marginLeft: '40%', marginBottom: 30 }}
             />
-          </Form.Field>
-          <Grid style={{ width: '90%', margin: '0 auto' }}>
-            <Grid.Column width={5}>
-              <h3 style={{ color: '#656768' }}>Number of Employees</h3>
-              {NumOfEmployees}
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <h3 style={{ color: '#656768' }}>Annual Return</h3>
-              {AnualReturns}
-            </Grid.Column>
-            <Grid.Column width={5}>
-              <h3 style={{ color: '#656768' }}>Annual Profits</h3>
-              {AnualProfits}
-            </Grid.Column>
-          </Grid>
-          <Button
-            className="btn btn-reverse"
-            content="Next"
-            style={{ marginLeft: '40%', marginBottom: 30 }}
-          />
-        </Form>
-      </div>
-      <Grid style={{ background: "#34495E", textAlign: "center" }}>
-        <Grid.Column width="5">
-          <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
-          <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
-        </Grid.Column>
-        <Grid.Column width="6" verticalAlign='middle'>
-          <Icon name="facebook square" size='big' style={{ color: 'white' }} />
-          <Icon name="linkedin" size='big' style={{ color: 'white' }} />
-          <Icon name="twitter" size='big' style={{ color: 'white' }} />
-        </Grid.Column>
-        <Grid.Column width="5">
-          <h3 style={{ color: 'white' }}>Links</h3>
-          <Link to='#' style={{ marginRight: 10 }}>ACCI website</Link>
-          <Link to='#' style={{ marginRight: 10 }}>Membership Directory</Link>
-          <Link to='#' style={{ marginRight: 10 }}>ACCI Events</Link>
-          <Link to='#' style={{ marginRight: 10 }}>Shop on ACCI</Link>
-        </Grid.Column>
-      </Grid>
-      <footer style={{ verticalAlign: 'middle', background: 'white', color: '#656768', textAlign: 'center', padding: '10px', fontWeight: 'bold' }}>
-        Copyright © 2017 Abuja Chamber of Commerce & Industry
+          </Form>
+        </div>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
+          <Grid.Column width="5">
+            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
+            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
+          </Grid.Column>
+          <Grid.Column width="6" verticalAlign="middle">
+            <Icon
+              name="facebook square"
+              size="big"
+              style={{ color: 'white' }}
+            />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
+          </Grid.Column>
+          <Grid.Column width="5">
+            <h3 style={{ color: 'white' }}>Links</h3>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI website
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Membership Directory
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI Events
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Shop on ACCI
+            </Link>
+          </Grid.Column>
+        </Grid>
+        <footer
+          style={{
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
+          }}
+        >
+          Copyright © 2017 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
     )

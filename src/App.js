@@ -7,6 +7,7 @@ import LoginPage from './Pages/LoginPage/LoginPage'
 import Home from './Pages/Home/Home'
 import UserRoute from './components/routes/UserRoute'
 import GuestRoute from './components/routes/GuestRoute'
+import RegRoute from './components/routes/RegRoute'
 import SignUpPage from './Pages/SignUpPage/SignUpPage'
 import ContReg from './Pages/contReg/ContReg'
 import ContReg2 from './Pages/contReg/ContReg2'
@@ -22,26 +23,29 @@ import Profile from './Pages/Profile'
 
 const App = ({ location }) => (
   <div>
-    <Route exact path="/cont" component={ContReg} />
-    <Route exact path="/cont2" component={ContReg2} />
-    <Route exact path="/cont3" component={ContReg3} />
-    <Route exact path="/cont4" component={ContReg4} />
-    <Route exact path="/cont5" component={ContReg5} />
-    <Route exact path="/cont6" component={ContReg6} />
-    <Route exact path="/payment" component={Payment} />
-    <Route exact path="/profile" component={Profile} />
-    <Route exact path="/events" component={EventPage} />
-    {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
-    <Route location={location} path="/signup" exact component={SignUpPage} />
-    <Route
-      location={location}
-      path="/forgotpassword"
-      exact
-      component={ForgotPassword}
-    />
-    <Route location={location} path="/login" exact component={LoginPage} />
-    <UserRoute location={location} path="/app" component={Main} />
-    <Route location={location} path="/" exact component={LandingPage} />
+    <Switch>
+      <Route location={location} path="/" exact component={LandingPage} />
+
+      <RegRoute exact path="/cont" component={ContReg} />
+      <RegRoute exact path="/cont2" component={ContReg2} />
+      <RegRoute exact path="/cont3" component={ContReg3} />
+      <RegRoute exact path="/cont4" component={ContReg4} />
+      <RegRoute exact path="/cont5" component={ContReg5} />
+      <RegRoute exact path="/cont6" component={ContReg6} />
+      <Route exact path="/payment" component={Payment} />
+      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/events" component={EventPage} />
+      {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
+      <Route location={location} path="/signup" exact component={SignUpPage} />
+      <Route
+        location={location}
+        path="/forgotpassword"
+        exact
+        component={ForgotPassword}
+      />
+      <Route location={location} path="/login" exact component={LoginPage} />
+      <UserRoute location={location} path="/app" component={Main} />
+    </Switch>
   </div>
 )
 

@@ -1,10 +1,18 @@
 import React from 'react'
-import { Segment, Image, Grid, Button, Dimmer, Loader, Icon } from 'semantic-ui-react'
+import {
+  Segment,
+  Image,
+  Grid,
+  Button,
+  Dimmer,
+  Loader,
+  Icon,
+} from 'semantic-ui-react'
 import PaystackComponent from '../../components/PaystackComponent'
 import { userLoggedIn } from '../../actions/auth'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -119,11 +127,6 @@ class ContReg6 extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Segment>
-              <Image
-                style={{ marginBottom: 20 }}
-                verticalAlign="middle"
-                src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-              />
               <h3
                 style={{ background: '#2ECC71', color: 'white', padding: 10 }}
               >
@@ -169,25 +172,46 @@ class ContReg6 extends React.Component {
             </Segment>
           </Grid.Column>
         </Grid>
-        <Grid style={{ background: "#34495E", textAlign: "center" }}>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
           <Grid.Column width="5">
             <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
             <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
-          <Grid.Column width="6" verticalAlign='middle'>
-            <Icon name="facebook square" size='big' style={{ color: 'white' }} />
-            <Icon name="linkedin" size='big' style={{ color: 'white' }} />
-            <Icon name="twitter" size='big' style={{ color: 'white' }} />
+          <Grid.Column width="6" verticalAlign="middle">
+            <Icon
+              name="facebook square"
+              size="big"
+              style={{ color: 'white' }}
+            />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
           </Grid.Column>
           <Grid.Column width="5">
             <h3 style={{ color: 'white' }}>Links</h3>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI website</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Membership Directory</Link>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI Events</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Shop on ACCI</Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI website
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Membership Directory
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI Events
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Shop on ACCI
+            </Link>
           </Grid.Column>
         </Grid>
-        <footer style={{ verticalAlign: 'middle', background: 'white', color: '#656768', textAlign: 'center', padding: '10px', fontWeight: 'bold' }}>
+        <footer
+          style={{
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
+          }}
+        >
           Copyright © 2017 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>

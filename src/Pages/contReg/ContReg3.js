@@ -76,131 +76,154 @@ class ContReg3 extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <Form style={{ width: '70%', margin: '0 auto', textAlign: 'center' , marginBottom: 50}}>
-        <Image
-          style={{ marginBottom: 20, marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
-        <h2>Company Representatives</h2>
-        <Grid columns="equal">
-          <Grid.Column>
-            <Form.Field loading={this.state.loading}>
-              <Form.Input
-                placeholder="Name"
-                name="companyRepName1"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input
-                type="email"
-                placeholder="email"
-                name="companyRepEmail1"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input
-                placeholder="Phone number"
-                name="companyRepPhone1"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload Passport Photographs of the Company Representative(s)
-              </label>
-              <Form.Input
-                type="file"
-                name="companyRepPassportUrl1"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload curriculum Vitae of Company Representative(s)
-              </label>
-              <Form.Input
-                type="file"
-                name="companyRepCVurl"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-          </Grid.Column>
-          <Grid.Column>
-            <Form.Field loading={this.state.loading}>
-              <Form.Input
-                placeholder="Name"
-                name="companyRepName2"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input
-                type="email"
-                placeholder="email"
-                name="companyRepEmail2"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Input
-                placeholder="Phone number"
-                name="companyRepPhone2"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload Passport Photographs of the Company Representative(s)
-              </label>
-              <Form.Input
-                type="file"
-                name="companyRepPassportUrl2"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Upload curriculum Vitae of Company Representative(s)
-              </label>
-              <Form.Input
-                type="file"
-                name="companyRepCVUrl2"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
-          </Grid.Column>
-        </Grid>
-        <div style={{ marginTop: 30 }}>
-          <Button to="/cont2" as={Link}>
-            Back
-          </Button>
-          <Button className="btn" onClick={this.submit}>
-            Next
-          </Button>
-        </div>
-      </Form>
-        <Grid style={{ background: "#34495E", textAlign: "center" }}>
+        <Form
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            textAlign: 'center',
+            marginBottom: 50,
+          }}
+        >
+          <h2>Company Representatives</h2>
+          <Grid columns="equal">
+            <Grid.Column>
+              <Form.Field loading={this.state.loading}>
+                <Form.Input
+                  placeholder="Name"
+                  name="companyRepName1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  type="email"
+                  placeholder="email"
+                  name="companyRepEmail1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  placeholder="Phone number"
+                  name="companyRepPhone1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload Passport Photographs of the Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepPassportUrl1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload curriculum Vitae of Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepCVurl"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+            <Grid.Column>
+              <Form.Field loading={this.state.loading}>
+                <Form.Input
+                  placeholder="Name"
+                  name="companyRepName2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  type="email"
+                  placeholder="email"
+                  name="companyRepEmail2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  placeholder="Phone number"
+                  name="companyRepPhone2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload Passport Photographs of the Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepPassportUrl2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload curriculum Vitae of Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepCVUrl2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+          </Grid>
+          <div style={{ marginTop: 30 }}>
+            <Button to="/cont2" as={Link}>
+              Back
+            </Button>
+            <Button className="btn" onClick={this.submit}>
+              Next
+            </Button>
+          </div>
+        </Form>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
           <Grid.Column width="5">
             <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
             <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
-          <Grid.Column width="6" verticalAlign='middle'>
-            <Icon name="facebook square" size='big' style={{ color: 'white' }} />
-            <Icon name="linkedin" size='big' style={{ color: 'white' }} />
-            <Icon name="twitter" size='big' style={{ color: 'white' }} />
+          <Grid.Column width="6" verticalAlign="middle">
+            <Icon
+              name="facebook square"
+              size="big"
+              style={{ color: 'white' }}
+            />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
           </Grid.Column>
           <Grid.Column width="5">
             <h3 style={{ color: 'white' }}>Links</h3>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI website</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Membership Directory</Link>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI Events</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Shop on ACCI</Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI website
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Membership Directory
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI Events
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Shop on ACCI
+            </Link>
           </Grid.Column>
         </Grid>
-        <footer style={{ verticalAlign: 'middle', background: 'white', color: '#656768', textAlign: 'center', padding: '10px', fontWeight: 'bold' }}>
+        <footer
+          style={{
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
+          }}
+        >
           Copyright © 2017 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>

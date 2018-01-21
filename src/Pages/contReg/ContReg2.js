@@ -10,7 +10,7 @@ import {
   Divider,
   Card,
   Icon,
-  Grid
+  Grid,
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
@@ -109,11 +109,6 @@ const panes = [
           textAlign: 'center',
         }}
       >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
         <Message header="N350,000/N50,000" color="yellow" />
         <h3>BENEFITS</h3>
         <p>Can vote and be voted for</p>
@@ -247,117 +242,138 @@ class ContReg2 extends Component {
     const { history, user } = this.props
     return (
       <React.Fragment>
-      <div
-        style={{
-          width: '70%',
-          margin: '0 auto',
-          border: '1px solid #C0C0C0',
-          minHeight: '100%',
-          verticalAlign: 'middle',
-          marginTop: '100px',
-          marginBottom: 100,
-          textAlign: 'left',
-          paddingBottom: 50,
-        }}
-      >
-        <h2 style={{ margin: 60, textAlign: 'center' }}>
-          Select a membership category
-        </h2>
-        {this.state.plans.length ? (
-          <Tab
-            menu={{ fluid: true, vertical: true, tabular: 'right' }}
-            panes={this.state.plans}
-            onTabChange={(change, { activeIndex }) => {
-              state.activeIndex = activeIndex
-              console.log(state)
-            }}
-          />
-        ) : (
-          <Segment>
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-          </Segment>
-        )}
-        {/* <Button
+        <div
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            border: '1px solid #C0C0C0',
+            minHeight: '100%',
+            verticalAlign: 'middle',
+            marginTop: '100px',
+            marginBottom: 100,
+            textAlign: 'left',
+            paddingBottom: 50,
+          }}
+        >
+          <h2 style={{ margin: 60, textAlign: 'center' }}>
+            Select a membership category
+          </h2>
+          {this.state.plans.length ? (
+            <Tab
+              menu={{ fluid: true, vertical: true, tabular: 'right' }}
+              panes={this.state.plans}
+              onTabChange={(change, { activeIndex }) => {
+                state.activeIndex = activeIndex
+                console.log(state)
+              }}
+            />
+          ) : (
+            <Segment>
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer>
+            </Segment>
+          )}
+          {/* <Button
           as={Link}
           to="/cont"
           style={{ marginLeft: '10%', marginTop: 50, marginRight: 30 }}
         >
           Back
         </Button> */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '3rem',
-          }}
-        >
-          <Button
-            // as={Link}
-            // to={{
-            //   pathname: '/cont3',
-            //   state: {
-            //     id: 'state.id',
-            //   },
-            // }}
-            onClick={() => {
-              axios
-                .put(
-                  `${BASEURL}api/v1/user/${user.id}`,
-                  {
-                    membershipPlan: this.state.plans[state.activeIndex]
-                      .plan_code,
-                    //   fee: this.state.plans[state.activeIndex].fee,
-                    //   name: this.state.plans[state.activeIndex].name,
-                    //   description: this.state.plans[state.activeIndex]
-                    //     .description,
-                    // },
-                    regState: 2,
-                  },
-                  {
-                    headers: {
-                      authorization: user.token,
-                      'Content-Type': 'application/form-data',
-                      Accept: 'application/form-data',
-                    },
-                  }
-                )
-                .then(() => {
-                  history.push({
-                    pathname: '/cont3',
-                    state: {
-                      id: 'state.id',
-                    },
-                  })
-                })
-                .catch(console.log)
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '3rem',
             }}
-            className="btn"
           >
-            Next
-          </Button>
+            <Button
+              // as={Link}
+              // to={{
+              //   pathname: '/cont3',
+              //   state: {
+              //     id: 'state.id',
+              //   },
+              // }}
+              onClick={() => {
+                axios
+                  .put(
+                    `${BASEURL}api/v1/user/${user.id}`,
+                    {
+                      membershipPlan: this.state.plans[state.activeIndex]
+                        .plan_code,
+                      //   fee: this.state.plans[state.activeIndex].fee,
+                      //   name: this.state.plans[state.activeIndex].name,
+                      //   description: this.state.plans[state.activeIndex]
+                      //     .description,
+                      // },
+                      regState: 2,
+                    },
+                    {
+                      headers: {
+                        authorization: user.token,
+                        'Content-Type': 'application/form-data',
+                        Accept: 'application/form-data',
+                      },
+                    }
+                  )
+                  .then(() => {
+                    history.push({
+                      pathname: '/cont3',
+                      state: {
+                        id: 'state.id',
+                      },
+                    })
+                  })
+                  .catch(console.log)
+              }}
+              className="btn"
+            >
+              Next
+            </Button>
+          </div>
         </div>
-      </div>
-        <Grid style={{ background: "#34495E", textAlign: "center" }}>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
           <Grid.Column width="5">
             <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
             <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
-          <Grid.Column width="6" verticalAlign='middle'>
-            <Icon name="facebook square" size='big' style={{ color: 'white' }} />
-            <Icon name="linkedin" size='big' style={{ color: 'white' }} />
-            <Icon name="twitter" size='big' style={{ color: 'white' }} />
+          <Grid.Column width="6" verticalAlign="middle">
+            <Icon
+              name="facebook square"
+              size="big"
+              style={{ color: 'white' }}
+            />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
           </Grid.Column>
           <Grid.Column width="5">
             <h3 style={{ color: 'white' }}>Links</h3>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI website</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Membership Directory</Link>
-            <Link to='#' style={{ marginRight: 10 }}>ACCI Events</Link>
-            <Link to='#' style={{ marginRight: 10 }}>Shop on ACCI</Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI website
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Membership Directory
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI Events
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Shop on ACCI
+            </Link>
           </Grid.Column>
         </Grid>
-        <footer style={{ verticalAlign: 'middle', background: 'white', color: '#656768', textAlign: 'center', padding: '10px', fontWeight: 'bold' }}>
+        <footer
+          style={{
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
+          }}
+        >
           Copyright © 2017 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>

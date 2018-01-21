@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { Tab, Grid, Image, Label, Card, Icon, Button, List, Segment, Dimmer, Loader } from "semantic-ui-react";
+import { Tab, Header, Grid, Image, Form, Label, Card, Icon, Modal, Button, List, Segment, Dimmer, Loader } from "semantic-ui-react";
 
 let mappedActivity;
 let myFriends;
@@ -120,9 +120,32 @@ const Profile = (props) => {
               </Grid.Column>
               <Grid.Column width='7'>
                 <div>
-                  <h3>{props.profile.company}</h3>
+                  <h3>{props.profile.companyName}</h3>
                   <p>{props.profile.email}</p>
                 </div>
+                <Modal trigger={<Button size="mini">Edit profile</Button>} closeIcon dimmer="blurring">
+                  <Modal.Header>Edit profile</Modal.Header>
+                  <Modal.Content image>
+                    <Image wrapped size='medium' src='https://cdn-images-1.medium.com/fit/c/200/200/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg' />
+                    <Modal.Description>
+                      <Form>
+                        <Form.Field>
+                          <label>Company name</label>
+                          <input placeholder="company name" value={props.profile.companyName}/>
+                        </Form.Field>
+                        <Form.Field>
+                          <label>Company email</label>
+                          <input placeholder="company name" value={props.profile.email} />
+                        </Form.Field>
+                        <Form.Field>
+                          <label>Company Address</label>
+                          <input placeholder="company name" value={props.profile.address} />
+                        </Form.Field>
+                        <Button>Submit</Button>
+                      </Form>
+                    </Modal.Description>
+                  </Modal.Content>
+                </Modal>
               </Grid.Column>
             </Grid.Row>
           </Grid>

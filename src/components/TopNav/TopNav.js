@@ -2,25 +2,46 @@ import React, { Component } from "react";
 import { Input, Menu, Icon, Label, Dropdown } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { logout } from "../../actions/auth";
 
 import "./TopNav.css";
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com'
+// const BASEURL = 'https://2968008f.ngrok.io'
 
 class TopNav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notifications : []
+      notifications : [],
+      friends : []
     }
   }
   render() {
-    let notification = this.state.notifications
-    const notifs = Object.keys(notification)
-                    .map((key) =>(
-                      <Dropdown.Item key={key}>`${notifs[key].message} from ${notifs[key].from}`</Dropdown.Item>
-                    ))
+    const notification = this.state.notifications
+    let notifs
+    let friends
+    if(notification.length > 0){
+      notifs = notification.map((notif) =>(
+                <Dropdown.Item key={notif} as={Link} to={BASEURL+"/api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
+              ))
+    }
+    else {
+      notifs = <Dropdown.Item>There is no notification</Dropdown.Item>
+    }
+
+
+    const requests = this.state.friends
+    if(requests.length > 0){
+      friends = requests.map((friend) =>(
+                  <Dropdown.Item key={friend}>{friend.requester} sent a friend request</Dropdown.Item>
+                ))
+    }
+    else {
+      friends = <Dropdown.Item>You do not have any friend requests</Dropdown.Item>
+    }
     return (
       <Menu fixed="top" secondary className="top-menu">
         <Menu.Item>
@@ -33,23 +54,26 @@ class TopNav extends React.Component {
         <Menu.Menu position="right">
           <Menu.Item
             name="friends"
-            onClick={this.handleItemClick}
           >
             <Icon name="users" />
             <Label color="red" floating circular size="mini" >
-              22
+              {this.state.friends.length}
                 </Label>
+              <Dropdown text='' floating>
+                <Dropdown.Menu>
+                  {friends}
+                </Dropdown.Menu>
+              </Dropdown>
           </Menu.Item>
           <Menu.Item
             name="notifications"
           >
             <Icon name="bell" />
             <Label color="red" floating circular size="mini">
-              22
+              {this.state.notifications.length}
                 </Label>
                 <Dropdown text='' floating>
                 <Dropdown.Menu>
-                  <Dropdown.Item>Important</Dropdown.Item>
                   {notifs}
                 </Dropdown.Menu>
               </Dropdown>
@@ -62,18 +86,27 @@ class TopNav extends React.Component {
     )
   }
   componentDidMount() {
-    this.fetchNotifications
-    this.fetchMessages
+    this.fetchNotifications()
+    this.fetchFriends()
   }
   fetchNotifications = () => {
-    let url = `${BASEURL}/api/v1/notification`
+    let url = `${BASEURL}/api/v1/notifications`
     this.fetchApi(url)
       .then(function(arr){
-        this.state.notifications = arr
-        console.log(arr)
-      })
+        this.setState({
+          notifications : arr.data
+        })
+      }.bind(this))
   }
-
+  fetchFriends = () => {
+    let url = `${BASEURL}/api/v1/social/requests/${this.props.user.id}`
+    this.fetchApi(url)
+      .then(function(arr){
+        this.setState({
+          friends : arr.data
+        })
+      }.bind(this))
+  }
   fetchApi = url => {
     return axios.get(url, {
               headers: {

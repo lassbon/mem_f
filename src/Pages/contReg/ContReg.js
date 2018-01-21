@@ -156,7 +156,7 @@ class ContReg extends Component {
             border: '1px solid #C0C0C0',
             minHeight: '100%',
             verticalAlign: 'middle',
-            marginTop: '100px',
+            // marginTop: '100px',
             marginBottom: 100,
           }}
         >

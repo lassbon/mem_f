@@ -76,7 +76,7 @@ const WelcomePage = () => (
           INCREASE YOUR NETWORK
         </Header>
         <p>NOT A MEMBER?</p>
-        <Button className="btn btn-reverse" style={{ margin: 0 }}>
+        <Button as={Link} to='/signup' className="btn btn-reverse" style={{ margin: 0 }}>
           REGISTER
         </Button>
       </Grid.Column>

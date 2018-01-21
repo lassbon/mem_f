@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserProfile, getuserActivity, getuserFriends } from "../actions/users";
-import { 
+import {
   getUserDonations,
   getUserEvents,
   getUserMemberships,
@@ -17,18 +17,27 @@ class ProfileCard extends React.Component {
       profile: this.props.userProfileDetails || {},
       activities: { 'posts': [] },
       friends: { 'friends': [] },
-      donations: {'donations': [] },
+      donations: { 'donations': [] },
       events: { 'events': [] },
       memberships: { 'memberships': [] },
-      trainings: { 'trainings': [] }
+      trainings: { 'trainings': [] },
+      name: '',
+      email: '',
+      address: '',
+      loading: true
     };
     this.getTransactionHistory = this.getTransactionHistory.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.getUserProfile(this.props.userId).then(res => {
       this.setState({
-        profile: this.props.userProfileDetails
+        profile: this.props.userProfileDetails,
+        name: this.props.userProfileDetails.name,
+        email: this.props.userProfileDetails.email,
+        address: this.props.userProfileDetails.address
       })
     })
     this.props.getuserActivity(this.props.userId).then(res => {
@@ -62,14 +71,37 @@ class ProfileCard extends React.Component {
     })
     this.props.getUserMemberships(this.props.userId).then(res => {
       this.setState({
-        memberships: this.props.userMemberships
+        memberships: this.props.userMemberships,
+        loading: false
       })
     })
   }
 
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  onSubmit(event) {
+    const payload = {
+      name: this.state.name,
+      email: this.state.email,
+      address: this.state.address
+    }
+    console.log('payload', payload)
+    event.preventDefault();
+    alert('I submittedd')
+    // this.props
+    //   .newForumTopic(this.state)
+    //   .then((res) => console.log('kdnkdnkvdbnkjdd'))
+  }
+
+
   render() {
-    const { profile, activities, friends, donations, memberships, trainings, events  } = this.state;
-    console.log('mayowa', this.state)
+    const { profile, activities, loading, friends, donations, memberships, email, trainings, events } = this.state;
+    console.log('email', this.props.userProfileDetails.email)
+    console.log('email2222', email)
     return (
       <Profile
         getTransactionHistory={this.getTransactionHistory}
@@ -80,6 +112,10 @@ class ProfileCard extends React.Component {
         trainings={trainings}
         events={events}
         activities={activities}
+        onChange={this.onChange}
+        onSubmit={this.onSubmit}
+        email={email}
+        loading={loading}
       />
     );
   }
@@ -98,7 +134,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getUserProfile,
+export default connect(mapStateToProps, {
+  getUserProfile,
   getuserActivity,
   getuserFriends,
   getUserDonations,

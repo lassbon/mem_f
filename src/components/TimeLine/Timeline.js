@@ -17,8 +17,8 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-// const BASEURL = 'https://2968008f.ngrok.io/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {
   constructor() {
@@ -38,7 +38,6 @@ class Timelines extends React.Component {
         authorization: token,
       },
     }).then(response => {
-      // console.log('response', response)
       this.state_setPosts(response.data)
     })
   }
@@ -118,12 +117,12 @@ class Timelines extends React.Component {
                     </Label>
                   </Button>
 
-                  <Comments />
-                  {/* <Button icon="comment" size="mini" /> */}
-                  {/* <Button icon="share" size="mini" /> */}
-                </Card.Content>
-              </Card>
-            ))
+                    <Comments post={post.id} comments={post.comments}/>
+                    {/* <Button icon="comment" size="mini" /> */}
+                    {/* <Button icon="share" size="mini" /> */}
+                  </Card.Content>
+                </Card>
+              ))
           ) : (
             <Segment>
               <Dimmer active inverted>

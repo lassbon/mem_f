@@ -6,7 +6,9 @@ let mappedActivity;
 let myFriends;
 let totalFriends;
 let getPayments;
-let donations
+let donations;
+let onChange;
+let onSubmit;
 
 
 const spinner = <Segment>
@@ -16,7 +18,9 @@ const spinner = <Segment>
 </Segment>
 
 const Profile = (props) => {
-  props.activities.posts.length === 0  ?  mappedActivity = spinner :
+  onChange = props.onChange
+  onSubmit = props.onSubmit
+  props.loading ? mappedActivity = spinner :
   mappedActivity = props.activities.posts.map(activity => (
     <Tab.Pane attached={false} key={activity.createdAt}>
       <Card.Group className="TimeLine">
@@ -131,17 +135,17 @@ const Profile = (props) => {
                       <Form>
                         <Form.Field>
                           <label>Company name</label>
-                          <input placeholder="company name" value={props.profile.companyName}/>
+                          <input onChange={onChange} placeholder="company name" name="name" value={props.profile.company}/>
                         </Form.Field>
                         <Form.Field>
                           <label>Company email</label>
-                          <input placeholder="company name" value={props.profile.email} />
+                          <input onChange={onChange}  placeholder="company name" name="email" value={props.email} />
                         </Form.Field>
                         <Form.Field>
                           <label>Company Address</label>
-                          <input placeholder="company name" value={props.profile.address} />
+                          <input onChange={onChange}  placeholder="company name" name="address" value={props.profile.address} />
                         </Form.Field>
-                        <Button>Submit</Button>
+                        <Button onClick={onSubmit}>Submit</Button>
                       </Form>
                     </Modal.Description>
                   </Modal.Content>

@@ -2,29 +2,11 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
 import { Link, Redirect } from 'react-router-dom'
-import { newForumTopic } from "../actions/forums";
+import { newForumTopic, getAllForums } from "../actions/forums";
 
 const centerText = {
   textAlign: "center"
 }
-
-const items = [
-  {
-    header: 'Abuja Chamber of Commerce and Industry (ACCI) Presents Certificate of Platinum Membership to Dangote Group on Her Special Day, 29th September, 2017',
-    description: '120 replies',
-    meta: 'By Chukwu Nonso, 17/10/2017',
-  },
-  {
-    header: 'Project Report - May',
-    description: '120 replies',
-    meta: 'By Chukwu Nonso, 17/10/2017',
-  },
-  {
-    header: 'Project Report - June',
-    description: '120 replies',
-    meta: 'By Chukwu Nonso, 17/10/2017',
-  },
-]
 
 class Discussions extends React.Component {
   constructor(props) {
@@ -33,10 +15,19 @@ class Discussions extends React.Component {
       content: '',
       title: '',
       creator: this.props.userId,
-      topic: '1 for now'
+      topic: '1 for now',
+      forumTopics: this.props.allForumTopics || []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props
+      .getAllForums()
+      .then((res) => this.setState({
+        forumTopics: this.props.allForumTopics
+      }))
   }
 
   onChange(event) {
@@ -49,7 +40,7 @@ class Discussions extends React.Component {
     event.preventDefault();
     this.props
       .newForumTopic(this.state)
-      .then((res) => console.log('kdnkdnkvdbnkjdd'))
+      .then((res) => console.log('kdnkdnkvdbnkjdd', res))
   }
 
   state = { open: false }
@@ -58,17 +49,16 @@ class Discussions extends React.Component {
   close = () => this.setState({ open: false })
 
   render() {
-    const { open, size, header, content } = this.state
+    const { open, size, header, content, forumTopics } = this.state
     const { match } = this.props
-
-    return(
+    return (
       <React.Fragment>
         <Grid>
           <div className='bana library'>
             DISCUSSIONS
       </div>
           <div className='sub-bana'>
-            (50) Total Discussions
+            {forumTopics.length} Total Discussions
       </div>
 
         </Grid>
@@ -95,10 +85,19 @@ class Discussions extends React.Component {
             <Button onClick={this.onSubmit}>Submit</Button>
           </Modal.Actions>
         </Modal>
-
-        <Link to={`${match.path}/maindis`}>
-          <Card.Group items={items} />
-        </Link>
+        {forumTopics.map(topics => (
+          <Link to={`${match.path}/${topics.id}`} key={topics.id}>
+            <Card.Group>
+              <Card style={{ width: "100%" }}>
+                <Card.Content>
+                  <Card.Header>{topics.title}</Card.Header>
+                  <Card.Meta>{new Date(topics.createdAt).toDateString()}</Card.Meta>
+                  <Card.Description>{topics.content}</Card.Description>
+                </Card.Content>
+              </Card>
+            </Card.Group>
+          </Link>
+        ))}
       </React.Fragment>
     )
   }
@@ -107,7 +106,8 @@ class Discussions extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userId: state.user.id,
+    allForumTopics: state.forums.allTopics,
   }
 }
 
-export default connect(mapStateToProps, { newForumTopic })(Discussions)
+export default connect(mapStateToProps, { newForumTopic, getAllForums })(Discussions)

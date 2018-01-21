@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 import PaystackComponent from '../../components/PaystackComponent'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -166,4 +167,4 @@ class ContReg5 extends React.Component {
     )
   }
 }
-export default connect(({ user }) => ({ user }))(ContReg5)
+export default withRouter(connect(({ user }) => ({ user }))(ContReg5))

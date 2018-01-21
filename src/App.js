@@ -8,6 +8,7 @@ import Home from './Pages/Home/Home'
 import UserRoute from './components/routes/UserRoute'
 import GuestRoute from './components/routes/GuestRoute'
 import RegRoute from './components/routes/RegRoute'
+import RegMessage from './components/messages/Message'
 import SignUpPage from './Pages/SignUpPage/SignUpPage'
 import ContReg from './Pages/contReg/ContReg'
 import ContReg2 from './Pages/contReg/ContReg2'
@@ -32,6 +33,7 @@ const App = ({ location }) => (
       <RegRoute exact path="/cont4" component={ContReg4} />
       <RegRoute exact path="/cont5" component={ContReg5} />
       <RegRoute exact path="/cont6" component={ContReg6} />
+      <Route exact path="/regmessage" component={RegMessage} />
       <Route exact path="/payment" component={Payment} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/events" component={EventPage} />

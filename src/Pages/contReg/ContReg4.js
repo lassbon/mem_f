@@ -3,6 +3,7 @@ import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
+import { withRouter } from 'react-router-dom'
 
 class ContReg4 extends React.Component {
   state = {
@@ -40,7 +41,8 @@ class ContReg4 extends React.Component {
     this.props.update(
       { ...this.state.data, token, regState: 4 },
       history,
-      '/cont5',
+      '/regmessage',
+      // '/cont5',
       id
     )
     // .catch(() => {
@@ -65,6 +67,7 @@ class ContReg4 extends React.Component {
             margin: '0 auto',
             textAlign: 'center',
             height: '100%',
+            minHeight: '50vh',
           }}
           loading={this.state.loading}
         >
@@ -155,4 +158,6 @@ class ContReg4 extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user }), { update })(ContReg4)
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(ContReg4)
+)

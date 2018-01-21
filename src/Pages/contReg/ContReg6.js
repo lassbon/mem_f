@@ -13,6 +13,7 @@ import { userLoggedIn } from '../../actions/auth'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -219,4 +220,6 @@ class ContReg6 extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user }), { userLoggedIn })(ContReg6)
+export default withRouter(
+  connect(({ user }) => ({ user }), { userLoggedIn })(ContReg6)
+)

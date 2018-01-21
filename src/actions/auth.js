@@ -48,7 +48,7 @@ export const signup = (data, history) => dispatch => {
     // dispatch(authorizeUser({ email: data.email, password: data.password }))
     console.log('success', res)
     history.push({
-      pathname: '/cont',
+      pathname: '/login',
       state: {
         id: res.data.id,
       },

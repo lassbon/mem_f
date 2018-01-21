@@ -16,6 +16,7 @@ class Discussions extends React.Component {
       title: '',
       creator: this.props.userId,
       topic: '1 for now',
+      redirect: false,
       forumTopics: this.props.allForumTopics || []
     };
     this.onChange = this.onChange.bind(this);
@@ -30,6 +31,14 @@ class Discussions extends React.Component {
       }))
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props.getAllForums()
+    const forumTopics = nextProps.allForumTopics;
+    this.setState({
+      forumTopics
+    });
+  }
+
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -40,7 +49,7 @@ class Discussions extends React.Component {
     event.preventDefault();
     this.props
       .newForumTopic(this.state)
-      .then((res) => console.log('kdnkdnkvdbnkjdd', res))
+      .then((res) => this.close())
   }
 
   state = { open: false }
@@ -49,8 +58,12 @@ class Discussions extends React.Component {
   close = () => this.setState({ open: false })
 
   render() {
-    const { open, size, header, content, forumTopics } = this.state
+    const { open, size, header, redirect, content, forumTopics } = this.state
     const { match } = this.props
+    if (redirect) {
+      return <Redirect to='/app/discuss'/>;
+    }
+
     return (
       <React.Fragment>
         <Grid>

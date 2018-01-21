@@ -83,52 +83,47 @@ class Timelines extends React.Component {
       <React.Fragment>
         <Card.Group className="TimeLine">
           {posts.length ? (
-            posts
-              .map((post, i) => (
-                <Card style={{ width: '100%' }} key={post.id}>
-                  <Card.Content>
-                    <Image
-                      floated="left"
-                      size="mini"
-                      circular
-                      src=''
+            posts.map((post, i) => (
+              <Card style={{ width: '100%' }} key={post.id}>
+                <Card.Content>
+                  <Image floated="left" size="mini" circular src="" />
+                  <Card.Header>Chuks Festus</Card.Header>
+                  <Card.Meta>
+                    on {new Date(post.createdAt).toDateString()}
+                  </Card.Meta>
+                  <Card.Description>{post.postText}</Card.Description>
+                  <Card.Description>
+                    <img
+                      src={post.postImage}
+                      alt=""
+                      style={{ width: '100%', marginTop: 10 }}
                     />
-                    <Card.Header>Chuks Festus</Card.Header>
-                    <Card.Meta>on {new Date(post.createdAt).toDateString()}</Card.Meta>
-                    <Card.Description>{post.postText}</Card.Description>
-                    <Card.Description>
-                      <img
-                        src={post.postImage}
-                        alt=""
-                        style={{ width: '100%', marginTop: 10 }}
-                      />
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra className="time">
-                    <Button as="div" labelPosition="right">
-                      <Button
-                        basic
-                        color="red"
-                        onClick={() => {
-                          this.likePost(post.id, i)
-                        }}
-                        size="mini"
-                      >
-                        <Icon name="heart" />
-                        Like
-                      </Button>
-                      <Label as="a" basic color="red" pointing="left">
-                        {post.likes ? post.likes.length : 0}
-                      </Label>
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra className="time">
+                  <Button as="div" labelPosition="right">
+                    <Button
+                      basic
+                      color="red"
+                      onClick={() => {
+                        this.likePost(post.id, i)
+                      }}
+                      size="mini"
+                    >
+                      <Icon name="heart" />
+                      Like
                     </Button>
+                    <Label as="a" basic color="red" pointing="left">
+                      {post.likes ? post.likes.length : 0}
+                    </Label>
+                  </Button>
 
-                    <Comments />
-                    {/* <Button icon="comment" size="mini" /> */}
-                    {/* <Button icon="share" size="mini" /> */}
-                  </Card.Content>
-                </Card>
-              ))
-              .reverse()
+                  <Comments />
+                  {/* <Button icon="comment" size="mini" /> */}
+                  {/* <Button icon="share" size="mini" /> */}
+                </Card.Content>
+              </Card>
+            ))
           ) : (
             <Segment>
               <Dimmer active inverted>

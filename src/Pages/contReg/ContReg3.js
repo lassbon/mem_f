@@ -231,4 +231,6 @@ class ContReg3 extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({ user }), { update })(ContReg3)
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(ContReg3)
+)

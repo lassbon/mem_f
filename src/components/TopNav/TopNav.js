@@ -6,13 +6,14 @@ import axios from 'axios'
 import { logout } from "../../actions/auth";
 
 import "./TopNav.css";
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://2968008f.ngrok.io'
 
 class TopNav extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      notifications : []
+      notifications : {},
+      friends : {}
     }
   }
   render() {
@@ -62,18 +63,24 @@ class TopNav extends React.Component {
     )
   }
   componentDidMount() {
-    this.fetchNotifications
-    this.fetchMessages
+    this.fetchNotifications()
+    this.fetchFriends()
+    console.log(this.state)
   }
   fetchNotifications = () => {
-    let url = `${BASEURL}/api/v1/notification`
+    let url = `${BASEURL}/api/v1/notifications`
     this.fetchApi(url)
       .then(function(arr){
         this.state.notifications = arr
-        console.log(arr)
-      })
+      }.bind(this))
   }
-
+  fetchFriends = () => {
+    let url = `${BASEURL}/api/v1/social/requests/${this.props.user.id}`
+    this.fetchApi(url)
+      .then(function(arr){
+        this.state.friends = arr
+      }.bind(this))
+  }
   fetchApi = url => {
     return axios.get(url, {
               headers: {

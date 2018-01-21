@@ -21,43 +21,43 @@ const Profile = (props) => {
   onChange = props.onChange
   onSubmit = props.onSubmit
   props.loading ? mappedActivity = spinner :
-  mappedActivity = props.activities.posts.map(activity => (
-    <Tab.Pane attached={false} key={activity.createdAt}>
-      <Card.Group className="TimeLine">
-        <Card style={{ width: "100%" }}>
-          {getPayments = props.getTransactionHistory}
-          <Card.Content>
-            <Image
-              floated="left"
-              size="mini"
-              circular
-              src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
-            />
-            <Card.Header>{activity.company}</Card.Header>
-            <Card.Meta>{new Date(activity.createdAt).toDateString()}</Card.Meta>
-            <Card.Description>{activity.postText}</Card.Description>
-            <Card.Description>
-              <img
-                src="http://xinature.com/wp-content/uploads/2017/01/rivers-tree-night-mist-webs-river-blue-spider-creepy-wallpapers-download.jpg"
-                alt=""
-                style={{ width: "100%", marginTop: 10 }}
+    mappedActivity = props.activities.posts.map(activity => (
+      <Tab.Pane attached={false} key={activity.createdAt}>
+        <Card.Group className="TimeLine">
+          <Card style={{ width: "100%" }}>
+            {getPayments = props.getTransactionHistory}
+            <Card.Content>
+              <Image
+                floated="left"
+                size="mini"
+                circular
+                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
               />
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <div className="ui three buttons">
-              <Button size="mini">
-                <Icon name="like" />
-                {/* {activity.likes.length} */}
-              </Button>
-              <Button icon="comment" size="mini" />
-              {/* <Button icon="share" size="mini" /> */}
-            </div>
-          </Card.Content>
-        </Card>
-      </Card.Group>
-    </Tab.Pane>
-  ))
+              <Card.Header>{activity.company}</Card.Header>
+              <Card.Meta>{new Date(activity.createdAt).toDateString()}</Card.Meta>
+              <Card.Description>{activity.postText}</Card.Description>
+              <Card.Description>
+                <img
+                  src="http://xinature.com/wp-content/uploads/2017/01/rivers-tree-night-mist-webs-river-blue-spider-creepy-wallpapers-download.jpg"
+                  alt=""
+                  style={{ width: "100%", marginTop: 10 }}
+                />
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui three buttons">
+                <Button size="mini">
+                  <Icon name="like" />
+                  {/* {activity.likes.length} */}
+                </Button>
+                <Button icon="comment" size="mini" />
+                {/* <Button icon="share" size="mini" /> */}
+              </div>
+            </Card.Content>
+          </Card>
+        </Card.Group>
+      </Tab.Pane>
+    ))
 
   totalFriends = props.friends.friends.length;
   myFriends = props.friends.friends.map(friend => (
@@ -135,17 +135,21 @@ const Profile = (props) => {
                       <Form>
                         <Form.Field>
                           <label>Company name</label>
-                          <input onChange={onChange} placeholder="company name" name="name" value={props.profile.company}/>
+                          <input onChange={onChange} placeholder="company name" name="company" value={props.company} />
                         </Form.Field>
                         <Form.Field>
                           <label>Company email</label>
-                          <input onChange={onChange}  placeholder="company name" name="email" value={props.email} />
+                          <input onChange={onChange} placeholder="company email" name="email" value={props.email} />
                         </Form.Field>
                         <Form.Field>
                           <label>Company Address</label>
-                          <input onChange={onChange}  placeholder="company name" name="address" value={props.profile.address} />
+                          <input onChange={onChange} placeholder="company address" name="address" value={props.address} />
                         </Form.Field>
-                        <Button onClick={onSubmit}>Submit</Button>
+                        <Form.Field>
+                          <label>Password</label>
+                          <input onChange={onChange} placeholder="Update password" name="password" value={props.password} />
+                        </Form.Field>
+                        <Button onClick={onSubmit}><Link to="/app">Submit</Link></Button>
                       </Form>
                     </Modal.Description>
                   </Modal.Content>

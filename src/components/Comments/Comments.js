@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Comments extends Component {
   constructor() {
@@ -16,11 +17,11 @@ class Comments extends Component {
     this.setState(state => ({ ...state, comments }))
   }
   getComments = () => {
-    const { user: { token, id } } = this.props
+    const { user: { token, id }, post } = this.props
     // console.log(this.props)
     // console.log(token, id)
     // setAuthorizationHeader(token)
-    axios(`${BASEURL}api/v1/social/comment`, {
+    axios(`${BASEURL}api/v1/social/comment/${post}`, {
       headers: {
         authorization: token,
       },
@@ -30,17 +31,17 @@ class Comments extends Component {
     })
   }
   replyComment = event => {
-    const { user: { token, id } } = this.props
+    const { user: { token, id}, post } = this.props
     let data = event.target.querySelector('textarea').value
     this.setState({
       loading : !this.state.loading
     })
-    axios.post(`${BASEURL}api/v1/social/comment`, {data : data}, {
+    axios.post(`${BASEURL}api/v1/social/comment`, {'comment' : data, 'owner' : id, 'post' : post}, {
       headers: {
         authorization: token,
       },
     }).then(response => {
-      // console.log('response', response)
+      console.log('response', response)
       this.state_setComments(response.data)
       this.setState({
         loading : !this.state.loading
@@ -50,6 +51,9 @@ class Comments extends Component {
 
   componentDidMount() {
     this.getComments()
+    this.setState({
+      comments : this.props.comments
+    })
   }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })

@@ -38,17 +38,11 @@ export default {
       axios.post(`${BASEURL}api/vi/user/reset`, email),
 
     profile: id =>
-      axios
-        .get(`${BASEURL}api/v1/user/${id}`)
-        .then(res => res.data),
+      axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),
     activity: id =>
-      axios
-        .get(`${BASEURL}api/v1/useractivity/${id}`)
-        .then(res => res.data),
+      axios.get(`${BASEURL}api/v1/useractivity/${id}`).then(res => res.data),
     friends: id =>
-      axios
-        .get(`${BASEURL}api/v1/userfriends/${id}`)
-        .then(res => res.data)
+      axios.get(`${BASEURL}api/v1/userfriends/${id}`).then(res => res.data),
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),
@@ -107,7 +101,7 @@ export default {
   },
 
   projects: {
-    ongoing: (token) => {
+    ongoing: token => {
       return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -116,7 +110,7 @@ export default {
         },
       })
     },
-    completed: (token) => {
+    completed: token => {
       return axios.get(`${BASEURL}api/v1/projects/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -127,7 +121,7 @@ export default {
     },
   },
   events: {
-    ongoing: (token) => {
+    ongoing: token => {
       return axios.get(`${BASEURL}api/v1/events/ongoing`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -136,7 +130,7 @@ export default {
         },
       })
     },
-    completed: (token) => {
+    completed: token => {
       return axios.get(`${BASEURL}api/v1/events/completed`, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -166,15 +160,13 @@ export default {
   },
   forum: {
     reg: data =>
-    axios.post(`${BASEURL}api/v1/forum/post`, data, {
-      headers: {
-        'Content-Type': 'application/form-data',
-        Accept: 'application/form-data',
-      },
-    }),
+      axios.post(`${BASEURL}api/v1/forum/post`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
+      }),
     getForums: id =>
-    axios
-      .get(`${BASEURL}/api/v1/forum/post/`)
-      .then(res => res.data),
+      axios.get(`${BASEURL}/api/v1/forum/post/`).then(res => res.data),
   },
 }

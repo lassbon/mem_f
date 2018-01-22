@@ -43,6 +43,9 @@ export default {
       axios.get(`${BASEURL}api/v1/useractivity/${id}`).then(res => res.data),
     friends: id =>
       axios.get(`${BASEURL}api/v1/userfriends/${id}`).then(res => res.data),
+    updateUser: (id, credentails) =>
+      axios.put(`${BASEURL}api/v1/user/${id}`, credentails).then(res => res.data),
+
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),

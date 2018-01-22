@@ -1,5 +1,5 @@
 import {
-  USER_PROFILE, USER_ACTIVITY, USER_FRIENDS
+  USER_PROFILE, USER_ACTIVITY, USER_FRIENDS, USER_PROFILE_UPDATE
 } from "../types";
 
 const initialState = {

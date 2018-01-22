@@ -86,7 +86,7 @@ class PostStatus extends React.Component {
               <Image
                 size="tiny"
                 circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
               />
             </Grid.Column>
             <Grid.Column width={13}>

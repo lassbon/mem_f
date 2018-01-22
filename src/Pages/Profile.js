@@ -168,7 +168,7 @@ const Profile = (props) => {
 const panes = [
   { menuItem: "Activity", render: () => mappedActivity },
   {
-    menuItem: "Friends", render: () => ([<Tab.Pane attached={false}>
+    menuItem: "Connections", render: () => ([<Tab.Pane attached={false}>
       <Card fluid>
         <Card.Content>
           <Card.Header style={{ textAlign: 'center' }}>

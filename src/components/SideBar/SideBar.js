@@ -57,13 +57,13 @@ class SideBar extends React.Component {
 
               <Icon name="hourglass end" />
         </Menu.Item>
-        <Menu.Item
+        {/* <Menu.Item
           as={Link}
           to={`${this.props.match.path}/library`}
         >Library
 
               <Icon name="book" />
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     )  
   }  

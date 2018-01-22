@@ -87,9 +87,9 @@ class ProfileCard extends React.Component {
 
   onSubmit(event) {
     const payload = {
-      company: this.state.company,
+      companyName: this.state.company,
       email: this.state.email,
-      address: this.state.address,
+      companyAddress: this.state.address,
       password: this.state.password
     }
     event.preventDefault();

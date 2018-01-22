@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfile, getuserActivity, getuserFriends } from "../actions/users";
+import { getUserProfile, getuserActivity, getuserFriends, updateUserProfile } from "../actions/users";
 import {
   getUserDonations,
   getUserEvents,
@@ -24,6 +24,8 @@ class ProfileCard extends React.Component {
       name: '',
       email: '',
       address: '',
+      company: '',
+      password: '',
       loading: true
     };
     this.getTransactionHistory = this.getTransactionHistory.bind(this)
@@ -35,9 +37,9 @@ class ProfileCard extends React.Component {
     this.props.getUserProfile(this.props.userId).then(res => {
       this.setState({
         profile: this.props.userProfileDetails,
-        name: this.props.userProfileDetails.name,
         email: this.props.userProfileDetails.email,
-        address: this.props.userProfileDetails.address
+        address: this.props.userProfileDetails.companyAddress,
+        company: this.props.userProfileDetails.companyName
       })
     })
     this.props.getuserActivity(this.props.userId).then(res => {
@@ -85,23 +87,20 @@ class ProfileCard extends React.Component {
 
   onSubmit(event) {
     const payload = {
-      name: this.state.name,
+      companyName: this.state.company,
       email: this.state.email,
-      address: this.state.address
+      companyAddress: this.state.address,
+      password: this.state.password
     }
-    console.log('payload', payload)
     event.preventDefault();
-    alert('I submittedd')
-    // this.props
-    //   .newForumTopic(this.state)
-    //   .then((res) => console.log('kdnkdnkvdbnkjdd'))
+    this.props
+      .updateUserProfile(this.props.userId, payload)
+      .then((res) => console.log('kdnkdnkvdbnkjdd'))
   }
 
 
   render() {
-    const { profile, activities, loading, friends, donations, memberships, email, trainings, events } = this.state;
-    console.log('email', this.props.userProfileDetails.email)
-    console.log('email2222', email)
+    const { profile, password, activities, loading, friends, donations, memberships, email, company, address, trainings, events } = this.state;
     return (
       <Profile
         getTransactionHistory={this.getTransactionHistory}
@@ -116,6 +115,9 @@ class ProfileCard extends React.Component {
         onSubmit={this.onSubmit}
         email={email}
         loading={loading}
+        password={password}
+        company={company}
+        address={address}
       />
     );
   }
@@ -141,5 +143,6 @@ export default connect(mapStateToProps, {
   getUserDonations,
   getUserEvents,
   getUserMemberships,
-  getUserTrainings
+  getUserTrainings,
+  updateUserProfile
 })(ProfileCard)

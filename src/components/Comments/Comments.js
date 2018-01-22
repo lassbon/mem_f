@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Comments extends Component {
   constructor() {

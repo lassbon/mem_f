@@ -123,7 +123,7 @@ class ContReg6 extends React.Component {
       <React.Fragment>
         <Grid
           textAlign="center"
-          style={{ height: '100%' }}
+          style={{ height: '100%', marginBottom: 50 }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
@@ -155,13 +155,16 @@ class ContReg6 extends React.Component {
                       <h4>N{plan.fee}</h4>
                     </Grid.Column>
                   </Grid>
-                  <PaystackComponent
-                    variablename="Verfication "
-                    email={user.email}
-                    amount={`${plan.fee}00`}
-                    plan={plan.paystack.data.plan_code}
-                    callback={this.changeToNew}
-                  />
+                  
+                    <div style={{ margin: '0 auto', marginTop: 40, marginLeft: '35%' }}>
+                      <PaystackComponent
+                        variablename="Verfication "
+                        email={user.email}
+                        amount={`${plan.fee}00`}
+                        plan={plan.paystack.data.plan_code}
+                        callback={this.changeToNew}
+                      />
+                  </div>
                 </React.Fragment>
               ) : (
                 <Segment>

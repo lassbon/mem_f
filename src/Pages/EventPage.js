@@ -55,7 +55,7 @@ class Events extends React.Component {
           header={ev.title}
           meta={ev.date}
           description={ev.description}
-          extra={extra}
+          
         />
       )
       return co
@@ -70,7 +70,7 @@ class Events extends React.Component {
             header={ev.title}
             meta={ev.date}
             description={ev.description}
-            extra={extra}
+            
           />
         )
         return co

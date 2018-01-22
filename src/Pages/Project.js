@@ -50,13 +50,7 @@ class Project extends React.Component {
         <Card.Group className="TimeLine">
           <Card style={{ width: '100%' }}>
             <Card.Content>
-              <Image
-                floated="left"
-                size="mini"
-                circular
-                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
-              />
-              <Card.Header>Chuks Festus</Card.Header>
+              <Image size="big" src={jobs.banner} />
               <Card.Meta>{jobs.createdAt}</Card.Meta>
               <Card.Description>{jobs.description}</Card.Description>
               <div
@@ -65,9 +59,9 @@ class Project extends React.Component {
                   justifyContent: 'center',
                 }}
               >
-                <PaystackComponent
+                {/* <PaystackComponent
                   amount={5000000.0}
-                  text="Donate to project"
+                  text="Make payment"
                   variablename="Verfication "
                   class="donate-button"
                   email={email}
@@ -76,7 +70,7 @@ class Project extends React.Component {
                       {
                         display_name: 'Payment For',
                         variable_name: 'donation title',
-                        value: `donation_${id}`,
+                        value: `project_${id}`,
                       },
                       {
                         display_name: 'Membership ID',
@@ -90,23 +84,14 @@ class Project extends React.Component {
                   // amount={`${plan.fee}00`}
                   // plan={plan.paystack.data.plan_code}
                   // callback={this.changeToNew}
-                />
+                /> */}
               </div>
             </Card.Content>
             {/* <Image
                   size="big"
                   src={jobs.banner}
                 /> */}
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {currentcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
+            
           </Card>
         </Card.Group>
       </Tab.Pane>
@@ -117,27 +102,12 @@ class Project extends React.Component {
         <Card.Group className="TimeLine">
           <Card style={{ width: '100%' }}>
             <Card.Content>
-              <Image
-                floated="left"
-                size="mini"
-                circular
-                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
-              />
-              <Card.Header>Chuks Festus</Card.Header>
+              <Image size="big" src={jobs.banner} />
               <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>{jobs.description}</Card.Description>
             </Card.Content>
-            <Image size="big" src={jobs.banner} />
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {completedcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
+            
+            
           </Card>
         </Card.Group>
       </Tab.Pane>

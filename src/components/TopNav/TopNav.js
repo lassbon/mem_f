@@ -27,7 +27,6 @@ class TopNav extends React.Component {
     const notification = this.state.notifications
     let notifs
     let friends
-    let searchOutput
     if(notification.length > 0){
       notifs = notification.map((notif) =>(
                 <Dropdown.Item key={notif} as={Link} to={BASEURL+"api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
@@ -36,14 +35,7 @@ class TopNav extends React.Component {
     else {
       notifs = <Dropdown.Item>There is no notification</Dropdown.Item>
     }
-    if(value.length > 1) {
-      if(0){
 
-      }
-      else {
-        searchOutput = 1
-      }
-    }
 
     const requests = this.state.friends
     if(requests.length > 0){
@@ -57,11 +49,12 @@ class TopNav extends React.Component {
     return (
       <Menu fixed="top" secondary className="top-menu">
         <Menu.Item>
-          <Input
-            icon="search"
-            placeholder="find a member or project..."
-            className="search-box"
+          <Search
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
             onSearchChange={this.handleSearchChange}
+            results={results}
+            value={value}
           />
         </Menu.Item>
         <Menu.Menu position="right">
@@ -142,7 +135,7 @@ class TopNav extends React.Component {
       if (this.state.value.length < 1) return this.resetComponent()
       const { user: { token, id }} = this.props
 
-      axios(`${BASEURL}api/v1/searchuser`, {'searchTerm' : value}, {
+      axios(`${BASEURL}api/v1/social/postsearch`, {'searchTerm' : value}, {
         headers: {
           authorization: token,
         },

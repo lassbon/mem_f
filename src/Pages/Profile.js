@@ -31,14 +31,14 @@ const Profile = (props) => {
                 floated="left"
                 size="mini"
                 circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
               />
               <Card.Header>{activity.company}</Card.Header>
               <Card.Meta>{new Date(activity.createdAt).toDateString()}</Card.Meta>
               <Card.Description>{activity.postText}</Card.Description>
               <Card.Description>
                 <img
-                  src="http://xinature.com/wp-content/uploads/2017/01/rivers-tree-night-mist-webs-river-blue-spider-creepy-wallpapers-download.jpg"
+                  src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
                   alt=""
                   style={{ width: "100%", marginTop: 10 }}
                 />
@@ -68,7 +68,7 @@ const Profile = (props) => {
           <List horizontal>
             {
               <List.Item key="{p.memberId}">
-                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
+                <Image circular size="tiny" src="http://cdn.onlinewebfonts.com/svg/img_568656.png" />
                 <List.Content>
                   <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
                   <p>{friend.email}</p>
@@ -89,7 +89,7 @@ const Profile = (props) => {
           <List horizontal>
             {
               <List.Item key="{p.memberId}">
-                <Image circular size="tiny" src="https://i.imgur.com/vMOJDOk.jpg" />
+                <Image circular size="tiny" src="http://cdn.onlinewebfonts.com/svg/img_568656.png" />
                 <List.Content>
                   <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
                   'None'
@@ -119,7 +119,7 @@ const Profile = (props) => {
                 <Image
                   size="tiny"
                   circular
-                  src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                  src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
                 />
               </Grid.Column>
               <Grid.Column width='7'>
@@ -130,7 +130,7 @@ const Profile = (props) => {
                 <Modal trigger={<Button size="mini">Edit profile</Button>} closeIcon dimmer="blurring">
                   <Modal.Header>Edit profile</Modal.Header>
                   <Modal.Content image>
-                    <Image wrapped size='medium' src='https://cdn-images-1.medium.com/fit/c/200/200/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg' />
+                    <Image wrapped size='medium' src='http://cdn.onlinewebfonts.com/svg/img_568656.png' />
                     <Modal.Description>
                       <Form>
                         <Form.Field>

@@ -38,7 +38,7 @@ const Profile = (props) => {
               <Card.Description>{activity.postText}</Card.Description>
               <Card.Description>
                 <img
-                  src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
+                  src={activity.postImage}
                   alt=""
                   style={{ width: "100%", marginTop: 10 }}
                 />

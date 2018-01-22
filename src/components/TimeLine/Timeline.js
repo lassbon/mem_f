@@ -85,8 +85,8 @@ class Timelines extends React.Component {
             posts.map((post, i) => (
               <Card style={{ width: '100%' }} key={post.id}>
                 <Card.Content>
-                  <Image floated="left" size="mini" circular src="" />
-                  <Card.Header>Chuks Festus</Card.Header>
+                  <Image floated="left" size="mini" circular src="http://cdn.onlinewebfonts.com/svg/img_568656.png" />
+                  <Card.Header>{post.owner}</Card.Header>
                   <Card.Meta>
                     on {new Date(post.createdAt).toDateString()}
                   </Card.Meta>

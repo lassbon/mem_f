@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios'
 
-export default (token) => {
+export default token => {
   if (token) {
-    axios.defaults.headers.common.authorization = `Bearer ${token}`;
+    axios.defaults.headers.common.authorization = `${token}`
   } else {
-    delete axios.defaults.headers.common.authorization;
+    delete axios.defaults.headers.common.authorization
   }
-};
+}

@@ -1,8 +1,25 @@
 import React, { Component } from 'react'
-import { Tab, Header, Message, Image } from 'semantic-ui-react'
+import {
+  Tab,
+  Header,
+  Message,
+  Image,
+  Dimmer,
+  Loader,
+  Segment,
+  Divider,
+  Card,
+  Icon,
+  Grid,
+} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
+import { connect } from 'react-redux'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 const panes = [
   {
@@ -52,7 +69,7 @@ const panes = [
     render: () => (
       <Tab.Pane
         style={{
-          textAlign: 'center',
+          textAlign: 'left',
         }}
       >
         <Image
@@ -92,11 +109,6 @@ const panes = [
           textAlign: 'center',
         }}
       >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
         <Message header="N350,000/N50,000" color="yellow" />
         <h3>BENEFITS</h3>
         <p>Can vote and be voted for</p>
@@ -160,54 +172,213 @@ const panes = [
   },
 ]
 
-const ContReg2 = props => {
-  const { location: { state }, history } = props
-  console.log(this.props)
-  if (state == null || state.id == null) {
-    history.push('/signup')
-    return null
-  }
+const state = { activeIndex: 0 }
 
-  return (
-    <div
-      style={{
-        width: '70%',
-        margin: '0 auto',
-        border: '1px solid #C0C0C0',
-        minHeight: '100%',
-        verticalAlign: 'middle',
-        marginTop: '100px',
-        marginBottom: 100,
-        textAlign: 'center',
-        paddingBottom: 50,
-      }}
-    >
-      <h2 style={{ margin: 60 }}>Select a membership category</h2>
-      <Tab
-        menu={{ fluid: true, vertical: true, tabular: 'right' }}
-        panes={panes}
-      />
-      <Button
-        as={Link}
-        to="/cont"
-        style={{ marginLeft: '10%', marginTop: 50, marginRight: 30 }}
-      >
-        Back
-      </Button>
-      <Button
-        as={Link}
-        to={{
-          pathname: '/cont3',
-          state: {
-            id: state.id,
-          },
-        }}
-        className="btn"
-      >
-        Next
-      </Button>
-    </div>
-  )
+class ContReg2 extends Component {
+  state = {
+    plans: [],
+  }
+  componentDidMount() {
+    const { user } = this.props
+    axios(`${BASEURL}api/v1/levels/`, {
+      headers: {
+        authorization: user.token,
+      },
+    }).then(response => {
+      console.log(response)
+      const plans = response.data.map(
+        ({ description, fee, name, paystack: { data: { plan_code } } }) => ({
+          render: () => (
+            <Card
+              fluid
+              raised={true}
+              header="Option 1"
+              style={{ padding: '4rem' }}
+            >
+              <Header as="h1" style={{ textTransform: 'capitalize' }}>
+                {description.replace('<br>', '')}
+              </Header>
+              <Divider />
+              {/* <Header as="h3">{fee}</Header> */}
+              <Message header={fee} />
+              <h3>BENEFITS</h3>
+              <p>Can vote and be voted for</p>
+              <p>
+                Advocacy roles on company’s related issues with the government
+                Priority
+              </p>
+              <p>
+                provision during all chamber’s activities/services as the case
+                may be
+              </p>
+              <p>
+                20 per cent discount on space participation at Annual Abuja
+                International
+              </p>
+              <p>
+                Trade Fair Glass/ Crystal Membership certificate Freebies (
+                Scarf, Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+              </p>
+              <p>
+                Direct link to company’s website from the official chamber’s
+                webpage.
+              </p>
+            </Card>
+          ),
+          menuItem: name,
+          plan_code,
+          description,
+          fee,
+          name,
+        })
+      )
+      this.setState(prevState => ({ ...prevState, plans }))
+      // console.log(plans)
+    })
+
+    // this.setState()
+  }
+  render() {
+    const { history, user } = this.props
+    return (
+      <React.Fragment>
+        <div
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            border: '1px solid #C0C0C0',
+            minHeight: '100%',
+            verticalAlign: 'middle',
+            marginTop: '100px',
+            marginBottom: 100,
+            textAlign: 'left',
+            paddingBottom: 50,
+          }}
+        >
+          <h2 style={{ margin: 60, textAlign: 'center' }}>
+            Select a membership category
+          </h2>
+          {this.state.plans.length ? (
+            <Tab
+              menu={{ fluid: true, vertical: true, tabular: 'right' }}
+              panes={this.state.plans}
+              onTabChange={(change, { activeIndex }) => {
+                state.activeIndex = activeIndex
+                console.log(state)
+              }}
+            />
+          ) : (
+            <Segment>
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer>
+            </Segment>
+          )}
+          {/* <Button
+          as={Link}
+          to="/cont"
+          style={{ marginLeft: '10%', marginTop: 50, marginRight: 30 }}
+        >
+          Back
+        </Button> */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '3rem',
+            }}
+          >
+            <Button
+              // as={Link}
+              // to={{
+              //   pathname: '/cont3',
+              //   state: {
+              //     id: 'state.id',
+              //   },
+              // }}
+              onClick={() => {
+                axios
+                  .put(
+                    `${BASEURL}api/v1/user/${user.id}`,
+                    {
+                      membershipPlan: this.state.plans[state.activeIndex]
+                        .plan_code,
+                      //   fee: this.state.plans[state.activeIndex].fee,
+                      //   name: this.state.plans[state.activeIndex].name,
+                      //   description: this.state.plans[state.activeIndex]
+                      //     .description,
+                      // },
+                      regState: 2,
+                    },
+                    {
+                      headers: {
+                        authorization: user.token,
+                        'Content-Type': 'application/form-data',
+                        Accept: 'application/form-data',
+                      },
+                    }
+                  )
+                  .then(() => {
+                    history.push({
+                      pathname: '/cont3',
+                      state: {
+                        id: 'state.id',
+                      },
+                    })
+                  })
+                  .catch(console.log)
+              }}
+              className="btn"
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
+          <Grid.Column width="5">
+            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
+            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
+          </Grid.Column>
+          <Grid.Column width="6" verticalAlign="middle">
+            <Icon
+              name="facebook square"
+              size="big"
+              style={{ color: 'white' }}
+            />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
+          </Grid.Column>
+          <Grid.Column width="5">
+            <h3 style={{ color: 'white' }}>Links</h3>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI website
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Membership Directory
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              ACCI Events
+            </Link>
+            <Link to="#" style={{ marginRight: 10 }}>
+              Shop on ACCI
+            </Link>
+          </Grid.Column>
+        </Grid>
+        <footer
+          style={{
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
+          }}
+        >
+          Copyright © 2017 Abuja Chamber of Commerce & Industry
+        </footer>
+      </React.Fragment>
+    )
+  }
 }
 
-export default withRouter(ContReg2)
+export default withRouter(connect(({ user }) => ({ user }))(ContReg2))

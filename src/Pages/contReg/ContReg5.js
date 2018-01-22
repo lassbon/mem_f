@@ -79,6 +79,7 @@ class ContReg5 extends React.Component {
                 (A registration fee is required to cover the cost of the
                 verification process)
               </h3>
+              
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
                 <strong>N25,000</strong>

@@ -49,7 +49,7 @@ class ContReg5 extends React.Component {
           loading: false,
         })
         history.push({
-          pathname: '/cont6',
+          pathname: '/regmessage',
           state: {
             id: id,
           },

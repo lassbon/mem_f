@@ -1,5 +1,5 @@
 import api from "../api";
-import { USER_PROFILE, USER_ACTIVITY, USER_FRIENDS } from '../types'
+import { USER_PROFILE, USER_ACTIVITY, USER_FRIENDS, USER_PROFILE_UPDATE } from '../types'
 
 export const signup = (data) => (dispatch) => api.user.signup(data)
 
@@ -19,6 +19,11 @@ export const setUserFriends = friends => ({
 })
 
 
+export const updateProfile = payload => ({
+  type: USER_PROFILE_UPDATE,
+  payload,
+})
+
 export const getUserProfile = id => dispatch =>
   api.user.profile(id).then(res => {
     dispatch(setUserProfile(res));
@@ -34,5 +39,11 @@ export const getuserActivity = id => dispatch =>
 export const getuserFriends = id => dispatch =>
   api.user.friends(id).then(res => {
     dispatch(setUserFriends(res));
+    return Promise.resolve(res)
+  });
+
+export const updateUserProfile = (id, userData) => dispatch =>
+  api.user.updateUser(id, userData).then(res => {
+    dispatch(updateProfile(res));
     return Promise.resolve(res)
   });

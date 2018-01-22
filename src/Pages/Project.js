@@ -54,7 +54,7 @@ class Project extends React.Component {
                 floated="left"
                 size="mini"
                 circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
               />
               <Card.Header>Chuks Festus</Card.Header>
               <Card.Meta>{jobs.createdAt}</Card.Meta>
@@ -121,7 +121,7 @@ class Project extends React.Component {
                 floated="left"
                 size="mini"
                 circular
-                src="https://cdn-images-1.medium.com/fit/c/100/100/1*sJE5hPC1KeMj1o4_bH2jXA.jpeg"
+                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
               />
               <Card.Header>Chuks Festus</Card.Header>
               <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>

@@ -97,16 +97,7 @@ class Project extends React.Component {
                   size="big"
                   src={jobs.banner}
                 /> */}
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {currentcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
+            
           </Card>
         </Card.Group>
       </Tab.Pane>
@@ -128,16 +119,7 @@ class Project extends React.Component {
               <Card.Description>{jobs.description}</Card.Description>
             </Card.Content>
             <Image size="big" src={jobs.banner} />
-            <Card.Content extra>
-              <div className="ui three buttons">
-                <Button size="mini">
-                  <Icon name="like" />
-                  {completedcount}
-                </Button>
-                <Button icon="comment" size="mini" />
-                <Button icon="share" size="mini" />
-              </div>
-            </Card.Content>
+            
           </Card>
         </Card.Group>
       </Tab.Pane>

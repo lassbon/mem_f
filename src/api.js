@@ -68,6 +68,14 @@ export default {
           authorization: data.token,
         },
       }),
+    alertReferee: data =>
+      axios.post(`${BASEURL}api/v1/alertreferee`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: data.token,
+        },
+      }),
 
     // contreg2: data => {
 

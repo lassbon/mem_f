@@ -147,7 +147,7 @@ const Profile = (props) => {
                         </Form.Field>
                         <Form.Field>
                           <label>Password</label>
-                          <input onChange={onChange} placeholder="Update password" name="password" value={props.password} />
+                          <input onChange={onChange} placeholder="Update password" type="password" name="password" value={props.password} />
                         </Form.Field>
                         <Button onClick={onSubmit}><Link to="/app">Submit</Link></Button>
                       </Form>

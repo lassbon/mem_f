@@ -38,8 +38,8 @@ class ProfileCard extends React.Component {
       this.setState({
         profile: this.props.userProfileDetails,
         email: this.props.userProfileDetails.email,
-        address: this.props.userProfileDetails.address,
-        company: this.props.userProfileDetails.company
+        address: this.props.userProfileDetails.companyAddress,
+        company: this.props.userProfileDetails.companyName
       })
     })
     this.props.getuserActivity(this.props.userId).then(res => {
@@ -117,6 +117,7 @@ class ProfileCard extends React.Component {
         loading={loading}
         password={password}
         company={company}
+        address={address}
       />
     );
   }

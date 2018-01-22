@@ -17,7 +17,26 @@ const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 class Payment extends Component {
   state = {
-    memberships: [],
+    memberships: [{
+      id : '92u309239',
+      createdAt : 'Jan 21, 2018',
+      amount : 20000
+    }],
+  }
+  renewMembership = () => {
+    const { user: { token, id }, post } = this.props
+    console.log("Came to renew memberships")
+    // axios(`${BASEURL}api/v1/userpayments/memberships/${id}`, {
+    //   headers: {
+    //     authorization: token,
+    //   },
+    // }).then(response => {
+    //   this.setState(
+    //     prevState => ({ ...prevState, ...response.data }),
+    //     () => console.log(this.state)
+    //   )
+    //   console.log('payments', response.data)
+    // })
   }
   componentDidMount() {
     const { user: { token, id } } = this.props
@@ -83,10 +102,30 @@ class Payment extends Component {
         </Grid>
       </Tab.Pane>
     ))
+    let renewal = ''
+    if(this.state.memberships.length > 0) {
+      renewal = (<Button
+              style={{
+                background: 'var(--main-gold)',
+                color: 'var(--white)',
+                width: '60%',
+                margin: '0 auto',
+                display: 'table'
+              }}
+              onClick={this.renewMembership}
+            >
+              RENEW MEMBERSHIP
+            </Button>)
+    }
     const panes = [
       {
         menuItem: 'Membership Renewal',
-        render: () => memberships,
+        render: () => (
+          <div>
+            {memberships}
+            {renewal}
+          </div>
+        )
       },
       {
         menuItem: '(1) Total Subscriptions',

@@ -52,7 +52,7 @@ class ContReg6 extends React.Component {
         })
         localStorage.acciJWT = token
         history.push({
-          pathname: '/app',
+          pathname: '/confirmation',
         })
       })
     // userLoggedIn({ token })

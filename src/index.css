@@ -26,6 +26,7 @@ a:hover {
 
 body {
   font-family: 'Encode Sans Expanded', sans-serif;
+  line-height: 22px
   /* background: #e2e2e2; */
 }
 
@@ -232,5 +233,28 @@ div.seven.wide.column > div > p {
 }
 
 .black_color {
-  color: black !important;
+  color: black !important;}
+.ui.card, .ui.cards> .card {
+  border: none !important;
+  /* box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important; */
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.item > div input{
+  -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important
+}
+
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > div {
+  padding: 0 !important;
+  margin-right: 40px !important
+
+}
+
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > div > div.ui.floating.dropdown {
+  width: 10px
 }

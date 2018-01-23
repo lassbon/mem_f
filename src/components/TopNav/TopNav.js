@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Menu, Icon, Label, Dropdown } from "semantic-ui-react";
+import { Input, Menu, Icon, Label, Dropdown, Button } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
@@ -25,8 +25,14 @@ class TopNav extends React.Component {
     let friends
     if(notification.length > 0){
       notifs = notification.map((notif) =>(
-                <Dropdown.Item key={notif} as={Link} to={BASEURL+"/api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
-              ))
+        <Dropdown.Item 
+          key={notif} 
+          as={Link} 
+          to={BASEURL+"/api/v1/notifications/"+notif.userId}
+        >
+          <strong>{notif.from}</strong> says {notif.message}
+        </Dropdown.Item>
+      ))
     }
     else {
       notifs = <Dropdown.Item>There is no notification</Dropdown.Item>
@@ -36,8 +42,8 @@ class TopNav extends React.Component {
     const requests = this.state.friends
     if(requests.length > 0){
       friends = requests.map((friend) =>(
-                  <Dropdown.Item key={friend}>{friend.requester} sent a friend request</Dropdown.Item>
-                ))
+        <Dropdown.Item key={friend}>{friend.requester} sent a friend request</Dropdown.Item>
+      ))
     }
     else {
       friends = <Dropdown.Item>You do not have any friend requests</Dropdown.Item>
@@ -55,7 +61,7 @@ class TopNav extends React.Component {
           <Menu.Item
             name="friends"
           >
-            <Icon name="users" />
+            <Icon style={{ color: '#3a3a3a' }} name="users" size='large' />
             <Label color="red" floating circular size="mini" >
               {this.state.friends.length}
                 </Label>
@@ -68,7 +74,7 @@ class TopNav extends React.Component {
           <Menu.Item
             name="notifications"
           >
-            <Icon name="bell" />
+            <Icon style={{ color: '#3a3a3a' }} name="bell" size='large' />
             <Label color="red" floating circular size="mini">
               {this.state.notifications.length}
                 </Label>
@@ -79,7 +85,7 @@ class TopNav extends React.Component {
               </Dropdown>
           </Menu.Item>
           <Menu.Item onClick={() => this.props.logout()}>
-            <Icon name='external' />
+            <Button>Logout</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>

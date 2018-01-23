@@ -48,8 +48,7 @@ class RegMessage extends React.Component {
                   <Icon name="mail" size="large" />
                 </div>
               </div>
-              Please hold on while we verify you. A message with a link to
-              proceed with registration will be sent to you.
+              Thank you , please hold on while your financial member refer you. An email will be sent to continue registration.
             </div>
           </div>
         </RegLayout>

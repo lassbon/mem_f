@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { Tab, Header, Grid, Image, Form, Label, Card, Icon, Modal, Button, List, Segment, Dimmer, Loader } from "semantic-ui-react";
 
+import avatar from '../images/image (4).png'
+
 let mappedActivity;
 let myFriends;
 let totalFriends;
@@ -31,7 +33,7 @@ const Profile = (props) => {
                 floated="left"
                 size="mini"
                 circular
-                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
+                src={avatar}
               />
               <Card.Header>{activity.company}</Card.Header>
               <Card.Meta>{new Date(activity.createdAt).toDateString()}</Card.Meta>
@@ -68,7 +70,7 @@ const Profile = (props) => {
           <List horizontal>
             {
               <List.Item key="{p.memberId}">
-                <Image circular size="tiny" src="http://cdn.onlinewebfonts.com/svg/img_568656.png" />
+                <Image circular size="tiny" src={avatar} />
                 <List.Content>
                   <List.Header><Link to={`/profile/`}>"l"</Link></List.Header>
                   <p>{friend.email}</p>
@@ -119,13 +121,13 @@ const Profile = (props) => {
                 <Image
                   size="tiny"
                   circular
-                  src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
+                  src={avatar}
                 />
               </Grid.Column>
               <Grid.Column width='7'>
-                <div>
-                  <h3>{props.profile.companyName}</h3>
-                  <p>{props.profile.email}</p>
+                <div style={{marginBottom: 14}}>
+                  <h3 style={{marginBottom: 0}}>{props.profile.companyName}</h3>
+                  <p style={{fontSize: 12}}>{props.profile.email}</p>
                 </div>
                 <Modal trigger={<Button size="mini">Edit profile</Button>} closeIcon dimmer="blurring">
                   <Modal.Header>Edit profile</Modal.Header>
@@ -203,9 +205,9 @@ const reportCont = [
         <Grid.Row>
           <Grid.Column width={6} style={{ textAlign: 'center' }}>
             <h4 style={{ marginBottom: 0 }}>Total Payments</h4>
-            <h2 style={{ marginTop: 5 }}>N250,000</h2>
+            <h2 style={{ marginTop: 5, color: '#707070' }}>N250,000</h2>
           </Grid.Column>
-          <Grid.Column width={6} style={{ textAlign: 'center' }}>
+          <Grid.Column width={6} style={{ marginLeft: '20%' }}>
             <h4 style={{ marginBottom: 0 }}>Total Payments</h4>
             <h5 style={{ marginTop: 5 }}>N250,000</h5>
             <h4 style={{ marginBottom: 0 }}>Total Payments</h4>

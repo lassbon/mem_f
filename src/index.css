@@ -258,3 +258,19 @@ div.seven.wide.column > div > p {
 #root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > div > div.ui.floating.dropdown {
   width: 10px
 }
+
+#root > div > main > div:nth-child(2) > div.ui.pointing.secondary.menu > a.item {
+   /* border-bottom: 3px solid var(--main-gold) !important; */
+   padding-left: 45px;
+   padding-right: 45px;
+   font-weight: bold;
+   
+   text-align: center !important
+}
+
+#root > div > main > div.ui.grid > div > div {
+     -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important
+}

@@ -87,7 +87,7 @@ class Timelines extends React.Component {
               <Card style={{ width: '100%' }} key={post.id}>
                 <Card.Content>
                   <Image floated="left" size="mini" circular src={avatar} />
-                  <Card.Header style={{marginTop: 5}}>{post.owner}</Card.Header>
+                  <Card.Header style={{marginTop: 5}}>{post.companyName}</Card.Header>
                   <Card.Meta style={{fontSize: 10}}>
                     on {new Date(post.createdAt).toDateString()}
                   </Card.Meta>

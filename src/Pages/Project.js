@@ -51,7 +51,7 @@ class Project extends React.Component {
           <Card style={{ width: '100%' }}>
             <Card.Content>
               <Image size="big" src={jobs.banner} />
-              <Card.Meta>{jobs.createdAt}</Card.Meta>
+              <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>{jobs.description}</Card.Description>
               <div
                 style={{

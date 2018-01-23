@@ -68,7 +68,15 @@ class Comments extends Component {
 
     return (
       <React.Fragment>
-        <Button as='div' labelPosition='right'>
+        <Button 
+          size="mini"
+          content={visible ? 'Hide' : 'Show'} 
+          onClick={this.toggleVisibility}
+        > 
+          <Icon name='comment' />        
+          comment {comments.length}
+        </Button>
+        {/* <Button as='div' labelPosition='right'>
           
           <Button
             basic color='blue'
@@ -79,7 +87,7 @@ class Comments extends Component {
             comment
           </Button>
           <Label as='a' basic color='blue' pointing='left'>{comments.length}</Label>
-        </Button>
+        </Button> */}
         <Divider hidden />
         <Transition visible={visible} animation='slide down' duration={500}>
           <Comment.Group>
@@ -101,7 +109,7 @@ class Comments extends Component {
           ) : false}
           <Form reply onSubmit={this.replyComment} loading={this.state.loading}>
             <Form.TextArea autoHeight rows={2} placeholder='leave a comment...' />
-            <Button content='Add Comment' size='tiny' labelPosition='left' icon='edit' primary />
+            <Button style={{marginLeft: '75%'}} content='Add Comment' size='tiny' labelPosition='left' icon='edit' primary />
           </Form>
           </Comment.Group>
         </Transition>

@@ -16,6 +16,7 @@ import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
+import avatar from '../../images/image (4).png'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -85,9 +86,9 @@ class Timelines extends React.Component {
             posts.map((post, i) => (
               <Card style={{ width: '100%' }} key={post.id}>
                 <Card.Content>
-                  <Image floated="left" size="mini" circular src="http://cdn.onlinewebfonts.com/svg/img_568656.png" />
-                  <Card.Header>{post.owner}</Card.Header>
-                  <Card.Meta>
+                  <Image floated="left" size="mini" circular src={avatar} />
+                  <Card.Header style={{marginTop: 5}}>{post.owner}</Card.Header>
+                  <Card.Meta style={{fontSize: 10}}>
                     on {new Date(post.createdAt).toDateString()}
                   </Card.Meta>
                   <Card.Description>{post.postText}</Card.Description>
@@ -100,26 +101,19 @@ class Timelines extends React.Component {
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra className="time">
-                  <Button as="div" labelPosition="right">
-                    <Button
-                      basic
-                      color="red"
+                    
+                    <Button size="mini"
+                      style={{ marginLeft: '70%', marginTop: 10 }}
                       onClick={() => {
                         this.likePost(post.id, i)
-                      }}
-                      size="mini"
-                    >
-                      <Icon name="heart" />
-                      Like
+                      }}>
+                      <Icon color='red' name="like" />
+                      Likes {post.likes ? post.likes.length : 0}
                     </Button>
-                    <Label as="a" basic color="red" pointing="left">
-                      {post.likes ? post.likes.length : 0}
-                    </Label>
-                  </Button>
-
-                    <Comments post={post.id} comments={post.comments}/>
+                    
                     {/* <Button icon="comment" size="mini" /> */}
                     {/* <Button icon="share" size="mini" /> */}
+                    <Comments post={post.id} comments={post.comments}/>
                   </Card.Content>
                 </Card>
               ))

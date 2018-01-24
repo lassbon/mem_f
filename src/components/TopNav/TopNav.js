@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Menu, Icon, Label, Dropdown } from "semantic-ui-react";
+import { Input, Menu, Icon, Label, Dropdown, Search } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
@@ -8,7 +8,7 @@ import { logout } from "../../actions/auth";
 
 import "./TopNav.css";
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io'
 
 class TopNav extends React.Component {
@@ -16,16 +16,20 @@ class TopNav extends React.Component {
     super(props)
     this.state = {
       notifications : [],
-      friends : []
+      friends       : [],
+      isLoading     : false,
+      value         : null,
+      results       : []
     }
   }
   render() {
+    const { isLoading, value, results } = this.state
     const notification = this.state.notifications
     let notifs
     let friends
     if(notification.length > 0){
       notifs = notification.map((notif) =>(
-                <Dropdown.Item key={notif} as={Link} to={BASEURL+"/api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
+                <Dropdown.Item key={notif} as={Link} to={BASEURL+"api/v1/notifications/"+notif.userId}><strong>{notif.from}</strong> says {notif.message}</Dropdown.Item>
               ))
     }
     else {
@@ -45,10 +49,12 @@ class TopNav extends React.Component {
     return (
       <Menu fixed="top" secondary className="top-menu">
         <Menu.Item>
-          <Input
-            icon="search"
-            placeholder="find a member or project..."
-            className="search-box"
+          <Search
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={this.handleSearchChange}
+            results={results}
+            value={value}
           />
         </Menu.Item>
         <Menu.Menu position="right">
@@ -90,7 +96,7 @@ class TopNav extends React.Component {
     this.fetchFriends()
   }
   fetchNotifications = () => {
-    let url = `${BASEURL}/api/v1/notifications`
+    let url = `${BASEURL}api/v1/notifications`
     this.fetchApi(url)
       .then(function(arr){
         this.setState({
@@ -99,7 +105,7 @@ class TopNav extends React.Component {
       }.bind(this))
   }
   fetchFriends = () => {
-    let url = `${BASEURL}/api/v1/social/requests/${this.props.user.id}`
+    let url = `${BASEURL}api/v1/social/requests/${this.props.user.id}`
     this.fetchApi(url)
       .then(function(arr){
         this.setState({
@@ -114,6 +120,33 @@ class TopNav extends React.Component {
                 Accept: 'application/form-data',
               },
             })
+  }
+  componentWillMount() {
+    this.resetComponent()
+  }
+
+  resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
+
+  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.resetComponent()
+      const { user: { token, id }} = this.props
+
+      axios(`${BASEURL}api/v1/social/postsearch`, {'searchTerm' : value}, {
+        headers: {
+          authorization: token,
+        },
+      }).then(response => {
+        console.log('response', response)
+        this.setState({
+          isLoading: false,
+          result : response.data
+        })
+      })
+    }, 500)
   }
 }
 

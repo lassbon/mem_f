@@ -43,9 +43,10 @@ const sendDetails = (details, id) =>
 
 class ContReg extends Component {
   state = {
-    aReturn: null,
+    annualReturn: null,
     employees: null,
     profits: null,
+    companyCOIUrl: null,
     companyName: null,
     companyAddress: null,
     companyBusiness: null,
@@ -117,15 +118,15 @@ class ContReg extends Component {
       </div>
     ))
 
-    const AnualReturns = returns.map(aReturn => (
-      <div key={`${aReturn} + ${aReturn}`}>
+    const AnualReturns = returns.map(annualReturn => (
+      <div key={`${annualReturn} + ${annualReturn}`}>
         <Form.Field
-          label={aReturn}
+          label={annualReturn}
           control="input"
           type="radio"
-          name="aReturn"
-          value={aReturn}
-          checked={this.state.aReturn === `${aReturn}`}
+          name="annualReturn"
+          value={annualReturn}
+          checked={this.state.annualReturn === `${annualReturn}`}
           onChange={this.handleChange}
         />
         <br />
@@ -187,11 +188,20 @@ class ContReg extends Component {
               />
             </Form.Field>
             <Form.Field
-              style={{ width: '55%', margin: '10px auto', marginBottom: 50 }}
+              style={{ width: '55%', margin: '10px auto'}}
             >
               <input
                 placeholder="Nature of buisness"
                 name="companyBusiness"
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field
+              style={{ width: '55%', margin: '10px auto', marginBottom: 50 }}
+            >
+              <input
+                type='file'
+                name="companyCOIUrl"
                 onChange={this.handleChange}
               />
             </Form.Field>

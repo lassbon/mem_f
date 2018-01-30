@@ -43,7 +43,7 @@ class ContReg4 extends React.Component {
     console.log('cont', { ...this.state.data, token, regState: 4 })
     console.log('alert', {
       id,
-      referrerUrl: 'http://http://acci.herokuapp.com/cont4',
+      referrerUrl: 'http://acci.herokuapp.com/cont4',
       token,
     })
     api.signup

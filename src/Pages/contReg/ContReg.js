@@ -45,7 +45,7 @@ class ContReg extends Component {
   state = {
     annualReturn: null,
     employees: null,
-    profits: null,
+    annualProfit: null,
     companyCOIUrl: null,
     companyName: null,
     companyAddress: null,
@@ -133,15 +133,15 @@ class ContReg extends Component {
       </div>
     ))
 
-    const AnualProfits = returns.map(aProfit => (
-      <div key={`${aProfit} + ${aProfit}`}>
+    const AnualProfits = returns.map(annualProfit => (
+      <div key={`${annualProfit} + ${annualProfit}`}>
         <Form.Field
-          label={aProfit}
+          label={annualProfit}
           control="input"
           type="radio"
-          value={aProfit}
+          value={annualProfit}
           name="profits"
-          checked={this.state.profits === `${aProfit}`}
+          checked={this.state.annualProfit === `${annualProfit}`}
           onChange={this.handleChange}
         />
         <br />

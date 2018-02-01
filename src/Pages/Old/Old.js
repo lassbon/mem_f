@@ -32,6 +32,22 @@ class OldMembers extends React.Component {
     .then(data => this.setState({data}))
     .catch(error => console.error('pasered failed'))
   }
+
+  onSubmit = () => {
+    // console.log(this.state)
+    this.setState({ loading: true })
+    const { history, user: { id, token } } = this.props
+    this.props
+      .update({ ...this.state, token }, history, '/old2', id)
+      .catch(() => {
+        //handle error
+        return Promise.resolve('')
+      })
+      .then(() => {
+        this.setState({ loading: true })
+      })
+    this.setState({ loading: true })
+  }
   
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
 import { withRouter } from 'react-router-dom'
+import api from '../../api'
 
 class ContReg4 extends React.Component {
   state = {
@@ -22,7 +23,7 @@ class ContReg4 extends React.Component {
     // }
   }
 
-  handleChange1 = e => {
+  handleChange = (e, s) => {
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     })
@@ -38,13 +39,40 @@ class ContReg4 extends React.Component {
     console.log(this.state)
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
-    this.props.update(
-      { ...this.state.data, token, regState: 4 },
-      history,
-      '/regmessage',
-      // '/cont5',
-      id
-    )
+
+    console.log('cont', { ...this.state.data, token, regState: 4 })
+    console.log('alert', {
+      id,
+      referrerUrl: 'http://acci.herokuapp.com/cont4',
+      token,
+    })
+    api.signup
+      .contreg({ ...this.state.data, token, regState: 4 }, id)
+      .then(() => {
+        history.push({
+          pathname: '/cont5',
+        })
+      })
+    // .then(() => {
+    //   api.signup.alertReferee({
+    //     id,
+    //     referrerUrl: 'http://http://acci.herokuapp.com/cont4',
+    //     token,
+    //   })
+    // })
+
+    // this.props.update(
+    //   { ...this.state.data, token, regState: 4 },
+    //   history,
+    //   '/regmessage',
+    //   // '/cont5',
+    //   id
+    // ).then(() => {
+    //   api.signup.alertReferee({
+    //     id,
+    //     referrerUrl: 'http://http://acci.herokuapp.com/cont4'
+    //   })
+    // })
     // .catch(() => {
     //   //handle error
     //   return Promise.resolve('')

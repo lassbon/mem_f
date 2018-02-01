@@ -21,6 +21,9 @@ import ContReg6 from './Pages/contReg/ContReg6'
 import Payment from './Pages/Payment'
 import EventPage from './Pages/EventPage'
 import Profile from './Pages/Profile'
+import Confirmation from './components/messages/Message2'
+import OldMembers from './Pages/Old/Old'
+import OldMembers2 from './Pages/Old/Old2'
 
 const App = ({ location }) => (
   <div>
@@ -29,10 +32,13 @@ const App = ({ location }) => (
 
       <RegRoute exact path="/cont" component={ContReg} />
       <RegRoute exact path="/cont2" component={ContReg2} />
+      <GuestRoute exact path="/old" component={OldMembers} />
+      <GuestRoute exact path="/old2" component={OldMembers2} />
       <RegRoute exact path="/cont3" component={ContReg3} />
       <RegRoute exact path="/cont4" component={ContReg4} />
       <RegRoute exact path="/cont5" component={ContReg5} />
       <RegRoute exact path="/cont6" component={ContReg6} />
+      <RegRoute exact path="/confirmation" component={Confirmation} />
       <Route exact path="/regmessage" component={RegMessage} />
       <Route exact path="/payment" component={Payment} />
       <Route exact path="/profile" component={Profile} />

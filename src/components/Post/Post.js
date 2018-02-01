@@ -12,7 +12,8 @@ import {
 
 import api from '../../api'
 import { connect } from 'react-redux'
-import Timelines from '../TimeLine/Timeline'
+import Timelines from '../TimeLine/Timeline';
+import avartar from '../../images/image (4).png'
 
 import './Post.css'
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon'
@@ -86,12 +87,13 @@ class PostStatus extends React.Component {
               <Image
                 size="tiny"
                 circular
-                src="http://cdn.onlinewebfonts.com/svg/img_568656.png"
+                src={avartar}
               />
             </Grid.Column>
             <Grid.Column width={13}>
               <Form onSubmit={this.handleSubmit}>
                 <TextArea
+                  rows='2'
                   autoHeight
                   placeholder="update status..."
                   onChange={this.handleChange}
@@ -110,7 +112,7 @@ class PostStatus extends React.Component {
                   <Button
                     content="Post"
                     style={{
-                      background: '#34495E',
+                      background: 'var(--main-gold)',
                       color: '#FFFFFF',
                       marginLeft: 5,
                     }}

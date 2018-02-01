@@ -49,7 +49,7 @@ class ContReg5 extends React.Component {
           loading: false,
         })
         history.push({
-          pathname: '/cont6',
+          pathname: '/regmessage',
           state: {
             id: id,
           },
@@ -70,39 +70,42 @@ class ContReg5 extends React.Component {
       <React.Fragment>
         <Grid
           textAlign="center"
-          style={{ height: '100%' }}
+          style={{ height: '100%', marginBottom: 50 }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Card style={{ padding: '20px' }}>
+            <Card style={{ padding: '20px', width: '100%' }}>
               <h3>
                 (A registration fee is required to cover the cost of the
                 verification process)
               </h3>
+              
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
                 <strong>N25,000</strong>
               </Grid.Column>
-              <PaystackComponent
-                variablename="Verfication "
-                amount={2500000}
-                callback={this.changeToNew}
-                email={email}
-                metadata={{
-                  custom_fields: [
-                    {
-                      display_name: 'Payment For',
-                      variable_name: 'registration',
-                      value: 'registration',
-                    },
-                    {
-                      display_name: 'Membership ID',
-                      variable_name: 'membership_id',
-                      value: id,
-                    },
-                  ],
-                }}
-              />
+              <div style={{margin: '10px auto', marginTop: 40}}>
+                <PaystackComponent
+                  variablename="Verfication "
+                  amount={2500000}
+                  callback={this.changeToNew}
+                  email={email}
+                  metadata={{
+                    custom_fields: [
+                      {
+                        display_name: 'Payment For',
+                        variable_name: 'registration',
+                        value: 'registration',
+                      },
+                      {
+                        display_name: 'Membership ID',
+                        variable_name: 'membership_id',
+                        value: id,
+                      },
+                    ],
+                  }}
+                />
+              </div>
               {this.state.loading && (
                 <Segment>
                   <Dimmer active inverted>

@@ -5,13 +5,32 @@ import { Container, Header, Form, Grid,Button, Icon } from 'semantic-ui-react'
 
 class OldMembers extends React.Component {
 
-  state = {
-    companyName: null,
-    membershipId: null,
-    membershipPlan: null,
-    email: null,
-    companyPhone: null,
-    loading: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: [],
+      loading: false,
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData() {
+    fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb')
+    .then(res => res.json())
+    .then(parsedJSON => parsedJSON.results.map(user => (
+      {
+        companyName: `${user.login.username}`,
+        email: `${user.email}`,
+        membershipId: `${user.id.value}`,
+        membershipPlan: `gold`,
+        companyPhone: `${user.phone}`
+      }
+    )))
+    .then(data => this.setState({data}))
+    .catch(error => console.error('pasered failed'))
   }
   
   handleChange = e => {
@@ -41,6 +60,7 @@ class OldMembers extends React.Component {
               <input
                 placeholder="Company's Name"
                 name="companyName"
+                disabled
                 onChange={this.handleChange}
               />
             </Form.Field>
@@ -48,6 +68,7 @@ class OldMembers extends React.Component {
               <input
                 placeholder="Membership Id"
                 name="membershipId"
+                disabled
                 onChange={this.handleChange}
               />
             </Form.Field>
@@ -55,6 +76,7 @@ class OldMembers extends React.Component {
               <input
                 placeholder="Membership Type"
                 name="membershipPlan"
+                disabled
                 onChange={this.handleChange}
               />
             </Form.Field>
@@ -64,6 +86,7 @@ class OldMembers extends React.Component {
               <input
                 placeholder="Email"
                 type="email"
+                disabled
                 name="email"
                 onChange={this.handleChange}
               />

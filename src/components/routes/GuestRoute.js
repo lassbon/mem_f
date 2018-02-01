@@ -7,7 +7,7 @@ const registrationStagesPaths = [
 ]
 
 const registrationStagesDesc = [
-  'Knowing you',
+  'Details',
   'Others',
 ]
 

@@ -14,15 +14,16 @@ const registrationStages = [
 
 class OldmembersPage extends React.Component {
   submit = data =>
-    this.props.oldMem(data).then(user => {
-      const { history } = this.props
-      const { regState } = user
-      console.log(regState, registrationStages[regState])
-      regState > 2
-        ? history.push('/app')
-        : history.push(registrationStages[regState])
-      // this.props.history.push('/app')
-    })
+    this.props.oldMem(data)
+    // .then(user => {
+    //   const { history } = this.props
+    //   const { regState } = user
+    //   console.log(regState, registrationStages[regState])
+    //   regState > 2
+    //     ? history.push('/app')
+    //     : history.push(registrationStages[regState])
+    //   // this.props.history.push('/app')
+    // })
 
   render() {
     return (

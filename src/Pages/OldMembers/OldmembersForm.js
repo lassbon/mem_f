@@ -8,10 +8,9 @@ class OldmembersForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
+      
         membershipId: "",
         password: "",
-      },
       errors: {},
       loading: false
     };
@@ -30,11 +29,12 @@ class OldmembersForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props.submit(this.state).catch(error => {
-        if (error.response) {
-          this.setState({ errors: error.response.data, loading: false });
-        }
-      });
+      this.props.submit(this.state)
+      // .catch(error => {
+      //   if (error.response) {
+      //     this.setState({ errors: error.response.data, loading: false });
+      //   }
+      // });
     }
   }
 

@@ -141,7 +141,7 @@ const Profile = (props) => {
                         </Form.Field>
                         <Form.Field>
                           <label>Company email</label>
-                          <input disabled onChange={onChange} placeholder="company email" name="email" value={props.email} />
+                          <Form.Input disabled onChange={onChange} placeholder="company email" name="email" value={props.email} />
                         </Form.Field>
                         <Form.Field>
                           <label>Company Address</label>

@@ -16,6 +16,19 @@ export const userRegistered = payload => ({
   payload,
 })
 
+export const oldMem = (data, history) => dispatch => {
+  api.oldMem.reg(data).then(res => {
+    // dispatch(authorizeUser({ email: data.email, password: data.password }))
+    console.log('success', res)
+    history.push({
+      pathname: '/old',
+      state: {
+        id: res.data.id,
+      },
+    })
+  })
+}
+
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(res => {
     console.log(res)

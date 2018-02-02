@@ -4,18 +4,14 @@ import {
   Tab,
   Grid,
   Image,
-  Label,
-  Segment,
   Card,
-  Icon,
-  Button,
 } from 'semantic-ui-react'
 import {
   fetchCurrentProjects,
   fetchCompletedProjects,
 } from '../actions/projects'
 // import { object } from "../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types";
-import PaystackComponent from '../components/PaystackComponent'
+// import PaystackComponent from '../components/PaystackComponent'
 import './project.css'
 
 class Project extends React.Component {
@@ -41,7 +37,7 @@ class Project extends React.Component {
   }
 
   render() {
-    const { user: { email, id } } = this.props
+    const { user: { id } } = this.props
 
     const currentcount = this.state.currentproject.length
     const completedcount = this.state.completedproject.length

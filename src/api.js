@@ -52,6 +52,22 @@ export default {
   //   create: book =>
   //     axios.post(`${BASEURL}api/v1/social/post/`, { post }).then(res => res.data.post)
   // }
+  oldMem: {
+    check: data =>
+      axios.post(`${BASEURL}api/v1/oldmember`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data'
+        },
+      }),
+    contLogin: (data, id) => 
+      axios.put(`${BASEURL}api/v1/oldmember/${id}`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
+      }),
+  },
   signup: {
     reg: data =>
       axios.post(`${BASEURL}api/v1/user`, data, {

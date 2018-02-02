@@ -2,44 +2,41 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
 import {
-  Container,
   Grid,
-  Image,
-  Segment,
   Form,
   Button,
   Icon,
 } from 'semantic-ui-react'
 
-import logo from '../../images/ACCIHD-LOGO.png'
+// import logo from '../../images/ACCIHD-LOGO.png'
 import './cont.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
-import { contReg } from '../../actions/signupCont'
+// import { contReg } from '../../actions/signupCont'
 
-function getSteps() {
-  return [
-    'Knowing You',
-    'Category',
-    'Details',
-    'Referrals',
-    'Reg Payment',
-    'Membership Payment',
-  ]
-}
+// function getSteps() {
+//   return [
+//     'Knowing You',
+//     'Category',
+//     'Details',
+//     'Referrals',
+//     'Reg Payment',
+//     'Membership Payment',
+//   ]
+// }
 
 // const BASEURL = 'http://localhost:1337/'
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-const sendDetails = (details, id) =>
-  axios.put(`${BASEURL}api/v1/user/${id}`, details, {
-    headers: {
-      'Content-Type': 'application/form-data',
-      Accept: 'application/form-data',
-    },
-  })
+// const sendDetails = (details, id) =>
+//   axios.put(`${BASEURL}api/v1/user/${id}`, details, {
+//     headers: {
+//       'Content-Type': 'application/form-data',
+//       Accept: 'application/form-data',
+//     },
+//   })
 
 class ContReg extends Component {
   state = {
@@ -133,15 +130,15 @@ class ContReg extends Component {
       </div>
     ))
 
-    const AnualProfits = returns.map(annualProfit => (
-      <div key={`${annualProfit} + ${annualProfit}`}>
+    const AnualProfits = returns.map(AnualProfits => (
+      <div key={`${AnualProfits} + ${AnualProfits}`}>
         <Form.Field
-          label={annualProfit}
+          label={AnualProfits}
           control="input"
           type="radio"
-          value={annualProfit}
+          value={AnualProfits}
           name="profits"
-          checked={this.state.annualProfit === `${annualProfit}`}
+          checked={this.state.AnualProfits === `${AnualProfits}`}
           onChange={this.handleChange}
         />
         <br />

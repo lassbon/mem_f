@@ -9,10 +9,9 @@ import {
   Dimmer,
   Loader,
   Segment,
-  Label,
 } from 'semantic-ui-react'
 // import { getPostData } from '../../utils/membership-api'
-import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
+// import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
 import Comments from '../Comments/Comments'

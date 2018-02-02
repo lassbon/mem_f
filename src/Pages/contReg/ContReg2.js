@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import {
   Tab,
-  Header,
-  Message,
-  Image,
   Dimmer,
   Loader,
   Segment,
   Divider,
-  Card,
   Icon,
   Grid,
 } from 'semantic-ui-react'
@@ -21,156 +17,156 @@ import { connect } from 'react-redux'
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-const panes = [
-  {
-    menuItem: 'CATEGORY A - GOLD MEMBERS',
-    render: () => (
-      <Tab.Pane
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
-        <Message
-          color="orange"
-          icon="checkmark"
-          header="N350,000/N50,000"
-          content="recomended"
-        />
-        <h3>BENEFITS</h3>
-        <p>Can vote and be voted for</p>
-        <p>
-          Advocacy roles on company’s related issues with the government
-          Priority
-        </p>
-        <p>
-          provision during all chamber’s activities/services as the case may be
-        </p>
-        <p>
-          20 per cent discount on space participation at Annual Abuja
-          International
-        </p>
-        <p>
-          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
-          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
-        </p>
-        <p>
-          Direct link to company’s website from the official chamber’s webpage.
-        </p>
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: 'CATEGORY B - SILVER MEMBERS',
-    render: () => (
-      <Tab.Pane
-        style={{
-          textAlign: 'left',
-        }}
-      >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
-        <Message header="N350,000/N50,000" />
-        <h3>BENEFITS</h3>
-        <p>Can vote and be voted for</p>
-        <p>
-          Advocacy roles on company’s related issues with the government
-          Priority
-        </p>
-        <p>
-          provision during all chamber’s activities/services as the case may be
-        </p>
-        <p>
-          20 per cent discount on space participation at Annual Abuja
-          International
-        </p>
-        <p>
-          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
-          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
-        </p>
-        <p>
-          Direct link to company’s website from the official chamber’s webpage.
-        </p>
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: 'CATEGORY C - BRONZE MEMBERS',
-    render: () => (
-      <Tab.Pane
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        <Message header="N350,000/N50,000" color="yellow" />
-        <h3>BENEFITS</h3>
-        <p>Can vote and be voted for</p>
-        <p>
-          Advocacy roles on company’s related issues with the government
-          Priority
-        </p>
-        <p>
-          provision during all chamber’s activities/services as the case may be
-        </p>
-        <p>
-          20 per cent discount on space participation at Annual Abuja
-          International
-        </p>
-        <p>
-          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
-          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
-        </p>
-        <p>
-          Direct link to company’s website from the official chamber’s webpage.
-        </p>
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: 'CATEGORY D - BRASS MEMBERS',
-    render: () => (
-      <Tab.Pane
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        <Image
-          style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
-          verticalAlign="middle"
-          src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
-        />
-        <Message header="N350,000/N50,000" color="brown" />
-        <h3>BENEFITS</h3>
-        <p>Can vote and be voted for</p>
-        <p>
-          Advocacy roles on company’s related issues with the government
-          Priority
-        </p>
-        <p>
-          provision during all chamber’s activities/services as the case may be
-        </p>
-        <p>
-          20 per cent discount on space participation at Annual Abuja
-          International
-        </p>
-        <p>
-          Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
-          Cufflinks, Tie Pins, Customised Chamber’s Shirt)
-        </p>
-        <p>
-          Direct link to company’s website from the official chamber’s webpage.
-        </p>
-      </Tab.Pane>
-    ),
-  },
-]
+// const panes = [
+//   {
+//     menuItem: 'CATEGORY A - GOLD MEMBERS',
+//     render: () => (
+//       <Tab.Pane
+//         style={{
+//           textAlign: 'center',
+//         }}
+//       >
+//         <Image
+//           style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
+//           verticalAlign="middle"
+//           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+//         />
+//         <Message
+//           color="orange"
+//           icon="checkmark"
+//           header="N350,000/N50,000"
+//           content="recomended"
+//         />
+//         <h3>BENEFITS</h3>
+//         <p>Can vote and be voted for</p>
+//         <p>
+//           Advocacy roles on company’s related issues with the government
+//           Priority
+//         </p>
+//         <p>
+//           provision during all chamber’s activities/services as the case may be
+//         </p>
+//         <p>
+//           20 per cent discount on space participation at Annual Abuja
+//           International
+//         </p>
+//         <p>
+//           Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+//           Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+//         </p>
+//         <p>
+//           Direct link to company’s website from the official chamber’s webpage.
+//         </p>
+//       </Tab.Pane>
+//     ),
+//   },
+//   {
+//     menuItem: 'CATEGORY B - SILVER MEMBERS',
+//     render: () => (
+//       <Tab.Pane
+//         style={{
+//           textAlign: 'left',
+//         }}
+//       >
+//         <Image
+//           style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
+//           verticalAlign="middle"
+//           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+//         />
+//         <Message header="N350,000/N50,000" />
+//         <h3>BENEFITS</h3>
+//         <p>Can vote and be voted for</p>
+//         <p>
+//           Advocacy roles on company’s related issues with the government
+//           Priority
+//         </p>
+//         <p>
+//           provision during all chamber’s activities/services as the case may be
+//         </p>
+//         <p>
+//           20 per cent discount on space participation at Annual Abuja
+//           International
+//         </p>
+//         <p>
+//           Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+//           Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+//         </p>
+//         <p>
+//           Direct link to company’s website from the official chamber’s webpage.
+//         </p>
+//       </Tab.Pane>
+//     ),
+//   },
+//   {
+//     menuItem: 'CATEGORY C - BRONZE MEMBERS',
+//     render: () => (
+//       <Tab.Pane
+//         style={{
+//           textAlign: 'center',
+//         }}
+//       >
+//         <Message header="N350,000/N50,000" color="yellow" />
+//         <h3>BENEFITS</h3>
+//         <p>Can vote and be voted for</p>
+//         <p>
+//           Advocacy roles on company’s related issues with the government
+//           Priority
+//         </p>
+//         <p>
+//           provision during all chamber’s activities/services as the case may be
+//         </p>
+//         <p>
+//           20 per cent discount on space participation at Annual Abuja
+//           International
+//         </p>
+//         <p>
+//           Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+//           Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+//         </p>
+//         <p>
+//           Direct link to company’s website from the official chamber’s webpage.
+//         </p>
+//       </Tab.Pane>
+//     ),
+//   },
+//   {
+//     menuItem: 'CATEGORY D - BRASS MEMBERS',
+//     render: () => (
+//       <Tab.Pane
+//         style={{
+//           textAlign: 'center',
+//         }}
+//       >
+//         <Image
+//           style={{ marginBottom: 20, marginLeft: '10%', marginTop: 30 }}
+//           verticalAlign="middle"
+//           src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
+//         />
+//         <Message header="N350,000/N50,000" color="brown" />
+//         <h3>BENEFITS</h3>
+//         <p>Can vote and be voted for</p>
+//         <p>
+//           Advocacy roles on company’s related issues with the government
+//           Priority
+//         </p>
+//         <p>
+//           provision during all chamber’s activities/services as the case may be
+//         </p>
+//         <p>
+//           20 per cent discount on space participation at Annual Abuja
+//           International
+//         </p>
+//         <p>
+//           Trade Fair Glass/ Crystal Membership certificate Freebies ( Scarf,
+//           Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+//         </p>
+//         <p>
+//           Direct link to company’s website from the official chamber’s webpage.
+//         </p>
+//       </Tab.Pane>
+//     ),
+//   },
+// ]
 
 const state = { activeIndex: 0 }
 

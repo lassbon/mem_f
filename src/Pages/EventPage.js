@@ -3,12 +3,7 @@ import { connect } from 'react-redux'
 import {
   Tab,
   Grid,
-  Image,
-  Label,
-  Segment,
   Card,
-  Icon,
-  Button,
 } from 'semantic-ui-react'
 import { fetchCompletedEvent, fetchCurrentEvent } from '../actions/events'
 
@@ -35,16 +30,16 @@ class Events extends React.Component {
   }
 
   render() {
-    const extra = (
-      <div className="ui three buttons">
-        <Button size="mini">
-          <Icon name="like" />
-          20
-        </Button>
-        <Button icon="comment" size="mini" />
-        <Button icon="share" size="mini" />
-      </div>
-    )
+    // const extra = (
+    //   <div className="ui three buttons">
+    //     <Button size="mini">
+    //       <Icon name="like" />
+    //       20
+    //     </Button>
+    //     <Button icon="comment" size="mini" />
+    //     <Button icon="share" size="mini" />
+    //   </div>
+    // )
     const currentcount = this.state.currentEvent.length
     const completedcount = this.state.completedEvent.length
     const currentEventCards = this.state.currentEvent.reduce((co, ev, i) => {

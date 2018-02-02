@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import LandingPage from './Pages/LandingPage'
 import LoginPage from './Pages/LoginPage/LoginPage'
-import Home from './Pages/Home/Home'
+// import Home from './Pages/Home/Home'
 import UserRoute from './components/routes/UserRoute'
 import GuestRoute from './components/routes/GuestRoute'
 import RegRoute from './components/routes/RegRoute'
@@ -24,6 +24,7 @@ import Profile from './Pages/Profile'
 import Confirmation from './components/messages/Message2'
 import OldMembers from './Pages/Old/Old'
 import OldMembers2 from './Pages/Old/Old2'
+import OldmembersPage from './Pages/OldMembers/OldmembersPage';
 
 const App = ({ location }) => (
   <div>
@@ -52,6 +53,7 @@ const App = ({ location }) => (
         component={ForgotPassword}
       />
       <Route location={location} path="/login" exact component={LoginPage} />
+      <Route location={location} path="/oldmem" exact component={OldmembersPage} />
       <UserRoute location={location} path="/app" component={Main} />
     </Switch>
   </div>

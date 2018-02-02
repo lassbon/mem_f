@@ -1,9 +1,7 @@
 import React from 'react'
 import {
   Segment,
-  Image,
   Grid,
-  Button,
   Dimmer,
   Loader,
   Icon,

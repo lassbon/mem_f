@@ -1,9 +1,7 @@
 import React from 'react'
 import {
   Card,
-  Image,
   Grid,
-  Button,
   Dimmer,
   Loader,
   Segment,
@@ -58,7 +56,7 @@ class ContReg5 extends React.Component {
   }
 
   render() {
-    const { user: { id, token, email } } = this.props
+    const { user: { id, email } } = this.props
     // const { location: { state }, history } = this.props
     // console.log(this.props)
     // if (state == null || state.id == null) {

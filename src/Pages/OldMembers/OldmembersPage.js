@@ -1,28 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { login } from '../../actions/auth'
+import { oldMem } from '../../actions/auth'
 import { Message, Grid, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-import LoginForm from './LoginForm'
+import OldmembersForm from './OldmembersForm'
 
 const registrationStages = [
-  '/cont',
-  '/cont2',
-  '/cont3',
-  '/cont4',
-  '/cont5',
-  '/cont6',
+  '/old',
+  '/old2',
 ]
 
-class LoginPage extends React.Component {
+class OldmembersPage extends React.Component {
   submit = data =>
-    this.props.login(data).then(user => {
+    this.props.oldMem(data).then(user => {
       const { history } = this.props
       const { regState } = user
       console.log(regState, registrationStages[regState])
-      regState > 5
+      regState > 2
         ? history.push('/app')
         : history.push(registrationStages[regState])
       // this.props.history.push('/app')
@@ -42,7 +38,7 @@ class LoginPage extends React.Component {
               verticalAlign="middle"
               src="http://www.accinigeria.com/wp-content/uploads/2017/10/ACCIHD2-2.png"
             />
-            <LoginForm submit={this.submit} />
+            <OldmembersForm submit={this.submit} />
             <Message>
               New to us?{' '}
               <Link to="/signup" style={{ color: 'var(--main-blue)' }}>
@@ -52,9 +48,6 @@ class LoginPage extends React.Component {
 
             <Link to="/forgotpassword" style={{ color: 'var(--main-blue)' }}>
               forgot password?
-            </Link><br />
-            <Link to="/oldmem" style={{ color: 'var(--main-blue)' }}>
-              Old members click here..
             </Link>
           </Grid.Column>
         </Grid>
@@ -63,11 +56,11 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage.propTypes = {
+OldmembersPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  login: PropTypes.func.isRequired,
+  oldMem: PropTypes.func.isRequired,
 }
 
-export default connect(null, { login })(LoginPage)
+export default connect(null, { oldMem })(OldmembersPage)

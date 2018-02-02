@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Input, Menu, Icon, Label, Dropdown, Button, Search } from "semantic-ui-react";
+import React from "react";
+import {Menu, Icon, Label, Dropdown, Button, Search } from "semantic-ui-react";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'

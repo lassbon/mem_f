@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 import {
   Tab,
   Grid,
-  Image,
   Label,
   Segment,
   Card,
-  Icon,
   Button,
 } from 'semantic-ui-react'
 import axios from 'axios'
@@ -24,7 +22,7 @@ class Payment extends Component {
     }],
   }
   renewMembership = () => {
-    const { user: { token, id }, post } = this.props
+    // const { user: { token, id }, post } = this.props
     console.log("Came to renew memberships")
     // axios(`${BASEURL}api/v1/userpayments/memberships/${id}`, {
     //   headers: {

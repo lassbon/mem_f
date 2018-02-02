@@ -9,7 +9,7 @@ class OldmembersForm extends React.Component {
     super(props);
     this.state = {
       
-        membershipId: "",
+      membershipId: "",
         password: "",
       errors: {},
       loading: false

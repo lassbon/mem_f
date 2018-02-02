@@ -43,7 +43,6 @@ class ContReg extends Component {
     annualReturn: null,
     employees: null,
     annualProfit: null,
-    companyCOIUrl: null,
     companyName: null,
     companyAddress: null,
     companyBusiness: null,
@@ -130,15 +129,15 @@ class ContReg extends Component {
       </div>
     ))
 
-    const AnualProfits = returns.map(AnualProfits => (
-      <div key={`${AnualProfits} + ${AnualProfits}`}>
+    const annualProfit = returns.map(annualProfit => (
+      <div key={`${annualProfit} + ${annualProfit}`}>
         <Form.Field
-          label={AnualProfits}
+          label={annualProfit}
           control="input"
           type="radio"
-          value={AnualProfits}
-          name="profits"
-          checked={this.state.AnualProfits === `${AnualProfits}`}
+          value={annualProfit}
+          name="annualProfit"
+          checked={this.state.annualProfit === `${annualProfit}`}
           onChange={this.handleChange}
         />
         <br />
@@ -193,15 +192,7 @@ class ContReg extends Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
-            <Form.Field
-              style={{ width: '55%', margin: '10px auto', marginBottom: 50 }}
-            >
-              <input
-                type='file'
-                name="companyCOIUrl"
-                onChange={this.handleChange}
-              />
-            </Form.Field>
+            
             <Grid style={{ width: '90%', margin: '0 auto' }}>
               <Grid.Column width={5}>
                 <h3 style={{ color: '#656768' }}>Number of Employees</h3>
@@ -213,7 +204,7 @@ class ContReg extends Component {
               </Grid.Column>
               <Grid.Column width={5}>
                 <h3 style={{ color: '#656768' }}>Annual Profits</h3>
-                {AnualProfits}
+                {annualProfit}
               </Grid.Column>
             </Grid>
             <Button

@@ -13,6 +13,7 @@ import Discussions from '../Pages/Discussion'
 import Payment from '../Pages/Payment'
 import EventPage from '../Pages/EventPage'
 import MainDis from '../Pages/MainDis';
+import MainProd from '../Pages/MainProd';
 
 const Main = ({ match }) => (
   <React.Fragment>
@@ -30,6 +31,7 @@ const Main = ({ match }) => (
         <Route exact path={`${match.path}/discuss`} component={Discussions} />
         <Route exact path={`${match.path}/discuss/:name`} component={MainDis} />
         <Route exact path={`${match.path}/payment`} component={Payment} />
+        <Route exact path={`${match.path}/project/:name`} component={MainProd} />
         <Redirect to={`${match.url}`} />
       </Switch>
     </main>

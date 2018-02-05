@@ -6,6 +6,7 @@ import {
   Image,
   Card,
 } from 'semantic-ui-react'
+import { Link, Redirect } from 'react-router-dom'
 import {
   fetchCurrentProjects,
   fetchCompletedProjects,
@@ -20,6 +21,7 @@ class Project extends React.Component {
     this.state = {
       currentproject: this.props.currentProjectList || [],
       completedproject: this.props.completedProjectList || [],
+      redirect: false,
     }
   }
 
@@ -37,13 +39,17 @@ class Project extends React.Component {
   }
 
   render() {
-    const { user: { id } } = this.props
-
+    const { user: { id }, match } = this.props
+    const {redirect} = this.state
+    if (redirect) {
+      return <Redirect to='/app/project' />;
+    }
     const currentcount = this.state.currentproject.length
     const completedcount = this.state.completedproject.length
     const projects = this.state.currentproject.map(jobs => (
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
+        <Link to={`${match.path}/jjj`}>
           <Card style={{ width: '100%' }}>
             <Card.Content>
               <Image size="big" src={jobs.banner} />
@@ -89,6 +95,7 @@ class Project extends React.Component {
                 /> */}
             
           </Card>
+        </Link>
         </Card.Group>
       </Tab.Pane>
     ))
@@ -96,15 +103,15 @@ class Project extends React.Component {
     const completed = this.state.completedproject.map(jobs => (
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
+          <Link to={`${match.path}/jjj`}>
           <Card style={{ width: '100%' }}>
             <Card.Content>
               <Image size="big" src={jobs.banner} />
               <Card.Meta>{new Date(jobs.createdAt).toDateString()}</Card.Meta>
               <Card.Description>{jobs.description}</Card.Description>
             </Card.Content>
-            
-            
           </Card>
+        </Link>
         </Card.Group>
       </Tab.Pane>
     ))

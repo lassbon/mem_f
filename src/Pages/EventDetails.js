@@ -205,6 +205,31 @@ class EventDetails extends Component {
                     marginBottom: '0.5rem',
                   }}
                 >
+                  Organizer:
+                </h5>
+                <p
+                  style={{
+                    color: '#656565',
+                  }}
+                >
+                  {' '}
+                  Abuja Chamber of commerce and Industry
+                </p>
+              </div>
+              <div
+                style={{
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
+                }}
+              >
+                <h5
+                  style={{
+                    fontWeight: 900,
+                    margin: '0px',
+                    marginBottom: '0.5rem',
+                  }}
+                >
                   Cost:
                 </h5>
                 <p> N50,000</p>

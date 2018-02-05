@@ -15,6 +15,8 @@ import EventPage from '../Pages/EventPage'
 import MainDis from '../Pages/MainDis'
 import EventDetails from '../Pages/EventDetails'
 
+import MainProd from '../Pages/MainProd'
+
 const Main = ({ match }) => (
   <React.Fragment>
     <TopNav />
@@ -36,6 +38,11 @@ const Main = ({ match }) => (
           component={EventDetails}
         />
         <Route exact path={`${match.path}/payment`} component={Payment} />
+        <Route
+          exact
+          path={`${match.path}/project/:name`}
+          component={MainProd}
+        />
         <Redirect to={`${match.url}`} />
       </Switch>
     </main>

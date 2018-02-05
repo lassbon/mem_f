@@ -1,7 +1,15 @@
 import React from 'react'
 import { Advertisement } from 'semantic-ui-react';
-
 import './Advert.css';
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
+
+// class Advert extends React.Component {
+//   constructor() {
+
+//   }
+// }
 
 const Advert = () => (
   <div style={{marginLeft: '75vw'}}>

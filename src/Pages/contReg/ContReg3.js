@@ -31,6 +31,7 @@ class ContReg3 extends React.Component {
       companyRepEmail2: null,
       companyRepPassportUrl2: null,
       companyRepCVUrl2: null,
+      companyCOIUrl: null,
     },
   }
 
@@ -169,12 +170,26 @@ class ContReg3 extends React.Component {
                 </label>
                 <Form.Input
                   type="file"
-                  name="companyRepCVUrl2"
+                  name="companyCOIUrl"
                   onChange={this.handleChange}
                 />
               </Form.Field>
             </Grid.Column>
           </Grid>
+          <Grid centered columns={2}>
+                <Grid.Column>
+                <Form.Field>
+                  <label style={{textAlign: 'center'}}>
+                    Upload CAC document
+                </label>
+                  <Form.Input
+                    type="file"
+                    name="companyRepCVUrl2"
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                </Grid.Column>
+              </Grid>
           <div style={{ marginTop: 30 }}>
             <Button to="/cont2" as={Link}>
               Back

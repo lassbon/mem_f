@@ -98,7 +98,7 @@ class Comments extends Component {
                   <React.Fragment>
                   <Comment>
                     <Comment.Content>
-                      <Comment.Author as='a'>{com.owner}</Comment.Author>
+                      <Comment.Author as='a'>{com.companyName}</Comment.Author>
                       <Comment.Text>{com.comment}</Comment.Text>
                     </Comment.Content>
                   </Comment>

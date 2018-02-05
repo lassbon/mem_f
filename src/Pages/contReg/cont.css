@@ -1,38 +1,35 @@
 svg {
-  fill: #D5C67A !important;
-  height: 50px
+  fill: #d5c67a !important;
+  height: 50px;
 }
 
-.ui.segment
-{
+.ui.segment {
   background: #fff;
 }
 
-body
-{
-  background: #EDEEE97A;
+body {
+  background: #edeee97a;
 }
 
-img.ui.image {
+/* img.ui.image {
   display: block;
   height: 70px;
-}
+} */
 
-.category_item
-{
+.category_item {
   padding: 1.4rem;
   background: #fff;
   border: 1px solid #ddd;
   color: #828282;
   min-width: 250px;
-  margin:5px;
-  margin-top:2.2rem;
+  margin: 5px;
+  margin-top: 2.2rem;
   cursor: pointer;
   font-weight: 600;
   border-left: 10px solid gold;
 }
 
-.category_item.active{
+.category_item.active {
   background: #eee;
 }
 
@@ -40,6 +37,13 @@ img.ui.image {
   background: #e5e4e2 !important
 } */
 
-#root > div > div > div:nth-child(2) > div > div.four.wide.column > div > a:nth-child(2) {
-  color: gold
+#root
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > div.four.wide.column
+  > div
+  > a:nth-child(2) {
+  color: gold;
 }

@@ -1,11 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  Tab,
-  Grid,
-  Card,
-} from 'semantic-ui-react'
+import { Tab, Grid, Card } from 'semantic-ui-react'
 import { fetchCompletedEvent, fetchCurrentEvent } from '../actions/events'
+import { Link } from 'react-router-dom'
 
 class Events extends React.Component {
   constructor(props) {
@@ -45,13 +42,14 @@ class Events extends React.Component {
     const currentEventCards = this.state.currentEvent.reduce((co, ev, i) => {
       co[Math.floor(i / 2)] = co[Math.floor(i / 2)] || []
       co[Math.floor(i / 2)].push(
-        <Card
-          image={ev.banner}
-          header={ev.title}
-          meta={ev.date}
-          description={ev.description}
-          
-        />
+        <Link to={`events/${ev.id}`} style={{ display: 'block' }}>
+          <Card
+            image={ev.banner}
+            header={ev.title}
+            meta={ev.date}
+            description={ev.description}
+          />
+        </Link>
       )
       return co
     }, [])
@@ -60,13 +58,14 @@ class Events extends React.Component {
       (co, ev, i) => {
         co[Math.floor(i / 2)] = co[Math.floor(i / 2)] || []
         co[Math.floor(i / 2)].push(
-          <Card
-            image={ev.banner}
-            header={ev.title}
-            meta={ev.date}
-            description={ev.description}
-            
-          />
+          <Link to={`events/${ev.id}`}>
+            <Card
+              image={ev.banner}
+              header={ev.title}
+              meta={ev.date}
+              description={ev.description}
+            />
+          </Link>
         )
         return co
       },
@@ -74,9 +73,9 @@ class Events extends React.Component {
     )
 
     const events = currentEventCards.map(ev => (
-      <Tab.Pane attached={false}>
-        <Card.Group className="TimeLine">{ev}</Card.Group>
-      </Tab.Pane>
+      // <Tab.Pane attached={false}>
+      <Card.Group className="TimeLine">{ev}</Card.Group>
+      // {/* </Tab.Pane> */}
     ))
 
     const completed = completedEventCards.map(ev => (

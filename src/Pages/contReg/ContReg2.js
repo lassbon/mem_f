@@ -170,32 +170,32 @@ const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 const state = { activeIndex: 0 }
 
-const benefits = [
-  `
-Can vote and be voted for.
-Priority provision during chamber activities.
-Advocacy roles on related issues on behalf of the company with government.
-Entitled to first advantage on ALL chamber’s activities/services as the case may be.
-20 per cent discount on space participation at the Annual Abuja International Trade Fair
-or/and on any Foreign Trade Missions.
-Glass/ Crystal Membership Certificate.
-Right of Choice on selected chamber’s activities/ programmes.
-Freebies (Scarf, Cufflinks, Tie Pins, Customised Chamber’s Shirt).
-Direct link to company’s website from the official chamber’s webpage.`,
-  `
-Can vote and be voted for.
-Advocacy roles on company’s related issues with the government.
-Priority provision during ALL chamber’s activities/services as the case may be.
-20 per cent discount on space participation at Annual Abuja International Trade Fair
-Glass/ Crystal Membership certificate
-Freebies ( Scarf, Cufflinks, Tie Pins, Customised Chamber’s Shirt)
-Direct link to company’s website from the official chamber’s webpage.`,
-  `Can vote but cannot be voted for.
-Special provision during chamber’s activities/ services as the case may be.
-10 per cent discount on space participation at Annual Abuja International Trade Fair.
-Membership Certificate.
-Freebies (Scarf, Cufflinks, Tie Pins and Customised Chamber’s Shirt).`,
-]
+// const benefits = [
+//   `
+// Can vote and be voted for.
+// Priority provision during chamber activities.
+// Advocacy roles on related issues on behalf of the company with government.
+// Entitled to first advantage on ALL chamber’s activities/services as the case may be.
+// 20 per cent discount on space participation at the Annual Abuja International Trade Fair
+// or/and on any Foreign Trade Missions.
+// Glass/ Crystal Membership Certificate.
+// Right of Choice on selected chamber’s activities/ programmes.
+// Freebies (Scarf, Cufflinks, Tie Pins, Customised Chamber’s Shirt).
+// Direct link to company’s website from the official chamber’s webpage.`,
+//   `
+// Can vote and be voted for.
+// Advocacy roles on company’s related issues with the government.
+// Priority provision during ALL chamber’s activities/services as the case may be.
+// 20 per cent discount on space participation at Annual Abuja International Trade Fair
+// Glass/ Crystal Membership certificate
+// Freebies ( Scarf, Cufflinks, Tie Pins, Customised Chamber’s Shirt)
+// Direct link to company’s website from the official chamber’s webpage.`,
+//   `Can vote but cannot be voted for.
+// Special provision during chamber’s activities/ services as the case may be.
+// 10 per cent discount on space participation at Annual Abuja International Trade Fair.
+// Membership Certificate.
+// Freebies (Scarf, Cufflinks, Tie Pins and Customised Chamber’s Shirt).`,
+// ]
 
 // const getDescription =
 
@@ -244,7 +244,7 @@ class ContReg2 extends Component {
                 </h2>
                 <h3>BENEFITS</h3>
                 <div style={{ padding: '1rem' }}>
-                  {benefits[i]
+                  {/* {benefits[i]
                     .split('\n')
                     .filter(v => v)
                     .map(benefit => (
@@ -255,7 +255,7 @@ class ContReg2 extends Component {
                         </div>
                         <Divider />
                       </React.Fragment>
-                    ))}
+                    ))} */}
                 </div>
               </div>
             </React.Fragment>

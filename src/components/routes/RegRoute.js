@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import RegLayout from '../RegLayout'
 
 const registrationStagesPaths = [
@@ -73,7 +74,8 @@ const RegRoute = ({ component: Component, path }) => (
                     flexDirection: 'column',
                   }}
                 >
-                  <div
+                  <Link
+                    to={registrationStagesPaths[i]}
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
@@ -95,7 +97,7 @@ const RegRoute = ({ component: Component, path }) => (
                   >
                     {' '}
                     {i + 1}{' '}
-                  </div>{' '}
+                  </Link>{' '}
                   <span>{registrationStagesDesc[i]}</span>
                 </li>
               ))}

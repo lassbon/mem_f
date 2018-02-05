@@ -40,6 +40,24 @@ class Discussions extends React.Component {
             <Card.Header>{topicInfo.title}</Card.Header>
             <Card.Meta>{new Date(topicInfo.createdAt).toDateString()}</Card.Meta>
             <Card.Description>{topicInfo.content}</Card.Description>
+            <Card.Content extra className="time">
+
+              {/* <Button size="mini"
+                style={{ marginLeft: '70%', marginTop: 10 }}
+                onClick={() => {
+                  this.likePost(post.id, i)
+                }}>
+                <Icon color='red' name="like" />
+                Likes {post.likes ? post.likes.length : 0}
+              </Button> */}
+
+              <Button size="mini">
+                <Icon name="like" color="red" />
+                0 Likes
+              </Button>
+              <Button size="mini">comments</Button>
+              {/* <Comments post={post.id} comments={post.comments} /> */}
+            </Card.Content>
           </Card.Content>
         </Card>
       </Card.Group>

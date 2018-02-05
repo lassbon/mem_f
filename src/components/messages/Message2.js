@@ -12,7 +12,7 @@ class CongratMessage extends React.Component {
             Congratulations!!! You are now a member of ACCI.
           </Message.Header>
           <p style={{ textAlign: 'center' }}>
-            Your Membership ID is 132465789.Your certificate will be presented to you soon
+            Your Membership ID is .Your certificate will be presented to you soon
           </p>
           <Link className='btn' style={{ border: '1px soild white' }} to="/app"><b>Continue to Site</b></Link>
         </Message>

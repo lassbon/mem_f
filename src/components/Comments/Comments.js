@@ -108,7 +108,7 @@ class Comments extends Component {
               .reverse()
           ) : false}
           <Form reply onSubmit={this.replyComment} loading={this.state.loading}>
-            <Form.TextArea autoHeight rows={2} placeholder='leave a comment...' />
+            <Form.TextArea style={{height: 'auto !important'}} autoHeight rows={2} placeholder='leave a comment...' />
             <Button style={{marginLeft: '75%'}} content='Add Comment' size='tiny' labelPosition='left' icon='edit' primary />
           </Form>
           </Comment.Group>

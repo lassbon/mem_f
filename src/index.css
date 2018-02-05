@@ -274,3 +274,7 @@ div.seven.wide.column > div > p {
   box-shadow: none !important;
   border: none !important
 }
+
+#root > div > main > div.ui.cards.TimeLine > div > div.extra.content.time > div.ui.comments.slide.down.visible.transition > form > div > textarea {
+  height: auto !important
+}

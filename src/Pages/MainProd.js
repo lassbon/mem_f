@@ -1,8 +1,34 @@
 import React from 'react';
-import { Grid, Image, Card, Comment, Header, Form, Button, Divider, Icon } from 'semantic-ui-react'
+import { Grid, Image, Card, Comment, Header, Form, Button, Divider, Icon } from 'semantic-ui-react';
+import { getProjects } from '../actions/projects'
 
 class MainProd extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state ={
+      topicInfo: '',
+    }
+  }
+
+  componentDidMount() {
+    this.props.getProjects(this.props.match.params.name).then(() => {
+      this.setState({
+        topicInfo: this.props.topicDetails,
+      });
+    });
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
   render() {
+
+    const { topicInfo } = this.state
+
     return (
       <div
         style={{
@@ -57,7 +83,7 @@ class MainProd extends React.Component {
                     height: 'auto',
                     width: '100%',
                   }}
-                  src="http://s373035130.websitehome.co.uk/EyeDBsite/wp-content/uploads/2014/07/VisionDB-Demo-button.jpg"
+                  src={topicInfo.banner}
                 />
               </div>
               <figcaption
@@ -66,12 +92,7 @@ class MainProd extends React.Component {
                 }}
               >
                 <p>
-                  50% off so many categories! If that doesn’t entice you, then
-                  we don’t know what will. Make sure to check out the Konga
-                  Clearance Sale this Boxing Day! Better be quick though,
-                  LIMITED STOCK only! And we mean that, so if you see something
-                  you like at a discounted price, buy it! Because if you don’t,
-                  someone else will!
+                  {topicInfo.content}
                 </p>
                 <Button size="mini">
                   <Icon color="red" name="like" /> likes 0

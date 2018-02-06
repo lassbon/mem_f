@@ -7,6 +7,7 @@ import {
   Divider,
   Icon,
   Grid,
+  Label,
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
@@ -208,12 +209,13 @@ class ContReg2 extends Component {
   }
   componentDidMount() {
     const { user } = this.props
+    const { recommendedLevel } = user
     axios(`${BASEURL}api/v1/levels/`, {
       headers: {
         authorization: user.token,
       },
     }).then(response => {
-      console.log(response)
+      console.log('plans', response)
       const plans = response.data.map(
         ({ description, fee, name, paystack: { data: { plan_code } } }, i) => ({
           render: () => (
@@ -230,7 +232,17 @@ class ContReg2 extends Component {
                   padding: '2rem 0px',
                 }}
               >
-                {/* <Header as="h3">{fee}</Header> */}
+                <div
+                  style={{
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  {name === recommendedLevel && (
+                    <Label as="a" color="blue" tag>
+                      Recommended
+                    </Label>
+                  )}
+                </div>
                 <h2
                   className="encode-font"
                   style={{
@@ -243,12 +255,12 @@ class ContReg2 extends Component {
                     padding: '1rem',
                   }}
                 >
-                  {(fee + '')
+                  N{(fee + '')
                     .split('')
                     .reverse()
                     .reduce(
                       (acc, l, i, arr) =>
-                        i % 3 === 0 && i < arr.length - 1
+                        i % 3 === 0 && i !== arr.length - 1 && i !== 0
                           ? `${acc},${l}`
                           : `${acc}${l}`,
                       ''
@@ -290,7 +302,7 @@ class ContReg2 extends Component {
   }
   render() {
     const { history, user, location: { pathname } } = this.props
-
+    const { recommendedLevel } = user
     if (user.regState == null) return <Redirect to="/login" />
     const index = paths.indexOf(pathname)
     const regState = user.regState
@@ -318,6 +330,9 @@ class ContReg2 extends Component {
           </h2>
           {this.state.plans.length ? (
             <Tab
+              defaultActiveIndex={this.state.plans.findIndex(
+                ({ name }) => name === recommendedLevel
+              )}
               menu={{ fluid: true, vertical: true, tabular: 'right' }}
               panes={this.state.plans}
               onTabChange={(change, { activeIndex }) => {

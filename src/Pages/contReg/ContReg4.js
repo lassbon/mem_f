@@ -3,6 +3,7 @@ import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
+import { ToastContainer, toast } from 'react-toastify'
 import { Redirect, withRouter } from 'react-router-dom'
 import api from '../../api'
 import { paths } from '../../data/registrationPages'
@@ -49,14 +50,40 @@ class ContReg4 extends React.Component {
     //   referrerUrl: 'http://acci.herokuapp.com/cont4',
     //   token,
     // })
-    this.props
-      .update({ ...this.state.data, token, regState: 4 }, id)
+
+    Promise.all([
+      api.signup.validateReferee({ email: this.state.referee1 }, token),
+      api.signup.validateReferee({ email: this.state.referee2 }, token),
+    ])
+      .then(arr => {
+        const error = arr.some(({ data: { status } }) => status === 'error')
+        if (error) {
+          throw new Error(error)
+        }
+        return Promise.resolve(arr)
+      })
+      .then(() =>
+        this.props.update({ ...this.state.data, token, regState: 4 }, id)
+      )
+      .then(() => {
+        api.signup.alertReferee({
+          id,
+          // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
+          token,
+        })
+      })
       .then(() => {
         this.setState({ loading: false })
         history.push({
           pathname: '/cont5',
         })
       })
+      .catch(err => {
+        // console.log('err', err)
+        toast(err.response.data.err)
+        this.setState({ loading: false })
+      })
+
     // api.signup
     //   .contreg({ ...this.state.data, token, regState: 4 }, id)
     //   .then(() => {
@@ -109,6 +136,14 @@ class ContReg4 extends React.Component {
     }
     return (
       <React.Fragment>
+        <ToastContainer
+          position="top-center"
+          type="error"
+          autoClose={50000}
+          newestOnTop={false}
+          hideProgressBar={false}
+          closeOnClick={false}
+        />
         <Form
           style={{
             width: '70%',
@@ -126,7 +161,7 @@ class ContReg4 extends React.Component {
                 <Form.Input
                   type="email"
                   placeholder="email"
-                  name="referrer1"
+                  name="referee1"
                   onChange={this.handleChange}
                 />
               </Form.Field>
@@ -140,7 +175,7 @@ class ContReg4 extends React.Component {
                   <Form.Input
                     type="email"
                     placeholder="email"
-                    name="referrer2"
+                    name="referee2"
                     onChange={this.handleChange}
                   />
                 </Form.Field>

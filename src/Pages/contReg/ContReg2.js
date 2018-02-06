@@ -248,7 +248,7 @@ class ContReg2 extends Component {
                     .reverse()
                     .reduce(
                       (acc, l, i, arr) =>
-                        i % 3 === 0 && i < arr.length - 1
+                        i % 3 === 0 && i !== arr.length - 1 && i !== 0
                           ? `${acc},${l}`
                           : `${acc}${l}`,
                       ''

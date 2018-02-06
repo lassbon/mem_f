@@ -37,13 +37,13 @@ const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 class ContReg extends Component {
   state = {
-    annualReturn: null,
-    employees: null,
-    annualProfit: null,
-    companyName: null,
-    companyAddress: null,
-    companyBusiness: null,
-    companyPhone: null,
+    annualReturn: this.props.user.annualReturn,
+    employees: this.props.user.employees,
+    annualProfit: this.props.user.annualProfit,
+    companyName: this.props.user.companyName,
+    companyAddress: this.props.user.companyAddress,
+    companyBusiness: this.props.user.companyBusiness,
+    companyPhone: this.props.user.companyPhone,
     loading: false,
   }
 
@@ -58,8 +58,7 @@ class ContReg extends Component {
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
     this.props
-      .update({ regState: 1, token }, id)
-      .then(() => update({ ...this.state, regState: 1, token }, id))
+      .update({ ...this.state, regState: 1, token }, id)
       .then(() => {
         this.setState({ loading: false })
         history.push({
@@ -75,10 +74,14 @@ class ContReg extends Component {
 
   validate = () => {
     // perform validation here
-    console.log(Object.values(this.state))
+    console.log(Object.values(this.state), Object.keys(this.state))
     return Object.values(this.state).some(val => val === null)
   }
 
+  componentDidMount() {
+    // console.log('autofill', this.props.user)
+    // this.setState({ ...this.props.user })
+  }
   render() {
     const { history, user, location: { pathname } } = this.props
     console.log(user)
@@ -180,6 +183,7 @@ class ContReg extends Component {
                 placeholder="Company's Name"
                 name="companyName"
                 onChange={this.handleChange}
+                value={this.state.companyName}
               />
             </Form.Field>
             <Form.Field style={{ width: '55%', margin: '10px auto' }}>
@@ -187,6 +191,7 @@ class ContReg extends Component {
                 placeholder="Address"
                 name="companyAddress"
                 onChange={this.handleChange}
+                value={this.state.companyAddress}
               />
             </Form.Field>
             <Form.Field style={{ width: '55%', margin: '10px auto' }}>
@@ -194,6 +199,7 @@ class ContReg extends Component {
                 placeholder="Phone Number"
                 name="companyPhone"
                 onChange={this.handleChange}
+                value={this.state.companyPhone}
               />
             </Form.Field>
             <Form.Field style={{ width: '55%', margin: '10px auto' }}>
@@ -201,6 +207,7 @@ class ContReg extends Component {
                 placeholder="Nature of business"
                 name="companyBusiness"
                 onChange={this.handleChange}
+                value={this.state.companyBusiness}
               />
             </Form.Field>
 

@@ -52,8 +52,8 @@ class ContReg4 extends React.Component {
     // })
 
     Promise.all([
-      api.signup.validateReferee({ email: this.state.referee1 }, token),
-      api.signup.validateReferee({ email: this.state.referee2 }, token),
+      api.signup.validateReferee({ email: this.state.data.referee1 }, token),
+      api.signup.validateReferee({ email: this.state.data.referee2 }, token),
     ])
       .then(arr => {
         const error = arr.some(({ data: { status } }) => status === 'error')

@@ -102,12 +102,12 @@ class ContReg5 extends React.Component {
 
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
-                <strong>N25,000</strong>
+                <strong>N5,000</strong>
               </Grid.Column>
               <div style={{ margin: '10px auto', marginTop: 40 }}>
                 <PaystackComponent
                   variablename="Verfication "
-                  amount={2500000}
+                  amount={500000}
                   callback={this.changeToNew}
                   email={email}
                   metadata={{

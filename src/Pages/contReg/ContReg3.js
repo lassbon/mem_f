@@ -47,19 +47,19 @@ class ContReg3 extends React.Component {
   }
 
   submit = () => {
-    console.log(this.state)
+    // console.log(this.state)
     if (!this.validate()) return
-    console.log('gotcha')
-    // this.setState({ loading: true })
-    // const { history, user: { id, token } } = this.props
-    // this.props
-    //   .update({ ...this.state.data, token, regState: 3 }, id)
-    //   .then(() => {
-    //     this.setState({ loading: false })
-    //     history.push({
-    //       pathname: '/cont4',
-    //     })
-    //   })
+    // console.log('gotcha')
+    this.setState({ loading: true })
+    const { history, user: { id, token } } = this.props
+    this.props
+      .update({ ...this.state.data, token, regState: 3 }, id)
+      .then(() => {
+        this.setState({ loading: false })
+        history.push({
+          pathname: '/cont4',
+        })
+      })
 
     // .catch(() => {
     //   //handle error

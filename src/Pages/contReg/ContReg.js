@@ -58,7 +58,8 @@ class ContReg extends Component {
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
     this.props
-      .update({ ...this.state, regState: 1, token }, id)
+      .update({ regState: 1, token }, id)
+      .then(() => update({ ...this.state, regState: 1, token }, id))
       .then(() => {
         this.setState({ loading: false })
         history.push({

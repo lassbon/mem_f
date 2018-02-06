@@ -109,6 +109,14 @@ export default {
           authorization: data.token,
         },
       }),
+    validateReferee: (data, token) =>
+      axios.post(`${BASEURL}api/v1/validatereferee`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
 
     // contreg2: data => {
 

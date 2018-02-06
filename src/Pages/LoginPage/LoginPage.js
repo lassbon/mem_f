@@ -54,9 +54,11 @@ class LoginPage extends React.Component {
               forgot password?
             </Link>
             <br />
+            <Message>
             <Link to="/oldmem" style={{ color: 'var(--main-blue)' }}>
               Old members click here..
             </Link>
+            </Message>
           </Grid.Column>
         </Grid>
       </div>

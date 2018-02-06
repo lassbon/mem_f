@@ -271,6 +271,15 @@ class ContReg2 extends Component {
                 </h2>
                 <h3>BENEFITS</h3>
                 <div style={{ padding: '1rem' }}>
+                  {description.split('\n').map(benefit => (
+                    <React.Fragment>
+                      <div style={{ display: 'flex' }}>
+                        <Icon name="checkmark" />
+                        <p>{benefit}</p>
+                      </div>
+                      <Divider />
+                    </React.Fragment>
+                  ))}
                   {/* {benefits[i]
                     .split('\n')
                     .filter(v => v)

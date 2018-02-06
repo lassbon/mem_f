@@ -126,7 +126,7 @@ class ContReg4 extends React.Component {
                 <Form.Input
                   type="email"
                   placeholder="email"
-                  name="referrer1"
+                  name="referee1"
                   onChange={this.handleChange}
                 />
               </Form.Field>
@@ -140,7 +140,7 @@ class ContReg4 extends React.Component {
                   <Form.Input
                     type="email"
                     placeholder="email"
-                    name="referrer2"
+                    name="referee2"
                     onChange={this.handleChange}
                   />
                 </Form.Field>

@@ -48,18 +48,18 @@ class ContReg3 extends React.Component {
 
   submit = () => {
     console.log(this.state)
-    if (this.validate()) return
-
-    this.setState({ loading: true })
-    const { history, user: { id, token } } = this.props
-    this.props
-      .update({ ...this.state.data, token, regState: 3 }, id)
-      .then(() => {
-        this.setState({ loading: false })
-        history.push({
-          pathname: '/cont4',
-        })
-      })
+    if (!this.validate()) return
+    console.log('gotcha')
+    // this.setState({ loading: true })
+    // const { history, user: { id, token } } = this.props
+    // this.props
+    //   .update({ ...this.state.data, token, regState: 3 }, id)
+    //   .then(() => {
+    //     this.setState({ loading: false })
+    //     history.push({
+    //       pathname: '/cont4',
+    //     })
+    //   })
 
     // .catch(() => {
     //   //handle error
@@ -76,8 +76,46 @@ class ContReg3 extends React.Component {
 
   validate = () => {
     // perform validation here
-    console.log(Object.values(this.state.data))
-    return Object.values(this.state.data).some(val => val === null)
+    // console.log(Object.values(this.state.data))
+
+    const rep1 = [
+      'companyRepName1',
+      'companyRepPhone1',
+      'companyRepEmail1',
+      'companyRepPassportUrl1',
+      'companyRepCVUrl2',
+    ]
+    const rep2 = [
+      'companyRepName2',
+      'companyRepPhone2',
+      'companyRepEmail2',
+      'companyRepPassportUrl2',
+      'companyCOIUrl',
+      'companyRepCVUrl2',
+    ]
+    let rep1Inputs = []
+    let rep2Inputs = []
+
+    const inputs = this.state.data
+    const inputsArr = []
+    for (let val in inputs) {
+      if (rep1.indexOf(val) > -1) {
+        rep1Inputs.push(inputs[val])
+      } else if (rep2.indexOf(val) > -1) {
+        rep2Inputs.push(inputs[val])
+      }
+    }
+    // console.log(
+    //   [
+    //     rep1Inputs.some(val => val === null),
+    //     rep2Inputs.some(val => val === null),
+    //   ].some(val => val === false)
+    // )
+    return [
+      rep1Inputs.some(val => val === null),
+      rep2Inputs.some(val => val === null),
+    ].some(val => val === false)
+    // return
   }
 
   render() {

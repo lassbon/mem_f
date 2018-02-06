@@ -52,6 +52,13 @@ class ContReg4 extends React.Component {
     this.props
       .update({ ...this.state.data, token, regState: 4 }, id)
       .then(() => {
+        api.signup.alertReferee({
+          id,
+          // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
+          token,
+        })
+      })
+      .then(() => {
         this.setState({ loading: false })
         history.push({
           pathname: '/cont5',

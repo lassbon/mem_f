@@ -62,7 +62,9 @@ class ContReg4 extends React.Component {
         }
         return Promise.resolve(arr)
       })
-      .then(() => this.props.update({ ...this.state.data, token }, id))
+      .then(() =>
+        this.props.update({ ...this.state.data, token, regState: 4 }, id)
+      )
       .then(() => {
         api.signup.alertReferee({
           id,
@@ -73,7 +75,7 @@ class ContReg4 extends React.Component {
       .then(() => {
         this.setState({ loading: false })
         history.push({
-          pathname: '/regmessage',
+          pathname: '/cont5',
         })
       })
       .catch(err => {

@@ -98,6 +98,7 @@ class ContReg3 extends React.Component {
             textAlign: 'center',
             marginBottom: 50,
           }}
+          loading={this.state.loading}
         >
           <h2>Company Representatives</h2>
           <Grid columns="equal">

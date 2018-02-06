@@ -213,7 +213,7 @@ class ContReg2 extends Component {
         authorization: user.token,
       },
     }).then(response => {
-      console.log(response)
+      console.log('plans', response)
       const plans = response.data.map(
         ({ description, fee, name, paystack: { data: { plan_code } } }, i) => ({
           render: () => (
@@ -243,7 +243,7 @@ class ContReg2 extends Component {
                     padding: '1rem',
                   }}
                 >
-                  {(fee + '')
+                  N{(fee + '')
                     .split('')
                     .reverse()
                     .reduce(

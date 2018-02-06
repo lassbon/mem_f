@@ -1,34 +1,36 @@
-import React from "react";
-import validator from 'validator';
-import { Button, Form, Message } from "semantic-ui-react";
-import InlineError from "../../components/messages/InlineError";
-import "../LoginPage/login.css";
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import validator from 'validator'
+import { Button, Form, Message } from 'semantic-ui-react'
+import InlineError from '../../components/messages/InlineError'
+import '../LoginPage/login.css'
+
+const decode = require('base-64').decode
 
 class OldmembersForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      
-      membershipId: "",
-        password: "",
+      membershipId: decode(this.props.match.params.id),
+      password: '',
       errors: {},
-      loading: false
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.validate = this.validate.bind(this);
+      loading: false,
+    }
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    const errors = this.validate(this.state);
-    this.setState({ errors });
+  onSubmit = e => {
+    e.preventDefault()
+    const errors = this.validate(this.state)
+    this.setState({ errors })
     if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
+      this.setState({ loading: true })
       this.props.submit(this.state)
       // .catch(error => {
       //   if (error.response) {
@@ -39,16 +41,17 @@ class OldmembersForm extends React.Component {
   }
 
   validate = data => {
-    const errors = {};
+    const errors = {}
     // if (!validator.isEmail(data.email)) errors.email = "invalid email";
-    if (!data.membershipId) errors.membershipId = "please enter your membership Id";
-    if (!data.password) errors.password = "please enter a password";
-    return errors;
-  };
-
+    if (!data.membershipId)
+      errors.membershipId = 'please enter your membership Id'
+    if (!data.password) errors.password = 'please enter a password'
+    return errors
+  }
 
   render() {
-    const { errors, loading } = this.state;
+    const { errors, loading } = this.state
+    console.log()
     return (
       <Form size="large" onSubmit={this.onSubmit} loading={loading}>
         {errors.err && (
@@ -84,8 +87,8 @@ class OldmembersForm extends React.Component {
           Login
         </Button>
       </Form>
-    );
+    )
   }
 }
 
-export default OldmembersForm;
+export default withRouter(OldmembersForm)

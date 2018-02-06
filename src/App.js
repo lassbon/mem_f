@@ -24,7 +24,7 @@ import Profile from './Pages/Profile'
 import Confirmation from './components/messages/Message2'
 import OldMembers from './Pages/Old/Old'
 import OldMembers2 from './Pages/Old/Old2'
-import OldmembersPage from './Pages/OldMembers/OldmembersPage';
+import OldmembersPage from './Pages/OldMembers/OldmembersPage'
 
 const App = ({ location }) => (
   <div>
@@ -53,7 +53,12 @@ const App = ({ location }) => (
         component={ForgotPassword}
       />
       <Route location={location} path="/login" exact component={LoginPage} />
-      <Route location={location} path="/oldmem" exact component={OldmembersPage} />
+      <Route
+        location={location}
+        path="/onboard/:id"
+        exact
+        component={OldmembersPage}
+      />
       <UserRoute location={location} path="/app" component={Main} />
     </Switch>
   </div>

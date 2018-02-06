@@ -203,6 +203,13 @@ class ContReg6 extends React.Component {
             </Segment>
           </Grid.Column>
         </Grid>
+        {this.state.loading && (
+          <Segment>
+            <Dimmer active inverted>
+              <Loader inverted>Loading</Loader>
+            </Dimmer>
+          </Segment>
+        )}
         <Grid style={{ background: '#34495E', textAlign: 'center' }}>
           <Grid.Column width="5">
             <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>

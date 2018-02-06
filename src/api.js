@@ -151,27 +151,6 @@ export default {
       }),
     likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data),
   },
-
-  projects: {
-    ongoing: token => {
-      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-    completed: token => {
-      return axios.get(`${BASEURL}api/v1/projects/completed`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-  },
   events: {
     ongoing: token => {
       return axios.get(`${BASEURL}api/v1/events/ongoing`, {
@@ -222,5 +201,35 @@ export default {
       axios.get(`${BASEURL}api/v1/forum/post/`).then(res => res.data),
     getOne: id =>
       axios.get(`${BASEURL}api/v1/forum/post/${id}`).then(res => res.data),
+  },
+  projects: {
+    reg: data =>
+      axios.get(`${BASEURL}api/v1/getprojects`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        }
+      }),
+
+    ongoing: token => {
+      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    completed: token => {
+      return axios.get(`${BASEURL}api/v1/projects/completed`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/getprojects/${id}`).then(res => res.data),
   },
 }

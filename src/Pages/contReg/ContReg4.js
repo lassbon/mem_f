@@ -3,15 +3,16 @@ import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import api from '../../api'
+import { paths } from '../../data/registrationPages'
 
 class ContReg4 extends React.Component {
   state = {
     loading: false,
     data: {
-      referrer1: null,
-      referrer2: null,
+      referee1: null,
+      referee2: null,
     },
     // rep1 : {
     //   id : null,
@@ -36,23 +37,33 @@ class ContReg4 extends React.Component {
 
   submit = () => {
     // console.log(this.state)
-    console.log(this.state)
+    // console.log(this.state)
+    if (this.validate()) return
+
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
 
-    console.log('cont', { ...this.state.data, token, regState: 4 })
-    console.log('alert', {
-      id,
-      referrerUrl: 'http://acci.herokuapp.com/cont4',
-      token,
-    })
-    api.signup
-      .contreg({ ...this.state.data, token, regState: 4 }, id)
+    // console.log('cont', { ...this.state.data, token, regState: 4 })
+    // console.log('alert', {
+    //   id,
+    //   referrerUrl: 'http://acci.herokuapp.com/cont4',
+    //   token,
+    // })
+    this.props
+      .update({ ...this.state.data, token, regState: 4 }, id)
       .then(() => {
+        this.setState({ loading: false })
         history.push({
           pathname: '/cont5',
         })
       })
+    // api.signup
+    //   .contreg({ ...this.state.data, token, regState: 4 }, id)
+    //   .then(() => {
+    //     history.push({
+    //       pathname: '/cont5',
+    //     })
+    //   })
     // .then(() => {
     //   api.signup.alertReferee({
     //     id,
@@ -84,9 +95,18 @@ class ContReg4 extends React.Component {
 
   validate = () => {
     // perform validation here
+    console.log(Object.values(this.state))
+    return Object.values(this.state.data).some(val => val === null)
   }
 
   render() {
+    const { user, location: { pathname } } = this.props
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
     return (
       <React.Fragment>
         <Form

@@ -10,9 +10,11 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { update } from '../../actions/auth'
+import { paths } from '../../data/registrationPages'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -202,6 +204,7 @@ const state = { activeIndex: 0 }
 class ContReg2 extends Component {
   state = {
     plans: [],
+    loading: false,
   }
   componentDidMount() {
     const { user } = this.props
@@ -240,7 +243,19 @@ class ContReg2 extends Component {
                     padding: '1rem',
                   }}
                 >
-                  {fee}
+                  {(fee + '')
+                    .split('')
+                    .reverse()
+                    .reduce(
+                      (acc, l, i, arr) =>
+                        i % 3 === 0 && i < arr.length - 1
+                          ? `${acc},${l}`
+                          : `${acc}${l}`,
+                      ''
+                    )
+                    .split('')
+                    .reverse()
+                    .join('')}
                 </h2>
                 <h3>BENEFITS</h3>
                 <div style={{ padding: '1rem' }}>
@@ -274,7 +289,15 @@ class ContReg2 extends Component {
     // this.setState()
   }
   render() {
-    const { history, user } = this.props
+    const { history, user, location: { pathname } } = this.props
+
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    console.log('cont2', regState)
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
     return (
       <React.Fragment>
         <div
@@ -319,6 +342,13 @@ class ContReg2 extends Component {
         >
           Back
         </Button> */}
+          {this.state.loading && (
+            <Segment>
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer>
+            </Segment>
+          )}
           <div
             style={{
               display: 'flex',
@@ -335,36 +365,54 @@ class ContReg2 extends Component {
               //   },
               // }}
               onClick={() => {
-                axios
-                  .put(
-                    `${BASEURL}api/v1/user/${user.id}`,
+                const { history } = this.props
+                this.setState({ loading: true })
+                this.props
+                  .update(
                     {
                       membershipPlan: this.state.plans[state.activeIndex]
                         .plan_code,
-                      //   fee: this.state.plans[state.activeIndex].fee,
-                      //   name: this.state.plans[state.activeIndex].name,
-                      //   description: this.state.plans[state.activeIndex]
-                      //     .description,
-                      // },
                       regState: 2,
+                      token: user.token,
                     },
-                    {
-                      headers: {
-                        authorization: user.token,
-                        'Content-Type': 'application/form-data',
-                        Accept: 'application/form-data',
-                      },
-                    }
+                    user.id
                   )
                   .then(() => {
+                    this.setState({ loading: false })
                     history.push({
                       pathname: '/cont3',
-                      state: {
-                        id: 'state.id',
-                      },
                     })
                   })
-                  .catch(console.log)
+                // axios
+                //   .put(
+                //     `${BASEURL}api/v1/user/${user.id}`,
+                //     {
+                //       membershipPlan: this.state.plans[state.activeIndex]
+                //         .plan_code,
+                //       //   fee: this.state.plans[state.activeIndex].fee,
+                //       //   name: this.state.plans[state.activeIndex].name,
+                //       //   description: this.state.plans[state.activeIndex]
+                //       //     .description,
+                //       // },
+                //       regState: 2,
+                //     },
+                //     {
+                //       headers: {
+                //         authorization: user.token,
+                //         'Content-Type': 'application/form-data',
+                //         Accept: 'application/form-data',
+                //       },
+                //     }
+                //   )
+                //   .then(() => {
+                //     history.push({
+                //       pathname: '/cont3',
+                //       state: {
+                //         id: 'state.id',
+                //       },
+                //     })
+                //   })
+                //   .catch(console.log)
               }}
               className="btn"
             >
@@ -419,4 +467,6 @@ class ContReg2 extends Component {
   }
 }
 
-export default withRouter(connect(({ user }) => ({ user }))(ContReg2))
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(ContReg2)
+)

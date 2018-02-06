@@ -1,17 +1,13 @@
 import React from 'react'
-import {
-  Segment,
-  Grid,
-  Dimmer,
-  Loader,
-  Icon,
-} from 'semantic-ui-react'
+import { Segment, Grid, Dimmer, Loader, Icon } from 'semantic-ui-react'
 import PaystackComponent from '../../components/PaystackComponent'
 import { userLoggedIn } from '../../actions/auth'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { update } from '../../actions/auth'
 import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
+import { paths } from '../../data/registrationPages'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -27,22 +23,20 @@ class ContReg6 extends React.Component {
   }
 
   changeToNew() {
-    const { history, user: { id, token }, userLoggedIn } = this.props
+    const { user } = this.props
+    const { id, token } = user
+    const { history, userLoggedIn } = this.props
     // let token = axios.defaults.headers.common.authorization
     this.setState({
       loading: true,
     })
-    axios
-      .put(
-        `${BASEURL}api/v1/user/${id}`,
+    this.props
+      .update(
         {
           regState: 6,
+          token,
         },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
+        id
       )
       .then(() => {
         this.setState({
@@ -53,6 +47,27 @@ class ContReg6 extends React.Component {
           pathname: '/confirmation',
         })
       })
+    // axios
+    //   .put(
+    //     `${BASEURL}api/v1/user/${id}`,
+    //     {
+    //       regState: 6,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: token,
+    //       },
+    //     }
+    //   )
+    //   .then(() => {
+    //     this.setState({
+    //       loading: false,
+    //     })
+    //     localStorage.acciJWT = token
+    //     history.push({
+    //       pathname: '/confirmation',
+    //     })
+    //   })
     // userLoggedIn({ token })
   }
   componentDidMount() {
@@ -102,9 +117,17 @@ class ContReg6 extends React.Component {
   }
 
   render() {
-    const { user: { id, token, email } } = this.props
+    const { user, location: { pathname } } = this.props
+    const { id, token, email } = user
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
+
     // console.log(membershipPlan)
-    const { plan, user } = this.state
+    const { plan } = this.state
     plan &&
       console.log(plan.fee, plan.paystack.data.plan_code, plan.name, user.email)
     // const str = "{"
@@ -153,15 +176,21 @@ class ContReg6 extends React.Component {
                       <h4>N{plan.fee}</h4>
                     </Grid.Column>
                   </Grid>
-                  
-                    <div style={{ margin: '0 auto', marginTop: 40, marginLeft: '35%' }}>
-                      <PaystackComponent
-                        variablename="Verfication "
-                        email={user.email}
-                        amount={plan.fee}
-                        plan={plan.paystack.data.plan_code}
-                        callback={this.changeToNew}
-                      />
+
+                  <div
+                    style={{
+                      margin: '0 auto',
+                      marginTop: 40,
+                      marginLeft: '35%',
+                    }}
+                  >
+                    <PaystackComponent
+                      variablename="Verfication "
+                      email={user.email}
+                      amount={plan.fee}
+                      plan={plan.paystack.data.plan_code}
+                      callback={this.changeToNew}
+                    />
                   </div>
                 </React.Fragment>
               ) : (
@@ -222,5 +251,5 @@ class ContReg6 extends React.Component {
 }
 
 export default withRouter(
-  connect(({ user }) => ({ user }), { userLoggedIn })(ContReg6)
+  connect(({ user }) => ({ user }), { userLoggedIn, update })(ContReg6)
 )

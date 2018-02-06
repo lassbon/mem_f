@@ -35,6 +35,7 @@ export const login = credentials => dispatch =>
 
     localStorage.acciJWT = res.token
     setAuthorizationHeader(res.token)
+    console.log('res', res)
     dispatch(userLoggedIn(res))
     return Promise.resolve(res)
   })
@@ -70,14 +71,10 @@ export const signup = (data, history) => dispatch => {
 }
 
 // update on user
-export const update = (data, history, location, id) => dispatch =>
-  api.signup.contreg(data, id).then(res => {
+export const update = (userData, id) => dispatch =>
+  api.signup.contreg(userData, id).then(({ data }) => {
     // dispatch(authorizeUser({ email: data.email, password: data.password }))
-    console.log('success', res)
-    history.push({
-      pathname: location,
-      state: {
-        id: id,
-      },
-    })
+    console.log('reg update dispatch', data)
+    dispatch(userLoggedIn(data))
+    return Promise.resolve(data)
   })

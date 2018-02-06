@@ -75,7 +75,7 @@ class ContReg4 extends React.Component {
       .then(() => {
         this.setState({ loading: false })
         history.push({
-          pathname: '/cont5',
+          pathname: '/regmessage',
         })
       })
       .catch(err => {

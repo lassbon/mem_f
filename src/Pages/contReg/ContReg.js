@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
-import {
-  Grid,
-  Form,
-  Button,
-  Icon,
-} from 'semantic-ui-react'
+import { Grid, Form, Button, Icon } from 'semantic-ui-react'
 
 // import logo from '../../images/ACCIHD-LOGO.png'
 import './cont.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
+import { paths } from '../../data/registrationPages'
+
 // import { contReg } from '../../actions/signupCont'
 
 // function getSteps() {
@@ -51,31 +48,46 @@ class ContReg extends Component {
   }
 
   handleChange = e => {
+    console.log(this.state)
     this.setState({ [e.target.name]: e.target.value })
   }
 
   onSubmit = () => {
     // console.log(this.state)
+    if (this.validate()) return
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
     this.props
-      .update({ ...this.state, regState: 1, token }, history, '/cont2', id)
-      .catch(() => {
-        //handle error
-        return Promise.resolve('')
-      })
+      .update({ ...this.state, regState: 1, token }, id)
       .then(() => {
-        this.setState({ loading: true })
+        this.setState({ loading: false })
+        history.push({
+          pathname: '/cont2',
+        })
       })
-    this.setState({ loading: true })
+      .catch(error => {
+        //handle error
+        console.log(error)
+      })
+    // this.setState({ loading: true })
   }
 
   validate = () => {
     // perform validation here
+    console.log(Object.values(this.state))
+    return Object.values(this.state).some(val => val === null)
   }
 
   render() {
-    // const { location: { state }, history } = this.props
+    const { history, user, location: { pathname } } = this.props
+    console.log(user)
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    console.log('cont2', regState)
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
     // console.log(this.props)
     // if (state == null || state.id == null) {
     //   history.push('/signup')
@@ -183,16 +195,14 @@ class ContReg extends Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
-            <Form.Field
-              style={{ width: '55%', margin: '10px auto'}}
-            >
+            <Form.Field style={{ width: '55%', margin: '10px auto' }}>
               <input
                 placeholder="Nature of buisness"
                 name="companyBusiness"
                 onChange={this.handleChange}
               />
             </Form.Field>
-            
+
             <Grid style={{ width: '90%', margin: '0 auto' }}>
               <Grid.Column width={5}>
                 <h3 style={{ color: '#656768' }}>Number of Employees</h3>

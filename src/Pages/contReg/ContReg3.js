@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { update } from '../../actions/auth'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
+import { paths } from '../../data/registrationPages'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -25,7 +26,6 @@ class ContReg3 extends React.Component {
       companyRepPhone1: null,
       companyRepEmail1: null,
       companyRepPassportUrl1: null,
-      companyRepCVUrl1: null,
       companyRepName2: null,
       companyRepPhone2: null,
       companyRepEmail2: null,
@@ -48,14 +48,18 @@ class ContReg3 extends React.Component {
 
   submit = () => {
     console.log(this.state)
+    if (this.validate()) return
+
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
-    this.props.update(
-      { ...this.state.data, token, regState: 3 },
-      history,
-      '/cont4',
-      id
-    )
+    this.props
+      .update({ ...this.state.data, token, regState: 3 }, id)
+      .then(() => {
+        this.setState({ loading: false })
+        history.push({
+          pathname: '/cont4',
+        })
+      })
 
     // .catch(() => {
     //   //handle error
@@ -72,9 +76,19 @@ class ContReg3 extends React.Component {
 
   validate = () => {
     // perform validation here
+    console.log(Object.values(this.state.data))
+    return Object.values(this.state.data).some(val => val === null)
   }
 
   render() {
+    const { user, location: { pathname } } = this.props
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    console.log('cont3', regState)
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
     return (
       <React.Fragment>
         <Form
@@ -177,19 +191,19 @@ class ContReg3 extends React.Component {
             </Grid.Column>
           </Grid>
           <Grid centered columns={2}>
-                <Grid.Column>
-                <Form.Field>
-                  <label style={{textAlign: 'center'}}>
-                    Upload CAC document
+            <Grid.Column>
+              <Form.Field>
+                <label style={{ textAlign: 'center' }}>
+                  Upload CAC document
                 </label>
-                  <Form.Input
-                    type="file"
-                    name="companyRepCVUrl2"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                </Grid.Column>
-              </Grid>
+                <Form.Input
+                  type="file"
+                  name="companyRepCVUrl2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+          </Grid>
           <div style={{ marginTop: 30 }}>
             <Button to="/cont2" as={Link}>
               Back

@@ -1,17 +1,12 @@
 import React from 'react'
-import {
-  Card,
-  Grid,
-  Dimmer,
-  Loader,
-  Segment,
-  Icon,
-} from 'semantic-ui-react'
+import { Card, Grid, Dimmer, Loader, Segment, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import PaystackComponent from '../../components/PaystackComponent'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
+import { update } from '../../actions/auth'
+import { Redirect, withRouter } from 'react-router-dom'
+import { paths } from '../../data/registrationPages'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -30,17 +25,13 @@ class ContReg5 extends React.Component {
     this.setState({
       loading: true,
     })
-    axios
-      .put(
-        `${BASEURL}api/v1/user/${id}`,
+    this.props
+      .update(
         {
           regState: 5,
+          token,
         },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
+        id
       )
       .then(() => {
         this.setState({
@@ -53,10 +44,41 @@ class ContReg5 extends React.Component {
           },
         })
       })
+    // axios
+    //   .put(
+    //     `${BASEURL}api/v1/user/${id}`,
+    //     {
+    //       regState: 5,
+    //     },
+    //     {
+    //       headers: {
+    //         authorization: token,
+    //       },
+    //     }
+    //   )
+    //   .then(() => {
+    //     this.setState({
+    //       loading: false,
+    //     })
+    //     history.push({
+    //       pathname: '/regmessage',
+    //       state: {
+    //         id: id,
+    //       },
+    //     })
+    //   })
   }
 
   render() {
-    const { user: { id, email } } = this.props
+    const { user, location: { pathname } } = this.props
+    const { id, email } = user
+
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />
+    }
     // const { location: { state }, history } = this.props
     // console.log(this.props)
     // if (state == null || state.id == null) {
@@ -77,12 +99,12 @@ class ContReg5 extends React.Component {
                 (A registration fee is required to cover the cost of the
                 verification process)
               </h3>
-              
+
               <Grid.Column>Registration Fee</Grid.Column>
               <Grid.Column>
                 <strong>N25,000</strong>
               </Grid.Column>
-              <div style={{margin: '10px auto', marginTop: 40}}>
+              <div style={{ margin: '10px auto', marginTop: 40 }}>
                 <PaystackComponent
                   variablename="Verfication "
                   amount={2500000}
@@ -168,4 +190,6 @@ class ContReg5 extends React.Component {
     )
   }
 }
-export default withRouter(connect(({ user }) => ({ user }))(ContReg5))
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(ContReg5)
+)

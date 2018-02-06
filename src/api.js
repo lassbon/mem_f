@@ -23,6 +23,12 @@ export default {
         .then(responses => {
           return Promise.resolve({ ...responses[0], ...responses[1].data })
         }),
+    getUserData: ({ id, token }) =>
+      axios(`${BASEURL}api/v1/user/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      }),
 
     signup: user =>
       axios
@@ -44,8 +50,9 @@ export default {
     friends: id =>
       axios.get(`${BASEURL}api/v1/userfriends/${id}`).then(res => res.data),
     updateUser: (id, credentails) =>
-      axios.put(`${BASEURL}api/v1/user/${id}`, credentails).then(res => res.data),
-
+      axios
+        .put(`${BASEURL}api/v1/user/${id}`, credentails)
+        .then(res => res.data),
   },
   // posts: {
   //   fetchAll: () => axios.get(`${BASEURL}api/v1/social/post/`).then(res => res.data.post),
@@ -57,10 +64,10 @@ export default {
       axios.post(`${BASEURL}api/v1/oldmember`, data, {
         headers: {
           'Content-Type': 'application/form-data',
-          Accept: 'application/form-data'
+          Accept: 'application/form-data',
         },
       }),
-    contLogin: (data, id) => 
+    contLogin: (data, id) =>
       axios.put(`${BASEURL}api/v1/oldmember/${id}`, data, {
         headers: {
           'Content-Type': 'application/form-data',
@@ -76,14 +83,24 @@ export default {
           Accept: 'application/form-data',
         },
       }),
-    contreg: (data, id) =>
-      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: data.token,
-        },
-      }),
+    contreg: (data, id) => {
+      console.log(data, id)
+      return axios
+        .put(`${BASEURL}api/v1/user/${id}`, data, {
+          headers: {
+            'Content-Type': 'application/form-data',
+            Accept: 'application/form-data',
+            authorization: data.token,
+          },
+        })
+        .then(() =>
+          axios(`${BASEURL}api/v1/user/${id}`, {
+            headers: {
+              authorization: data.token,
+            },
+          })
+        )
+    },
     alertReferee: data =>
       axios.post(`${BASEURL}api/v1/alertreferee`, data, {
         headers: {

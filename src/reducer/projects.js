@@ -1,8 +1,9 @@
-import { CURRENT_PROJECTS, COMPLETED_PROJECTS } from "../types";
+import { CURRENT_PROJECTS, COMPLETED_PROJECTS, ALL_PROJECTS, PROJECTS_BY_ID } from "../types";
 
 const initialState = {
   currentproject: [],
-  completedproject: []
+  completedproject: [],
+  projects: []
 }
 export default function user(state = initialState, action = {}) {
   switch(action.type){
@@ -14,6 +15,10 @@ export default function user(state = initialState, action = {}) {
       return {
         completedproject: action.completedProject,
       };
+    case PROJECTS_BY_ID:
+      return {
+        projects: action.projects
+      }
     default: 
       return state
   }

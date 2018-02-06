@@ -215,7 +215,7 @@ class ContReg6 extends React.Component {
             <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
             <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
-          <Grid.Column width="6" verticalAlign="middle">
+          <Grid.Column width="6" verticalAlign="middle ">
             <Icon
               name="facebook square"
               size="big"

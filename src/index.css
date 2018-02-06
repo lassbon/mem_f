@@ -278,3 +278,7 @@ div.seven.wide.column > div > p {
 #root > div > main > div.ui.cards.TimeLine > div > div.extra.content.time > div.ui.comments.slide.down.visible.transition > form > div > textarea {
   height: auto !important
 }
+
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.item > div > div.ui.icon.input > input {
+  background: #e2e2e2
+}

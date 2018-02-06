@@ -175,13 +175,7 @@ const panes = [
         <Card.Content>
           <Card.Header style={{ textAlign: 'center' }}>
             {totalFriends} connections
-            <br />
-            <Button
-              style={{ marginTop: 30 }}
-              basic color='green'
-              size='tiny'>
-              <Icon name='add circle' />Add connections
-        </Button>
+            
     </Card.Header>
         </Card.Content>
       </Card>

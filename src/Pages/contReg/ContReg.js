@@ -198,7 +198,7 @@ class ContReg extends Component {
             </Form.Field>
             <Form.Field style={{ width: '55%', margin: '10px auto' }}>
               <input
-                placeholder="Nature of buisness"
+                placeholder="Nature of business"
                 name="companyBusiness"
                 onChange={this.handleChange}
               />

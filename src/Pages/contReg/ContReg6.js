@@ -187,7 +187,7 @@ class ContReg6 extends React.Component {
                     <PaystackComponent
                       variablename="Verfication "
                       email={user.email}
-                      amount={plan.fee}
+                      amount={+plan.fee}
                       plan={plan.paystack.data.plan_code}
                       callback={this.changeToNew}
                     />

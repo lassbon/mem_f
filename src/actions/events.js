@@ -1,5 +1,11 @@
-import { CURRENT_EVENTS, COMPLETED_EVENTS } from "../types";
+import { CURRENT_EVENTS, COMPLETED_EVENTS, ALL_EVENTS, EVENTS_BY_ID } from "../types";
 import api from "../api";
+
+const events = payload => ({
+  type: EVENTS_BY_ID,
+  payload
+});
+
 
 const currentEvent = (events) => ({
   type: CURRENT_EVENTS,
@@ -28,3 +34,8 @@ export const fetchCompletedEvent = (token) => dispatch =>
       .catch(err => {
         console.log('error', err);
       })
+
+export const getEvents = (id) => dispatch =>
+  api.events
+    .getOne(id)
+    .then(res => dispatch(events(res)));

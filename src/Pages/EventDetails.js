@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { connect } from 'react-redux';
 import { Button, Icon } from 'semantic-ui-react'
+import { getEvents } from '../actions/events'
 
 class EventDetails extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state ={
+      topicInfo: '',
+    }
+  }
+
   componentDidMount() {
-    // this.props.getForum(this.props.match.params.name).then(() => {
-    //   this.setState({
-    //     topicInfo: this.props.topicDetails,
-    //   });
-    // });
+    // console.log("props", this.props)
+    this.props.getEvents(this.props.match.params.id).then((data) => {
+      console.log('data', this.props.topicDetails)
+      this.setState({
+        topicInfo: this.props.topicDetails.events,
+      });
+    });
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
   render() {
+    const { topicInfo } = this.state
     return (
       <div
         style={{
@@ -44,7 +64,7 @@ class EventDetails extends Component {
                   color: '#fff',
                 }}
               >
-                Trade fair
+                {topicInfo.title}
               </h3>
             </div>
             <figure
@@ -64,7 +84,7 @@ class EventDetails extends Component {
                     height: 'auto',
                     width: '100%',
                   }}
-                  src="http://s373035130.websitehome.co.uk/EyeDBsite/wp-content/uploads/2014/07/VisionDB-Demo-button.jpg"
+                  src={topicInfo.banner}
                 />
               </div>
               <figcaption
@@ -73,12 +93,7 @@ class EventDetails extends Component {
                 }}
               >
                 <p>
-                  50% off so many categories! If that doesn’t entice you, then
-                  we don’t know what will. Make sure to check out the Konga
-                  Clearance Sale this Boxing Day! Better be quick though,
-                  LIMITED STOCK only! And we mean that, so if you see something
-                  you like at a discounted price, buy it! Because if you don’t,
-                  someone else will!
+                 {topicInfo.description}
                 </p>
                 <Button size="mini">
                   <Icon color="red" name="like" /> likes 0
@@ -137,7 +152,7 @@ class EventDetails extends Component {
                   }}
                 >
                   {' '}
-                  29th November 2017 @ 8.00 am
+                  on {new Date(topicInfo.date).toDateString()}
                 </p>
               </div>
               <div
@@ -162,7 +177,8 @@ class EventDetails extends Component {
                   }}
                 >
                   {' '}
-                  29th November 2017 @ 8.00 am
+                  on {new Date(topicInfo.date).toDateString()}
+                  {/* {topicInfo.date} */}
                 </p>
               </div>
               <div
@@ -187,8 +203,7 @@ class EventDetails extends Component {
                   }}
                 >
                   {' '}
-                  Abuja International Trade & Convention Center, Km 8, Umar
-                  Yar'Adua Express Way, (Airport Road), Abuja
+                  {topicInfo.venue}
                 </p>
               </div>
               <div
@@ -232,7 +247,7 @@ class EventDetails extends Component {
                 >
                   Cost:
                 </h5>
-                <p> N50,000</p>
+                <p>{topicInfo.fee}</p>
               </div>
               <div>
                 <a
@@ -270,4 +285,10 @@ class EventDetails extends Component {
   }
 }
 
-export default EventDetails
+const mapStateToProps = state => ({
+  topicDetails: state.events,
+});
+
+export default connect(mapStateToProps, {
+  getEvents
+})(EventDetails);

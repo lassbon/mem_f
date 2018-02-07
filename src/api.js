@@ -151,26 +151,6 @@ export default {
       }),
     likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data),
   },
-  events: {
-    ongoing: token => {
-      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-    completed: token => {
-      return axios.get(`${BASEURL}api/v1/events/completed`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-  },
   payments: {
     donations: id =>
       axios
@@ -231,5 +211,35 @@ export default {
     },
     getOne: id =>
       axios.get(`${BASEURL}api/v1/getprojects/${id}`).then(res => res.data),
+  },
+  events: {
+    reg: data =>
+      axios.get(`${BASEURL}api/v1/getevents`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        }
+      }),
+
+    ongoing: token => {
+      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    completed: token => {
+      return axios.get(`${BASEURL}api/v1/events/completed`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/getevents/${id}`).then(res => res.data),
   },
 }

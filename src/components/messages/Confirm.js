@@ -7,13 +7,16 @@ const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 class Confirm extends React.Component {
   
   componentDidMount() {
-   
+   this.sendDit()
   }
 
   sendDit(referrerId, userId) {
     axios.post(
       `${BASEURL}api/v1/referrer`,
-
+      {
+        referrerId: this.props.match.params.id,
+        userId: this.props.match.params.user
+      },
     )
   }
   render() {

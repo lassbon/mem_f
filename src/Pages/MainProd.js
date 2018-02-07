@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Grid, Image, Card, Comment, Header, Form, Button, Divider, Icon } from 'semantic-ui-react';
 import { getProjects } from '../actions/projects'
 
@@ -284,4 +285,12 @@ class MainProd extends React.Component {
   }
 };
 
-export default MainProd
+const mapStateToProps = state => ({
+  topicDetails: state.projects.topic,
+});
+
+export default connect(mapStateToProps, {
+  getProjects
+})(MainProd);
+
+// export default MainProd

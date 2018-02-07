@@ -24,7 +24,7 @@ import Profile from './Pages/Profile'
 import Confirmation from './components/messages/Message2'
 import OldMembers from './Pages/Old/Old'
 import OldMembers2 from './Pages/Old/Old2'
-import OldmembersPage from './Pages/OldMembers/OldmembersPage';
+import OldmembersPage from './Pages/OldMembers/OldmembersPage'
 import Confirm from './components/messages/Confirm';
 
 const App = ({ location }) => (
@@ -45,7 +45,7 @@ const App = ({ location }) => (
       <Route exact path="/payment" component={Payment} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/events" component={EventPage} />
-      <Route exact path="/confirm" component={Confirm} />
+      <Route exact path="/confirm/:id" component={Confirm} />
       {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
       <Route location={location} path="/signup" exact component={SignUpPage} />
       <Route

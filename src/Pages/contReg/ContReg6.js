@@ -139,7 +139,23 @@ class ContReg6 extends React.Component {
     //   history.push('/signup')
     //   return null
     // }
-
+    const formattedFee =
+      typeof plan === 'object' && plan != null
+        ? 'N' +
+          (plan.fee + '')
+            .split('')
+            .reverse()
+            .reduce(
+              (acc, l, i, arr) =>
+                i % 3 === 0 && i !== arr.length - 1 && i !== 0
+                  ? `${acc},${l}`
+                  : `${acc}${l}`,
+              ''
+            )
+            .split('')
+            .reverse()
+            .join('')
+        : ''
     return (
       <React.Fragment>
         <Grid
@@ -165,7 +181,7 @@ class ContReg6 extends React.Component {
                       <h4>Membership Fee</h4>
                     </Grid.Column>
                     <Grid.Column>
-                      <h4>N{plan.fee}</h4>
+                      <h4>{formattedFee}</h4>
                     </Grid.Column>
                   </Grid>
                   <Grid columns="equal">
@@ -173,7 +189,7 @@ class ContReg6 extends React.Component {
                       <h4>Total</h4>
                     </Grid.Column>
                     <Grid.Column>
-                      <h4>N{plan.fee}</h4>
+                      <h4>{formattedFee}</h4>
                     </Grid.Column>
                   </Grid>
 
@@ -187,8 +203,8 @@ class ContReg6 extends React.Component {
                     <PaystackComponent
                       variablename="Verfication "
                       email={user.email}
-                      amount={plan.fee}
-                      plan={plan.paystack.data.plan_code}
+                      amount={plan.fee * 100}
+                      // plan={plan.paystack.data.plan_code}
                       callback={this.changeToNew}
                     />
                   </div>

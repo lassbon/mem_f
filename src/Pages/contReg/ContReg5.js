@@ -28,7 +28,7 @@ class ContReg5 extends React.Component {
     this.props
       .update(
         {
-          regState: 5,
+          // regState: 5,
           token,
         },
         id

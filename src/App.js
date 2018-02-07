@@ -55,7 +55,12 @@ const App = ({ location }) => (
         component={ForgotPassword}
       />
       <Route location={location} path="/login" exact component={LoginPage} />
-      <Route location={location} path="/oldmem" exact component={OldmembersPage} />
+      <Route
+        location={location}
+        path="/onboard/:id"
+        exact
+        component={OldmembersPage}
+      />
       <UserRoute location={location} path="/app" component={Main} />
     </Switch>
   </div>

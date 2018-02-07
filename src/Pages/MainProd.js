@@ -97,7 +97,7 @@ class MainProd extends React.Component {
                   color: '#fff',
                 }}
               >
-                Trade fair
+                {topicInfo.title}
               </h3>
             </div>
             <figure
@@ -126,7 +126,7 @@ class MainProd extends React.Component {
                 }}
               >
                 <p>
-                  {topicInfo.content}
+                  {topicInfo.description}
                 </p>
                 <Button size="mini">
                   <Icon color="red" name="like" /> likes 0
@@ -185,7 +185,7 @@ class MainProd extends React.Component {
                   }}
                 >
                   {' '}
-                  29th November 2017 @ 8.00 am
+                  on {new Date(topicInfo.createdAt).toDateString()}
                 </p>
               </div>
               <div
@@ -210,7 +210,8 @@ class MainProd extends React.Component {
                   }}
                 >
                   {' '}
-                  29th November 2017 @ 8.00 am
+                  on {new Date(topicInfo.updatedAt).toDateString()}
+                  
                 </p>
               </div>
               <div

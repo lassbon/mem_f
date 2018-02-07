@@ -1,9 +1,10 @@
 import React from 'react'
 import { Message } from 'semantic-ui-react'
+import Axios from 'axios';
 
 class Confirm extends React.Component {
-  constructor(props) {
-    super(props)
+  componentDidMount() {
+
   }
   render() {
     return (

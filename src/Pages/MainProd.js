@@ -1,7 +1,10 @@
 import React from 'react';
+import axios from 'axios'
 import { connect } from 'react-redux';
 import { Grid, Image, Card, Comment, Header, Form, Button, Divider, Icon } from 'semantic-ui-react';
 import { getProjects } from '../actions/projects'
+
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 class MainProd extends React.Component {
 
@@ -18,6 +21,35 @@ class MainProd extends React.Component {
         topicInfo: this.props.topicDetails,
       });
     });
+  }
+
+  likePost = (postId, index) => {
+    const { user: { token, id } } = this.props
+    axios
+      .post(
+        `${BASEURL}api/v1/getprojects`,
+        {
+          id: postId,
+          liker: id,
+        },
+        {
+          headers: {
+            authorization: token,
+            'Content-Type': 'application/form-data',
+            Accept: 'application/form-data',
+          },
+        }
+      )
+      .then(() => {
+        const updatedPosts = this.state.posts.map((post, i) => {
+          post.likes = !post.likes ? [] : post.likes
+          return i === index ? (post.likes.push({}), post) : post
+        })
+        this.setState(prevState => ({
+          ...prevState,
+          post: updatedPosts,
+        }))
+      })
   }
 
   onChange(event) {

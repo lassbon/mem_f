@@ -40,7 +40,7 @@ const Main = ({ match }) => (
         <Route exact path={`${match.path}/payment`} component={Payment} />
         <Route
           exact
-          path={`${match.path}/project/:id`}
+          path={`${match.path}/project/:name`}
           component={MainProd}
         />
         <Redirect to={`${match.url}`} />

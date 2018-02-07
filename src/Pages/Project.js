@@ -103,7 +103,7 @@ class Project extends React.Component {
     const completed = this.state.completedproject.map(jobs => (
       <Tab.Pane attached={false}>
         <Card.Group className="TimeLine">
-          <Link to={`${match.path}/jjj`}>
+          <Link to={`${match.path}/${jobs.id}`}>
           <Card style={{ width: '100%' }}>
             <Card.Content>
               <Image size="big" src={jobs.banner} />

@@ -31,7 +31,7 @@ const Main = ({ match }) => (
         <Route exact path={`${match.path}/library`} component={Library} />
         <Route exact path={`${match.path}/events`} component={EventPage} />
         <Route exact path={`${match.path}/discuss`} component={Discussions} />
-        <Route exact path={`${match.path}/discuss/:name`} component={MainDis} />
+        <Route exact path={`${match.path}/discuss/:id`} component={MainDis} />
         <Route
           exact
           path={`${match.path}/events/:id`}
@@ -40,7 +40,7 @@ const Main = ({ match }) => (
         <Route exact path={`${match.path}/payment`} component={Payment} />
         <Route
           exact
-          path={`${match.path}/project/:name`}
+          path={`${match.path}/project/:id`}
           component={MainProd}
         />
         <Redirect to={`${match.url}`} />

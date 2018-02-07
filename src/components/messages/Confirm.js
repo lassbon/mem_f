@@ -14,8 +14,8 @@ class Confirm extends React.Component {
     axios.post(
       `${BASEURL}api/v1/referrer`,
       {
-        refereeId: this.props.match.params.user,
-        id: this.props.match.params.id
+        refereeId: this.props.match.params.id,
+        id: this.props.match.params.user
       },
     )
   }

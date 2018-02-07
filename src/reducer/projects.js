@@ -17,7 +17,7 @@ export default function user(state = initialState, action = {}) {
       };
     case PROJECTS_BY_ID:
       return {
-        projects: action.projects
+        projects: action.payload
       }
     default: 
       return state

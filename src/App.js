@@ -45,7 +45,7 @@ const App = ({ location }) => (
       <Route exact path="/payment" component={Payment} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/events" component={EventPage} />
-      <Route exact path="/confirm/:id" component={Confirm} />
+      <Route exact path="/confirm/:id/:id" component={Confirm} />
       {/* <Route location={location} path='/login' exact component={LoginPage} /> */}
       <Route location={location} path="/signup" exact component={SignUpPage} />
       <Route

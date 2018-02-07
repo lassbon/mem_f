@@ -16,9 +16,10 @@ class MainProd extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getProjects(this.props.match.params.name).then(() => {
+    this.props.getProjects(this.props.match.params.name).then((data) => {
+      console.log('data', this.props.topicDetails)
       this.setState({
-        topicInfo: this.props.topicDetails,
+        topicInfo: this.props.topicDetails.projects,
       });
     });
   }
@@ -318,7 +319,7 @@ class MainProd extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  topicDetails: state.projects.topic,
+  topicDetails: state.projects,
 });
 
 export default connect(mapStateToProps, {

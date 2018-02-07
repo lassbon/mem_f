@@ -10,7 +10,7 @@ class Confirm extends React.Component {
    this.sendDit()
   }
 
-  sendDit(referrerId, userId) {
+  sendDit(refereeId, id) {
     axios.post(
       `${BASEURL}api/v1/referrer`,
       {

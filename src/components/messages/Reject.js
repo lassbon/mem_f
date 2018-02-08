@@ -10,12 +10,14 @@ class Reject extends React.Component {
    this.sendDit()
   }
 
-  sendDit(refereeId, id) {
+  sendDit() {
+    const refid = this.props.match.params.refereeId
+    const userid = this.props.match.params.id
     axios.delete(
-      `${BASEURL}api/v1/referrer/:id/:refereeId`,
+      `${BASEURL}api/v1/referrer/${userid}/${refid}`,
       {
-        refereeId: this.props.match.params.id,
-        id: this.props.match.params.user
+        refereeId: refid,
+        id: userid
       },
     )
   }

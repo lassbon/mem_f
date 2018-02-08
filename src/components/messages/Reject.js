@@ -22,9 +22,9 @@ class Reject extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Message positive
-          icon='checkmark'
-          header="Confirmed!!"
+        <Message error
+          icon='delete'
+          header="Rejection successful"
         />
       </React.Fragment>
     )

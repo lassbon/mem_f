@@ -31,6 +31,24 @@ class ContReg4 extends React.Component {
     })
   }
 
+  validateReferee = () => {
+    const { location: { pathname }, user: { token } } = this.props
+    const status = pathname.split('/')[2]
+    const refs = ['referee1', 'referee2']
+    // console.log(Object.values(this.state))
+    if (status) {
+      return api.signup.validateReferee(
+        { email: this.state.data[refs[status]] },
+        token
+      )
+    }
+
+    return Promise.all([
+      api.signup.validateReferee({ email: this.state.data.referee1 }, token),
+      api.signup.validateReferee({ email: this.state.data.referee2 }, token),
+    ])
+  }
+
   // handleChange2 = (e) => {
   //   this.setState({
   //   rep2 : {...this.state.rep1, [e.target.name]: e.target.value}})
@@ -51,10 +69,7 @@ class ContReg4 extends React.Component {
     //   token,
     // })
 
-    Promise.all([
-      api.signup.validateReferee({ email: this.state.data.referee1 }, token),
-      api.signup.validateReferee({ email: this.state.data.referee2 }, token),
-    ])
+    this.validateReferee()
       .then(arr => {
         const error = arr.some(({ data: { status } }) => status === 'error')
         if (error) {
@@ -127,7 +142,7 @@ class ContReg4 extends React.Component {
     const refs = ['referee1', 'referee2']
     // console.log(Object.values(this.state))
     if (status) {
-      console.log('status here')
+      console.log(this.state.data[refs[status]], this.state)
       return this.state.data[refs[status]] === null
     }
     return Object.values(this.state.data).some(val => val === null)

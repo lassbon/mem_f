@@ -36,7 +36,7 @@ class ContReg4 extends React.Component {
     const status = pathname.split('/')[2]
     const refs = ['referee1', 'referee2']
     console.log('status', status)
-    if (status) {
+    if (status > -1) {
       console.log('referee state', this.state.data[refs[status - 1]])
       return Promise.resolve([
         api.signup.validateReferee(
@@ -69,10 +69,11 @@ class ContReg4 extends React.Component {
     const status = pathname.split('/')[2] - 1
     const refs = ['referee1', 'referee2']
 
-    const data = status
-      ? { [refs[status]]: this.state.data[refs[status]] }
-      : Object.assign({}, this.state.data)
-
+    const data =
+      status > -1
+        ? { [refs[status]]: this.state.data[refs[status]] }
+        : Object.assign({}, this.state.data)
+    console.log(data)
     // console.log('cont', { ...this.state.data, token, regState: 4 })
     // console.log('alert', {
     //   id,
@@ -88,18 +89,26 @@ class ContReg4 extends React.Component {
         }
         return Promise.resolve(arr)
       })
-      .then(() => this.props.update({ ...data, token, regState: 4 }, id))
+      .then(() =>
+        this.props.update(
+          {
+            ...data,
+            token,
+            regState: 4,
+          },
+          id
+        )
+      )
       .then(() => {
         api.signup.alertReferee({
           id,
-          // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
           token,
         })
       })
       .then(() => {
         this.setState({ loading: false })
         history.push({
-          pathname: status ? '/regmessage' : '/cont5',
+          pathname: status > -1 ? '/regmessage' : '/cont5',
         })
       })
       .catch(err => {
@@ -164,7 +173,7 @@ class ContReg4 extends React.Component {
 
     if (user.regState == null) {
       history.push('/login', {
-        redirect: `/cont4${status ? `/${status}` : ''}`,
+        redirect: `/cont4${status > -1 ? `/${status}` : ''}`,
       })
       return null
     }

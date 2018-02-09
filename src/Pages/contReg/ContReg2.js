@@ -310,7 +310,7 @@ class ContReg2 extends Component {
     // this.setState()
   }
   render() {
-    const { history, user, location: { pathname } } = this.props
+    const {  user, location: { pathname } } = this.props
     const { recommendedLevel } = user
     if (user.regState == null) return <Redirect to="/login" />
     const index = paths.indexOf(pathname)

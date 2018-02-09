@@ -5,7 +5,7 @@ import { Grid, Form, Button, Icon } from 'semantic-ui-react'
 
 // import logo from '../../images/ACCIHD-LOGO.png'
 import './cont.css'
-import axios from 'axios'
+
 import { Link } from 'react-router-dom'
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
@@ -24,7 +24,7 @@ import { paths } from '../../data/registrationPages'
 // }
 
 // const BASEURL = 'http://localhost:1337/'
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 // const sendDetails = (details, id) =>
@@ -83,7 +83,7 @@ class ContReg extends Component {
     // this.setState({ ...this.props.user })
   }
   render() {
-    const { history, user, location: { pathname } } = this.props
+    const { user, location: { pathname } } = this.props
     console.log(user)
     if (user.regState == null) return <Redirect to="/login" />
     const index = paths.indexOf(pathname)

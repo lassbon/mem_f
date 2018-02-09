@@ -36,7 +36,7 @@ class ContReg5 extends React.Component {
           loading: false
         });
         history.push({
-          pathname: "/regmessage",
+          pathname: "/cont7",
           state: {
             id: id
           }
@@ -93,27 +93,22 @@ class ContReg5 extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Card style={{ padding: "20px", width: "100%" }}>
-              <h3>
-                (A registration fee is required to cover the cost of the
-                verification process)
-              </h3>
-
-              <Grid.Column>Registration Fee</Grid.Column>
+              <Grid.Column>Membership Plan</Grid.Column>
               <Grid.Column>
                 <strong>N5,000</strong>
               </Grid.Column>
               <div style={{ margin: "10px auto", marginTop: 40 }}>
                 <PaystackComponent
                   variablename="Verfication "
-                  amount={500000}
+                  amount={50000}
                   callback={this.changeToNew}
                   email={email}
                   metadata={{
                     custom_fields: [
                       {
                         display_name: "Payment For",
-                        variable_name: "registration",
-                        value: "registration"
+                        variable_name: "membership",
+                        value: "membership"
                       },
                       {
                         display_name: "Membership ID",

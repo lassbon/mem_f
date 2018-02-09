@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
+import { Grid, Form, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { update } from '../../actions/auth'

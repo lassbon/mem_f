@@ -1,22 +1,16 @@
 import React from 'react'
-import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
+import { Grid, Form, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { update } from '../../actions/auth'
 import { connect } from 'react-redux'
-import axios from 'axios'
+
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-const sendDetails = (details, id) =>
-  axios.put(`${BASEURL}api/v1/user/${id}`, details, {
-    headers: {
-      'Content-Type': 'application/form-data',
-      Accept: 'application/form-data',
-    },
-  })
+
 
 class ContReg3 extends React.Component {
   state = {
@@ -97,7 +91,7 @@ class ContReg3 extends React.Component {
     let rep2Inputs = []
 
     const inputs = this.state.data
-    const inputsArr = []
+    
     for (let val in inputs) {
       if (rep1.indexOf(val) > -1) {
         rep1Inputs.push(inputs[val])

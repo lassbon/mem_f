@@ -93,11 +93,6 @@ class ContReg5 extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Card style={{ padding: "20px", width: "100%" }}>
-              <h3>
-                (A registration fee is required to cover the cost of the
-                verification process)
-              </h3>
-
               <Grid.Column>Membership Plan</Grid.Column>
               <Grid.Column>
                 <strong>N5,000</strong>

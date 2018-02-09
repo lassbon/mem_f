@@ -35,12 +35,15 @@ class ContReg4 extends React.Component {
     const { location: { pathname }, user: { token } } = this.props
     const status = pathname.split('/')[2]
     const refs = ['referee1', 'referee2']
-    // console.log(Object.values(this.state))
+    console.log('status', status)
     if (status) {
-      return api.signup.validateReferee(
-        { email: this.state.data[refs[status]] },
-        token
-      )
+      console.log('referee state', this.state.data[refs[status - 1]])
+      return Promise.resolve([
+        api.signup.validateReferee(
+          { email: this.state.data[refs[status - 1]] },
+          token
+        ),
+      ])
     }
 
     return Promise.all([
@@ -52,6 +55,7 @@ class ContReg4 extends React.Component {
   // handleChange2 = (e) => {
   //   this.setState({
   //   rep2 : {...this.state.rep1, [e.target.name]: e.target.value}})
+  //
   // }
 
   submit = () => {
@@ -60,7 +64,14 @@ class ContReg4 extends React.Component {
     if (this.validate()) return
 
     this.setState({ loading: true })
-    const { history, user: { id, token } } = this.props
+    const { history, user: { id, token }, location: { pathname } } = this.props
+
+    const status = pathname.split('/')[2] - 1
+    const refs = ['referee1', 'referee2']
+
+    const data = status
+      ? { [refs[status]]: this.state.data[refs[status]] }
+      : Object.assign({}, this.state.data)
 
     // console.log('cont', { ...this.state.data, token, regState: 4 })
     // console.log('alert', {
@@ -71,15 +82,13 @@ class ContReg4 extends React.Component {
 
     this.validateReferee()
       .then(arr => {
-        const error = arr.some(({ data: { status } }) => status === 'error')
+        const error = arr.some(({ status }) => status === 'error')
         if (error) {
           throw new Error(error)
         }
         return Promise.resolve(arr)
       })
-      .then(() =>
-        this.props.update({ ...this.state.data, token, regState: 4 }, id)
-      )
+      .then(() => this.props.update({ ...data, token, regState: 4 }, id))
       .then(() => {
         api.signup.alertReferee({
           id,
@@ -90,11 +99,11 @@ class ContReg4 extends React.Component {
       .then(() => {
         this.setState({ loading: false })
         history.push({
-          pathname: '/cont5',
+          pathname: status ? '/regmessage' : '/cont5',
         })
       })
       .catch(err => {
-        // console.log('err', err)
+        console.log('err', err)
         toast(err.response.data.err)
         this.setState({ loading: false })
       })
@@ -143,7 +152,7 @@ class ContReg4 extends React.Component {
     // console.log(Object.values(this.state))
     if (status) {
       console.log(this.state.data[refs[status]], this.state)
-      return this.state.data[refs[status]] === null
+      return this.state.data[refs[status - 1]] === null
     }
     return Object.values(this.state.data).some(val => val === null)
   }

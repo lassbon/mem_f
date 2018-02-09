@@ -25,8 +25,8 @@ import Confirmation from './components/messages/Message2'
 import OldMembers from './Pages/Old/Old'
 import OldMembers2 from './Pages/Old/Old2'
 import OldmembersPage from './Pages/OldMembers/OldmembersPage'
-import Confirm from './components/messages/Confirm';
-import Reject from './components/messages/Reject';
+import Confirm from './components/messages/Confirm'
+import Reject from './components/messages/Reject'
 
 const App = ({ location }) => (
   <div>
@@ -37,7 +37,8 @@ const App = ({ location }) => (
       <RegRoute exact path="/cont2" component={ContReg2} />
       <GuestRoute exact path="/old" component={OldMembers} />
       <GuestRoute exact path="/old2" component={OldMembers2} />
-      <RegRoute exact path="/cont3" component={ContReg3} />
+      <RegRoute exact path="/cont3/" component={ContReg3} />
+      <RegRoute exact path="/cont3/:status" component={ContReg3} />
       <RegRoute exact path="/cont4" component={ContReg4} />
       <RegRoute exact path="/cont5" component={ContReg5} />
       <RegRoute exact path="/cont6" component={ContReg6} />

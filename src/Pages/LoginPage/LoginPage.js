@@ -17,18 +17,26 @@ const registrationStages = [
 ]
 
 class LoginPage extends React.Component {
-  submit = data =>
-    this.props.login(data).then(user => {
+  submit = data => {
+    console.log('login history', this.props.history)
+    const { history: { location: { state } } } = this.props
+
+    return this.props.login(data).then(user => {
       const { history } = this.props
       const { regState } = user
-      console.log(regState, registrationStages[regState])
-      regState > 5
+      // console.log(regState, registrationStages[regState])
+      regState > 6
         ? history.push('/app')
-        : history.push(registrationStages[regState])
+        : state && state.redirect
+          ? history.push(state.redirect)
+          : history.push(registrationStages[regState])
       // this.props.history.push('/app')
     })
+  }
 
   render() {
+    console.log('login load history', this.props.history)
+
     return (
       <div className="login-form">
         <Grid

@@ -99,12 +99,7 @@ class ContReg3 extends React.Component {
         rep2Inputs.push(inputs[val])
       }
     }
-    // console.log(
-    //   [
-    //     rep1Inputs.some(val => val === null),
-    //     rep2Inputs.some(val => val === null),
-    //   ].some(val => val === false)
-    // )
+
     return [
       rep1Inputs.some(val => val === null),
       rep2Inputs.some(val => val === null),

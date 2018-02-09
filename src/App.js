@@ -38,8 +38,9 @@ const App = ({ location }) => (
       <RegRoute exact path="/cont2" component={ContReg2} />
       <GuestRoute exact path="/old" component={OldMembers} />
       <GuestRoute exact path="/old2" component={OldMembers2} />
-      <RegRoute exact path="/cont3" component={ContReg3} />
+      <RegRoute exact path="/cont3/" component={ContReg3} />
       <RegRoute exact path="/cont4" component={ContReg4} />
+      <RegRoute exact path="/cont4/:status" component={ContReg4} />
       <RegRoute exact path="/cont5" component={ContReg5} />
       <RegRoute exact path="/cont6" component={ContReg7} />
       <RegRoute exact path="/cont7" component={ContReg6} />

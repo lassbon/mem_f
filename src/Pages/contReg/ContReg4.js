@@ -93,14 +93,13 @@ class ContReg4 extends React.Component {
         api.signup.alertReferee({
           id,
           // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
-          token,
-          headers: { "Access-Control-Allow-Origin": "*" }
+          token
         });
       })
       .then(() => {
         this.setState({ loading: false });
         history.push({
-          pathname: status ? "/cont5" : "/regmessage"
+          pathname: status ? "/regmessage" : "/cont5"
         });
       })
       .catch(err => {

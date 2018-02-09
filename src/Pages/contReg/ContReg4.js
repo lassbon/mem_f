@@ -55,6 +55,7 @@ class ContReg4 extends React.Component {
   // handleChange2 = (e) => {
   //   this.setState({
   //   rep2 : {...this.state.rep1, [e.target.name]: e.target.value}})
+  //
   // }
 
   submit = () => {

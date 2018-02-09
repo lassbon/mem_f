@@ -122,7 +122,14 @@ class ContReg4 extends React.Component {
 
   validate = () => {
     // perform validation here
+    const { user, location: { pathname }, history } = this.props
+    const status = pathname.split('/')[2]
+    const refs = ['referee1', 'referee2']
     console.log(Object.values(this.state))
+    if (status) {
+      console.log('status here')
+      return this.state[refs[status]] === null
+    }
     return Object.values(this.state.data).some(val => val === null)
   }
 

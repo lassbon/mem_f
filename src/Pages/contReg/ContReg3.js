@@ -114,18 +114,11 @@ class ContReg3 extends React.Component {
   }
 
   render() {
-    const { user, location: { pathname }, history } = this.props
-    // console.log('cont3 match', this.props)
-    const status = pathname.split('/')[2]
-
-    if (user.regState == null) {
-      history.push('/login', {
-        redirect: `/cont3${status ? `/${status}` : ''}`,
-      })
-      return null
-    }
+    const { user, location: { pathname } } = this.props
+    if (user.regState == null) return <Redirect to="/login" />
     const index = paths.indexOf(pathname)
     const regState = user.regState
+    console.log('cont3', regState)
     if (regState < index) {
       return <Redirect to={paths[regState]} />
     }
@@ -142,98 +135,94 @@ class ContReg3 extends React.Component {
         >
           <h2>Company Representatives</h2>
           <Grid columns="equal">
-            {!status || status == 1 ? (
-              <Grid.Column>
-                <Form.Field loading={this.state.loading}>
-                  <Form.Input
-                    placeholder="Name"
-                    name="companyRepName1"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <Form.Input
-                    type="email"
-                    placeholder="email"
-                    name="companyRepEmail1"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <Form.Input
-                    placeholder="Phone number"
-                    name="companyRepPhone1"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Upload Passport Photographs of the Company Representative(s)
-                  </label>
-                  <Form.Input
-                    type="file"
-                    name="companyRepPassportUrl1"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Upload curriculum Vitae of Company Representative(s)
-                  </label>
-                  <Form.Input
-                    type="file"
-                    name="companyRepCVurl"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-              </Grid.Column>
-            ) : null}
-            {!status || status == 2 ? (
-              <Grid.Column>
-                <Form.Field loading={this.state.loading}>
-                  <Form.Input
-                    placeholder="Name"
-                    name="companyRepName2"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <Form.Input
-                    type="email"
-                    placeholder="email"
-                    name="companyRepEmail2"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <Form.Input
-                    placeholder="Phone number"
-                    name="companyRepPhone2"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Upload Passport Photographs of the Company Representative(s)
-                  </label>
-                  <Form.Input
-                    type="file"
-                    name="companyRepPassportUrl2"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>
-                    Upload curriculum Vitae of Company Representative(s)
-                  </label>
-                  <Form.Input
-                    type="file"
-                    name="companyCOIUrl"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-              </Grid.Column>
-            ) : null}
+            <Grid.Column>
+              <Form.Field loading={this.state.loading}>
+                <Form.Input
+                  placeholder="Name"
+                  name="companyRepName1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  type="email"
+                  placeholder="email"
+                  name="companyRepEmail1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  placeholder="Phone number"
+                  name="companyRepPhone1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload Passport Photographs of the Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepPassportUrl1"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload curriculum Vitae of Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepCVurl"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+            <Grid.Column>
+              <Form.Field loading={this.state.loading}>
+                <Form.Input
+                  placeholder="Name"
+                  name="companyRepName2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  type="email"
+                  placeholder="email"
+                  name="companyRepEmail2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  placeholder="Phone number"
+                  name="companyRepPhone2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload Passport Photographs of the Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyRepPassportUrl2"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Upload curriculum Vitae of Company Representative(s)
+                </label>
+                <Form.Input
+                  type="file"
+                  name="companyCOIUrl"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
           </Grid>
           <Grid centered columns={2}>
             <Grid.Column>

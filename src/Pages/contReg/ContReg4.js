@@ -127,8 +127,16 @@ class ContReg4 extends React.Component {
   }
 
   render() {
-    const { user, location: { pathname } } = this.props
-    if (user.regState == null) return <Redirect to="/login" />
+    const { user, location: { pathname }, history } = this.props
+    // console.log('cont3 match', this.props)
+    const status = pathname.split('/')[2]
+
+    if (user.regState == null) {
+      history.push('/login', {
+        redirect: `/cont4${status ? `/${status}` : ''}`,
+      })
+      return null
+    }
     const index = paths.indexOf(pathname)
     const regState = user.regState
     if (regState < index) {
@@ -156,26 +164,13 @@ class ContReg4 extends React.Component {
         >
           <h2>Please fill member id and email of two financial members</h2>
           <Grid columns="equal">
-            <Grid.Column>
-              <Form.Field>
-                <Form.Input
-                  type="email"
-                  placeholder="email"
-                  name="referee1"
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input type="text" placeholder="membership id" />
-              </Form.Field>
-            </Grid.Column>
-            <Grid.Column>
+            {!status || status == 1 ? (
               <Grid.Column>
                 <Form.Field>
                   <Form.Input
                     type="email"
                     placeholder="email"
-                    name="referee2"
+                    name="referee1"
                     onChange={this.handleChange}
                   />
                 </Form.Field>
@@ -183,7 +178,24 @@ class ContReg4 extends React.Component {
                   <Form.Input type="text" placeholder="membership id" />
                 </Form.Field>
               </Grid.Column>
-            </Grid.Column>
+            ) : null}
+            {!status || status == 1 ? (
+              <Grid.Column>
+                <Grid.Column>
+                  <Form.Field>
+                    <Form.Input
+                      type="email"
+                      placeholder="email"
+                      name="referee2"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Form.Input type="text" placeholder="membership id" />
+                  </Form.Field>
+                </Grid.Column>
+              </Grid.Column>
+            ) : null}
           </Grid>
           <div style={{ marginTop: 30 }}>
             <Button to="/cont3" as={Link}>

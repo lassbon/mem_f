@@ -13,7 +13,8 @@ const registrationStages = [
   "/cont3",
   "/cont4",
   "/cont5",
-  "/cont6"
+  "/cont6",
+  "/cont7"
 ];
 
 class LoginPage extends React.Component {

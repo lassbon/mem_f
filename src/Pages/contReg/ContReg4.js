@@ -179,7 +179,7 @@ class ContReg4 extends React.Component {
                 </Form.Field>
               </Grid.Column>
             ) : null}
-            {!status || status == 1 ? (
+            {!status || status == 2 ? (
               <Grid.Column>
                 <Grid.Column>
                   <Form.Field>

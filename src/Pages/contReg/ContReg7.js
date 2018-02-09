@@ -9,7 +9,7 @@ import { paths } from "../../data/registrationPages";
 
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-class ContReg5 extends React.Component {
+class ContReg7 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -184,5 +184,5 @@ class ContReg5 extends React.Component {
   }
 }
 export default withRouter(
-  connect(({ user }) => ({ user }), { update })(ContReg5)
+  connect(({ user }) => ({ user }), { update })(ContReg7)
 );

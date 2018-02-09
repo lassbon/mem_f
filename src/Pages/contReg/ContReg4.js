@@ -1,20 +1,20 @@
-import React from 'react'
-import { Grid, Form, Button, Icon } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { update } from '../../actions/auth'
-import { ToastContainer, toast } from 'react-toastify'
-import { Redirect, withRouter } from 'react-router-dom'
-import api from '../../api'
-import { paths } from '../../data/registrationPages'
+import React from "react";
+import { Grid, Form, Button, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { update } from "../../actions/auth";
+import { ToastContainer, toast } from "react-toastify";
+import { Redirect, withRouter } from "react-router-dom";
+import api from "../../api";
+import { paths } from "../../data/registrationPages";
 
 class ContReg4 extends React.Component {
   state = {
     loading: false,
     data: {
       referee1: null,
-      referee2: null,
-    },
+      referee2: null
+    }
     // rep1 : {
     //   id : null,
     //   email : null
@@ -23,34 +23,34 @@ class ContReg4 extends React.Component {
     //   id : null,
     //   email : null
     // }
-  }
+  };
 
   handleChange = (e, s) => {
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
-    })
-  }
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+  };
 
   validateReferee = () => {
-    const { location: { pathname }, user: { token } } = this.props
-    const status = pathname.split('/')[2]
-    const refs = ['referee1', 'referee2']
-    console.log('status', status)
+    const { location: { pathname }, user: { token } } = this.props;
+    const status = pathname.split("/")[2];
+    const refs = ["referee1", "referee2"];
+    console.log("status", status);
     if (status) {
-      console.log('referee state', this.state.data[refs[status - 1]])
+      console.log("referee state", this.state.data[refs[status - 1]]);
       return Promise.resolve([
         api.signup.validateReferee(
           { email: this.state.data[refs[status - 1]] },
           token
-        ),
-      ])
+        )
+      ]);
     }
 
     return Promise.all([
       api.signup.validateReferee({ email: this.state.data.referee1 }, token),
-      api.signup.validateReferee({ email: this.state.data.referee2 }, token),
-    ])
-  }
+      api.signup.validateReferee({ email: this.state.data.referee2 }, token)
+    ]);
+  };
 
   // handleChange2 = (e) => {
   //   this.setState({
@@ -61,17 +61,17 @@ class ContReg4 extends React.Component {
   submit = () => {
     // console.log(this.state)
     // console.log(this.state)
-    if (this.validate()) return
+    if (this.validate()) return;
 
-    this.setState({ loading: true })
-    const { history, user: { id, token }, location: { pathname } } = this.props
+    this.setState({ loading: true });
+    const { history, user: { id, token }, location: { pathname } } = this.props;
 
-    const status = pathname.split('/')[2] - 1
-    const refs = ['referee1', 'referee2']
+    const status = pathname.split("/")[2] - 1;
+    const refs = ["referee1", "referee2"];
 
     const data = status
       ? { [refs[status]]: this.state.data[refs[status]] }
-      : Object.assign({}, this.state.data)
+      : Object.assign({}, this.state.data);
 
     // console.log('cont', { ...this.state.data, token, regState: 4 })
     // console.log('alert', {
@@ -82,11 +82,11 @@ class ContReg4 extends React.Component {
 
     this.validateReferee()
       .then(arr => {
-        const error = arr.some(({ status }) => status === 'error')
+        const error = arr.some(({ status }) => status === "error");
         if (error) {
-          throw new Error(error)
+          throw new Error(error);
         }
-        return Promise.resolve(arr)
+        return Promise.resolve(arr);
       })
       .then(() => this.props.update({ ...data, token, regState: 4 }, id))
       .then(() => {
@@ -94,19 +94,20 @@ class ContReg4 extends React.Component {
           id,
           // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
           token,
-        })
+          headers: { "Access-Control-Allow-Origin": "*" }
+        });
       })
       .then(() => {
-        this.setState({ loading: false })
+        this.setState({ loading: false });
         history.push({
-          pathname: status ? '/regmessage' : '/cont5',
-        })
+          pathname: status ? "/cont5" : "/regmessage"
+        });
       })
       .catch(err => {
-        console.log('err', err)
-        toast(err.response.data.err)
-        this.setState({ loading: false })
-      })
+        console.log("err", err);
+        toast(err.response.data.err);
+        this.setState({ loading: false });
+      });
 
     // api.signup
     //   .contreg({ ...this.state.data, token, regState: 4 }, id)
@@ -142,36 +143,36 @@ class ContReg4 extends React.Component {
     // .then(() => {
     //   this.setState({ loading: true })
     // })
-  }
+  };
 
   validate = () => {
     // perform validation here
-    const { user, location: { pathname }, history } = this.props
-    const status = pathname.split('/')[2]
-    const refs = ['referee1', 'referee2']
+    const { user, location: { pathname }, history } = this.props;
+    const status = pathname.split("/")[2];
+    const refs = ["referee1", "referee2"];
     // console.log(Object.values(this.state))
     if (status) {
-      console.log(this.state.data[refs[status]], this.state)
-      return this.state.data[refs[status - 1]] === null
+      console.log(this.state.data[refs[status]], this.state);
+      return this.state.data[refs[status - 1]] === null;
     }
-    return Object.values(this.state.data).some(val => val === null)
-  }
+    return Object.values(this.state.data).some(val => val === null);
+  };
 
   render() {
-    const { user, location: { pathname }, history } = this.props
+    const { user, location: { pathname }, history } = this.props;
     // console.log('cont3 match', this.props)
-    const status = pathname.split('/')[2]
+    const status = pathname.split("/")[2];
 
     if (user.regState == null) {
-      history.push('/login', {
-        redirect: `/cont4${status ? `/${status}` : ''}`,
-      })
-      return null
+      history.push("/login", {
+        redirect: `/cont4${status ? `/${status}` : ""}`
+      });
+      return null;
     }
-    const index = paths.indexOf(pathname)
-    const regState = user.regState
+    const index = paths.indexOf(pathname);
+    const regState = user.regState;
     if (regState < index) {
-      return <Redirect to={paths[regState]} />
+      return <Redirect to={paths[regState]} />;
     }
     return (
       <React.Fragment>
@@ -185,11 +186,11 @@ class ContReg4 extends React.Component {
         />
         <Form
           style={{
-            width: '70%',
-            margin: '0 auto',
-            textAlign: 'center',
-            height: '100%',
-            minHeight: '50vh',
+            width: "70%",
+            margin: "0 auto",
+            textAlign: "center",
+            height: "100%",
+            minHeight: "50vh"
           }}
           loading={this.state.loading}
         >
@@ -237,22 +238,22 @@ class ContReg4 extends React.Component {
             </Button>
           </div>
         </Form>
-        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
+        <Grid style={{ background: "#34495E", textAlign: "center" }}>
           <Grid.Column width="5">
-            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
-            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
+            <h2 style={{ color: "#D5C67A", fontSize: "50px" }}>3215</h2>
+            <h3 style={{ color: "white", marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
           <Grid.Column width="6" verticalAlign="middle">
             <Icon
               name="facebook square"
               size="big"
-              style={{ color: 'white' }}
+              style={{ color: "white" }}
             />
-            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
-            <Icon name="twitter" size="big" style={{ color: 'white' }} />
+            <Icon name="linkedin" size="big" style={{ color: "white" }} />
+            <Icon name="twitter" size="big" style={{ color: "white" }} />
           </Grid.Column>
           <Grid.Column width="5">
-            <h3 style={{ color: 'white' }}>Links</h3>
+            <h3 style={{ color: "white" }}>Links</h3>
             <Link to="#" style={{ marginRight: 10 }}>
               ACCI website
             </Link>
@@ -269,21 +270,21 @@ class ContReg4 extends React.Component {
         </Grid>
         <footer
           style={{
-            verticalAlign: 'middle',
-            background: 'white',
-            color: '#656768',
-            textAlign: 'center',
-            padding: '10px',
-            fontWeight: 'bold',
+            verticalAlign: "middle",
+            background: "white",
+            color: "#656768",
+            textAlign: "center",
+            padding: "10px",
+            fontWeight: "bold"
           }}
         >
           Copyright © 2017 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
-    )
+    );
   }
 }
 
 export default withRouter(
   connect(({ user }) => ({ user }), { update })(ContReg4)
-)
+);

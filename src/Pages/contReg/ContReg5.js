@@ -182,7 +182,7 @@ class ContReg5 extends React.Component {
             fontWeight: "bold"
           }}
         >
-          Copyright © 2017 Abuja Chamber of Commerce & Industry
+          Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
     );

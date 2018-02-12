@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Grid,
   Container,
@@ -8,7 +8,7 @@ import {
   Header,
   Form
 } from "semantic-ui-react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import "./welcome.css";
 import logo from "../../images/ACCIHD-LOGO.png";
@@ -22,7 +22,7 @@ const WelcomePage = () => (
           <Image src={logo} alt="acci logo" />
         </Grid.Column>
         <Grid.Column width={5}>
-            <Button as={Link} to="/login" className="btn" content="Login" />
+          <Button as={Link} to="/login" className="btn" content="Login" />
           <Button
             as={Link}
             to="/signup"
@@ -43,7 +43,7 @@ const WelcomePage = () => (
         </Header>
       </Grid.Column>
       <Grid.Column width={7}>
-        <Image style={{height: '100%'}} src={screen} alt="" />
+        <Image style={{ height: "100%" }} src={screen} alt="" />
       </Grid.Column>
     </Grid>
     <Grid style={{ height: "70vh" }}>
@@ -76,33 +76,55 @@ const WelcomePage = () => (
           INCREASE YOUR NETWORK
         </Header>
         <p>NOT A MEMBER?</p>
-        <Button as={Link} to='/signup' className="btn btn-reverse" style={{ margin: 0 }}>
+        <Button
+          as={Link}
+          to="/signup"
+          className="btn btn-reverse"
+          style={{ margin: 0 }}
+        >
           REGISTER
         </Button>
       </Grid.Column>
     </Grid>
     <Grid style={{ background: "#34495E", textAlign: "center" }}>
       <Grid.Column width="5">
-        <h2 style={{ color: '#D5C67A', fontSize: '50px'}}>3215</h2>
-        <h3 style={{color: 'white', marginTop: 5}}>Registered Members</h3>
+        <h2 style={{ color: "#D5C67A", fontSize: "50px" }}>3215</h2>
+        <h3 style={{ color: "white", marginTop: 5 }}>Registered Members</h3>
       </Grid.Column>
-      <Grid.Column width="6" verticalAlign='middle'>
-        <Icon name="facebook square" size='big' style={{color: 'white'}} />
-        <Icon name="linkedin" size='big' style={{color: 'white'}} />
-        <Icon name="twitter" size='big' style={{color: 'white'}} />
+      <Grid.Column width="6" verticalAlign="middle">
+        <Icon name="facebook square" size="big" style={{ color: "white" }} />
+        <Icon name="linkedin" size="big" style={{ color: "white" }} />
+        <Icon name="twitter" size="big" style={{ color: "white" }} />
       </Grid.Column>
       <Grid.Column width="5">
-        <h3 style={{color: 'white'}}>Links</h3>
-        <Link to='#' style={{marginRight: 10}}>ACCI website</Link>
-        <Link to='#' style={{ marginRight: 10 }}>Membership Directory</Link>
-        <Link to='#' style={{ marginRight: 10 }}>ACCI Events</Link>
-        <Link to='#' style={{marginRight: 10}}>Shop on ACCI</Link>
+        <h3 style={{ color: "white" }}>Links</h3>
+        <Link to="#" style={{ marginRight: 10 }}>
+          ACCI website
+        </Link>
+        <Link to="#" style={{ marginRight: 10 }}>
+          Membership Directory
+        </Link>
+        <Link to="#" style={{ marginRight: 10 }}>
+          ACCI Events
+        </Link>
+        <Link to="#" style={{ marginRight: 10 }}>
+          Shop on ACCI
+        </Link>
       </Grid.Column>
     </Grid>
-    <footer style={{ verticalAlign: 'middle', background: 'white', color: '#656768', textAlign: 'center', padding: '10px', fontWeight: 'bold'}}>
-      Copyright © 2017 Abuja Chamber of Commerce & Industry
+    <footer
+      style={{
+        verticalAlign: "middle",
+        background: "white",
+        color: "#656768",
+        textAlign: "center",
+        padding: "10px",
+        fontWeight: "bold"
+      }}
+    >
+      Copyright © 2018 Abuja Chamber of Commerce & Industry
     </footer>
   </React.Fragment>
 );
 
-export default WelcomePage
+export default WelcomePage;

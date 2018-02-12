@@ -27,26 +27,16 @@ class ContReg6 extends React.Component {
     const { id, token } = user;
     const { history } = this.props;
     // let token = axios.defaults.headers.common.authorization
-    this.setState({
-      loading: true
-    });
-    this.props
-      .update(
-        {
-          regState: 6,
-          token
-        },
-        id
-      )
-      .then(() => {
-        this.setState({
-          loading: false
-        });
-        localStorage.acciJWT = token;
-        history.push({
-          pathname: "/confirmation"
-        });
+    //"membershipDue": "paid",
+    //roshbon@gmail.com
+    this.setState({ loading: true });
+    this.props.update({ regState: 6, token }, id).then(() => {
+      this.setState({ loading: false });
+      localStorage.acciJWT = token;
+      history.push({
+        pathname: "/confirmation"
       });
+    });
     // axios
     //   .put(
     //     `${BASEURL}api/v1/user/${id}`,

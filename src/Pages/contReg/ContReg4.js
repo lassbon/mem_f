@@ -32,12 +32,21 @@ class ContReg4 extends React.Component {
   };
 
   validateReferee = () => {
+<<<<<<< HEAD
     const { location: { pathname }, user: { token } } = this.props;
     const status = pathname.split("/")[2];
     const refs = ["referee1", "referee2"];
     console.log("status", status);
     if (status) {
       console.log("referee state", this.state.data[refs[status - 1]]);
+=======
+    const { location: { pathname }, user: { token } } = this.props
+    const status = pathname.split('/')[2]
+    const refs = ['referee1', 'referee2']
+    console.log('status', status)
+    if (status > -1) {
+      console.log('referee state', this.state.data[refs[status - 1]])
+>>>>>>> 4ac0b57c4d8449ba00bcb93f806ac89e5f1de3ac
       return Promise.resolve([
         api.signup.validateReferee(
           { email: this.state.data[refs[status - 1]] },
@@ -69,13 +78,22 @@ class ContReg4 extends React.Component {
     const status = pathname.split("/")[2] - 1;
     const refs = ["referee1", "referee2"];
 
+<<<<<<< HEAD
     const data = status
       ? { [refs[status]]: this.state.data[refs[status]] }
       : Object.assign({}, this.state.data);
 
+=======
+    const data =
+      status > -1
+        ? { [refs[status]]: this.state.data[refs[status]] }
+        : Object.assign({}, this.state.data)
+    console.log(data)
+>>>>>>> 4ac0b57c4d8449ba00bcb93f806ac89e5f1de3ac
     // console.log('cont', { ...this.state.data, token, regState: 4 })
     // console.log('alert', {
     //   id,
+
     //   referrerUrl: 'http://acci.herokuapp.com/cont4',
     //   token,
     // })
@@ -88,19 +106,38 @@ class ContReg4 extends React.Component {
         }
         return Promise.resolve(arr);
       })
-      .then(() => this.props.update({ ...data, token, regState: 4 }, id))
+      .then(() =>
+        this.props.update(
+          {
+            ...data,
+            token,
+            regState: 4,
+          },
+          id
+        )
+      )
       .then(() => {
         api.signup.alertReferee({
           id,
+<<<<<<< HEAD
           // referrerUrl: 'http://http://acci.herokuapp.com/cont4',
           token
         });
+=======
+          token,
+        })
+>>>>>>> 4ac0b57c4d8449ba00bcb93f806ac89e5f1de3ac
       })
       .then(() => {
         this.setState({ loading: false });
         history.push({
+<<<<<<< HEAD
           pathname: status ? "/regmessage" : "/cont5"
         });
+=======
+          pathname: '/regmessage',
+        })
+>>>>>>> 4ac0b57c4d8449ba00bcb93f806ac89e5f1de3ac
       })
       .catch(err => {
         console.log("err", err);
@@ -163,10 +200,17 @@ class ContReg4 extends React.Component {
     const status = pathname.split("/")[2];
 
     if (user.regState == null) {
+<<<<<<< HEAD
       history.push("/login", {
         redirect: `/cont4${status ? `/${status}` : ""}`
       });
       return null;
+=======
+      history.push('/login', {
+        redirect: `/cont4${status > -1 ? `/${status}` : ''}`,
+      })
+      return null
+>>>>>>> 4ac0b57c4d8449ba00bcb93f806ac89e5f1de3ac
     }
     const index = paths.indexOf(pathname);
     const regState = user.regState;

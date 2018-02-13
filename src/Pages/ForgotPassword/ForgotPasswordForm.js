@@ -47,34 +47,28 @@ class ForgotPasswordForm extends React.Component {
     const { errors, data, loading } = this.state;
 
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: "100%" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Form onSubmit={this.onSubmit} loading={loading}>
-            {errors.err && (
-              <Message negative>
-                <Message.Header>{errors.err}</Message.Header>
-              </Message>
-            )}
-            <Form.Field error={!!errors.email}>
-              {/* <label htmlFor="email">Email</label> */}
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="email"
-                value={data.email}
-                onChange={this.onChange}
-              />
-              {errors.email && <InlineError text={errors.email} />}
-            </Form.Field>
-            <Button primary>ForgotPasswordForm</Button>
-          </Form>
-        </Grid.Column>
-      </Grid>
+      <Form size="large" onSubmit={this.onSubmit} loading={loading}>
+        {errors.err && (
+          <Message negative>
+            <Message.Header>{errors.err}</Message.Header>
+          </Message>
+        )}
+        <Form.Field error={!!errors.email}>
+          {/* <label htmlFor="email">Email</label> */}
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="email"
+            value={data.email}
+            onChange={this.onChange}
+          />
+          {errors.email && <InlineError text={errors.email} />}
+        </Form.Field>
+        <Button color="teal" fluid size="large">
+          ForgotPasswordForm
+        </Button>
+      </Form>
     );
   }
 }

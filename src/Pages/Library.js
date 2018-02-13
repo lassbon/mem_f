@@ -11,11 +11,16 @@ const centerText = {
 class Library extends React.Component {
   componentDidMount() {
     this.getDocs();
+    this.getOneCat();
     console.log(this.getDocs);
   }
 
   getDocs() {
     axios.get(`${BASEURL}api/v1/knowledgebase/category/`);
+  }
+  getOneCat() {
+    const id = "general";
+    axios.get(`${BASEURL}api/v1/knowledgebase/category/${id}`);
   }
 
   render() {
@@ -43,10 +48,7 @@ class Library extends React.Component {
                     verticalAlign="middle"
                   />
                   <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
+                    <List.Header style={{ color: "rgba(10, 1, 1, 0.674)" }}>
                       General
                     </List.Header>
                   </List.Content>
@@ -160,7 +162,7 @@ class Library extends React.Component {
             </Grid.Column>
             <Grid.Column width={11}>
               <Card style={{ width: "100%" }}>
-                <Card.Content header="Your Uploads" style={centerText} />
+                <Card.Content header="General" style={centerText} />
                 <Card.Content>
                   <Grid>
                     <Grid.Row style={{ margin: "0 auto" }}>
@@ -188,11 +190,6 @@ class Library extends React.Component {
                     </Grid.Row>
                   </Grid>
                 </Card.Content>
-                <Card.Content extra>
-                  <Button basic color="green" size="tiny">
-                    <Icon name="add circle" />upload to library
-                  </Button>
-                </Card.Content>
               </Card>
             </Grid.Column>
             <Grid.Column width={5}>
@@ -203,7 +200,7 @@ class Library extends React.Component {
               >
                 <List.Item>
                   <List.Content>
-                    <List.Header as="h4">Recent Uploads</List.Header>
+                    <List.Header as="h4">Your Uploads</List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
@@ -215,9 +212,6 @@ class Library extends React.Component {
                     >
                       The Interesting Narrative of the Life of Olaudah Equiano
                     </List.Header>
-                    <List.Description>
-                      <Icon name="download" size="small" />
-                    </List.Description>
                   </List.Content>
                 </List.Item>
                 <List.Item>
@@ -229,9 +223,6 @@ class Library extends React.Component {
                     >
                       The Interesting Narrative of the Life of Olaudah Equiano
                     </List.Header>
-                    <List.Description>
-                      <Icon name="download" size="small" />
-                    </List.Description>
                   </List.Content>
                 </List.Item>
                 <List.Item>
@@ -243,11 +234,13 @@ class Library extends React.Component {
                     >
                       The Interesting Narrative of the Life of Olaudah Equiano
                     </List.Header>
-                    <List.Description>
-                      <Icon name="download" size="small" />
-                    </List.Description>
                   </List.Content>
                 </List.Item>
+                <Card.Content extra>
+                  <Button basic color="green" size="tiny">
+                    <Icon name="add circle" />upload to library
+                  </Button>
+                </Card.Content>
               </List>
             </Grid.Column>
           </Grid.Row>

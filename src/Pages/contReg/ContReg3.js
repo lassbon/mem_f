@@ -95,18 +95,19 @@ class ContReg3 extends React.Component {
                 },
               }
             )
-          : Promise.resolve({ bannerUrl: '' })
+          : Promise.resolve({ data: { bannerUrl: '' } })
       })
     )
       .then(res => {
+        console.log(res)
         return this.props.update(
           {
             ...this.state.data,
-            companyRepPassportUrl1: res[0].bannerUrl,
-            companyRepPassportUrl2: res[1].bannerUrl,
-            companyRepCVUrl2: res[2].bannerUrl,
-            companyCOIUrl: res[3].bannerUrl,
-            companyRepCVurl: res[4].bannerUrl,
+            companyRepPassportUrl1: res[0].data.bannerUrl,
+            companyRepPassportUrl2: res[1].data.bannerUrl,
+            companyRepCVUrl2: res[2].data.bannerUrl,
+            companyCOIUrl: res[3].data.bannerUrl,
+            companyRepCVurl: res[4].data.bannerUrl,
             token,
             regState: 3,
           },

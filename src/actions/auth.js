@@ -58,8 +58,12 @@ export const logout = () => dispatch => {
   dispatch(userLoggedOut());
 };
 
-export const resetPasswordRequest = ({ email }) => () =>
+export const resetPasswordRequest = ({ email }) => () => {
   api.user.resetPasswordRequest(email);
+  // console.log("yoooo");
+};
+// api.user.resetPasswordRequest(email);
+// console.log("yoooo");
 
 export const resetPassword = data => () => api.user.resetPassword(data);
 

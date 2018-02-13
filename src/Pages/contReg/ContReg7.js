@@ -1,47 +1,47 @@
-import React from "react";
-import { Card, Grid, Dimmer, Loader, Segment, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import PaystackComponent from "../../components/PaystackComponent";
-import { connect } from "react-redux";
-import { update } from "../../actions/auth";
-import { Redirect, withRouter } from "react-router-dom";
-import { paths } from "../../data/registrationPages";
+import React from 'react'
+import { Card, Grid, Dimmer, Loader, Segment, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import PaystackComponent from '../../components/PaystackComponent'
+import { connect } from 'react-redux'
+import { update } from '../../actions/auth'
+import { Redirect, withRouter } from 'react-router-dom'
+import { paths } from '../../data/registrationPages'
 
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg7 extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      loading: false
-    };
-    this.changeToNew = this.changeToNew.bind(this);
+      loading: false,
+    }
+    this.changeToNew = this.changeToNew.bind(this)
   }
 
   changeToNew() {
-    const { history, user: { id, token } } = this.props;
+    const { history, user: { id, token } } = this.props
     this.setState({
-      loading: true
-    });
+      loading: true,
+    })
     this.props
       .update(
         {
-          // regState: 5,
-          token
+          regState: 6,
+          token,
         },
         id
       )
       .then(() => {
         this.setState({
-          loading: false
-        });
+          loading: false,
+        })
         history.push({
-          pathname: "/cont7",
+          pathname: '/cont7',
           state: {
-            id: id
-          }
-        });
-      });
+            id: id,
+          },
+        })
+      })
     // axios
     //   .put(
     //     `${BASEURL}api/v1/user/${id}`,
@@ -68,14 +68,14 @@ class ContReg7 extends React.Component {
   }
 
   render() {
-    const { user, location: { pathname } } = this.props;
-    const { id, email } = user;
+    const { user, location: { pathname } } = this.props
+    const { id, email } = user
 
-    if (user.regState == null) return <Redirect to="/login" />;
-    const index = paths.indexOf(pathname);
-    const regState = user.regState;
+    if (user.regState == null) return <Redirect to="/login" />
+    const index = paths.indexOf(pathname)
+    const regState = user.regState
     if (regState < index) {
-      return <Redirect to={paths[regState]} />;
+      return <Redirect to={paths[regState]} />
     }
     // const { location: { state }, history } = this.props
     // console.log(this.props)
@@ -88,16 +88,16 @@ class ContReg7 extends React.Component {
       <React.Fragment>
         <Grid
           textAlign="center"
-          style={{ height: "100%", marginBottom: 50 }}
+          style={{ height: '100%', marginBottom: 50 }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Card style={{ padding: "20px", width: "100%" }}>
+            <Card style={{ padding: '20px', width: '100%' }}>
               <Grid.Column>Membership Plan</Grid.Column>
               <Grid.Column>
                 <strong>N5,000</strong>
               </Grid.Column>
-              <div style={{ margin: "10px auto", marginTop: 40 }}>
+              <div style={{ margin: '10px auto', marginTop: 40 }}>
                 <PaystackComponent
                   variablename="Verfication "
                   amount={50000}
@@ -106,16 +106,16 @@ class ContReg7 extends React.Component {
                   metadata={{
                     custom_fields: [
                       {
-                        display_name: "Payment For",
-                        variable_name: "membership",
-                        value: "membership"
+                        display_name: 'Payment For',
+                        variable_name: 'membership',
+                        value: 'membership',
                       },
                       {
-                        display_name: "Membership ID",
-                        variable_name: "membership_id",
-                        value: id
-                      }
-                    ]
+                        display_name: 'Membership ID',
+                        variable_name: 'membership_id',
+                        value: id,
+                      },
+                    ],
                   }}
                 />
               </div>
@@ -137,22 +137,22 @@ class ContReg7 extends React.Component {
             </Card>
           </Grid.Column>
         </Grid>
-        <Grid style={{ background: "#34495E", textAlign: "center" }}>
+        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
           <Grid.Column width="5">
-            <h2 style={{ color: "#D5C67A", fontSize: "50px" }}>3215</h2>
-            <h3 style={{ color: "white", marginTop: 5 }}>Registered Members</h3>
+            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
+            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
           <Grid.Column width="6" verticalAlign="middle">
             <Icon
               name="facebook square"
               size="big"
-              style={{ color: "white" }}
+              style={{ color: 'white' }}
             />
-            <Icon name="linkedin" size="big" style={{ color: "white" }} />
-            <Icon name="twitter" size="big" style={{ color: "white" }} />
+            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
+            <Icon name="twitter" size="big" style={{ color: 'white' }} />
           </Grid.Column>
           <Grid.Column width="5">
-            <h3 style={{ color: "white" }}>Links</h3>
+            <h3 style={{ color: 'white' }}>Links</h3>
             <Link to="#" style={{ marginRight: 10 }}>
               ACCI website
             </Link>
@@ -169,20 +169,20 @@ class ContReg7 extends React.Component {
         </Grid>
         <footer
           style={{
-            verticalAlign: "middle",
-            background: "white",
-            color: "#656768",
-            textAlign: "center",
-            padding: "10px",
-            fontWeight: "bold"
+            verticalAlign: 'middle',
+            background: 'white',
+            color: '#656768',
+            textAlign: 'center',
+            padding: '10px',
+            fontWeight: 'bold',
           }}
         >
           Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
-    );
+    )
   }
 }
 export default withRouter(
   connect(({ user }) => ({ user }), { update })(ContReg7)
-);
+)

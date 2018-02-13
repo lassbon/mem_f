@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Grid, Card, Icon, Button, List } from "semantic-ui-react";
+import { Grid, Card, Icon, Input, List } from "semantic-ui-react";
 
 const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
 
@@ -237,9 +237,11 @@ class Library extends React.Component {
                   </List.Content>
                 </List.Item>
                 <Card.Content extra>
-                  <Button basic color="green" size="tiny">
-                    <Icon name="add circle" />upload to library
-                  </Button>
+                  <Input
+                    style={{ width: "100%" }}
+                    type="file"
+                    placeholder="upload file"
+                  />
                 </Card.Content>
               </List>
             </Grid.Column>

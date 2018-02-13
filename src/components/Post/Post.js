@@ -84,7 +84,11 @@ class PostStatus extends React.Component {
         <Card className="post">
           <Grid>
             <Grid.Column width={2}>
-              <Image size="tiny" circular src={avartar} />
+              <Image
+                size="tiny"
+                circular
+                src={this.props.currentUser.profileImage || avartar}
+              />
             </Grid.Column>
             <Grid.Column width={13}>
               <Form onSubmit={this.handleSubmit}>

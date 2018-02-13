@@ -82,40 +82,48 @@ class Timelines extends React.Component {
       <React.Fragment>
         <Card.Group className="TimeLine">
           {posts.length ? (
-            posts.map((post, i) => (
-              <Card style={{ width: '100%' }} key={post.id}>
-                <Card.Content>
-                  <Image floated="left" size="mini" circular src={avatar} />
-                  <Card.Header style={{marginTop: 5}}>{post.companyName}</Card.Header>
-                  <Card.Meta style={{fontSize: 10}}>
-                    on {new Date(post.createdAt).toDateString()}
-                  </Card.Meta>
-                  <Card.Description>{post.postText}</Card.Description>
-                  <Card.Description>
-                    <img
-                      src={post.postImage}
-                      alt=""
-                      style={{ width: '100%', marginTop: 10 }}
-                    />
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra className="time">
-                    
-                    <Button size="mini"
-                      style={{ marginLeft: '70%', marginTop: 10 }}
-                      onClick={() => {
-                        this.likePost(post.id, i)
-                      }}>
-                      <Icon color='red' name="like" />
-                      Likes {post.likes ? post.likes.length : 0}
-                    </Button>
-                    
-                    {/* <Button icon="comment" size="mini" /> */}
-                    {/* <Button icon="share" size="mini" /> */}
-                    <Comments post={post.id} comments={post.comments}/>
-                  </Card.Content>
-                </Card>
-              ))
+            posts.map(
+              (post, i) => (
+                console.log(post),
+                (
+                  <Card style={{ width: '100%' }} key={post.id}>
+                    <Card.Content>
+                      <Image floated="left" size="mini" circular src={avatar} />
+                      <Card.Header style={{ marginTop: 5 }}>
+                        {post.companyName}
+                      </Card.Header>
+                      <Card.Meta style={{ fontSize: 10 }}>
+                        on {new Date(post.createdAt).toDateString()}
+                      </Card.Meta>
+                      <Card.Description>{post.postText}</Card.Description>
+                      <Card.Description>
+                        <img
+                          src={post.postImage}
+                          alt=""
+                          style={{ width: '100%', marginTop: 10 }}
+                        />
+                      </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra className="time">
+                      <Button
+                        size="mini"
+                        style={{ marginLeft: '70%', marginTop: 10 }}
+                        onClick={() => {
+                          this.likePost(post.id, i)
+                        }}
+                      >
+                        <Icon color="red" name="like" />
+                        Likes {post.likes ? post.likes.length : 0}
+                      </Button>
+
+                      {/* <Button icon="comment" size="mini" /> */}
+                      {/* <Button icon="share" size="mini" /> */}
+                      <Comments post={post.id} comments={post.comments} />
+                    </Card.Content>
+                  </Card>
+                )
+              )
+            )
           ) : (
             <Segment>
               <Dimmer active inverted>

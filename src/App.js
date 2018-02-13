@@ -1,33 +1,33 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import PropTypes from "prop-types";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-import LandingPage from "./Pages/LandingPage";
-import LoginPage from "./Pages/LoginPage/LoginPage";
+import LandingPage from './Pages/LandingPage'
+import LoginPage from './Pages/LoginPage/LoginPage'
 // import Home from './Pages/Home/Home'
-import UserRoute from "./components/routes/UserRoute";
-import GuestRoute from "./components/routes/GuestRoute";
-import RegRoute from "./components/routes/RegRoute";
-import RegMessage from "./components/messages/Message";
-import SignUpPage from "./Pages/SignUpPage/SignUpPage";
-import ContReg from "./Pages/contReg/ContReg";
-import ContReg2 from "./Pages/contReg/ContReg2";
-import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
-import Main from "./components/Main";
-import ContReg3 from "./Pages/contReg/ContReg3";
-import ContReg4 from "./Pages/contReg/ContReg4";
-import ContReg5 from "./Pages/contReg/ContReg5";
-import ContReg6 from "./Pages/contReg/ContReg6";
-import Payment from "./Pages/Payment";
-import EventPage from "./Pages/EventPage";
-import Profile from "./Pages/Profile";
-import Confirmation from "./components/messages/Message2";
-import OldMembers from "./Pages/Old/Old";
-import OldMembers2 from "./Pages/Old/Old2";
-import OldmembersPage from "./Pages/OldMembers/OldmembersPage";
-import Confirm from "./components/messages/Confirm";
-import Reject from "./components/messages/Reject";
-import ContReg7 from "./Pages/contReg/ContReg7";
+import UserRoute from './components/routes/UserRoute'
+import GuestRoute from './components/routes/GuestRoute'
+import RegRoute from './components/routes/RegRoute'
+import RegMessage from './components/messages/Message'
+import SignUpPage from './Pages/SignUpPage/SignUpPage'
+import ContReg from './Pages/contReg/ContReg'
+import ContReg2 from './Pages/contReg/ContReg2'
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
+import Main from './components/Main'
+import ContReg3 from './Pages/contReg/ContReg3'
+import ContReg4 from './Pages/contReg/ContReg4'
+import ContReg5 from './Pages/contReg/ContReg5'
+import ContReg6 from './Pages/contReg/ContReg6'
+import Payment from './Pages/Payment'
+import EventPage from './Pages/EventPage'
+import Profile from './Pages/Profile'
+import Confirmation from './components/messages/Message2'
+import OldMembers from './Pages/Old/Old'
+import OldMembers2 from './Pages/Old/Old2'
+import OldmembersPage from './Pages/OldMembers/OldmembersPage'
+import Confirm from './components/messages/Confirm'
+import Reject from './components/messages/Reject'
+import ContReg7 from './Pages/contReg/ContReg7'
 
 const App = ({ location }) => (
   <div>
@@ -69,12 +69,12 @@ const App = ({ location }) => (
       <UserRoute location={location} path="/app" component={Main} />
     </Switch>
   </div>
-);
+)
 
 App.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
-};
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+}
 
-export default App;
+export default App

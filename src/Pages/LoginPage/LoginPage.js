@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
       const { history } = this.props;
       const { regState } = user;
       // console.log(regState, registrationStages[regState])
-      regState > 7
+      regState > 6
         ? history.push("/app")
         : state && state.redirect
           ? history.push(state.redirect)

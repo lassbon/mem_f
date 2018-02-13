@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfile, getuserActivity, getuserFriends } from "../actions/users";
-import { 
+import { getUserProfile, getuserActivity, getuserFriends, updateUserProfile } from "../actions/users";
+import {
   getUserDonations,
   getUserEvents,
   getUserMemberships,
@@ -17,18 +17,29 @@ class ProfileCard extends React.Component {
       profile: this.props.userProfileDetails || {},
       activities: { 'posts': [] },
       friends: { 'friends': [] },
-      donations: {'donations': [] },
+      donations: { 'donations': [] },
       events: { 'events': [] },
       memberships: { 'memberships': [] },
-      trainings: { 'trainings': [] }
+      trainings: { 'trainings': [] },
+      name: '',
+      email: '',
+      address: '',
+      company: '',
+      password: '',
+      loading: true
     };
     this.getTransactionHistory = this.getTransactionHistory.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.getUserProfile(this.props.userId).then(res => {
       this.setState({
-        profile: this.props.userProfileDetails
+        profile: this.props.userProfileDetails,
+        email: this.props.userProfileDetails.email,
+        address: this.props.userProfileDetails.companyAddress,
+        company: this.props.userProfileDetails.companyName
       })
     })
     this.props.getuserActivity(this.props.userId).then(res => {
@@ -62,14 +73,34 @@ class ProfileCard extends React.Component {
     })
     this.props.getUserMemberships(this.props.userId).then(res => {
       this.setState({
-        memberships: this.props.userMemberships
+        memberships: this.props.userMemberships,
+        loading: false
       })
     })
   }
 
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  onSubmit(event) {
+    const payload = {
+      companyName: this.state.company,
+      email: this.state.email,
+      companyAddress: this.state.address,
+      password: this.state.password
+    }
+    event.preventDefault();
+    this.props
+      .updateUserProfile(this.props.userId, payload)
+      .then((res) => console.log('kdnkdnkvdbnkjdd'))
+  }
+
+
   render() {
-    const { profile, activities, friends, donations, memberships, trainings, events  } = this.state;
-    console.log('mayowa', this.state)
+    const { profile, password, activities, loading, friends, donations, memberships, email, company, address, trainings, events } = this.state;
     return (
       <Profile
         getTransactionHistory={this.getTransactionHistory}
@@ -80,6 +111,13 @@ class ProfileCard extends React.Component {
         trainings={trainings}
         events={events}
         activities={activities}
+        onChange={this.onChange}
+        onSubmit={this.onSubmit}
+        email={email}
+        loading={loading}
+        password={password}
+        company={company}
+        address={address}
       />
     );
   }
@@ -98,11 +136,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getUserProfile,
+export default connect(mapStateToProps, {
+  getUserProfile,
   getuserActivity,
   getuserFriends,
   getUserDonations,
   getUserEvents,
   getUserMemberships,
-  getUserTrainings
+  getUserTrainings,
+  updateUserProfile
 })(ProfileCard)

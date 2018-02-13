@@ -1,43 +1,75 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { Tab, Grid, Image, Label, Segment, Card, Icon, Button, List, Modal, Form } from "semantic-ui-react";
+import { getForum } from "../actions/forums";
 
 const centerText = {
   textAlign: "center"
 }
 
-const items = [
-  {
-    header: `Abuja Chamber of Commerce and Industry (ACCI) 
-            Presents Certificate of Platinum Membership to Dangote Group on 
-            Her Special Day, 29th September, 2017`,
-    description: `It is a long established fact that a reader 
-                  will be distracted by the readable content of a page when looking at 
-                  its layout. The point of using Lorem Ipsum is that it has a more-or-less 
-                  normal distribution of letters, as opposed to using 'Content here, 
-                  content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`,
-    meta: 'By Chukwu Nonso, 17/10/2017',
-  }
-]
-
-
 class Discussions extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      topicInfo: '',
+    };
+  }
+
+
+  componentDidMount() {
+    this.props.getForum(this.props.match.params.name).then(() => {
+      this.setState({
+        topicInfo: this.props.topicDetails,
+      });
+    });
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
   render() {
+    const { topicInfo } = this.state
     return (
-      <React.Fragment>
-        <Grid>
-          <div className='bana library'>
-            DISCUSSIONS
-          </div>
+      <Card.Group>
+        <Card style={{ width: "100%" }}>
+          <Card.Content>
+            <Card.Header>{topicInfo.title}</Card.Header>
+            <Card.Meta>{new Date(topicInfo.createdAt).toDateString()}</Card.Meta>
+            <Card.Description>{topicInfo.content}</Card.Description>
+            <Card.Content extra className="time">
 
-        </Grid>
-        {console.log(this.props)}
+              {/* <Button size="mini"
+                style={{ marginLeft: '70%', marginTop: 10 }}
+                onClick={() => {
+                  this.likePost(post.id, i)
+                }}>
+                <Icon color='red' name="like" />
+                Likes {post.likes ? post.likes.length : 0}
+              </Button> */}
 
-        <Card.Group items={items} />
-      </React.Fragment>
+              <Button size="mini">
+                <Icon name="like" color="red" />
+                0 Likes
+              </Button>
+              <Button size="mini">comments</Button>
+              {/* <Comments post={post.id} comments={post.comments} /> */}
+            </Card.Content>
+          </Card.Content>
+        </Card>
+      </Card.Group>
     )
   }
 }
 
 
-export default Discussions;
+const mapStateToProps = state => ({
+  topicDetails: state.forums.topic,
+});
+
+export default connect(mapStateToProps, {
+  getForum
+})(Discussions);

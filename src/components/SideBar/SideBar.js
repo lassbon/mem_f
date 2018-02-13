@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Button } from "semantic-ui-react";
 import { Link, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logo from "../../images/ACCIHD-LOGO.png";
@@ -14,11 +14,12 @@ class SideBar extends React.Component {
     return (
       <Menu pointing secondary vertical fixed="top">
         <div style={{ padding: 10, background: "var(--main-gold)" }}>
-          <img src={Logo} alt="" style={{ width: "100%", height: "100%" }} />
+          <img src={Logo} alt="" style={{ width: "80%", height: "100%" }} />
         </div>
         <Menu.Item
           to={`${this.props.match.path}`}
           as={Link}
+          style={{marginTop: 15}}
         > Home
               <Icon name="home" />
         </Menu.Item>
@@ -64,6 +65,7 @@ class SideBar extends React.Component {
 
               <Icon name="book" />
         </Menu.Item>
+        {/* <Button className="btn btn-reverse" style={{marginTop: 100}}>Logout</Button> */}
       </Menu>
     )  
   }  

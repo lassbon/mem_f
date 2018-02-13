@@ -9,16 +9,16 @@ import {
   Dimmer,
   Loader,
   Segment,
-  Label,
 } from 'semantic-ui-react'
 // import { getPostData } from '../../utils/membership-api'
-import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
+// import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
 // import user from '../../reducer/user'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
+import avatar from '../../images/image (4).png'
 
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {
   constructor() {
@@ -38,7 +38,6 @@ class Timelines extends React.Component {
         authorization: token,
       },
     }).then(response => {
-      // console.log('response', response)
       this.state_setPosts(response.data)
     })
   }
@@ -83,52 +82,40 @@ class Timelines extends React.Component {
       <React.Fragment>
         <Card.Group className="TimeLine">
           {posts.length ? (
-            posts
-              .map((post, i) => (
-                <Card style={{ width: '100%' }} key={post.id}>
-                  <Card.Content>
-                    <Image
-                      floated="left"
-                      size="mini"
-                      circular
-                      src=''
+            posts.map((post, i) => (
+              <Card style={{ width: '100%' }} key={post.id}>
+                <Card.Content>
+                  <Image floated="left" size="mini" circular src={avatar} />
+                  <Card.Header style={{marginTop: 5}}>{post.companyName}</Card.Header>
+                  <Card.Meta style={{fontSize: 10}}>
+                    on {new Date(post.createdAt).toDateString()}
+                  </Card.Meta>
+                  <Card.Description>{post.postText}</Card.Description>
+                  <Card.Description>
+                    <img
+                      src={post.postImage}
+                      alt=""
+                      style={{ width: '100%', marginTop: 10 }}
                     />
-                    <Card.Header>Chuks Festus</Card.Header>
-                    <Card.Meta>on {new Date(post.createdAt).toDateString()}</Card.Meta>
-                    <Card.Description>{post.postText}</Card.Description>
-                    <Card.Description>
-                      <img
-                        src={post.postImage}
-                        alt=""
-                        style={{ width: '100%', marginTop: 10 }}
-                      />
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra className="time">
-                    <Button as="div" labelPosition="right">
-                      <Button
-                        basic
-                        color="red"
-                        onClick={() => {
-                          this.likePost(post.id, i)
-                        }}
-                        size="mini"
-                      >
-                        <Icon name="heart" />
-                        Like
-                      </Button>
-                      <Label as="a" basic color="red" pointing="left">
-                        {post.likes ? post.likes.length : 0}
-                      </Label>
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra className="time">
+                    
+                    <Button size="mini"
+                      style={{ marginLeft: '70%', marginTop: 10 }}
+                      onClick={() => {
+                        this.likePost(post.id, i)
+                      }}>
+                      <Icon color='red' name="like" />
+                      Likes {post.likes ? post.likes.length : 0}
                     </Button>
-
-                    <Comments />
+                    
                     {/* <Button icon="comment" size="mini" /> */}
                     {/* <Button icon="share" size="mini" /> */}
+                    <Comments post={post.id} comments={post.comments}/>
                   </Card.Content>
                 </Card>
               ))
-              .reverse()
           ) : (
             <Segment>
               <Dimmer active inverted>

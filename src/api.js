@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
 // const BASEURL = "http://localhost:1337/";
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
   user: {
@@ -10,27 +10,33 @@ export default {
       axios
         .post(`${BASEURL}api/v1/auth/user`, credentails)
         .then(res => {
-          const { data: { user: { id }, token } } = res
+          const { data: { user: { id }, token } } = res;
           return Promise.all([
             res.data,
             axios(`${BASEURL}api/v1/user/${id}`, {
               headers: {
-                authorization: token,
-              },
-            }),
-          ])
+                authorization: token
+              }
+            })
+          ]);
         })
         .then(responses => {
-          return Promise.resolve({ ...responses[0], ...responses[1].data })
+          return Promise.resolve({ ...responses[0], ...responses[1].data });
         }),
+    getUserData: ({ id, token }) =>
+      axios(`${BASEURL}api/v1/user/${id}`, {
+        headers: {
+          authorization: token
+        }
+      }),
 
     signup: user =>
       axios
         .post(`${BASEURL}api/v1/user`, user, {
           headers: {
-            'Content-Type': 'application/form-data',
-            Accept: 'application/form-data',
-          },
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data"
+          }
         })
         .then(res => res.data.user),
 
@@ -38,16 +44,14 @@ export default {
       axios.post(`${BASEURL}api/vi/user/reset`, email),
 
     profile: id =>
-      axios
-        .get(`${BASEURL}api/v1/user/${id}`)
-        .then(res => res.data),
+      axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),
     activity: id =>
-      axios
-        .get(`${BASEURL}api/v1/useractivity/${id}`)
-        .then(res => res.data),
+      axios.get(`${BASEURL}api/v1/useractivity/${id}`).then(res => res.data),
     friends: id =>
+      axios.get(`${BASEURL}api/v1/userfriends/${id}`).then(res => res.data),
+    updateUser: (id, credentails) =>
       axios
-        .get(`${BASEURL}api/v1/userfriends/${id}`)
+        .put(`${BASEURL}api/v1/user/${id}`, credentails)
         .then(res => res.data)
   },
   // posts: {
@@ -55,22 +59,81 @@ export default {
   //   create: book =>
   //     axios.post(`${BASEURL}api/v1/social/post/`, { post }).then(res => res.data.post)
   // }
+  oldMem: {
+    check: data =>
+      axios
+        .post(`${BASEURL}api/v1/auth/oldmember`, data, {
+          headers: {
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data",
+            authorization: data.token
+          }
+        })
+        .then(res => {
+          const { data: { user: { id }, token } } = res;
+          return Promise.all([
+            res.data,
+            axios(`${BASEURL}api/v1/user/${id}`, {
+              headers: {
+                authorization: token
+              }
+            })
+          ]);
+        })
+        .then(responses => {
+          return Promise.resolve({ ...responses[0], ...responses[1].data });
+        }),
+    contLogin: (data, id) =>
+      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: data.token
+        }
+      })
+  },
   signup: {
     reg: data =>
       axios.post(`${BASEURL}api/v1/user`, data, {
         headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-        },
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
       }),
-    contreg: (data, id) =>
-      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
+    contreg: (data, id) => {
+      console.log(data, id);
+      return axios
+        .put(`${BASEURL}api/v1/user/${id}`, data, {
+          headers: {
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data",
+            authorization: data.token
+          }
+        })
+        .then(() =>
+          axios(`${BASEURL}api/v1/user/${id}`, {
+            headers: {
+              authorization: data.token
+            }
+          })
+        );
+    },
+    alertReferee: data =>
+      axios.post(`${BASEURL}api/v1/alertreferee`, data, {
         headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: data.token,
-        },
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: data.token
+        }
       }),
+    validateReferee: (data, token) =>
+      axios.post(`${BASEURL}api/v1/validatereferee`, data, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      })
 
     // contreg2: data => {
 
@@ -98,53 +161,12 @@ export default {
     makepost: (data, token) =>
       axios.post(`${BASEURL}api/v1/social/post`, data, {
         headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
       }),
-    likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data),
-  },
-
-  projects: {
-    ongoing: (token) => {
-      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-    completed: (token) => {
-      return axios.get(`${BASEURL}api/v1/projects/completed`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-  },
-  events: {
-    ongoing: (token) => {
-      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
-    completed: (token) => {
-      return axios.get(`${BASEURL}api/v1/events/completed`, {
-        headers: {
-          'Content-Type': 'application/form-data',
-          Accept: 'application/form-data',
-          authorization: token,
-        },
-      })
-    },
+    likepost: data => axios.post(`${BASEURL}api/v1/social/post/like`, data)
   },
   payments: {
     donations: id =>
@@ -162,19 +184,79 @@ export default {
     memberships: id =>
       axios
         .get(`${BASEURL}api/v1/userpayments/memberships/${id}`)
-        .then(res => res.data),
+        .then(res => res.data)
   },
   forum: {
     reg: data =>
-    axios.post(`${BASEURL}api/v1/forum/post`, data, {
-      headers: {
-        'Content-Type': 'application/form-data',
-        Accept: 'application/form-data',
-      },
-    }),
-    getForums: id =>
-    axios
-      .get(`${BASEURL}/api/v1/forum/post/`)
-      .then(res => res.data),
+      axios.post(`${BASEURL}api/v1/forum/post`, data, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
+      }),
+    getForums: () =>
+      axios.get(`${BASEURL}api/v1/forum/post/`).then(res => res.data),
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/forum/post/${id}`).then(res => res.data)
   },
-}
+  projects: {
+    reg: data =>
+      axios.get(`${BASEURL}api/v1/getprojects`, data, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
+      }),
+
+    ongoing: token => {
+      return axios.get(`${BASEURL}api/v1/projects/ongoing`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      });
+    },
+    completed: token => {
+      return axios.get(`${BASEURL}api/v1/projects/completed`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      });
+    },
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/getprojects/${id}`).then(res => res.data)
+  },
+  events: {
+    reg: data =>
+      axios.get(`${BASEURL}api/v1/getevents`, data, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
+      }),
+
+    ongoing: token => {
+      return axios.get(`${BASEURL}api/v1/events/ongoing`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      });
+    },
+    completed: token => {
+      return axios.get(`${BASEURL}api/v1/events/completed`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      });
+    },
+    getOne: id =>
+      axios.get(`${BASEURL}api/v1/getevents/${id}`).then(res => res.data)
+  }
+};

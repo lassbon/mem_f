@@ -11,8 +11,8 @@ import InlineError from '../../components/messages/InlineError'
 import '../LoginPage/login.css'
 import { userRegistered } from '../../actions/auth'
 
-// const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+// const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {
   state = {

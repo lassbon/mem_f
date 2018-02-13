@@ -12,7 +12,10 @@ import Library from '../Pages/Library'
 import Discussions from '../Pages/Discussion'
 import Payment from '../Pages/Payment'
 import EventPage from '../Pages/EventPage'
-import MainDis from '../Pages/MainDis';
+import MainDis from '../Pages/MainDis'
+import EventDetails from '../Pages/EventDetails'
+
+import MainProd from '../Pages/MainProd'
 
 const Main = ({ match }) => (
   <React.Fragment>
@@ -28,8 +31,18 @@ const Main = ({ match }) => (
         <Route exact path={`${match.path}/library`} component={Library} />
         <Route exact path={`${match.path}/events`} component={EventPage} />
         <Route exact path={`${match.path}/discuss`} component={Discussions} />
-        <Route exact path={`${match.path}/discuss/:name`} component={MainDis} />
+        <Route exact path={`${match.path}/discuss/:id`} component={MainDis} />
+        <Route
+          exact
+          path={`${match.path}/events/:id`}
+          component={EventDetails}
+        />
         <Route exact path={`${match.path}/payment`} component={Payment} />
+        <Route
+          exact
+          path={`${match.path}/project/:name`}
+          component={MainProd}
+        />
         <Redirect to={`${match.url}`} />
       </Switch>
     </main>

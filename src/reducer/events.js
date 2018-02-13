@@ -1,8 +1,9 @@
-import { COMPLETED_EVENTS, CURRENT_EVENTS } from "../types";
+import { COMPLETED_EVENTS, CURRENT_EVENTS, ALL_EVENTS, EVENTS_BY_ID } from "../types";
 
 const initialState = {
   currentevent: [],
-  completedevent: []
+  completedevent: [],
+  events: []
 }
 export default function user(state = initialState, action = {}) {
   switch(action.type){
@@ -14,6 +15,10 @@ export default function user(state = initialState, action = {}) {
       return {
         completedevent: action.completedEvent,
       };
+    case EVENTS_BY_ID:
+      return {
+        events: action.payload
+      }
     default: 
       return state
   }

@@ -61,7 +61,7 @@ export default {
   // }
   oldMem: {
     check: data =>
-      axios.post(`${BASEURL}api/v1/oldmember`, data, {
+      axios.post(`${BASEURL}api/v1/auth/oldmember`, data, {
         headers: {
           "Content-Type": "application/form-data",
           Accept: "application/form-data",
@@ -69,10 +69,11 @@ export default {
         }
       }),
     contLogin: (data, id) =>
-      axios.put(`${BASEURL}api/v1/oldmember/${id}`, data, {
+      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
         headers: {
           "Content-Type": "application/form-data",
-          Accept: "application/form-data"
+          Accept: "application/form-data",
+          authorization: data.token
         }
       })
   },

@@ -11,9 +11,12 @@ class ForgotPassword extends React.Component {
   };
 
   submit = data =>
-    this.props
-      .resetPasswordRequest(data)
-      .then(() => this.setState({ success: true }));
+    this.props.resetPasswordRequest(
+      data,
+      this.setState({ success: true })
+      // console.log("props", this.props)
+    );
+  // .then(() => this.setState({ success: true }));
 
   render() {
     return (
@@ -21,8 +24,8 @@ class ForgotPassword extends React.Component {
         {this.state.success ? (
           <Message>Please check your email.</Message>
         ) : (
-            <ForgotPasswordForm submit={this.submit} />
-          )}
+          <ForgotPasswordForm submit={this.submit} />
+        )}
       </div>
     );
   }

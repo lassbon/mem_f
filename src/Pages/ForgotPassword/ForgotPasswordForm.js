@@ -9,7 +9,7 @@ class ForgotPasswordForm extends React.Component {
   state = {
     data: {
       email: "",
-      url: "http://localhost:3000/forgotpassword"
+      url: "http://localhost:3000/resetpassword"
     },
     loading: false,
     errors: {}

@@ -58,7 +58,7 @@ export const logout = () => dispatch => {
   dispatch(userLoggedOut());
 };
 
-export const resetPasswordRequest = ({ email }) => () => {
+export const resetPasswordRequest = email => () => {
   api.user.resetPasswordRequest(email);
   // console.log("yoooo");
 };

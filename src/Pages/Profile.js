@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Tab,
-  Header,
   Grid,
   Image,
   Form,
@@ -25,10 +24,10 @@ import { ToastContainer, toast } from 'react-toastify'
 let mappedActivity
 let myFriends
 let totalFriends
-let getPayments
-let donations
 let onChange
 let onSubmit
+let getPayments
+let donations
 
 const spinner = (
   <Segment>

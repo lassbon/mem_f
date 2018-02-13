@@ -41,7 +41,12 @@ export default {
         .then(res => res.data.user),
 
     resetPasswordRequest: email =>
-      axios.post(`${BASEURL}api/vi/user/reset`, email),
+      axios.post(`${BASEURL}api/v1/user/reset`, email, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
+      }),
 
     profile: id =>
       axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),

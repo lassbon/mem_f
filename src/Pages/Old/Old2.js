@@ -1,23 +1,15 @@
 import React from "react";
-import { Grid, Segment, Form, Image, Button, Icon } from "semantic-ui-react";
+import { Grid, Form, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { update } from "../../actions/auth";
 import { connect } from "react-redux";
-import axios from "axios";
-import { withRouter } from "react-router-dom";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+import { Redirect, withRouter } from "react-router-dom";
+import { paths } from "../../data/registrationPages";
+
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-const sendDetails = (details, id) =>
-  axios.put(`${BASEURL}api/v1/user/${id}`, details, {
-    headers: {
-      "Content-Type": "application/form-data",
-      Accept: "application/form-data"
-    }
-  });
-
-class ContReg3 extends React.Component {
+class OldMembers2 extends React.Component {
   state = {
     loading: false,
     data: {
@@ -25,12 +17,12 @@ class ContReg3 extends React.Component {
       companyRepPhone1: null,
       companyRepEmail1: null,
       companyRepPassportUrl1: null,
-      companyRepCVUrl1: null,
       companyRepName2: null,
       companyRepPhone2: null,
       companyRepEmail2: null,
       companyRepPassportUrl2: null,
-      companyRepCVUrl2: null
+      companyRepCVUrl2: null,
+      companyCOIUrl: null
     }
   };
 
@@ -46,15 +38,19 @@ class ContReg3 extends React.Component {
   };
 
   submit = () => {
-    console.log(this.state);
+    // console.log(this.state)
+    if (!this.validate()) return;
+    // console.log('gotcha')
     this.setState({ loading: true });
     const { history, user: { id, token } } = this.props;
-    this.props.update(
-      { ...this.state.data, token, regState: 3 },
-      history,
-      "/cont4",
-      id
-    );
+    this.props
+      .update({ ...this.state.data, token, regState: 7 }, id)
+      .then(() => {
+        this.setState({ loading: false });
+        history.push({
+          pathname: "/app"
+        });
+      });
 
     // .catch(() => {
     //   //handle error
@@ -71,9 +67,52 @@ class ContReg3 extends React.Component {
 
   validate = () => {
     // perform validation here
+    // console.log(Object.values(this.state.data))
+
+    const rep1 = [
+      "companyRepName1",
+      "companyRepPhone1",
+      "companyRepEmail1",
+      "companyRepPassportUrl1",
+      "companyRepCVUrl2"
+    ];
+    const rep2 = [
+      "companyRepName2",
+      "companyRepPhone2",
+      "companyRepEmail2",
+      "companyRepPassportUrl2",
+      "companyCOIUrl",
+      "companyRepCVUrl2"
+    ];
+    let rep1Inputs = [];
+    let rep2Inputs = [];
+
+    const inputs = this.state.data;
+
+    for (let val in inputs) {
+      if (rep1.indexOf(val) > -1) {
+        rep1Inputs.push(inputs[val]);
+      } else if (rep2.indexOf(val) > -1) {
+        rep2Inputs.push(inputs[val]);
+      }
+    }
+
+    return [
+      rep1Inputs.some(val => val === null),
+      rep2Inputs.some(val => val === null)
+    ].some(val => val === false);
+    // return
   };
 
   render() {
+    const { user, location: { pathname } } = this.props;
+    if (user.regState == null) return <Redirect to="/login" />;
+    const index = paths.indexOf(pathname);
+    const regState = user.regState;
+    console.log("cont3", regState);
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />;
+    }
     return (
       <React.Fragment>
         <Form
@@ -83,6 +122,7 @@ class ContReg3 extends React.Component {
             textAlign: "center",
             marginBottom: 50
           }}
+          loading={this.state.loading}
         >
           <h2>Company Representatives</h2>
           <Grid columns="equal">
@@ -169,6 +209,20 @@ class ContReg3 extends React.Component {
                 </label>
                 <Form.Input
                   type="file"
+                  name="companyCOIUrl"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+          </Grid>
+          <Grid centered columns={2}>
+            <Grid.Column>
+              <Form.Field>
+                <label style={{ textAlign: "center" }}>
+                  Upload CAC document
+                </label>
+                <Form.Input
+                  type="file"
                   name="companyRepCVUrl2"
                   onChange={this.handleChange}
                 />
@@ -176,7 +230,7 @@ class ContReg3 extends React.Component {
             </Grid.Column>
           </Grid>
           <div style={{ marginTop: 30 }}>
-            <Button to="/app" as={Link}>
+            <Button to="/cont2" as={Link}>
               Back
             </Button>
             <Button className="btn" onClick={this.submit}>
@@ -232,5 +286,5 @@ class ContReg3 extends React.Component {
 }
 
 export default withRouter(
-  connect(({ user }) => ({ user }), { update })(ContReg3)
+  connect(({ user }) => ({ user }), { update })(OldMembers2)
 );

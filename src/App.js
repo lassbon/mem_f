@@ -31,7 +31,12 @@ import ContReg7 from './Pages/contReg/ContReg7'
 import RestPassword from './Pages/ResetPassword'
 
 const App = ({ location, user }) => {
-  if (!user.id && location.pathname !== '/login') {
+  if (
+    !user.id &&
+    location.pathname !== '/login' &&
+    location.pathname !== 'signup' &&
+    location.pathname !== '/forgotpassword'
+  ) {
     return <Redirect to="/login" />
   }
   return (

@@ -12,7 +12,7 @@ import {
 
 import api from '../../api'
 import { connect } from 'react-redux'
-import Timelines from '../TimeLine/Timeline';
+import Timelines from '../TimeLine/Timeline'
 import avartar from '../../images/image (4).png'
 
 import './Post.css'
@@ -84,16 +84,12 @@ class PostStatus extends React.Component {
         <Card className="post">
           <Grid>
             <Grid.Column width={2}>
-              <Image
-                size="tiny"
-                circular
-                src={avartar}
-              />
+              <Image size="tiny" circular src={avartar} />
             </Grid.Column>
             <Grid.Column width={13}>
               <Form onSubmit={this.handleSubmit}>
                 <TextArea
-                  rows='2'
+                  rows="2"
                   autoHeight
                   placeholder="update status..."
                   onChange={this.handleChange}

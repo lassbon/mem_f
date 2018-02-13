@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Tab,
-  Header,
   Grid,
   Image,
   Form,
@@ -22,8 +21,6 @@ import avatar from "../images/image (4).png";
 let mappedActivity;
 let myFriends;
 let totalFriends;
-let getPayments;
-let donations;
 let onChange;
 let onSubmit;
 

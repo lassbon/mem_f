@@ -1,17 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import {
-  Grid,
-  Image,
-  Card,
-  Comment,
-  Header,
-  Form,
-  Button,
-  Divider,
-  Icon
-} from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import { getProjects } from "../actions/projects";
 
 const BASEURL = "https://obscure-waters-44612.herokuapp.com/";

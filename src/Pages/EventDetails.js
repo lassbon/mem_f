@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { Button, Icon } from "semantic-ui-react";
 import { getEvents } from "../actions/events";

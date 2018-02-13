@@ -28,6 +28,7 @@ import OldmembersPage from "./Pages/OldMembers/OldmembersPage";
 import Confirm from "./components/messages/Confirm";
 import Reject from "./components/messages/Reject";
 import ContReg7 from "./Pages/contReg/ContReg7";
+import RestPassword from "./Pages/ResetPassword";
 
 const App = ({ location }) => (
   <div>
@@ -58,6 +59,12 @@ const App = ({ location }) => (
         path="/forgotpassword"
         exact
         component={ForgotPassword}
+      />
+      <Route
+        location={location}
+        path="/resetpassword"
+        exact
+        component={RestPassword}
       />
       <Route location={location} path="/login" exact component={LoginPage} />
       <Route

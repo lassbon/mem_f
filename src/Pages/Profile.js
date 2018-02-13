@@ -23,6 +23,8 @@ let myFriends;
 let totalFriends;
 let onChange;
 let onSubmit;
+let getPayments;
+let donations;
 
 const spinner = (
   <Segment>

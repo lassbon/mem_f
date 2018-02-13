@@ -8,8 +8,7 @@ import InlineError from "../../components/messages/InlineError";
 class ForgotPasswordForm extends React.Component {
   state = {
     data: {
-      email: "",
-      url: "http://localhost:3000/forgotpassword"
+      email: ""
     },
     loading: false,
     errors: {}

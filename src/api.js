@@ -61,13 +61,28 @@ export default {
   // }
   oldMem: {
     check: data =>
-      axios.post(`${BASEURL}api/v1/auth/oldmember`, data, {
-        headers: {
-          "Content-Type": "application/form-data",
-          Accept: "application/form-data",
-          authorization: data.token
-        }
-      }),
+      axios
+        .post(`${BASEURL}api/v1/auth/oldmember`, data, {
+          headers: {
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data",
+            authorization: data.token
+          }
+        })
+        .then(res => {
+          const { data: { user: { id }, token } } = res;
+          return Promise.all([
+            res.data,
+            axios(`${BASEURL}api/v1/user/${id}`, {
+              headers: {
+                authorization: token
+              }
+            })
+          ]);
+        })
+        .then(responses => {
+          return Promise.resolve({ ...responses[0], ...responses[1].data });
+        }),
     contLogin: (data, id) =>
       axios.put(`${BASEURL}api/v1/user/${id}`, data, {
         headers: {

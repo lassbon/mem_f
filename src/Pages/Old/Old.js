@@ -1,19 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import RegLayout from "../../components/RegLayout";
 import { Container, Header, Form, Grid, Button, Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { update } from "../../actions/auth";
 
 class OldMembers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: {},
       loading: false
     };
   }
 
   componentDidMount() {
-    this.fetchData();
+    // this.fetchData();
+  }
+
+  componentDidUpdate() {
+    console.log(this.props);
+    const {
+      user: { companyName, email, membershipId, membershipPlan, companyPhone }
+    } = this.props;
+    // this.setState({
+    //   data: {
+    //     companyName,
+    //     email,
+    //     membershipId,
+    //     membershipPlan,
+    //     companyPhone
+    //   }
+    // });
   }
 
   fetchData() {
@@ -34,25 +52,55 @@ class OldMembers extends React.Component {
 
   onSubmit = () => {
     // console.log(this.state)
+    const {
+      user: {
+        companyName,
+        email,
+        membershipId,
+        membershipPlan,
+        companyPhone,
+        id,
+        token
+      }
+    } = this.props;
+    this.setState({
+      data: {
+        companyName,
+        email,
+        membershipId,
+        membershipPlan,
+        companyPhone,
+        id,
+        ...this.state.data
+      }
+    });
+
     this.setState({ loading: true });
-    const { history, user: { id, token } } = this.props;
+    const { history } = this.props;
     this.props
-      .update({ ...this.state, token }, history, "/old2", id)
-      .catch(() => {
+      .update({ ...this.state, token }, id)
+      .catch(err => {
         //handle error
+        console.error(err);
         return Promise.resolve("");
       })
       .then(() => {
-        this.setState({ loading: true });
+        history.push("/old2");
+        this.setState({ loading: false });
       });
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
   };
 
   render() {
+    const {
+      user: { companyName, email, membershipId, membershipPlan, companyPhone }
+    } = this.props;
     return (
       <React.Fragment>
         <div
@@ -73,6 +121,7 @@ class OldMembers extends React.Component {
           >
             <Form.Field style={{ width: "55%", margin: "10px auto" }}>
               <input
+                value={companyName || ""}
                 placeholder="Company's Name"
                 name="companyName"
                 disabled
@@ -81,6 +130,7 @@ class OldMembers extends React.Component {
             </Form.Field>
             <Form.Field style={{ width: "55%", margin: "10px auto" }}>
               <input
+                value={membershipId || ""}
                 placeholder="Membership Id"
                 name="membershipId"
                 disabled
@@ -89,6 +139,7 @@ class OldMembers extends React.Component {
             </Form.Field>
             <Form.Field style={{ width: "55%", margin: "10px auto" }}>
               <input
+                value={membershipPlan || ""}
                 placeholder="Membership Type"
                 name="membershipPlan"
                 disabled
@@ -97,6 +148,7 @@ class OldMembers extends React.Component {
             </Form.Field>
             <Form.Field style={{ width: "55%", margin: "10px auto" }}>
               <input
+                value={email || ""}
                 placeholder="Email"
                 type="email"
                 disabled
@@ -108,6 +160,7 @@ class OldMembers extends React.Component {
               style={{ width: "55%", margin: "10px auto", marginBottom: 50 }}
             >
               <input
+                value={companyPhone || ""}
                 type="text"
                 placeholder="Phone number"
                 name="companyPhone"
@@ -171,4 +224,6 @@ class OldMembers extends React.Component {
     );
   }
 }
-export default OldMembers;
+export default withRouter(
+  connect(({ user }) => ({ user }), { update })(OldMembers)
+);

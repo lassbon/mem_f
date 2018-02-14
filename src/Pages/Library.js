@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Grid, Card, Icon, Input, List, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 
 const centerText = {
   textAlign: 'center',
@@ -64,7 +64,7 @@ class Library extends React.Component {
     }
     return axios
       .post(
-        `https://obscure-waters-44612.herokuapp.com/api/v1/user/upload`,
+        `http://membership-api.accinigeria.com/api/v1/user/upload`,
         formData,
         {
           headers: {

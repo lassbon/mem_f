@@ -17,7 +17,7 @@ import './Timeline.css'
 import Comments from '../Comments/Comments'
 import avatar from '../../images/image (4).png'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Timelines extends React.Component {

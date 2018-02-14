@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg6 extends React.Component {

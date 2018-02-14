@@ -1,29 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  Tab,
-  Grid,
-  Label,
-  Segment,
-  Card,
-  Button,
-} from 'semantic-ui-react'
+import { Tab, Grid, Label, Segment, Card, Button } from 'semantic-ui-react'
 import axios from 'axios'
 //payments/memberships
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Payment extends Component {
   state = {
-    memberships: [{
-      id : '92u309239',
-      createdAt : 'Jan 21, 2018',
-      amount : 20000
-    }],
+    memberships: [
+      {
+        id: '92u309239',
+        createdAt: 'Jan 21, 2018',
+        amount: 20000,
+      },
+    ],
   }
   renewMembership = () => {
     // const { user: { token, id }, post } = this.props
-    console.log("Came to renew memberships")
+    console.log('Came to renew memberships')
     // axios(`${BASEURL}api/v1/userpayments/memberships/${id}`, {
     //   headers: {
     //     authorization: token,
@@ -101,19 +96,21 @@ class Payment extends Component {
       </Tab.Pane>
     ))
     let renewal = ''
-    if(this.state.memberships.length > 0) {
-      renewal = (<Button
-              style={{
-                background: 'var(--main-gold)',
-                color: 'var(--white)',
-                width: '60%',
-                margin: '0 auto',
-                display: 'table'
-              }}
-              onClick={this.renewMembership}
-            >
-              RENEW MEMBERSHIP
-            </Button>)
+    if (this.state.memberships.length > 0) {
+      renewal = (
+        <Button
+          style={{
+            background: 'var(--main-gold)',
+            color: 'var(--white)',
+            width: '60%',
+            margin: '0 auto',
+            display: 'table',
+          }}
+          onClick={this.renewMembership}
+        >
+          RENEW MEMBERSHIP
+        </Button>
+      )
     }
     const panes = [
       {
@@ -123,7 +120,7 @@ class Payment extends Component {
             {memberships}
             {renewal}
           </div>
-        )
+        ),
       },
       {
         menuItem: '(1) Total Subscriptions',

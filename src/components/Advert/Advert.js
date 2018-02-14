@@ -1,9 +1,8 @@
 import React from 'react'
-import { Advertisement } from 'semantic-ui-react';
-import './Advert.css';
+import { Advertisement } from 'semantic-ui-react'
+import './Advert.css'
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
-
+const BASEURL = 'http://membership-api.accinigeria.com/'
 
 // class Advert extends React.Component {
 //   constructor() {
@@ -12,9 +11,17 @@ const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 // }
 
 const Advert = () => (
-  <div style={{marginLeft: '75vw'}}>
-    <Advertisement className="add_name" unit='medium rectangle' test='Medium Rectangle' />
-    <Advertisement className="add_name2" unit='medium rectangle' test='Medium Rectangle' />
+  <div style={{ marginLeft: '75vw' }}>
+    <Advertisement
+      className="add_name"
+      unit="medium rectangle"
+      test="Medium Rectangle"
+    />
+    <Advertisement
+      className="add_name2"
+      unit="medium rectangle"
+      test="Medium Rectangle"
+    />
   </div>
 )
 

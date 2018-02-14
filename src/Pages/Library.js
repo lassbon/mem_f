@@ -1,66 +1,86 @@
-import React from "react";
-import axios from "axios";
+import React from 'react'
+import axios from 'axios'
 // import api from "../api";
-import { Grid, Card, Icon, Input, List, Button } from "semantic-ui-react";
+import { Grid, Card, Icon, Input, List, Button } from 'semantic-ui-react'
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
 const centerText = {
-  textAlign: "center"
-};
+  textAlign: 'center',
+}
 
 class Library extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       category: [],
-      file: null
-    };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.fileUpload = this.fileUpload.bind(this);
+      file: null,
+    }
+    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.fileUpload = this.fileUpload.bind(this)
   }
 
   componentDidMount() {
-    this.fetchDocs();
+    this.fetchDocs()
     // console.log("data", this.fetchDocs.res);
   }
 
   onFormSubmit(e) {
-    e.preventDefault(); // Stop form submit
+    e.preventDefault() // Stop form submit
     this.fileUpload(this.state.file).then(response => {
-      console.log(response.data);
-    });
+      console.log(response.data)
+    })
   }
   onChange(e) {
-    this.setState({ file: e.target.files[0] });
+    this.setState({ file: e.target.files[0] })
   }
 
   fetchDocs() {
     axios
       .get(`${BASEURL}api/v1/knowledgebase/category`, {
         headers: {
-          "Content-Type": "application/form-data",
-          Accept: "application/form-data"
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
           // authorization: token
-        }
+        },
       })
       .then(res => {
-        this.setState({ category: res.data });
-        console.log("name", res.data[0].name);
-      });
+        this.setState({ category: res.data })
+        console.log('name', res.data[0].name)
+      })
   }
 
   fileUpload(file) {
-    const url = `${BASEURL}api/v1/knowledgebase/category`;
-    const formData = new FormData();
-    formData.append("file", file);
+    const url = `${BASEURL}api/v1/knowledgebase/category`
+    const formData = new FormData()
+    formData.append('file', file)
     const config = {
       headers: {
-        "content-type": "multipart/form-data"
-      }
-    };
-    return axios.post(url, formData, config);
+        'content-type': 'multipart/form-data',
+      },
+    }
+    return axios
+      .post(
+        `https://obscure-waters-44612.herokuapp.com/api/v1/user/upload`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/form-data',
+            Accept: 'application/form-data',
+            authorization: token,
+          },
+        }
+      )
+      .then(({ data: { bannerUrl } }) =>
+        axios.post(
+          url,
+          {
+            document: bannerUrl,
+          },
+          config
+        )
+      )
   }
 
   render() {
@@ -74,7 +94,7 @@ class Library extends React.Component {
               <List
                 divided
                 relaxed
-                style={{ background: "var(--white)", padding: 15 }}
+                style={{ background: 'var(--white)', padding: 15 }}
               >
                 <List.Item>
                   <List.Content>
@@ -90,7 +110,7 @@ class Library extends React.Component {
                     />
 
                     <List.Content>
-                      <List.Header style={{ color: "rgba(10, 1, 1, 0.674)" }}>
+                      <List.Header style={{ color: 'rgba(10, 1, 1, 0.674)' }}>
                         {doc.name}
                       </List.Header>
                     </List.Content>
@@ -99,11 +119,11 @@ class Library extends React.Component {
               </List>
             </Grid.Column>
             <Grid.Column width={11}>
-              <Card style={{ width: "100%" }}>
+              <Card style={{ width: '100%' }}>
                 <Card.Content header="General" style={centerText} />
                 <Card.Content>
                   <Grid>
-                    <Grid.Row style={{ margin: "0 auto" }}>
+                    <Grid.Row style={{ margin: '0 auto' }}>
                       <Grid.Column width="5" style={centerText}>
                         <Icon name="file" size="huge" />
                         <p style={{ marginTop: 10 }}>
@@ -134,14 +154,14 @@ class Library extends React.Component {
               <List
                 divided
                 relaxed
-                style={{ background: "var(--white)", padding: 15 }}
+                style={{ background: 'var(--white)', padding: 15 }}
               >
                 <h5>Upload File</h5>
                 <form onSubmit={this.onFormSubmit}>
                   <Card.Content extra>
                     <Input
                       onChange={this.onChange}
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                       type="file"
                       placeholder="upload file"
                     />
@@ -157,8 +177,8 @@ class Library extends React.Component {
           </Grid.Row>
         </Grid>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default Library;
+export default Library

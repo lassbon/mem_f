@@ -1,13 +1,13 @@
 import _ from "lodash";
-import faker from "faker";
+import api from "../api";
 import React, { Component } from "react";
-import { Search, Grid, Header } from "semantic-ui-react";
+import { Search, Grid } from "semantic-ui-react";
 
 const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, "$")
+  title: api.fetchUsers.companyName,
+  description: api.fetchUsers.companyName,
+  image: api.fetchUsers.companyAddress,
+  price: api.fetchUsers.companyBusiness
 }));
 
 export default class MainSearch extends Component {
@@ -42,7 +42,7 @@ export default class MainSearch extends Component {
 
     return (
       <Grid>
-        <Grid.Column width={8}>
+        <Grid.Column width={16}>
           <Search
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
@@ -50,13 +50,8 @@ export default class MainSearch extends Component {
             results={results}
             value={value}
             {...this.props}
+            placeholder="search connections"
           />
-        </Grid.Column>
-        <Grid.Column width={8}>
-          <Header>State</Header>
-          <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          <Header>Options</Header>
-          <pre>{JSON.stringify(source, null, 2)}</pre>
         </Grid.Column>
       </Grid>
     );

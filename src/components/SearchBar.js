@@ -1,12 +1,13 @@
 import React from "react";
-import { Button, Icon, Search } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
+import MainSearch from "./MainSearch";
 
 function SearchBanner(props) {
   if (!props.warn) {
     return null;
   }
 
-  return <Search placeholder="serach Connections" />;
+  return <MainSearch />;
 }
 
 class SearchFriend extends React.Component {

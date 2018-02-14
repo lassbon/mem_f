@@ -276,5 +276,17 @@ export default {
         }
       })
       .then(res => res.data.names.map(name => res.data.names));
+  },
+
+  fetchUsers: token => {
+    axios
+      .get(`${BASEURL}api/v1/user/`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      })
+      .then(res => res.data);
   }
 };

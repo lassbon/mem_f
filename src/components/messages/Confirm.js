@@ -2,7 +2,7 @@ import React from "react";
 import { Message } from "semantic-ui-react";
 import axios from "axios";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://membership-api.accinigeria.com/";
 
 class Confirm extends React.Component {
   componentDidMount() {

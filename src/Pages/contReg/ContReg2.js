@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { update } from "../../actions/auth";
 import { paths } from "../../data/registrationPages";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://membership-api.accinigeria.com/";
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 // const panes = [

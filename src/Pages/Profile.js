@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   Tab,
   Grid,
@@ -13,21 +13,22 @@ import {
   List,
   Segment,
   Dimmer,
-  Loader,
-} from 'semantic-ui-react'
-import { connect } from 'react-redux'
-import { update } from '../actions/auth'
-import axios from 'axios'
-import avatar from '../images/image (4).png'
-import { ToastContainer, toast } from 'react-toastify'
+  Loader
+} from "semantic-ui-react";
+import { connect } from "react-redux";
+import { update } from "../actions/auth";
+import axios from "axios";
+import avatar from "../images/image (4).png";
+import { ToastContainer, toast } from "react-toastify";
+import SearchFriend from "../components/SearchBar";
 
-let mappedActivity
-let myFriends
-let totalFriends
-let onChange
-let onSubmit
-let getPayments
-let donations
+let mappedActivity;
+let myFriends;
+let totalFriends;
+let onChange;
+let onSubmit;
+let getPayments;
+let donations;
 
 const spinner = (
   <Segment>
@@ -35,7 +36,7 @@ const spinner = (
       <Loader inverted>Please wait...</Loader>
     </Dimmer>
   </Segment>
-)
+);
 
 class Profile extends Component {
   state = {
@@ -43,35 +44,35 @@ class Profile extends Component {
       profileImage: this.props.user.profileImage,
       companyName: this.props.user.companyName,
       companyAddress: this.props.user.companyAddress,
-      email: this.props.user.email,
-    },
-  }
+      email: this.props.user.email
+    }
+  };
   handleChange = e => {
     this.setState({
       data: {
-        [e.target.name]: e.target.value,
-      },
-    })
-  }
+        [e.target.name]: e.target.value
+      }
+    });
+  };
   handleProfileImageChange = e => {
-    let reader = new FileReader()
-    let file = e.target.files[0]
+    let reader = new FileReader();
+    let file = e.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result,
-      })
-    }
+        imagePreviewUrl: reader.result
+      });
+    };
 
-    reader.readAsDataURL(file)
-  }
+    reader.readAsDataURL(file);
+  };
   handleSubmit = e => {
-    const form = new FormData()
-    const data = this.state.file
-    const { user: { token, id } } = this.props
+    const form = new FormData();
+    const data = this.state.file;
+    const { user: { token, id } } = this.props;
 
-    form.append('file', data)
+    form.append("file", data);
 
     // console.log(form)
     return axios
@@ -80,10 +81,10 @@ class Profile extends Component {
         form,
         {
           headers: {
-            'Content-Type': 'application/form-data',
-            Accept: 'application/form-data',
-            authorization: token,
-          },
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data",
+            authorization: token
+          }
         }
       )
       .then(({ data: { bannerUrl } }) =>
@@ -91,29 +92,29 @@ class Profile extends Component {
           {
             ...this.state.data,
             profileImage: bannerUrl,
-            token,
+            token
           },
           id
         )
       )
       .then(() => {
-        toast('Profile updated.')
+        toast("Profile updated.");
       })
       .catch(err => {
-        toast('Please try again, an error occurred.')
-      })
-  }
+        toast("Please try again, an error occurred.");
+      });
+  };
   render() {
-    const { props } = this
+    const { props } = this;
 
-    onChange = props.onChange
-    onSubmit = props.onSubmit
+    onChange = props.onChange;
+    onSubmit = props.onSubmit;
     props.loading
       ? (mappedActivity = spinner)
       : (mappedActivity = props.activities.posts.map(activity => (
           <Tab.Pane attached={false} key={activity.createdAt}>
             <Card.Group className="TimeLine">
-              <Card style={{ width: '100%' }}>
+              <Card style={{ width: "100%" }}>
                 {(getPayments = props.getTransactionHistory)}
                 <Card.Content>
                   <Image floated="left" size="mini" circular src={avatar} />
@@ -126,7 +127,7 @@ class Profile extends Component {
                     <img
                       src={activity.postImage}
                       alt=""
-                      style={{ width: '100%', marginTop: 10 }}
+                      style={{ width: "100%", marginTop: 10 }}
                     />
                   </Card.Description>
                 </Card.Content>
@@ -143,9 +144,9 @@ class Profile extends Component {
               </Card>
             </Card.Group>
           </Tab.Pane>
-        )))
+        )));
 
-    totalFriends = props.friends.friends.length
+    totalFriends = props.friends.friends.length;
     myFriends = props.friends.friends.map(friend => (
       <Tab.Pane attached={false}>
         {console.log(friend)}
@@ -168,7 +169,7 @@ class Profile extends Component {
           </Card.Content>
         </Card>
       </Tab.Pane>
-    ))
+    ));
 
     donations = props.donations.donations.map(donation => (
       <Tab.Pane attached={false}>
@@ -195,7 +196,7 @@ class Profile extends Component {
           </Card.Content>
         </Card>
       </Tab.Pane>
-    ))
+    ));
     // const memberships =
     // const events =
     // const trainings =
@@ -242,7 +243,7 @@ class Profile extends Component {
                         <Modal.Description>
                           <Form onSubmit={this.handleSubmit}>
                             <Form.Field>
-                              <div style={{ position: 'relative' }}>
+                              <div style={{ position: "relative" }}>
                                 <Image
                                   wrapped
                                   size="medium"
@@ -251,7 +252,7 @@ class Profile extends Component {
                                       ? this.state.imagePreviewUrl
                                       : this.state.data.profileImage
                                         ? this.state.data.profileImage
-                                        : 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+                                        : "http://cdn.onlinewebfonts.com/svg/img_568656.png"
                                   }
                                 />
                                 <input
@@ -259,13 +260,13 @@ class Profile extends Component {
                                   onChange={this.handleProfileImageChange}
                                   type="file"
                                   style={{
-                                    position: 'absolute',
-                                    top: '0',
-                                    bottom: '0',
-                                    left: '0',
-                                    right: '0',
-                                    cursor: 'pointer',
-                                    opacity: 0,
+                                    position: "absolute",
+                                    top: "0",
+                                    bottom: "0",
+                                    left: "0",
+                                    right: "0",
+                                    cursor: "pointer",
+                                    opacity: 0
                                   }}
                                 />
                               </div>
@@ -313,79 +314,73 @@ class Profile extends Component {
         </Grid>
         <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
       </React.Fragment>
-    )
+    );
   }
 }
 
 const panes = [
-  { menuItem: 'Activity', render: () => mappedActivity },
+  { menuItem: "Activity", render: () => mappedActivity },
   {
-    menuItem: 'Connections',
+    menuItem: "Connections",
     render: () => [
       <Tab.Pane attached={false}>
         <Card fluid>
           <Card.Content>
-            <Card.Header style={{ textAlign: 'center' }}>
+            <Card.Header style={{ textAlign: "center" }}>
               {totalFriends} connections
               <br />
-              <Button
-                style={{ marginLeft: '18vw' }}
-                basic
-                color="green"
-                size="tiny"
-              >
-                <Icon name="add circle" />Add connections
-              </Button>
+              <br />
+              <SearchFriend />
             </Card.Header>
           </Card.Content>
         </Card>
       </Tab.Pane>,
-      myFriends,
-    ],
+      myFriends
+    ]
   },
   {
-    menuItem: 'Transaction History',
+    menuItem: "Transaction History",
     render: () => [
       <Tab.Pane attached={false}>
         <h1>Donations</h1>
       </Tab.Pane>,
-      'None',
+      "None",
       <Tab.Pane attached={false}>
         <h1>Events</h1>
       </Tab.Pane>,
-      'None',
+      "None",
       <Tab.Pane attached={false}>
         <h1>Trainings</h1>
       </Tab.Pane>,
-      'None',
+      "None",
       <Tab.Pane attached={false}>
         <h1>Memberships</h1>
       </Tab.Pane>,
-      'None',
-    ],
+      "None"
+    ]
   },
   {
-    menuItem: 'Reports',
+    menuItem: "Reports",
     render: () => (
       <Tab.Pane attached={false}>
         <Tab menu={{ pointing: true }} panes={reportCont} />
       </Tab.Pane>
-    ),
-  },
-]
+    )
+  }
+];
 
 const reportCont = [
   {
-    menuItem: 'Membership Fees',
+    menuItem: "Membership Fees",
     render: () => (
       <Tab.Pane attached={false}>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={6} style={{ textAlign: 'center' }}>
+            <Grid.Column width={6} style={{ textAlign: "center" }}>
               <h4 style={{ marginBottom: 0 }}>Total Payments</h4>
-              <h2 style={{ marginTop: 5, color: '#707070' }}>N250,000</h2>
+              <h2 style={{ marginTop: 5, color: "#707070" }}>N250,000</h2>
             </Grid.Column>
-            <Grid.Column width={6} style={{ marginLeft: '20%' }}>
+            <Grid.Column width={6} style={{ marginLeft: "20%" }}>
               <h4 style={{ marginBottom: 0 }}>Total Payments</h4>
               <h5 style={{ marginTop: 5 }}>N250,000</h5>
               <h4 style={{ marginBottom: 0 }}>Total Payments</h4>
@@ -394,34 +389,34 @@ const reportCont = [
           </Grid.Row>
         </Grid>
       </Tab.Pane>
-    ),
+    )
   },
   {
-    menuItem: 'Donations',
+    menuItem: "Donations",
     render: () => [
       <Tab.Pane attached={false}>Donations</Tab.Pane>,
       <Grid>
         <Grid.Row>
-          <Grid.Column width={6} style={{ textAlign: 'center' }}>
+          <Grid.Column width={6} style={{ textAlign: "center" }}>
             None
           </Grid.Column>
         </Grid.Row>
-      </Grid>,
-    ],
+      </Grid>
+    ]
   },
   {
-    menuItem: 'Tranings',
+    menuItem: "Tranings",
     render: () => [
       <Tab.Pane attached={false}>Tranings</Tab.Pane>,
       <Grid>
         <Grid.Row>
-          <Grid.Column width={6} style={{ textAlign: 'center' }}>
+          <Grid.Column width={6} style={{ textAlign: "center" }}>
             None
           </Grid.Column>
         </Grid.Row>
-      </Grid>,
-    ],
-  },
-]
+      </Grid>
+    ]
+  }
+];
 
-export default connect(({ user }) => ({ user }), { update })(Profile)
+export default connect(({ user }) => ({ user }), { update })(Profile);

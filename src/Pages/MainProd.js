@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Icon } from "semantic-ui-react";
 import { getProjects } from "../actions/projects";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "hhttp://membership-api.accinigeria.com/";
 
 class MainProd extends React.Component {
   constructor(props) {

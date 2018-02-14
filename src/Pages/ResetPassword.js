@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Form, Grid, Image } from "semantic-ui-react";
 import "./LoginPage/login.css";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://membership-api.accinigeria.com/";
 
 export default class RestPassword extends React.Component {
   constructor(props) {

@@ -2,6 +2,14 @@ import React from "react";
 import { Advertisement } from "semantic-ui-react";
 import "./Advert.css";
 
+const BASEURL = "http://membership-api.accinigeria.com/";
+
+// class Advert extends React.Component {
+//   constructor() {
+
+//   }
+// }
+
 const Advert = () => (
   <div style={{ marginLeft: "75vw" }}>
     <Advertisement

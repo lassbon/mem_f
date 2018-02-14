@@ -85,7 +85,7 @@ class ContReg3 extends React.Component {
         // console.log(form)
         return data
           ? axios.post(
-              `https://obscure-waters-44612.herokuapp.com/api/v1/user/upload`,
+              `http://membership-api.accinigeria.com/api/v1/user/upload`,
               form,
               {
                 headers: {

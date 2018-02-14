@@ -76,17 +76,13 @@ class Profile extends Component {
 
     // console.log(form)
     return axios
-      .post(
-        `https://obscure-waters-44612.herokuapp.com/api/v1/user/upload`,
-        form,
-        {
-          headers: {
-            "Content-Type": "application/form-data",
-            Accept: "application/form-data",
-            authorization: token
-          }
+      .post(`http://membership-api.accinigeria.com/api/v1/user/upload`, form, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
         }
-      )
+      })
       .then(({ data: { bannerUrl } }) =>
         this.props.update(
           {

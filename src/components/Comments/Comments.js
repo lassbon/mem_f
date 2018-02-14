@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   Button,
   Segment,
@@ -10,85 +10,85 @@ import {
   Comment,
   Icon,
   Form,
-  Label,
-} from 'semantic-ui-react'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import setAuthorizationHeader from '../../actions/setAuthorizationHeader'
+  Label
+} from "semantic-ui-react";
+import { connect } from "react-redux";
+import axios from "axios";
+import setAuthorizationHeader from "../../actions/setAuthorizationHeader";
 
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = "http://membership-api.accinigeria.com/";
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class Comments extends Component {
   constructor() {
-    super()
-    this.state = { comments: [], visible: false, loading: false }
+    super();
+    this.state = { comments: [], visible: false, loading: false };
   }
 
   state_setComments = comments => {
-    let state = this.state.comments
-    state.push(comments)
-    this.setState({ comments: state })
-    console.log(state, this.state.comments)
-  }
+    let state = this.state.comments;
+    state.push(comments);
+    this.setState({ comments: state });
+    console.log(state, this.state.comments);
+  };
   getComments = () => {
-    const { user: { token, id }, post } = this.props
+    const { user: { token, id }, post } = this.props;
     // console.log(this.props)
     // console.log(token, id)
     // setAuthorizationHeader(token)
     axios(`${BASEURL}api/v1/social/comment/${post}`, {
       headers: {
-        authorization: token,
-      },
+        authorization: token
+      }
     }).then(response => {
       // console.log('response', response)
-      this.state_setComments(response.data)
-    })
-  }
+      this.state_setComments(response.data);
+    });
+  };
   replyComment = event => {
-    const { user: { token, id }, post } = this.props
-    let parent = event.target.parentElement
-    let data = event.target.querySelector('textarea')
+    const { user: { token, id }, post } = this.props;
+    let parent = event.target.parentElement;
+    let data = event.target.querySelector("textarea");
     this.setState({
-      loading: !this.state.loading,
-    })
+      loading: !this.state.loading
+    });
     axios
       .post(
         `${BASEURL}api/v1/social/comment`,
         { comment: data.value, owner: id, post: post },
         {
           headers: {
-            authorization: token,
-          },
+            authorization: token
+          }
         }
       )
       .then(response => {
-        this.state_setComments(response.data)
+        this.state_setComments(response.data);
         this.setState({
-          loading: !this.state.loading,
-        })
-        data.value = ''
-        parent.classList.add('hidden')
-        parent.classList.remove('visible')
-      })
-  }
+          loading: !this.state.loading
+        });
+        data.value = "";
+        parent.classList.add("hidden");
+        parent.classList.remove("visible");
+      });
+  };
 
   componentDidMount() {
     this.setState({
-      comments: this.props.comments,
-    })
+      comments: this.props.comments
+    });
   }
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible })
+  toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
   render() {
-    const { visible, comments } = this.state
+    const { visible, comments } = this.state;
 
     return (
       <React.Fragment>
         <Button
           size="mini"
-          content={visible ? 'Hide' : 'Show'}
+          content={visible ? "Hide" : "Show"}
           onClick={this.toggleVisibility}
         >
           <Icon name="comment" />
@@ -131,13 +131,13 @@ class Comments extends Component {
               loading={this.state.loading}
             >
               <Form.TextArea
-                style={{ height: 'auto !important' }}
+                style={{ height: "auto !important" }}
                 autoHeight
                 rows={2}
                 placeholder="leave a comment..."
               />
               <Button
-                style={{ marginLeft: '75%' }}
+                style={{ marginLeft: "75%" }}
                 content="Add Comment"
                 size="tiny"
                 labelPosition="left"
@@ -148,12 +148,12 @@ class Comments extends Component {
           </Comment.Group>
         </Transition>
       </React.Fragment>
-    )
+    );
   }
 }
 
 const mapStateToProps = ({ user }) => ({
-  user,
-})
+  user
+});
 
-export default connect(mapStateToProps, null)(Comments)
+export default connect(mapStateToProps, null)(Comments);

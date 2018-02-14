@@ -1,36 +1,36 @@
-import React from 'react'
-import axios from 'axios'
-import { Button, Form, Grid, Image } from 'semantic-ui-react'
-import './LoginPage/login.css'
+import React from "react";
+import axios from "axios";
+import { Button, Form, Grid, Image } from "semantic-ui-react";
+import "./LoginPage/login.css";
 
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = "http://membership-api.accinigeria.com/";
 
 export default class RestPassword extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       token: this.props.match.params.token,
-      password: '',
-      confirmPassword: '',
-    }
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+      password: "",
+      confirmPassword: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-    })
+      [e.target.name]: e.target.value
+    });
   }
 
   onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     axios.put(`${BASEURL}api/v1/change`, {
       token: this.token,
       password: this.password,
-      confirmPassword: this.confirmPassword,
-    })
-  }
+      confirmPassword: this.confirmPassword
+    });
+  };
 
   render() {
     return (
@@ -38,7 +38,7 @@ export default class RestPassword extends React.Component {
         <div className="login-form">
           <Grid
             textAlign="center"
-            style={{ height: '100%' }}
+            style={{ height: "100%" }}
             verticalAlign="middle"
           >
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -75,6 +75,6 @@ export default class RestPassword extends React.Component {
           </Grid>
         </div>
       </React.Fragment>
-    )
+    );
   }
 }

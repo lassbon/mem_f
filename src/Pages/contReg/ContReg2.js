@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   Tab,
   Dimmer,
@@ -7,17 +7,17 @@ import {
   Divider,
   Icon,
   Grid,
-  Label,
-} from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button'
-import { Redirect, withRouter } from 'react-router-dom'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import { update } from '../../actions/auth'
-import { paths } from '../../data/registrationPages'
+  Label
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import Button from "semantic-ui-react/dist/commonjs/elements/Button/Button";
+import { Redirect, withRouter } from "react-router-dom";
+import axios from "axios";
+import { connect } from "react-redux";
+import { update } from "../../actions/auth";
+import { paths } from "../../data/registrationPages";
 
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = "http://membership-api.accinigeria.com/";
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 // const panes = [
@@ -171,7 +171,7 @@ const BASEURL = 'http://membership-api.accinigeria.com/'
 //   },
 // ]
 
-const state = { activeIndex: 0 }
+const state = { activeIndex: 0 };
 
 // const benefits = [
 //   `
@@ -205,17 +205,17 @@ const state = { activeIndex: 0 }
 class ContReg2 extends Component {
   state = {
     plans: [],
-    loading: false,
-  }
+    loading: false
+  };
   componentDidMount() {
-    const { user } = this.props
-    const { recommendedLevel } = user
+    const { user } = this.props;
+    const { recommendedLevel } = user;
     axios(`${BASEURL}api/v1/levels/`, {
       headers: {
-        authorization: user.token,
-      },
+        authorization: user.token
+      }
     }).then(response => {
-      console.log('plans', response)
+      console.log("plans", response);
       const plans = response.data.map(
         ({ description, fee, name, paystack: { data: { plan_code } } }, i) => ({
           render: () => (
@@ -223,18 +223,18 @@ class ContReg2 extends Component {
               {/* <h1 className="encode-font">{description.replace('<br>', '')}</h1> */}
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  width: '60%',
-                  border: '1px solid #ddd',
-                  borderRadius: '2rem',
-                  padding: '2rem 0px',
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  width: "60%",
+                  border: "1px solid #ddd",
+                  borderRadius: "2rem",
+                  padding: "2rem 0px"
                 }}
               >
                 <div
                   style={{
-                    marginBottom: '0.5rem',
+                    marginBottom: "0.5rem"
                   }}
                 >
                   {name === recommendedLevel && (
@@ -246,34 +246,34 @@ class ContReg2 extends Component {
                 <h2
                   className="encode-font"
                   style={{
-                    width: '100%',
-                    textTransform: 'capitalize',
-                    backgroundColor: '#D4AF37',
-                    color: '#fff',
-                    fontWeight: '900',
-                    textAlign: 'center',
-                    padding: '1rem',
+                    width: "100%",
+                    textTransform: "capitalize",
+                    backgroundColor: "#D4AF37",
+                    color: "#fff",
+                    fontWeight: "900",
+                    textAlign: "center",
+                    padding: "1rem"
                   }}
                 >
-                  N{(fee + '')
-                    .split('')
+                  N{(fee + "")
+                    .split("")
                     .reverse()
                     .reduce(
                       (acc, l, i, arr) =>
                         i % 3 === 0 && i !== arr.length - 1 && i !== 0
                           ? `${acc},${l}`
                           : `${acc}${l}`,
-                      ''
+                      ""
                     )
-                    .split('')
+                    .split("")
                     .reverse()
-                    .join('')}
+                    .join("")}
                 </h2>
                 <h3>BENEFITS</h3>
-                <div style={{ padding: '1rem' }}>
-                  {description.split('\n').map(benefit => (
+                <div style={{ padding: "1rem" }}>
+                  {description.split("\n").map(benefit => (
                     <React.Fragment>
-                      <div style={{ display: 'flex' }}>
+                      <div style={{ display: "flex" }}>
                         <Icon name="checkmark" />
                         <p>{benefit}</p>
                       </div>
@@ -300,41 +300,41 @@ class ContReg2 extends Component {
           plan_code,
           description,
           fee,
-          name,
+          name
         })
-      )
-      this.setState(prevState => ({ ...prevState, plans }))
+      );
+      this.setState(prevState => ({ ...prevState, plans }));
       // console.log(plans)
-    })
+    });
 
     // this.setState()
   }
   render() {
-    const { user, location: { pathname } } = this.props
-    const { recommendedLevel } = user
-    if (user.regState == null) return <Redirect to="/login" />
-    const index = paths.indexOf(pathname)
-    const regState = user.regState
-    console.log('cont2', regState)
+    const { user, location: { pathname } } = this.props;
+    const { recommendedLevel } = user;
+    if (user.regState == null) return <Redirect to="/login" />;
+    const index = paths.indexOf(pathname);
+    const regState = user.regState;
+    console.log("cont2", regState);
     if (regState < index) {
-      return <Redirect to={paths[regState]} />
+      return <Redirect to={paths[regState]} />;
     }
     return (
       <React.Fragment>
         <div
           style={{
-            width: '70%',
-            margin: '0 auto',
-            border: '1px solid #C0C0C0',
-            minHeight: '100%',
-            verticalAlign: 'middle',
-            marginTop: '100px',
+            width: "70%",
+            margin: "0 auto",
+            border: "1px solid #C0C0C0",
+            minHeight: "100%",
+            verticalAlign: "middle",
+            marginTop: "100px",
             marginBottom: 100,
-            textAlign: 'left',
-            paddingBottom: 50,
+            textAlign: "left",
+            paddingBottom: 50
           }}
         >
-          <h2 style={{ margin: 60, textAlign: 'center' }}>
+          <h2 style={{ margin: 60, textAlign: "center" }}>
             Select a membership category
           </h2>
           {this.state.plans.length ? (
@@ -342,14 +342,14 @@ class ContReg2 extends Component {
               defaultActiveIndex={this.state.plans.findIndex(
                 ({ name }) => name === recommendedLevel
               )}
-              menu={{ fluid: true, vertical: true, tabular: 'right' }}
+              menu={{ fluid: true, vertical: true, tabular: "right" }}
               panes={this.state.plans}
               onTabChange={(change, { activeIndex }) => {
-                state.activeIndex = activeIndex
-                console.log(state)
+                state.activeIndex = activeIndex;
+                console.log(state);
               }}
               style={{
-                borderLeft: '7px solid #D4AF37',
+                borderLeft: "7px solid #D4AF37"
               }}
             />
           ) : (
@@ -375,9 +375,9 @@ class ContReg2 extends Component {
           )}
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '3rem',
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "3rem"
             }}
           >
             <Button
@@ -389,24 +389,24 @@ class ContReg2 extends Component {
               //   },
               // }}
               onClick={() => {
-                const { history } = this.props
-                this.setState({ loading: true })
+                const { history } = this.props;
+                this.setState({ loading: true });
                 this.props
                   .update(
                     {
                       membershipPlan: this.state.plans[state.activeIndex]
                         .plan_code,
                       regState: 2,
-                      token: user.token,
+                      token: user.token
                     },
                     user.id
                   )
                   .then(() => {
-                    this.setState({ loading: false })
+                    this.setState({ loading: false });
                     history.push({
-                      pathname: '/cont3',
-                    })
-                  })
+                      pathname: "/cont3"
+                    });
+                  });
                 // axios
                 //   .put(
                 //     `${BASEURL}api/v1/user/${user.id}`,
@@ -444,22 +444,22 @@ class ContReg2 extends Component {
             </Button>
           </div>
         </div>
-        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
+        <Grid style={{ background: "#34495E", textAlign: "center" }}>
           <Grid.Column width="5">
-            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
-            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
+            <h2 style={{ color: "#D5C67A", fontSize: "50px" }}>3215</h2>
+            <h3 style={{ color: "white", marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
           <Grid.Column width="6" verticalAlign="middle">
             <Icon
               name="facebook square"
               size="big"
-              style={{ color: 'white' }}
+              style={{ color: "white" }}
             />
-            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
-            <Icon name="twitter" size="big" style={{ color: 'white' }} />
+            <Icon name="linkedin" size="big" style={{ color: "white" }} />
+            <Icon name="twitter" size="big" style={{ color: "white" }} />
           </Grid.Column>
           <Grid.Column width="5">
-            <h3 style={{ color: 'white' }}>Links</h3>
+            <h3 style={{ color: "white" }}>Links</h3>
             <Link to="#" style={{ marginRight: 10 }}>
               ACCI website
             </Link>
@@ -476,21 +476,21 @@ class ContReg2 extends Component {
         </Grid>
         <footer
           style={{
-            verticalAlign: 'middle',
-            background: 'white',
-            color: '#656768',
-            textAlign: 'center',
-            padding: '10px',
-            fontWeight: 'bold',
+            verticalAlign: "middle",
+            background: "white",
+            color: "#656768",
+            textAlign: "center",
+            padding: "10px",
+            fontWeight: "bold"
           }}
         >
           Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
-    )
+    );
   }
 }
 
 export default withRouter(
   connect(({ user }) => ({ user }), { update })(ContReg2)
-)
+);

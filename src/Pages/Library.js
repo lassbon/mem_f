@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Grid, Card, Icon, Input, List } from "semantic-ui-react";
+// import api from "../api";
+import { Grid, Card, Icon, Input, List, Button } from "semantic-ui-react";
 
 const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
 
@@ -9,18 +10,57 @@ const centerText = {
 };
 
 class Library extends React.Component {
-  componentDidMount() {
-    this.getDocs();
-    this.getOneCat();
-    console.log(this.getDocs);
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: [],
+      file: null
+    };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.fileUpload = this.fileUpload.bind(this);
   }
 
-  getDocs() {
-    axios.get(`${BASEURL}api/v1/knowledgebase/category/`);
+  componentDidMount() {
+    this.fetchDocs();
+    // console.log("data", this.fetchDocs.res);
   }
-  getOneCat() {
-    const id = "general";
-    axios.get(`${BASEURL}api/v1/knowledgebase/category/${id}`);
+
+  onFormSubmit(e) {
+    e.preventDefault(); // Stop form submit
+    this.fileUpload(this.state.file).then(response => {
+      console.log(response.data);
+    });
+  }
+  onChange(e) {
+    this.setState({ file: e.target.files[0] });
+  }
+
+  fetchDocs() {
+    axios
+      .get(`${BASEURL}api/v1/knowledgebase/category`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+          // authorization: token
+        }
+      })
+      .then(res => {
+        this.setState({ category: res.data });
+        console.log("name", res.data[0].name);
+      });
+  }
+
+  fileUpload(file) {
+    const url = `${BASEURL}api/v1/knowledgebase/category`;
+    const formData = new FormData();
+    formData.append("file", file);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+    return axios.post(url, formData, config);
   }
 
   render() {
@@ -41,123 +81,21 @@ class Library extends React.Component {
                     <List.Header as="h4">Categories</List.Header>
                   </List.Content>
                 </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header style={{ color: "rgba(10, 1, 1, 0.674)" }}>
-                      General
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Philosophy
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Science
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      History
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Business
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Geography
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Languages
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon
-                    name="folder"
-                    size="large"
-                    verticalAlign="middle"
-                  />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      Languages
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
+                {this.state.category.map(doc => (
+                  <List.Item key={doc.id} id={doc.id}>
+                    <List.Icon
+                      name="folder"
+                      size="large"
+                      verticalAlign="middle"
+                    />
+
+                    <List.Content>
+                      <List.Header style={{ color: "rgba(10, 1, 1, 0.674)" }}>
+                        {doc.name}
+                      </List.Header>
+                    </List.Content>
+                  </List.Item>
+                ))}
               </List>
             </Grid.Column>
             <Grid.Column width={11}>
@@ -192,57 +130,28 @@ class Library extends React.Component {
                 </Card.Content>
               </Card>
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={10}>
               <List
                 divided
                 relaxed
                 style={{ background: "var(--white)", padding: 15 }}
               >
-                <List.Item>
-                  <List.Content>
-                    <List.Header as="h4">Your Uploads</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name="file" size="large" verticalAlign="middle" />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      The Interesting Narrative of the Life of Olaudah Equiano
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name="file" size="large" verticalAlign="middle" />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      The Interesting Narrative of the Life of Olaudah Equiano
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name="file" size="large" verticalAlign="middle" />
-                  <List.Content>
-                    <List.Header
-                      as="h5"
-                      style={{ color: "rgba(10, 1, 1, 0.674)" }}
-                    >
-                      The Interesting Narrative of the Life of Olaudah Equiano
-                    </List.Header>
-                  </List.Content>
-                </List.Item>
-                <Card.Content extra>
-                  <Input
-                    style={{ width: "100%" }}
-                    type="file"
-                    placeholder="upload file"
-                  />
-                </Card.Content>
+                <h5>Upload File</h5>
+                <form onSubmit={this.onFormSubmit}>
+                  <Card.Content extra>
+                    <Input
+                      onChange={this.onChange}
+                      style={{ width: "100%" }}
+                      type="file"
+                      placeholder="upload file"
+                    />
+                    <br />
+                    <br />
+                    <Button type="submit" basic color="green" size="tiny">
+                      <Icon name="add circle" />Uploads Docs
+                    </Button>
+                  </Card.Content>
+                </form>
               </List>
             </Grid.Column>
           </Grid.Row>

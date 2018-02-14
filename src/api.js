@@ -263,5 +263,18 @@ export default {
     },
     getOne: id =>
       axios.get(`${BASEURL}api/v1/getevents/${id}`).then(res => res.data)
+  },
+
+  fetchDocs: cat => {
+    // console.log(this.res);
+    axios
+      .get(`${BASEURL}api/v1/knowledgebase/category`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+          // authorization: token
+        }
+      })
+      .then(res => res.data.names.map(name => res.data.names));
   }
 };

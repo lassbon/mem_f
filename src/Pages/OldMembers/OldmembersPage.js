@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { oldMem } from "../../actions/auth";
 import { Message, Grid, Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import OldmembersForm from "./OldmembersForm";
 
+const registrationStages = ["/old", "/old2"];
+
 class OldmembersPage extends React.Component {
-  submit = data => this.props.oldMem(data);
+  submit = data => this.props.oldMem(data, this.props.history);
   // .then(user => {
   //   const { history } = this.props
   //   const { regState } = user
@@ -58,4 +60,4 @@ OldmembersPage.propTypes = {
   oldMem: PropTypes.func.isRequired
 };
 
-export default connect(null, { oldMem })(OldmembersPage);
+export default withRouter(connect(null, { oldMem })(OldmembersPage));

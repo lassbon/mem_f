@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { Redirect, withRouter } from "react-router-dom";
 import { paths } from "../../data/registrationPages";
 
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://membership-api.accinigeria.com/";
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class ContReg6 extends React.Component {
@@ -30,7 +30,7 @@ class ContReg6 extends React.Component {
     //"membershipDue": "paid",
     //roshbon@gmail.com
     this.setState({ loading: true });
-    this.props.update({ regState: 6, token }, id).then(() => {
+    this.props.update({ regState: 7, token }, id).then(() => {
       this.setState({ loading: false });
       localStorage.acciJWT = token;
       history.push({
@@ -261,7 +261,7 @@ class ContReg6 extends React.Component {
             fontWeight: "bold"
           }}
         >
-          Copyright © 2017 Abuja Chamber of Commerce & Industry
+          Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
     );

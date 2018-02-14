@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { Grid, Form, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { update } from '../../actions/auth'
@@ -7,10 +8,7 @@ import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
 
-
 // const BASEURL = 'https://2968008f.ngrok.io/'
-
-
 
 class ContReg3 extends React.Component {
   state = {
@@ -20,6 +18,7 @@ class ContReg3 extends React.Component {
       companyRepPhone1: null,
       companyRepEmail1: null,
       companyRepPassportUrl1: null,
+      companyRepCVUrl: null,
       companyRepName2: null,
       companyRepPhone2: null,
       companyRepEmail2: null,
@@ -34,7 +33,27 @@ class ContReg3 extends React.Component {
   //     rep1: { ...this.state.rep1, [e.target.name]: e.target.value },
   //   })
   // }
+
   handleChange = e => {
+    const { target: { name } } = e
+    const hasFile = [
+      'companyRepPassportUrl1',
+      'companyRepPassportUrl2',
+      'companyRepCVUrl2',
+      'companyCOIUrl',
+      'companyRepCVurl',
+    ]
+    if (hasFile.indexOf(name) > -1) {
+      const file = e.target.files[0]
+
+      this.setState(
+        {
+          data: { ...this.state.data, [e.target.name]: file },
+        },
+        () => console.log(this.state.data)
+      )
+      return
+    }
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value },
     })
@@ -44,24 +63,70 @@ class ContReg3 extends React.Component {
     // console.log(this.state)
     if (!this.validate()) return
     // console.log('gotcha')
+    // const { user: { token } } = this.props
     this.setState({ loading: true })
     const { history, user: { id, token } } = this.props
-    this.props
-      .update({ ...this.state.data, token, regState: 3 }, id)
+
+    const hasFile = [
+      'companyRepPassportUrl1',
+      'companyRepPassportUrl2',
+      'companyRepCVUrl2',
+      'companyCOIUrl',
+      'companyRepCVurl',
+    ]
+
+    Promise.all(
+      hasFile.map(name => {
+        const form = new FormData()
+        const data = this.state.data[name]
+        if (data) {
+          form.append('file', data)
+        }
+        // console.log(form)
+        return data
+          ? axios.post(
+              `http://membership-api.accinigeria.com/api/v1/user/upload`,
+              form,
+              {
+                headers: {
+                  'Content-Type': 'application/form-data',
+                  Accept: 'application/form-data',
+                  authorization: token,
+                },
+              }
+            )
+          : Promise.resolve({ data: { bannerUrl: '' } })
+      })
+    )
+      .then(res => {
+        console.log(res)
+        return this.props.update(
+          {
+            ...this.state.data,
+            companyRepPassportUrl1: res[0].data.bannerUrl,
+            companyRepPassportUrl2: res[1].data.bannerUrl,
+            companyRepCVUrl2: res[2].data.bannerUrl,
+            companyCOIUrl: res[3].data.bannerUrl,
+            companyRepCVurl: res[4].data.bannerUrl,
+            token,
+            regState: 3,
+          },
+          id
+        )
+      })
       .then(() => {
         this.setState({ loading: false })
         history.push({
           pathname: '/cont4',
         })
       })
-
-    // .catch(() => {
-    //   //handle error
-    //   return Promise.resolve('')
-    // })
-    // .then(() => {
-    //   this.setState({ loading: true })
-    // })
+      .catch(() => {
+        //handle error
+        return Promise.resolve('')
+      })
+      .then(() => {
+        this.setState({ loading: false })
+      })
 
     // setTimeout(function() {
     //   window.location = '/cont4'
@@ -78,6 +143,7 @@ class ContReg3 extends React.Component {
       'companyRepEmail1',
       'companyRepPassportUrl1',
       'companyRepCVUrl2',
+      'companyRepCVurl',
     ]
     const rep2 = [
       'companyRepName2',
@@ -91,7 +157,7 @@ class ContReg3 extends React.Component {
     let rep2Inputs = []
 
     const inputs = this.state.data
-    
+
     for (let val in inputs) {
       if (rep1.indexOf(val) > -1) {
         rep1Inputs.push(inputs[val])
@@ -281,7 +347,7 @@ class ContReg3 extends React.Component {
             fontWeight: 'bold',
           }}
         >
-          Copyright © 2017 Abuja Chamber of Commerce & Industry
+          Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
     )

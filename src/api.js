@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASEURL = "http://localhost:1337/";
-const BASEURL = "https://obscure-waters-44612.herokuapp.com/";
+const BASEURL = "http://membership-api.accinigeria.com/";
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
@@ -41,7 +41,12 @@ export default {
         .then(res => res.data.user),
 
     resetPasswordRequest: email =>
-      axios.post(`${BASEURL}api/vi/user/reset`, email),
+      axios.post(`${BASEURL}api/v1/user/reset`, email, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+        }
+      }),
 
     profile: id =>
       axios.get(`${BASEURL}api/v1/user/${id}`).then(res => res.data),
@@ -61,17 +66,34 @@ export default {
   // }
   oldMem: {
     check: data =>
-      axios.post(`${BASEURL}api/v1/oldmember`, data, {
-        headers: {
-          "Content-Type": "application/form-data",
-          Accept: "application/form-data"
-        }
-      }),
+      axios
+        .post(`${BASEURL}api/v1/auth/oldmember`, data, {
+          headers: {
+            "Content-Type": "application/form-data",
+            Accept: "application/form-data",
+            authorization: data.token
+          }
+        })
+        .then(res => {
+          const { data: { user: { id }, token } } = res;
+          return Promise.all([
+            res.data,
+            axios(`${BASEURL}api/v1/user/${id}`, {
+              headers: {
+                authorization: token
+              }
+            })
+          ]);
+        })
+        .then(responses => {
+          return Promise.resolve({ ...responses[0], ...responses[1].data });
+        }),
     contLogin: (data, id) =>
-      axios.put(`${BASEURL}api/v1/oldmember/${id}`, data, {
+      axios.put(`${BASEURL}api/v1/user/${id}`, data, {
         headers: {
           "Content-Type": "application/form-data",
-          Accept: "application/form-data"
+          Accept: "application/form-data",
+          authorization: data.token
         }
       })
   },
@@ -113,7 +135,6 @@ export default {
       axios.post(`${BASEURL}api/v1/validatereferee`, data, {
         headers: {
           "Content-Type": "application/form-data",
-          "Access-Control-Allow-Origin": "*",
           Accept: "application/form-data",
           authorization: token
         }
@@ -242,5 +263,30 @@ export default {
     },
     getOne: id =>
       axios.get(`${BASEURL}api/v1/getevents/${id}`).then(res => res.data)
+  },
+
+  fetchDocs: cat => {
+    // console.log(this.res);
+    axios
+      .get(`${BASEURL}api/v1/knowledgebase/category`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data"
+          // authorization: token
+        }
+      })
+      .then(res => res.data.names.map(name => res.data.names));
+  },
+
+  fetchUsers: token => {
+    axios
+      .get(`${BASEURL}api/v1/user/`, {
+        headers: {
+          "Content-Type": "application/form-data",
+          Accept: "application/form-data",
+          authorization: token
+        }
+      })
+      .then(res => res.data);
   }
 };

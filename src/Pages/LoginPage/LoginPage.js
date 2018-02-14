@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
       const { history } = this.props;
       const { regState } = user;
       // console.log(regState, registrationStages[regState])
-      regState > 7
+      regState > 6
         ? history.push("/app")
         : state && state.redirect
           ? history.push(state.redirect)
@@ -62,22 +62,6 @@ class LoginPage extends React.Component {
             <Link to="/forgotpassword" style={{ color: "#9978ba" }}>
               forgot password?
             </Link>
-            <br />
-            <Message
-              style={{
-                backgroundColor: "#d3c479"
-              }}
-            >
-              <Link
-                to="/oldmem"
-                style={{
-                  color: "#fff"
-                }}
-              >
-                Old members{" "}
-                <span style={{ fontWeight: "bold" }}>click here..</span>
-              </Link>
-            </Message>
           </Grid.Column>
         </Grid>
       </div>

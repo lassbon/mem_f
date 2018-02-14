@@ -1,23 +1,15 @@
-import React from 'react'
-import { Grid, Segment, Form, Image, Button, Icon } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import { update } from '../../actions/auth'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import { withRouter } from 'react-router-dom'
+import React from "react";
+import { Grid, Form, Button, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { update } from "../../actions/auth";
+import { connect } from "react-redux";
 
-const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
+import { Redirect, withRouter } from "react-router-dom";
+import { paths } from "../../data/registrationPages";
+
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
-const sendDetails = (details, id) =>
-  axios.put(`${BASEURL}api/v1/user/${id}`, details, {
-    headers: {
-      'Content-Type': 'application/form-data',
-      Accept: 'application/form-data',
-    },
-  })
-
-class ContReg3 extends React.Component {
+class OldMembers2 extends React.Component {
   state = {
     loading: false,
     data: {
@@ -25,14 +17,14 @@ class ContReg3 extends React.Component {
       companyRepPhone1: null,
       companyRepEmail1: null,
       companyRepPassportUrl1: null,
-      companyRepCVUrl1: null,
       companyRepName2: null,
       companyRepPhone2: null,
       companyRepEmail2: null,
       companyRepPassportUrl2: null,
       companyRepCVUrl2: null,
-    },
-  }
+      companyCOIUrl: null
+    }
+  };
 
   // handleChange1 = e => {
   //   this.setState({
@@ -41,20 +33,24 @@ class ContReg3 extends React.Component {
   // }
   handleChange = e => {
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
-    })
-  }
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+  };
 
   submit = () => {
-    console.log(this.state)
-    this.setState({ loading: true })
-    const { history, user: { id, token } } = this.props
-    this.props.update(
-      { ...this.state.data, token, regState: 3 },
-      history,
-      '/cont4',
-      id
-    )
+    // console.log(this.state)
+    if (!this.validate()) return;
+    // console.log('gotcha')
+    this.setState({ loading: true });
+    const { history, user: { id, token } } = this.props;
+    this.props
+      .update({ ...this.state.data, token, regState: 7 }, id)
+      .then(() => {
+        this.setState({ loading: false });
+        history.push({
+          pathname: "/app"
+        });
+      });
 
     // .catch(() => {
     //   //handle error
@@ -67,22 +63,66 @@ class ContReg3 extends React.Component {
     // setTimeout(function() {
     //   window.location = '/cont4'
     // }, 3000)
-  }
+  };
 
   validate = () => {
     // perform validation here
-  }
+    // console.log(Object.values(this.state.data))
+
+    const rep1 = [
+      "companyRepName1",
+      "companyRepPhone1",
+      "companyRepEmail1",
+      "companyRepPassportUrl1",
+      "companyRepCVUrl2"
+    ];
+    const rep2 = [
+      "companyRepName2",
+      "companyRepPhone2",
+      "companyRepEmail2",
+      "companyRepPassportUrl2",
+      "companyCOIUrl",
+      "companyRepCVUrl2"
+    ];
+    let rep1Inputs = [];
+    let rep2Inputs = [];
+
+    const inputs = this.state.data;
+
+    for (let val in inputs) {
+      if (rep1.indexOf(val) > -1) {
+        rep1Inputs.push(inputs[val]);
+      } else if (rep2.indexOf(val) > -1) {
+        rep2Inputs.push(inputs[val]);
+      }
+    }
+
+    return [
+      rep1Inputs.some(val => val === null),
+      rep2Inputs.some(val => val === null)
+    ].some(val => val === false);
+    // return
+  };
 
   render() {
+    const { user, location: { pathname } } = this.props;
+    if (user.regState == null) return <Redirect to="/login" />;
+    const index = paths.indexOf(pathname);
+    const regState = user.regState;
+    console.log("cont3", regState);
+    if (regState < index) {
+      return <Redirect to={paths[regState]} />;
+    }
     return (
       <React.Fragment>
         <Form
           style={{
-            width: '70%',
-            margin: '0 auto',
-            textAlign: 'center',
-            marginBottom: 50,
+            width: "70%",
+            margin: "0 auto",
+            textAlign: "center",
+            marginBottom: 50
           }}
+          loading={this.state.loading}
         >
           <h2>Company Representatives</h2>
           <Grid columns="equal">
@@ -169,6 +209,20 @@ class ContReg3 extends React.Component {
                 </label>
                 <Form.Input
                   type="file"
+                  name="companyCOIUrl"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+          </Grid>
+          <Grid centered columns={2}>
+            <Grid.Column>
+              <Form.Field>
+                <label style={{ textAlign: "center" }}>
+                  Upload CAC document
+                </label>
+                <Form.Input
+                  type="file"
                   name="companyRepCVUrl2"
                   onChange={this.handleChange}
                 />
@@ -176,7 +230,7 @@ class ContReg3 extends React.Component {
             </Grid.Column>
           </Grid>
           <div style={{ marginTop: 30 }}>
-            <Button to="/app" as={Link}>
+            <Button to="/cont2" as={Link}>
               Back
             </Button>
             <Button className="btn" onClick={this.submit}>
@@ -184,22 +238,22 @@ class ContReg3 extends React.Component {
             </Button>
           </div>
         </Form>
-        <Grid style={{ background: '#34495E', textAlign: 'center' }}>
+        <Grid style={{ background: "#34495E", textAlign: "center" }}>
           <Grid.Column width="5">
-            <h2 style={{ color: '#D5C67A', fontSize: '50px' }}>3215</h2>
-            <h3 style={{ color: 'white', marginTop: 5 }}>Registered Members</h3>
+            <h2 style={{ color: "#D5C67A", fontSize: "50px" }}>3215</h2>
+            <h3 style={{ color: "white", marginTop: 5 }}>Registered Members</h3>
           </Grid.Column>
           <Grid.Column width="6" verticalAlign="middle">
             <Icon
               name="facebook square"
               size="big"
-              style={{ color: 'white' }}
+              style={{ color: "white" }}
             />
-            <Icon name="linkedin" size="big" style={{ color: 'white' }} />
-            <Icon name="twitter" size="big" style={{ color: 'white' }} />
+            <Icon name="linkedin" size="big" style={{ color: "white" }} />
+            <Icon name="twitter" size="big" style={{ color: "white" }} />
           </Grid.Column>
           <Grid.Column width="5">
-            <h3 style={{ color: 'white' }}>Links</h3>
+            <h3 style={{ color: "white" }}>Links</h3>
             <Link to="#" style={{ marginRight: 10 }}>
               ACCI website
             </Link>
@@ -216,21 +270,21 @@ class ContReg3 extends React.Component {
         </Grid>
         <footer
           style={{
-            verticalAlign: 'middle',
-            background: 'white',
-            color: '#656768',
-            textAlign: 'center',
-            padding: '10px',
-            fontWeight: 'bold',
+            verticalAlign: "middle",
+            background: "white",
+            color: "#656768",
+            textAlign: "center",
+            padding: "10px",
+            fontWeight: "bold"
           }}
         >
-          Copyright © 2017 Abuja Chamber of Commerce & Industry
+          Copyright © 2018 Abuja Chamber of Commerce & Industry
         </footer>
       </React.Fragment>
-    )
+    );
   }
 }
 
 export default withRouter(
-  connect(({ user }) => ({ user }), { update })(ContReg3)
-)
+  connect(({ user }) => ({ user }), { update })(OldMembers2)
+);

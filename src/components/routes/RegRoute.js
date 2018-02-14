@@ -10,6 +10,7 @@ const registrationStagesPaths = [
   '/cont4',
   '/cont5',
   '/cont6',
+  '/cont7',
 ]
 
 const registrationStagesDesc = [
@@ -17,7 +18,9 @@ const registrationStagesDesc = [
   'Category',
   'Details',
   'Referrals',
-  'Payment',
+  'Registration payment',
+  'Subscription',
+  'Membership payment',
 ]
 
 const RegRoute = ({ component: Component, path, user }) => {
@@ -65,7 +68,7 @@ const RegRoute = ({ component: Component, path, user }) => {
                 display: 'flex',
               }}
             >
-              {Array(5)
+              {Array(7)
                 .fill('')
                 .map((v, i) => (
                   <li
@@ -100,7 +103,9 @@ const RegRoute = ({ component: Component, path, user }) => {
                       {' '}
                       {i + 1}{' '}
                     </Link>{' '}
-                    <span>{registrationStagesDesc[i]}</span>
+                    <span style={{ fontSize: '12px' }}>
+                      {registrationStagesDesc[i]}
+                    </span>
                   </li>
                 ))}
             </ul>

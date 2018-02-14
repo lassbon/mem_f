@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 // import api from "../api";
 import { Grid, Card, Icon, Input, List, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 const BASEURL = 'https://obscure-waters-44612.herokuapp.com/'
 
@@ -52,6 +53,7 @@ class Library extends React.Component {
   }
 
   fileUpload(file) {
+    const { user: { token } } = this.props
     const url = `${BASEURL}api/v1/knowledgebase/category`
     const formData = new FormData()
     formData.append('file', file)
@@ -181,4 +183,4 @@ class Library extends React.Component {
   }
 }
 
-export default Library
+export default connect(({ user }) => ({ user }))(Library)

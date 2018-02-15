@@ -13,6 +13,7 @@ const registrationStages = [
   "/cont3",
   "/cont4",
   "/cont5",
+  "/regmessage",
   "/cont6",
   "/cont7"
 ];
@@ -26,12 +27,18 @@ class LoginPage extends React.Component {
       const { history } = this.props;
       const { regState } = user;
       // console.log(regState, registrationStages[regState])
-      regState > 6
+      regState > 7
         ? history.push("/app")
         : state && state.redirect
           ? history.push(state.redirect)
           : history.push(registrationStages[regState]);
       // this.props.history.push('/app')
+      console.log(
+        "login check: ",
+        state && state.redirect,
+        "login path: ",
+        registrationStages[regState]
+      );
     });
   };
 

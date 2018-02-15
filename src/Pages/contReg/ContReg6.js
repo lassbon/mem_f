@@ -30,7 +30,7 @@ class ContReg6 extends React.Component {
     //"membershipDue": "paid",
     //roshbon@gmail.com
     this.setState({ loading: true });
-    this.props.update({ regState: 7, token }, id).then(() => {
+    this.props.update({ regState: 8, token }, id).then(() => {
       this.setState({ loading: false });
       localStorage.acciJWT = token;
       history.push({
@@ -136,8 +136,7 @@ class ContReg6 extends React.Component {
     // }
     const formattedFee =
       typeof plan === "object" && plan != null
-        ? "N" +
-          (plan.fee + "")
+        ? (plan.fee + "")
             .split("")
             .reverse()
             .reduce(
@@ -176,7 +175,7 @@ class ContReg6 extends React.Component {
                       <h4>Membership Due</h4>
                     </Grid.Column>
                     <Grid.Column>
-                      <h4>{formattedFee}</h4>
+                      <h4>&#x20A6;{formattedFee}</h4>
                     </Grid.Column>
                   </Grid>
                   <Grid columns="equal">
@@ -184,7 +183,7 @@ class ContReg6 extends React.Component {
                       <h4>Total</h4>
                     </Grid.Column>
                     <Grid.Column>
-                      <h4>{formattedFee}</h4>
+                      <h4>&#x20A6; {formattedFee}</h4>
                     </Grid.Column>
                   </Grid>
 
@@ -199,8 +198,9 @@ class ContReg6 extends React.Component {
                       variablename="Verfication "
                       email={user.email}
                       amount={plan.fee * 100}
-                      // plan={plan.paystack.data.plan_code}
-                      callback={this.changeToNew}
+                      callback={
+                        this.changeToNew // plan={plan.paystack.data.plan_code}
+                      }
                     />
                   </div>
                 </React.Fragment>

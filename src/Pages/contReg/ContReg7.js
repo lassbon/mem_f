@@ -36,7 +36,7 @@ class ContReg7 extends React.Component {
           loading: false,
         })
         history.push({
-          pathname: '/cont7',
+          pathname: '/cont6',
           state: {
             id: id,
           },

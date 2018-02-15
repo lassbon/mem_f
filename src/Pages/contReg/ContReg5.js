@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
+import api from '../../api'
 
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
@@ -31,6 +32,12 @@ class ContReg5 extends React.Component {
         },
         id
       )
+      .then(() => {
+        return api.signup.alertReferee({
+          id,
+          token,
+        })
+      })
       .then(() => {
         this.setState({
           loading: false,

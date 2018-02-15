@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from "axios";
 import { Card, Grid, Dimmer, Loader, Segment, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import PaystackComponent from '../../components/PaystackComponent'
@@ -7,7 +8,7 @@ import { update } from '../../actions/auth'
 import { Redirect, withRouter } from 'react-router-dom'
 import { paths } from '../../data/registrationPages'
 
-// const BASEURL = 'https://2968008f.ngrok.io/'
+const BASEURL = "http://membership-api.accinigeria.com/";
 
 class ContReg7 extends React.Component {
   constructor(props) {

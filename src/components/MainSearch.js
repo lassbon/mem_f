@@ -2,6 +2,7 @@ import _ from "lodash";
 import api from "../api";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
+import {connect} from 'react-redux'
 
 const source = _.times(5, () => ({
   title: api.fetchUsers.companyName,
@@ -10,7 +11,7 @@ const source = _.times(5, () => ({
   price: api.fetchUsers.companyBusiness
 }));
 
-export default class MainSearch extends Component {
+class MainSearch extends Component {
   componentWillMount() {
     this.resetComponent();
   }
@@ -24,22 +25,27 @@ export default class MainSearch extends Component {
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
 
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.resetComponent();
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.title);
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(source, isMatch)
-      });
-    }, 500);
   };
+
+  componentDidMount = () => {
+    const { user: {token}} = this.props
+    api.fetchUsers(token).then((res) => {
+      const data = res.data
+      this.setState({
+        results: data.map((user) => ({
+          title: user.companyName,
+          description: user.companyName,
+          image: user.profileImage,
+          price: user.companyBusiness
+        }))
+      })
+    })
+  }
+  
 
   render() {
     const { isLoading, value, results } = this.state;
-
+    console.log("result", results)
     return (
       <Grid>
         <Grid.Column width={16}>
@@ -57,3 +63,5 @@ export default class MainSearch extends Component {
     );
   }
 }
+
+export default connect(({user}) => ({user}), null)(MainSearch)

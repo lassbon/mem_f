@@ -279,7 +279,7 @@ export default {
   },
 
   fetchUsers: token => {
-    axios
+    return axios
       .get(`${BASEURL}api/v1/user/`, {
         headers: {
           "Content-Type": "application/form-data",
@@ -287,6 +287,5 @@ export default {
           authorization: token
         }
       })
-      .then(res => res.data);
   }
 };

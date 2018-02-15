@@ -14,6 +14,7 @@ class ContReg7 extends React.Component {
     super(props)
     this.state = {
       loading: false,
+      plan: null
     }
     this.changeToNew = this.changeToNew.bind(this)
   }
@@ -42,6 +43,8 @@ class ContReg7 extends React.Component {
           },
         })
       })
+
+    
     // axios
     //   .put(
     //     `${BASEURL}api/v1/user/${id}`,
@@ -67,6 +70,39 @@ class ContReg7 extends React.Component {
     //   })
   }
 
+  componentDidMount() {
+    const { user } = this.props;
+
+    axios(`${BASEURL}api/v1/user/${user.id}`, {
+      headers: {
+        authorization: user.token
+      }
+    })
+      .then(({ data }) => {
+        return Promise.all([
+          data,
+          axios(`${BASEURL}api/v1/levels/`, {
+            headers: {
+              authorization: user.token
+            }
+          })
+        ]);
+      })
+      .then(results => {
+        // const { membershipPlan } = results[0]
+        const plans = results[1].data;
+
+        const plan = plans.find(p => {
+          return p.paystack.data.plan_code;
+        });
+        console.log(plan);
+        this.setState(prevState => ({
+          ...prevState,
+          user: results[0],
+          plan
+        }));
+      });}
+
   render() {
     const { user, location: { pathname } } = this.props
     const { id, email } = user
@@ -77,12 +113,37 @@ class ContReg7 extends React.Component {
     if (regState < index) {
       return <Redirect to={paths[regState]} />
     }
+    const { plan } = this.state;
+    plan &&
+      console.log(
+        plan.fee,
+        plan.paystack.data.plan_code,
+        plan.name,
+        user.email
+      );
     // const { location: { state }, history } = this.props
     // console.log(this.props)
     // if (state == null || state.id == null) {
     //   history.push('/signup')
     //   return null
     // }
+    const formattedFee =
+      typeof plan === "object" && plan != null
+        ? "N" +
+        (plan.fee + "")
+          .split("")
+          .reverse()
+          .reduce(
+            (acc, l, i, arr) =>
+              i % 3 === 0 && i !== arr.length - 1 && i !== 0
+                ? `${acc},${l}`
+                : `${acc}${l}`,
+            ""
+          )
+          .split("")
+          .reverse()
+          .join("")
+        : "";
 
     return (
       <React.Fragment>
@@ -95,12 +156,12 @@ class ContReg7 extends React.Component {
             <Card style={{ padding: '20px', width: '100%' }}>
               <Grid.Column>Membership Plan</Grid.Column>
               <Grid.Column>
-                <strong>N5,000</strong>
+                <strong>{plan.fee * 100}</strong>
               </Grid.Column>
               <div style={{ margin: '10px auto', marginTop: 40 }}>
                 <PaystackComponent
                   variablename="Verfication "
-                  amount={50000}
+                  amount={plan.fee * 100}
                   callback={this.changeToNew}
                   email={email}
                   metadata={{

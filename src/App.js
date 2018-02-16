@@ -21,6 +21,7 @@ import ContReg6 from './Pages/contReg/ContReg6'
 import Payment from './Pages/Payment'
 import EventPage from './Pages/EventPage'
 import Profile from './Pages/Profile'
+import Profile2 from './Pages/Profile2'
 import Confirmation from './components/messages/Message2'
 import OldMembers from './Pages/Old/Old'
 import OldMembers2 from './Pages/Old/Old2'
@@ -57,7 +58,8 @@ const App = ({ location, user }) => {
         <RegRoute exact path="/confirmation" component={Confirmation} />
         <Route exact path="/regmessage" component={RegMessage} />
         <Route exact path="/payment" component={Payment} />
-        <Route exact path="/profile" component={Profile} />
+        {/* <Route exact path="/profile" component={Profile} /> */}
+        {/* <Route exact path="/profile2/:id" component={Profile2} /> */}
         <Route exact path="/events" component={EventPage} />
         <Route exact path="/confirm/:id/:user" component={Confirm} />
         <Route exact path="/reject/:id/:refereeId" component={Reject} />

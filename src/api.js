@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = 'https://acciapi.ml/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
@@ -291,6 +291,15 @@ export default {
   social: {
     makeFriendRequest: (data, token) => {
       return axios.post(`${BASEURL}api/v1/social/request`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    getFriendRequests: (id, token) => {
+      return axios(`${BASEURL}api/v1/social/requests/${id}`, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',

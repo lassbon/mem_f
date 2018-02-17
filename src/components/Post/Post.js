@@ -52,6 +52,8 @@ class PostStatus extends React.Component {
         items: prevState.items.concat(newItem),
         text: '',
         postsKey: Math.random(),
+        file: '',
+        imagePreviewUrl: '',
       }))
     })
   }

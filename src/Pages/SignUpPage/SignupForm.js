@@ -1,53 +1,53 @@
-import React from "react";
-import axios from "axios";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { Button, Form, Grid, Image, Message } from "semantic-ui-react";
-import { withRouter } from "react-router-dom";
-import validator from "validator";
-import PropTypes from "prop-types";
+import React from 'react'
+import axios from 'axios'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { Button, Form, Grid, Image, Message } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom'
+import validator from 'validator'
+import PropTypes from 'prop-types'
 
-import InlineError from "../../components/messages/InlineError";
-import "../LoginPage/login.css";
-import { userRegistered } from "../../actions/auth";
+import InlineError from '../../components/messages/InlineError'
+import '../LoginPage/login.css'
+import { userRegistered } from '../../actions/auth'
 
-const BASEURL = "http://membership-api.accinigeria.com/";
+const BASEURL = 'https://acciapi.ml/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {
   state = {
     data: {
-      email: "",
-      password: "",
-      confirmPassword: ""
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     loading: false,
-    errors: {}
-  };
+    errors: {},
+  }
 
   signup = user =>
     axios
       .post(`${BASEURL}api/v1/user`, user, {
         headers: {
-          "Content-Type": "application/form-data",
-          Accept: "application/form-data"
-        }
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+        },
       })
       .then(response => {
-        userRegistered(response.data);
-      });
+        userRegistered(response.data)
+      })
 
   onChange = e =>
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    })
 
   onSubmit = () => {
-    const { history } = this.props;
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
+    const { history } = this.props
+    const errors = this.validate(this.state.data)
+    this.setState({ errors })
     if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
+      this.setState({ loading: true })
       // this.signup(this.state.data)
       //   .then(res => {
       //     console.log('success', res)
@@ -64,19 +64,19 @@ class SignupForm extends React.Component {
       //       this.setState({ errors: error.response.data, loading: false })
       //     }
       //   })
-      this.props.registerUser(this.state.data, history);
+      this.props.registerUser(this.state.data, history)
     }
-  };
+  }
 
   validate = data => {
-    const errors = {};
-    if (!validator.isEmail(data.email)) errors.email = "invalid email";
-    if (!data.password) errors.password = "please enter a password";
-    return errors;
-  };
+    const errors = {}
+    if (!validator.isEmail(data.email)) errors.email = 'invalid email'
+    if (!data.password) errors.password = 'please enter a password'
+    return errors
+  }
 
   render() {
-    const { data, errors, loading } = this.state;
+    const { data, errors, loading } = this.state
     return (
       <Form size="large" onSubmit={this.onSubmit} loading={loading}>
         {errors.err && (
@@ -122,18 +122,18 @@ class SignupForm extends React.Component {
           Signup
         </Button>
       </Form>
-    );
+    )
   }
 }
 
 SignupForm.propTypes = {
   // submit: PropTypes.func.isRequired,
-};
+}
 
 const mapDispatchToProps = dispatch => ({
   userRegistered: data => {
-    userRegistered(data);
-  }
-});
+    userRegistered(data)
+  },
+})
 
-export default withRouter(connect()(SignupForm));
+export default withRouter(connect()(SignupForm))

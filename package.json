@@ -47,6 +47,7 @@
     "react-toastify": "^3.3.1",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
+    "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "semantic-ui-css": "^2.2.12",

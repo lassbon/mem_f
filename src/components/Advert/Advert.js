@@ -1,8 +1,8 @@
-import React from "react";
-import { Advertisement } from "semantic-ui-react";
-import "./Advert.css";
+import React from 'react'
+import { Advertisement } from 'semantic-ui-react'
+import './Advert.css'
 
-const BASEURL = "http://membership-api.accinigeria.com/";
+const BASEURL = 'https://acciapi.ml/'
 
 // class Advert extends React.Component {
 //   constructor() {
@@ -11,7 +11,7 @@ const BASEURL = "http://membership-api.accinigeria.com/";
 // }
 
 const Advert = () => (
-  <div style={{ marginLeft: "75vw" }}>
+  <div style={{ marginLeft: '75vw' }}>
     <Advertisement
       className="add_name"
       unit="medium rectangle"
@@ -23,6 +23,6 @@ const Advert = () => (
       test="Medium Rectangle"
     />
   </div>
-);
+)
 
-export default Advert;
+export default Advert

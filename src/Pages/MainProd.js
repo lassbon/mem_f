@@ -1,98 +1,98 @@
-import React from "react";
-import axios from "axios";
-import { connect } from "react-redux";
-import { Button, Icon } from "semantic-ui-react";
-import { getProjects } from "../actions/projects";
+import React from 'react'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { Button, Icon } from 'semantic-ui-react'
+import { getProjects } from '../actions/projects'
 
-const BASEURL = "http://membership-api.accinigeria.com/";
+const BASEURL = 'https://acciapi.ml/'
 
 class MainProd extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      topicInfo: ""
-    };
+      topicInfo: '',
+    }
   }
 
   componentDidMount() {
     this.props.getProjects(this.props.match.params.name).then(data => {
-      console.log("data", this.props.topicDetails);
+      console.log('data', this.props.topicDetails)
       this.setState({
-        topicInfo: this.props.topicDetails.projects
-      });
-    });
+        topicInfo: this.props.topicDetails.projects,
+      })
+    })
   }
 
   likePost = (postId, index) => {
-    const { user: { token, id } } = this.props;
+    const { user: { token, id } } = this.props
     axios
       .post(
         `${BASEURL}api/v1/getprojects`,
         {
           id: postId,
-          liker: id
+          liker: id,
         },
         {
           headers: {
             authorization: token,
-            "Content-Type": "application/form-data",
-            Accept: "application/form-data"
-          }
+            'Content-Type': 'application/form-data',
+            Accept: 'application/form-data',
+          },
         }
       )
       .then(() => {
         const updatedPosts = this.state.posts.map((post, i) => {
-          post.likes = !post.likes ? [] : post.likes;
-          return i === index ? (post.likes.push({}), post) : post;
-        });
+          post.likes = !post.likes ? [] : post.likes
+          return i === index ? (post.likes.push({}), post) : post
+        })
         this.setState(prevState => ({
           ...prevState,
-          post: updatedPosts
-        }));
-      });
-  };
+          post: updatedPosts,
+        }))
+      })
+  }
 
   onChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
-    });
+      [event.target.name]: event.target.value,
+    })
   }
 
   render() {
-    const { topicInfo } = this.state;
+    const { topicInfo } = this.state
 
     return (
       <div
         style={{
           // width: '50%',
           // border: '1px solid #aaa',
-          backgroundColor: "#fff",
-          boxShadow: "2px 2px 15px rgba(0,0,0,0.1)",
-          padding: "2rem"
+          backgroundColor: '#fff',
+          boxShadow: '2px 2px 15px rgba(0,0,0,0.1)',
+          padding: '2rem',
         }}
       >
         <div
           style={{
-            display: "flex"
+            display: 'flex',
           }}
         >
           <div
             style={{
-              position: "relative",
-              width: "60%"
+              position: 'relative',
+              width: '60%',
             }}
           >
             <div
               style={{
-                position: "absolute",
-                width: "100%"
+                position: 'absolute',
+                width: '100%',
               }}
             >
               <h3
                 style={{
-                  padding: "0.5rem 1rem",
-                  backgroundColor: "rgba(0,0,0,0.74)",
-                  color: "#fff"
+                  padding: '0.5rem 1rem',
+                  backgroundColor: 'rgba(0,0,0,0.74)',
+                  color: '#fff',
                 }}
               >
                 {topicInfo.title}
@@ -100,20 +100,20 @@ class MainProd extends React.Component {
             </div>
             <figure
               style={{
-                margin: "0px"
+                margin: '0px',
               }}
             >
               <div
                 style={{
-                  width: "100%",
-                  height: "210px",
-                  overflow: "hidden"
+                  width: '100%',
+                  height: '210px',
+                  overflow: 'hidden',
                 }}
               >
                 <img
                   style={{
-                    height: "auto",
-                    width: "100%"
+                    height: 'auto',
+                    width: '100%',
                   }}
                   src={topicInfo.banner}
                   alt=""
@@ -121,7 +121,7 @@ class MainProd extends React.Component {
               </div>
               <figcaption
                 style={{
-                  padding: "1rem"
+                  padding: '1rem',
                 }}
               >
                 <p>{topicInfo.description}</p>
@@ -137,17 +137,17 @@ class MainProd extends React.Component {
 
           <div
             style={{
-              paddingLeft: "2rem",
-              width: "40%"
+              paddingLeft: '2rem',
+              width: '40%',
             }}
           >
             <div>
               <h4
                 style={{
-                  backgroundColor: "#e6e6e6",
-                  color: "#444",
+                  backgroundColor: '#e6e6e6',
+                  color: '#444',
                   // marginBottom: '1rem',
-                  padding: "0.45rem 1rem"
+                  padding: '0.45rem 1rem',
                 }}
               >
                 Details
@@ -155,124 +155,124 @@ class MainProd extends React.Component {
             </div>
             <div
               style={{
-                backgroundColor: "#f8f8f8",
+                backgroundColor: '#f8f8f8',
                 // boxShadow: '1px 1px 8px rgba(0,0,0,0.1)',
-                padding: "0.75rem 1rem 0.25rem"
+                padding: '0.75rem 1rem 0.25rem',
               }}
             >
               <div
                 style={{
-                  borderBottom: "1px solid #e6e6e6",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem"
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
                 }}
               >
                 <h5
                   style={{
                     fontWeight: 900,
-                    margin: "0px",
-                    marginBottom: "0.5rem"
+                    margin: '0px',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   Start:
                 </h5>
                 <p
                   style={{
-                    color: "#656565"
+                    color: '#656565',
                   }}
                 >
-                  {" "}
+                  {' '}
                   on {new Date(topicInfo.createdAt).toDateString()}
                 </p>
               </div>
               <div
                 style={{
-                  borderBottom: "1px solid #e6e6e6",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem"
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
                 }}
               >
                 <h5
                   style={{
                     fontWeight: 900,
-                    margin: "0px",
-                    marginBottom: "0.5rem"
+                    margin: '0px',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   End:
                 </h5>
                 <p
                   style={{
-                    color: "#656565"
+                    color: '#656565',
                   }}
                 >
-                  {" "}
+                  {' '}
                   on {new Date(topicInfo.updatedAt).toDateString()}
                 </p>
               </div>
               <div
                 style={{
-                  borderBottom: "1px solid #e6e6e6",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem"
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
                 }}
               >
                 <h5
                   style={{
                     fontWeight: 900,
-                    margin: "0px",
-                    marginBottom: "0.5rem"
+                    margin: '0px',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   Venue:
                 </h5>
                 <p
                   style={{
-                    color: "#656565"
+                    color: '#656565',
                   }}
                 >
-                  {" "}
+                  {' '}
                   Abuja International Trade & Convention Center, Km 8, Umar
                   Yar'Adua Express Way, (Airport Road), Abuja
                 </p>
               </div>
               <div
                 style={{
-                  borderBottom: "1px solid #e6e6e6",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem"
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
                 }}
               >
                 <h5
                   style={{
                     fontWeight: 900,
-                    margin: "0px",
-                    marginBottom: "0.5rem"
+                    margin: '0px',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   Organizer:
                 </h5>
                 <p
                   style={{
-                    color: "#656565"
+                    color: '#656565',
                   }}
                 >
-                  {" "}
+                  {' '}
                   Abuja Chamber of commerce and Industry
                 </p>
               </div>
               <div
                 style={{
-                  borderBottom: "1px solid #e6e6e6",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem"
+                  borderBottom: '1px solid #e6e6e6',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.75rem',
                 }}
               >
                 <h5
                   style={{
                     fontWeight: 900,
-                    margin: "0px",
-                    marginBottom: "0.5rem"
+                    margin: '0px',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   Cost:
@@ -311,16 +311,16 @@ class MainProd extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  topicDetails: state.projects
-});
+  topicDetails: state.projects,
+})
 
 export default connect(mapStateToProps, {
-  getProjects
-})(MainProd);
+  getProjects,
+})(MainProd)
 
 // export default MainProd

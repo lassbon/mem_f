@@ -21,6 +21,7 @@ import axios from 'axios'
 import avatar from '../images/image (4).png'
 import { ToastContainer, toast } from 'react-toastify'
 import SearchFriend from '../components/SearchBar'
+import api from '../api'
 
 let mappedActivity
 let myFriends
@@ -76,7 +77,7 @@ class Profile extends Component {
 
     // console.log(form)
     return axios
-      .post(`http://membership-api.accinigeria.com/api/v1/user/upload`, form, {
+      .post(`https://acciapi.ml/api/v1/user/upload`, form, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
@@ -98,6 +99,15 @@ class Profile extends Component {
       })
       .catch(err => {
         toast('Please try again, an error occurred.')
+      })
+  }
+  componentDidMount() {
+    const { user: { token, id } } = this.props
+    api.social
+      .getFriendRequests(id, token)
+      .then(res => console.log('get friend requests', res))
+      .catch(res => {
+        console.error('get friend requests', res)
       })
   }
   render() {
@@ -330,6 +340,78 @@ const panes = [
             </Card.Header>
           </Card.Content>
         </Card>
+        <Card.Group itemsPerRow={3}>
+          <Card color="grey">
+            <Card.Content>
+              <Image
+                floated="right"
+                size="mini"
+                src="/assets/images/avatar/large/steve.jpg"
+              />
+              <Card.Header>Steve Sanders</Card.Header>
+              <Card.Meta>Friends of Elliot</Card.Meta>
+              <Card.Description>
+                Steve wants to add you to the group{' '}
+                <strong>best friends</strong>
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui two buttons">
+                <Button.Group>
+                  <Button>Reject</Button>
+                  <Button.Or />
+                  <Button positive>Accept</Button>
+                </Button.Group>
+              </div>
+            </Card.Content>
+          </Card>
+          <Card color="grey">
+            <Card.Content>
+              <Image
+                floated="right"
+                size="mini"
+                src="/assets/images/avatar/large/molly.png"
+              />
+              <Card.Header>Molly Thomas</Card.Header>
+              <Card.Meta>New User</Card.Meta>
+              <Card.Description>
+                Molly wants to add you to the group <strong>musicians</strong>
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui two buttons">
+                <Button.Group>
+                  <Button>Reject</Button>
+                  <Button.Or />
+                  <Button positive>Accept</Button>
+                </Button.Group>
+              </div>
+            </Card.Content>
+          </Card>
+          <Card color="grey">
+            <Card.Content>
+              <Image
+                floated="right"
+                size="mini"
+                src="/assets/images/avatar/large/jenny.jpg"
+              />
+              <Card.Header>Jenny Lawrence</Card.Header>
+              <Card.Meta>New User</Card.Meta>
+              <Card.Description>
+                Jenny requested permission to view your contact details
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui two buttons">
+                <Button.Group>
+                  <Button>Reject</Button>
+                  <Button.Or />
+                  <Button positive>Accept</Button>
+                </Button.Group>
+              </div>
+            </Card.Content>
+          </Card>
+        </Card.Group>
       </Tab.Pane>,
       myFriends,
     ],

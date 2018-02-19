@@ -136,7 +136,7 @@ class EventDetails extends Component {
                     {topicInfo.likes.length}
                   </Button>
                   <Button icon="comment" size="mini">
-                    Comments 0
+                    Comments {topicInfo.comments.length}
                   </Button>
                 </figcaption>
                 {this.state.topicInfo.comments.map(

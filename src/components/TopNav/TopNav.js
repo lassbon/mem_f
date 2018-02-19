@@ -65,7 +65,7 @@ class TopNav extends React.Component {
           />
         </Menu.Item>
         <Menu.Menu position="right">
-          <Menu.Item name="friends">
+          {/* <Menu.Item name="friends">
             <Icon style={{ color: '#3a3a3a' }} name="users" size="large" />
             <Label color="red" floating circular size="mini">
               {this.state.friends.length}
@@ -82,7 +82,7 @@ class TopNav extends React.Component {
             <Dropdown text="" floating>
               <Dropdown.Menu>{notifs}</Dropdown.Menu>
             </Dropdown>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item onClick={() => this.props.logout()}>
             <Button>Logout</Button>
           </Menu.Item>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Icon, TextArea } from 'semantic-ui-react'
+import { Button, Icon, TextArea, Comment } from 'semantic-ui-react'
 import { getEvents } from '../actions/events'
 import api from '../api'
 
@@ -17,18 +17,21 @@ class EventDetails extends Component {
 
   componentDidMount() {
     // console.log("props", this.props)
-    this.props.getEvents(this.props.match.params.id).then(data => {
-      console.log('data', this.props.topicDetails)
-      this.setState({
-        topicInfo: this.props.topicDetails.events,
-      })
-    })
+    this.getEvent(this.props.match.params.id)
     console.log(api.events)
   }
 
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
+    })
+  }
+  getEvent = id => {
+    this.props.getEvents(id).then(data => {
+      console.log('data', this.props.topicDetails)
+      this.setState({
+        topicInfo: this.props.topicDetails.events,
+      })
     })
   }
   likeEvent = () => {
@@ -42,7 +45,7 @@ class EventDetails extends Component {
         },
         token
       )
-      .then(res => console.log('event like', res))
+      .then(res => this.getEvent(this.props.match.params.id))
       .catch(res => console.error('event error', res))
   }
 
@@ -56,7 +59,7 @@ class EventDetails extends Component {
     const { data: { comment }, topicInfo: { id } } = this.state
     api.events
       .makeComment({ comment: comment, owner, event: id }, token)
-      .then(res => console.log('make comment', res))
+      .then(res => this.getEvent(this.props.match.params.id))
       .catch(err => console.error('make comment', err))
   }
 
@@ -136,6 +139,30 @@ class EventDetails extends Component {
                     Comments 0
                   </Button>
                 </figcaption>
+                {this.state.topicInfo.comments.map(
+                  ({ comment, companyName, createdAt }) => (
+                    <Comment.Group>
+                      <Comment>
+                        <Comment.Avatar
+                          as="a"
+                          src="/assets/images/avatar/small/stevie.jpg"
+                        />
+                        <Comment.Content>
+                          <Comment.Author>{companyName}</Comment.Author>
+                          <Comment.Metadata>
+                            <div>{createdAt}</div>
+                            {/* <div>
+                          <Icon name='star' />
+                          5 Faves
+                        </div> */}
+                          </Comment.Metadata>
+                          <Comment.Text>{comment}</Comment.Text>
+                        </Comment.Content>
+                      </Comment>
+                    </Comment.Group>
+                  )
+                )}
+
                 <TextArea
                   onChange={this.handleCommentTextAreaOnChange}
                   placeholder="Comment"

@@ -13,7 +13,7 @@ import {
 import api from '../../api'
 import { connect } from 'react-redux'
 import Timelines from '../TimeLine/Timeline'
-import avartar from '../../images/image (4).png'
+// import avartar from '../../images/image (4).png'
 
 import './Post.css'
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon'
@@ -89,7 +89,7 @@ class PostStatus extends React.Component {
               <Image
                 size="tiny"
                 circular
-                src={this.props.currentUser.profileImage || avartar}
+                src={this.props.currentUser.profileImage || 'avartar'}
               />
             </Grid.Column>
             <Grid.Column width={13}>

@@ -18,7 +18,7 @@ import {
 import { connect } from 'react-redux'
 import { update } from '../actions/auth'
 import axios from 'axios'
-import avatar from '../images/image (4).png'
+// import avatar from '../images/image (4).png'
 import { ToastContainer, toast } from 'react-toastify'
 import SearchFriend from '../components/SearchBar'
 import api from '../api'
@@ -193,7 +193,7 @@ class Profile extends Component {
               <Card style={{ width: '100%' }}>
                 {(getPayments = props.getTransactionHistory)}
                 <Card.Content>
-                  <Image floated="left" size="mini" circular src={avatar} />
+                  <Image floated="left" size="mini" circular src={'avatar'} />
                   <Card.Header>{activity.company}</Card.Header>
                   <Card.Meta>
                     {new Date(activity.createdAt).toDateString()}

@@ -1,18 +1,34 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+console.log('env: ', process.env.NODE_ENV)
 
 module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[hash].app.js',
-    publicPath: './',
+    publicPath: '/',
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(jpe?g|png|gif|ttf|woff|eot|bmp|woff2)$/i,
+      //   loader: require.resolve('url-loader'),
+      //   options: {
+      //     limit: 10000,
+      //     name:
+      //       process.env.NODE_ENV === 'development'
+      //         ? path.resolve(__dirname,'[path]/[name].[ext]'
+      //         : '/public/media/[name].[ext]',
+      //   },
+      // },
       {
-        test: /\.(jpe?g|png|gif|ttf|woff|eot)$/i,
-        loader: 'file-loader?name=/media/[name].[ext]',
+        test: /\.(ttf|woff|eot|bmp|woff2)$/i,
+        loader: 'file-loader?name=/static/icons/[name].[ext]',
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=/static/images/[name].[ext]',
       },
       {
         test: /\.svg$/,
@@ -21,13 +37,25 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader/url',
-          'file-loader',
+          'style-loader',
+          // 'file-loader',
+          'css-loader',
           {
             loader: 'postcss-loader',
           },
         ],
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader/url',
+      //     'file-loader',
+      //     'css-loader',
+      //     {
+      //       loader: 'postcss-loader',
+      //     },
+      //   ],
+      // },
       {
         test: /\.(jsx?|tsx?)/,
         exclude: /(node_modules|bower_components)/,

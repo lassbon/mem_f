@@ -15,7 +15,7 @@ import {
 // import user from '../../reducer/user'
 import './Timeline.css'
 import Comments from '../Comments/Comments'
-import avatar from '../../images/image (4).png'
+// import avatar from '../../images/image (4).png'
 
 const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
@@ -88,7 +88,12 @@ class Timelines extends React.Component {
                 (
                   <Card style={{ width: '100%' }} key={post.id}>
                     <Card.Content>
-                      <Image floated="left" size="mini" circular src={avatar} />
+                      <Image
+                        floated="left"
+                        size="mini"
+                        circular
+                        src={'avatar'}
+                      />
                       <Card.Header style={{ marginTop: 5 }}>
                         {post.companyName}
                       </Card.Header>

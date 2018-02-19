@@ -17,7 +17,7 @@ const WelcomePage = () => (
     <Container>
       <Grid className="home-sec-one">
         <Grid.Column computer={11}>
-          <Image src="/images/ACCIHD-LOGO.png" alt="acci logo" />
+          <Image src="/static/images/ACCIHD-LOGO.png" alt="acci logo" />
         </Grid.Column>
         <Grid.Column width={5}>
           <Button as={Link} to="/login" className="btn" content="Login" />
@@ -41,7 +41,7 @@ const WelcomePage = () => (
         </Header>
       </Grid.Column>
       <Grid.Column width={7}>
-        <Image src="/images/screen.png" alt="" />
+        <Image src="/static/images/screen.png" alt="" />
       </Grid.Column>
     </Grid>
     <Grid style={{ height: '70vh' }}>

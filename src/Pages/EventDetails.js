@@ -17,13 +17,17 @@ class EventDetails extends Component {
 
   componentDidMount() {
     // console.log("props", this.props)
-    this.props.getEvents(this.props.match.params.id).then(data => {
-      console.log('data', this.props.topicDetails)
+    this.getEvent(this.props.match.params.id)
+    // console.log(api.events)
+  }
+
+  getEvent = id => {
+    this.props.getEvents(id).then(data => {
+      // console.log('data', this.props.topicDetails)
       this.setState({
         topicInfo: this.props.topicDetails.events,
       })
     })
-    console.log(api.events)
   }
 
   onChange(event) {
@@ -42,7 +46,7 @@ class EventDetails extends Component {
         },
         token
       )
-      .then(res => console.log('event like', res))
+      .then(res => this.getEvent(this.props.match.params.id))
       .catch(res => console.error('event error', res))
   }
 

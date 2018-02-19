@@ -11,15 +11,13 @@ import {
 import { Link } from 'react-router-dom'
 
 import './welcome.css'
-import logo from '../../images/ACCIHD-LOGO.png'
-import screen from '../../images/screen.png'
 
 const WelcomePage = () => (
   <React.Fragment>
     <Container>
       <Grid className="home-sec-one">
         <Grid.Column computer={11}>
-          <Image src={logo} alt="acci logo" />
+          <Image src="/images/ACCIHD-LOGO.png" alt="acci logo" />
         </Grid.Column>
         <Grid.Column width={5}>
           <Button as={Link} to="/login" className="btn" content="Login" />
@@ -43,7 +41,7 @@ const WelcomePage = () => (
         </Header>
       </Grid.Column>
       <Grid.Column width={7}>
-        <Image src={screen} alt="" />
+        <Image src="/images/screen.png" alt="" />
       </Grid.Column>
     </Grid>
     <Grid style={{ height: '70vh' }}>

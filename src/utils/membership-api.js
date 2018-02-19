@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const BASE_URL = 'http://localhost:1337/'
-// const BASE_URL = "https://acciapi.ml/";
+// const BASE_URL = "http://membership-api.accinigeria.com/";
 
 export { getPostData }
 

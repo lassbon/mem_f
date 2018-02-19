@@ -17,7 +17,7 @@ import { connect } from 'react-redux'
 import { update } from '../../actions/auth'
 import { paths } from '../../data/registrationPages'
 
-const BASEURL = 'https://acciapi.ml/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 // const panes = [

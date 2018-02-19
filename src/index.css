@@ -26,7 +26,7 @@ a:hover {
 
 body {
   font-family: 'Encode Sans Expanded', sans-serif;
-  line-height: 22px
+  line-height: 22px;
   /* background: #e2e2e2; */
 }
 
@@ -227,58 +227,95 @@ div.seven.wide.column > div > p {
   font-family: 'Encode Sans Expanded', sans-serif;
 }
 
-
-#root > div > div > div:nth-child(4) > div:nth-child(2) > div > div.stretched.twelve.wide.column > div > div.ui.message {
+#root
+  > div
+  > div
+  > div:nth-child(4)
+  > div:nth-child(2)
+  > div
+  > div.stretched.twelve.wide.column
+  > div
+  > div.ui.message {
   background: gold !important;
 }
 
 .black_color {
-  color: black !important;}
-.ui.card, .ui.cards> .card {
+  color: black !important;
+}
+.ui.card,
+.ui.cards > .card {
   border: none !important;
   /* box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important; */
   -webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
-#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.item > div input{
+#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.item > div input {
   -webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
+  -moz-box-shadow: none !important;
   box-shadow: none !important;
-  border: none !important
+  border: none !important;
 }
 
 #root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > div {
   padding: 0 !important;
-  margin-right: 40px !important
-
+  margin-right: 40px !important;
 }
 
-#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.right.menu > div > div.ui.floating.dropdown {
-  width: 10px
+#root
+  > div
+  > div.ui.secondary.top.fixed.top-menu.menu
+  > div.right.menu
+  > div
+  > div.ui.floating.dropdown {
+  width: 10px;
 }
 
-#root > div > main > div:nth-child(2) > div.ui.pointing.secondary.menu > a.item {
-   /* border-bottom: 3px solid var(--main-gold) !important; */
-   padding-left: 45px;
-   padding-right: 45px;
-   font-weight: bold;
-   
-   text-align: center !important
+#root
+  > div
+  > main
+  > div:nth-child(2)
+  > div.ui.pointing.secondary.menu
+  > a.item {
+  /* border-bottom: 3px solid var(--main-gold) !important; */
+  padding-left: 45px;
+  padding-right: 45px;
+  font-weight: bold;
+
+  text-align: center !important;
 }
 
 #root > div > main > div.ui.grid > div > div {
-     -webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
   box-shadow: none !important;
-  border: none !important
+  border: none !important;
 }
 
-#root > div > main > div.ui.cards.TimeLine > div > div.extra.content.time > div.ui.comments.slide.down.visible.transition > form > div > textarea {
-  height: auto !important
+#root
+  > div
+  > main
+  > div.ui.cards.TimeLine
+  > div
+  > div.extra.content.time
+  > div.ui.comments.slide.down.visible.transition
+  > form
+  > div
+  > textarea {
+  height: auto !important;
 }
 
-#root > div > div.ui.secondary.top.fixed.top-menu.menu > div.item > div > div.ui.icon.input > input {
-  background: #e2e2e2
+#root
+  > div
+  > div.ui.secondary.top.fixed.top-menu.menu
+  > div.item
+  > div
+  > div.ui.icon.input
+  > input {
+  background: #e2e2e2;
+}
+
+label {
+  font-weight: normal !important;
 }

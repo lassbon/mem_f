@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // const BASEURL = "http://localhost:1337/";
-const BASEURL = 'https://acciapi.ml/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {
@@ -235,6 +235,31 @@ export default {
       axios.get(`${BASEURL}api/v1/getprojects/${id}`).then(res => res.data),
   },
   events: {
+    create: (data, token) => {
+      axios.post(`${BASEURL}api/v1/events`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+    like: (data, token) =>
+      axios.post(`${BASEURL}api/v1/events/like`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
+    makeComment: (data, token) =>
+      axios.post(`${BASEURL}api/v1/events/comment`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
     reg: data =>
       axios.get(`${BASEURL}api/v1/getevents`, data, {
         headers: {
@@ -287,6 +312,16 @@ export default {
       },
     })
   },
+  knowledgebase: {
+    upload: (form, token) =>
+      axios.post(`${BASEURL}`, form, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
+  },
 
   social: {
     makeFriendRequest: (data, token) => {
@@ -298,8 +333,35 @@ export default {
         },
       })
     },
+    acceptFriendRequest: (data, token) =>
+      axios.post(`${BASEURL}api/v1/social/accept`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
+    rejectFriendRequest: (data, token) =>
+      axios.post(`${BASEURL}api/v1/social/cancel`, data, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      }),
     getFriendRequests: (id, token) => {
       return axios(`${BASEURL}api/v1/social/requests/${id}`, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
+    },
+  },
+  file: {
+    upload: (form, token) => {
+      return axios.post(`${BASEURL}api/v1/user/upload`, form, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',

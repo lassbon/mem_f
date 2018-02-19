@@ -47,7 +47,13 @@ class Profile extends Component {
       companyAddress: this.props.user.companyAddress,
       email: this.props.user.email,
     },
+    requests: [],
   }
+  state_setRequests = requests =>
+    this.setState(state => ({
+      ...state,
+      requests,
+    }))
   handleChange = e => {
     this.setState({
       data: {
@@ -77,7 +83,7 @@ class Profile extends Component {
 
     // console.log(form)
     return axios
-      .post(`https://acciapi.ml/api/v1/user/upload`, form, {
+      .post(`http://membership-api.accinigeria.com/api/v1/user/upload`, form, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',
@@ -103,15 +109,79 @@ class Profile extends Component {
   }
   componentDidMount() {
     const { user: { token, id } } = this.props
+    let requests = []
     api.social
       .getFriendRequests(id, token)
-      .then(res => console.log('get friend requests', res))
+      .then(({ data }) => {
+        requests = data
+        return Promise.all(
+          data.map(request =>
+            api.user.getUserData({
+              id: request.requester,
+              token,
+            })
+          )
+        )
+      })
+      .then(requesters =>
+        this.state_setRequests(
+          requesters.map(({ data }, i) => ({
+            ...requests[i],
+            user: data,
+          }))
+        )
+      )
       .catch(res => {
         console.error('get friend requests', res)
       })
   }
+  acceptFriendRequest = ({ requestee, requester }) => {
+    const { user: { token } } = this.props
+    api.social
+      .acceptFriendRequest(
+        {
+          requestee,
+          requester,
+        },
+        token
+      )
+      .then(() => {
+        toast('Connection request successfully accepted')
+        const requests = this.state.requests.filter(
+          request =>
+            requestee !== request.requestee && requester !== request.requester
+        )
+        this.state_setRequests(requests)
+      })
+      .catch(() => {
+        toast('An error occurred. Please, try again.')
+      })
+  }
+  rejectFriendRequest = ({ requestee, requester }) => {
+    const { user: { token } } = this.props
+    api.social
+      .rejectFriendRequest(
+        {
+          requestee,
+          requester,
+        },
+        token
+      )
+      .then(() => {
+        toast('Connection request rejected')
+        const requests = this.state.requests.filter(
+          request =>
+            requestee !== request.requestee && requester !== request.requester
+        )
+        this.state_setRequests(requests)
+      })
+      .catch(() => {
+        toast('An error occurred. Please, try again.')
+      })
+  }
   render() {
     const { props } = this
+    const { requests } = this.state
 
     onChange = props.onChange
     onSubmit = props.onSubmit
@@ -138,14 +208,12 @@ class Profile extends Component {
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <div className="ui three buttons">
+                  {/* <div className="ui three buttons">
                     <Button size="mini">
                       <Icon name="like" />
-                      {/* {activity.likes.length} */}
                     </Button>
                     <Button icon="comment" size="mini" />
-                    {/* <Button icon="share" size="mini" /> */}
-                  </div>
+                  </div> */}
                 </Card.Content>
               </Card>
             </Card.Group>
@@ -167,7 +235,17 @@ class Profile extends Component {
                       <Link to={`/profile/`}>"l"</Link>
                     </List.Header>
                     <p>{friend.email}</p>
-                    <Button size="tiny">Send message</Button>
+                    <a
+                      href={`mailto:${friend.email}`}
+                      style={{
+                        padding: '0.5rem 2rem',
+                        borderRadius: '3px',
+                        backgroundColor: '#cd90b9',
+                        color: '#fff',
+                      }}
+                    >
+                      Send message
+                    </a>
                   </List.Content>
                 </List.Item>
               }
@@ -203,6 +281,104 @@ class Profile extends Component {
         </Card>
       </Tab.Pane>
     ))
+
+    const panes = [
+      { menuItem: 'Activity', render: () => mappedActivity },
+      {
+        menuItem: 'Connections',
+        render: () => [
+          <Tab.Pane attached={false}>
+            <Card fluid>
+              <Card.Content>
+                <Card.Header style={{ textAlign: 'center' }}>
+                  {totalFriends} connections
+                  <br />
+                  <br />
+                  <SearchFriend />
+                </Card.Header>
+              </Card.Content>
+            </Card>
+            <Card.Group itemsPerRow={3}>
+              {requests.map(
+                ({
+                  requester,
+                  requestee,
+                  user: { companyName, companyBusiness, profileImage },
+                }) => (
+                  <Card color="grey">
+                    <Card.Content>
+                      <Image
+                        floated="right"
+                        size="mini"
+                        src={profileImage || '/images/avatars/boy.svg'}
+                      />
+                      <Card.Header>{companyName}</Card.Header>
+                      <Card.Meta>{companyBusiness}</Card.Meta>
+                      <Card.Description>
+                        {companyName} wants to add you to their connections{' '}
+                        {/* <strong>best friends</strong> */}
+                      </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <div className="ui two buttons">
+                        <Button.Group>
+                          <Button
+                            onClick={() =>
+                              this.rejectFriendRequest({ requestee, requester })
+                            }
+                          >
+                            Reject
+                          </Button>
+                          <Button.Or />
+                          <Button
+                            positive
+                            onClick={() =>
+                              this.acceptFriendRequest({ requestee, requester })
+                            }
+                          >
+                            Accept
+                          </Button>
+                        </Button.Group>
+                      </div>
+                    </Card.Content>
+                  </Card>
+                )
+              )}
+            </Card.Group>
+          </Tab.Pane>,
+          myFriends,
+        ],
+      },
+      {
+        menuItem: 'Transaction History',
+        render: () => [
+          <Tab.Pane attached={false}>
+            <h1>Donations</h1>
+          </Tab.Pane>,
+          'None',
+          <Tab.Pane attached={false}>
+            <h1>Events</h1>
+          </Tab.Pane>,
+          'None',
+          <Tab.Pane attached={false}>
+            <h1>Trainings</h1>
+          </Tab.Pane>,
+          'None',
+          <Tab.Pane attached={false}>
+            <h1>Memberships</h1>
+          </Tab.Pane>,
+          'None',
+        ],
+      },
+      {
+        menuItem: 'Reports',
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Tab menu={{ pointing: true }} panes={reportCont} />
+          </Tab.Pane>
+        ),
+      },
+    ]
     // const memberships =
     // const events =
     // const trainings =
@@ -323,129 +499,6 @@ class Profile extends Component {
     )
   }
 }
-
-const panes = [
-  { menuItem: 'Activity', render: () => mappedActivity },
-  {
-    menuItem: 'Connections',
-    render: () => [
-      <Tab.Pane attached={false}>
-        <Card fluid>
-          <Card.Content>
-            <Card.Header style={{ textAlign: 'center' }}>
-              {totalFriends} connections
-              <br />
-              <br />
-              <SearchFriend />
-            </Card.Header>
-          </Card.Content>
-        </Card>
-        <Card.Group itemsPerRow={3}>
-          <Card color="grey">
-            <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="/assets/images/avatar/large/steve.jpg"
-              />
-              <Card.Header>Steve Sanders</Card.Header>
-              <Card.Meta>Friends of Elliot</Card.Meta>
-              <Card.Description>
-                Steve wants to add you to the group{' '}
-                <strong>best friends</strong>
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className="ui two buttons">
-                <Button.Group>
-                  <Button>Reject</Button>
-                  <Button.Or />
-                  <Button positive>Accept</Button>
-                </Button.Group>
-              </div>
-            </Card.Content>
-          </Card>
-          <Card color="grey">
-            <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="/assets/images/avatar/large/molly.png"
-              />
-              <Card.Header>Molly Thomas</Card.Header>
-              <Card.Meta>New User</Card.Meta>
-              <Card.Description>
-                Molly wants to add you to the group <strong>musicians</strong>
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className="ui two buttons">
-                <Button.Group>
-                  <Button>Reject</Button>
-                  <Button.Or />
-                  <Button positive>Accept</Button>
-                </Button.Group>
-              </div>
-            </Card.Content>
-          </Card>
-          <Card color="grey">
-            <Card.Content>
-              <Image
-                floated="right"
-                size="mini"
-                src="/assets/images/avatar/large/jenny.jpg"
-              />
-              <Card.Header>Jenny Lawrence</Card.Header>
-              <Card.Meta>New User</Card.Meta>
-              <Card.Description>
-                Jenny requested permission to view your contact details
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className="ui two buttons">
-                <Button.Group>
-                  <Button>Reject</Button>
-                  <Button.Or />
-                  <Button positive>Accept</Button>
-                </Button.Group>
-              </div>
-            </Card.Content>
-          </Card>
-        </Card.Group>
-      </Tab.Pane>,
-      myFriends,
-    ],
-  },
-  {
-    menuItem: 'Transaction History',
-    render: () => [
-      <Tab.Pane attached={false}>
-        <h1>Donations</h1>
-      </Tab.Pane>,
-      'None',
-      <Tab.Pane attached={false}>
-        <h1>Events</h1>
-      </Tab.Pane>,
-      'None',
-      <Tab.Pane attached={false}>
-        <h1>Trainings</h1>
-      </Tab.Pane>,
-      'None',
-      <Tab.Pane attached={false}>
-        <h1>Memberships</h1>
-      </Tab.Pane>,
-      'None',
-    ],
-  },
-  {
-    menuItem: 'Reports',
-    render: () => (
-      <Tab.Pane attached={false}>
-        <Tab menu={{ pointing: true }} panes={reportCont} />
-      </Tab.Pane>
-    ),
-  },
-]
 
 const reportCont = [
   {

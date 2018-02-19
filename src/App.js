@@ -30,6 +30,7 @@ import Confirm from './components/messages/Confirm'
 import Reject from './components/messages/Reject'
 import ContReg7 from './Pages/contReg/ContReg7'
 import RestPassword from './Pages/ResetPassword'
+import { ToastContainer } from 'react-toastify'
 
 const App = ({ location, user }) => {
   // if (
@@ -42,6 +43,13 @@ const App = ({ location, user }) => {
   // }
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        autoClose={30000}
+        newestOnTop={true}
+        hideProgressBar={false}
+        closeOnClick={false}
+      />
       <Switch>
         <Route location={location} path="/" exact component={LandingPage} />
 

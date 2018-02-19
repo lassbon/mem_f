@@ -84,13 +84,17 @@ class ContReg3 extends React.Component {
         }
         // console.log(form)
         return data
-          ? axios.post(`https://acciapi.ml/api/v1/user/upload`, form, {
-              headers: {
-                'Content-Type': 'application/form-data',
-                Accept: 'application/form-data',
-                authorization: token,
-              },
-            })
+          ? axios.post(
+              `http://membership-api.accinigeria.com/api/v1/user/upload`,
+              form,
+              {
+                headers: {
+                  'Content-Type': 'application/form-data',
+                  Accept: 'application/form-data',
+                  authorization: token,
+                },
+              }
+            )
           : Promise.resolve({ data: { bannerUrl: '' } })
       })
     )

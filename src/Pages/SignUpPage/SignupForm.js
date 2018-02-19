@@ -6,12 +6,14 @@ import { Button, Form, Grid, Image, Message } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 import validator from 'validator'
 import PropTypes from 'prop-types'
+import { userLoggedIn } from '../../actions/auth'
 
 import InlineError from '../../components/messages/InlineError'
 import '../LoginPage/login.css'
 import { userRegistered } from '../../actions/auth'
+import api from '../../api'
 
-const BASEURL = 'https://acciapi.ml/'
+const BASEURL = 'http://membership-api.accinigeria.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {
@@ -64,7 +66,12 @@ class SignupForm extends React.Component {
       //       this.setState({ errors: error.response.data, loading: false })
       //     }
       //   })
-      this.props.registerUser(this.state.data, history)
+      this.props.registerUser(this.state.data, history).then(() =>
+        api.user.login(this.state.data).then(user => {
+          this.props.loggedIn(user)
+          this.props.history.push('/cont')
+        })
+      )
     }
   }
 
@@ -134,6 +141,7 @@ const mapDispatchToProps = dispatch => ({
   userRegistered: data => {
     userRegistered(data)
   },
+  loggedIn: user => dispatch(userLoggedIn(user)),
 })
 
-export default withRouter(connect()(SignupForm))
+export default withRouter(connect(null, mapDispatchToProps)(SignupForm))

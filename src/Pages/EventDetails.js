@@ -143,10 +143,7 @@ class EventDetails extends Component {
                   ({ comment, companyName, createdAt }) => (
                     <Comment.Group>
                       <Comment>
-                        <Comment.Avatar
-                          as="a"
-                          src="/assets/images/avatar/small/stevie.jpg"
-                        />
+                        <Comment.Avatar as="a" src="/images/avatars/man.svg" />
                         <Comment.Content>
                           <Comment.Author>{companyName}</Comment.Author>
                           <Comment.Metadata>

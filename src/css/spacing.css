@@ -1,0 +1,41 @@
+.lg\:mx-12 {
+  margin-right: @ml 3rem;
+  margin-left: @ml 3rem;
+}
+
+.lg\:mb-12 {
+  margin-bottom: @ml 3rem;
+}
+
+.lg\:mx-16 {
+  margin-right: @ml 4rem;
+  margin-left: @ml 4rem;
+}
+
+.lg\:px-12 {
+  padding-right: @ml 3rem;
+  padding-left: @ml 3rem;
+}
+
+.lg\:py-12 {
+  padding-top: @ml 3rem;
+  padding-bottom: @ml 3rem;
+}
+
+.lg\:p-12 {
+  padding: @ml 3rem;
+}
+
+.lg\:px-16 {
+  padding-right: @ml 4rem;
+  padding-left: @ml 4rem;
+}
+
+.lg\:py-16 {
+  padding-top: @ml 4rem;
+  padding-bottom: @ml 4rem;
+}
+
+.lg\:p-16 {
+  padding: @ml 4rem;
+}

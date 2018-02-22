@@ -1,0 +1,18 @@
+@import '../../../css/variables.css';
+
+.general {
+  .sidebar {
+    background: linear-gradient(
+        135deg,
+        rgba(215, 65, 113, 1) 0%,
+        rgba(215, 65, 113, 0.93) 27%,
+        rgba(238, 119, 134, 0.84) 38%,
+        rgba(238, 119, 134, 0.8) 53%,
+        rgba(238, 119, 134, 0.78) 100%
+      ),
+      url('/static/images/taylor_grote_415993__toHF1(1).jpg');
+    background-position: 0% 0%, 30% 0%;
+    background-size: cover, auto 100%;
+    background-repeat: no-repeat;
+  }
+}

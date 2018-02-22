@@ -1,0 +1,14 @@
+@import '../../../../css/variables.css';
+
+.main-app {
+  .lg\:sidebar {
+    /* background: @ml
+      linear-gradient(
+        115deg,
+        rgba(0, 0, 0, 0.04) 0%,
+        rgba(0, 0, 0, 0.03) 48%,
+        rgba(0, 0, 0, 0.02) 53%,
+        rgba(0, 0, 0, 0.01) 100%
+      ); */
+  }
+}

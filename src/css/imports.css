@@ -1,2 +1,11 @@
+@import './uppy.css';
+
+@import './variables.css';
+@import './typography.css';
+@import './shadows.css';
+@import './spacing.css';
+@import './widths.css';
+@import './form.css';
+
 @tailwind preflight;
 @tailwind utilities;

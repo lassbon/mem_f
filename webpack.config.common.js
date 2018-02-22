@@ -1,7 +1,8 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-console.log('env: ', process.env.NODE_ENV)
+
+console.log('direct: ', __dirname)
 
 module.exports = {
   output: {
@@ -27,19 +28,21 @@ module.exports = {
         loader: 'file-loader?name=/static/icons/[name].[ext]',
       },
       {
-        test: /\.(jpe?g|png|gif)$/i,
+        test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'file-loader?name=/static/images/[name].[ext]',
       },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader?removeTag=true',
-      },
+      // {
+      //   test: /\.svg$/,
+      //   loader: 'svg-inline-loader?removeTag=true',
+      // },
       {
         test: /\.css$/,
         use: [
+          // 'url-loader',
           'style-loader',
-          // 'file-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+          },
           {
             loader: 'postcss-loader',
           },

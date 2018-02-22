@@ -13,7 +13,7 @@ import '../LoginPage/login.css'
 import { userRegistered } from '../../actions/auth'
 import api from '../../api'
 
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = 'https://acciapi.ml/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 class SignupForm extends React.Component {

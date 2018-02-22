@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Grid, Card, Icon, Input, List, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
-const BASEURL = 'http://membership-api.accinigeria.com/'
+const BASEURL = 'https://acciapi.ml/'
 
 const centerText = {
   textAlign: 'center',
@@ -64,17 +64,13 @@ class Library extends React.Component {
       },
     }
     return axios
-      .post(
-        `http://membership-api.accinigeria.com/api/v1/user/upload`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/form-data',
-            Accept: 'application/form-data',
-            authorization: token,
-          },
-        }
-      )
+      .post(`https://acciapi.ml/api/v1/user/upload`, formData, {
+        headers: {
+          'Content-Type': 'application/form-data',
+          Accept: 'application/form-data',
+          authorization: token,
+        },
+      })
       .then(({ data: { bannerUrl } }) =>
         axios.post(
           url,

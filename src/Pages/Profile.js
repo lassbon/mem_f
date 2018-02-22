@@ -83,7 +83,7 @@ class Profile extends Component {
 
     // console.log(form)
     return axios
-      .post(`http://membership-api.accinigeria.com/api/v1/user/upload`, form, {
+      .post(`https://acciapi.ml/api/v1/user/upload`, form, {
         headers: {
           'Content-Type': 'application/form-data',
           Accept: 'application/form-data',

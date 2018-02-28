@@ -8,7 +8,7 @@ const merge = require('webpack-merge')
 const common = require('./webpack.config.common.js')
 
 module.exports = merge(common, {
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   plugins: [
     new CopyWebpackPlugin([{ from: 'src/static', to: 'static' }]),
     new CompressionPlugin({

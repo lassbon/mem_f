@@ -12,7 +12,7 @@ const FileInput = require('uppy/lib/plugins/FileInput')
 const ProgressBar = require('uppy/lib/plugins/ProgressBar')
 // Components
 
-import Post from 'post'
+import Post from 'Post'
 import PostForm from 'PostForm'
 import EmptyPaper from 'EmptyPaper'
 import Circle from 'loaders/Circle'

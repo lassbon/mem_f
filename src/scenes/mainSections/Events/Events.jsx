@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import simpleScrollbar from 'fixed/simpleScrollbar'
 import './eventsStyles.css'
 
 //Component
@@ -26,20 +27,38 @@ const Events = ({
   !completedEvents && fetchCompletedEvents(token)
   !ongoingEvents && fetchOngoingEvents(token)
   return (
-    <div className="lg:px-16 lg:py-6">
-      {ongoingEvents && (
-        <ul className="list-reset flex flex-wrap">
-          {ongoingEvents.result.map(id => (
-            <OngoingEvent
-              key={id}
-              event={ongoingEvents.entities.ongoing[id]}
-              likeEvent={likeEvent}
-              token={token}
-              user={user}
-            />
-          ))}
-        </ul>
-      )}
+    <div
+      ref={el => el && simpleScrollbar.initEl(el)}
+      className="lg:w-full lg:h-full overflow-y-scroll"
+    >
+      <div className="lg:px-16 lg:py-6 ">
+        {ongoingEvents && (
+          <ul className="list-reset flex flex-wrap">
+            {ongoingEvents.result.map(id => (
+              <OngoingEvent
+                key={id}
+                event={ongoingEvents.entities.ongoing[id]}
+                likeEvent={likeEvent}
+                token={token}
+                user={user}
+              />
+            ))}
+          </ul>
+        )}
+        {completedEvents && (
+          <ul className="list-reset flex flex-wrap">
+            {completedEvents.result.map(id => (
+              <OngoingEvent
+                key={id}
+                event={completedEvents.entities.completed[id]}
+                likeEvent={likeEvent}
+                token={token}
+                user={user}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

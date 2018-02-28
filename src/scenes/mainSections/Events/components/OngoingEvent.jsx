@@ -12,7 +12,7 @@ class OngoingEvent extends Component {
     const { event, likeEvent, token, user } = this.props
     const { expanded } = this.state
     return (
-      <li className="lg:w-1/3 lg:pr-8  relative">
+      <li className="lg:w-1/3 lg:pr-8 mb-8 relative">
         <div className="relative">
           <div className="rounded-lg overflow-hidden bg-white lg:lt-shadow relative">
             <div className="absolute ml-4 mt-4 px-4 py-2 bg-white rounded-full text-xs text-grey-darkest font-semibold z-20">
@@ -35,7 +35,7 @@ class OngoingEvent extends Component {
                 }
                 className="absolute pin-t pin-r mt-4 mr-6 text-2xl text-white"
               >
-                {event.likes.includes(user.id) ? (
+                {event.likes && event.likes.includes(user.id) ? (
                   <i className="ion-android-favorite text-purple-light" />
                 ) : (
                   <i className="ion-android-favorite-outline" />
@@ -47,16 +47,19 @@ class OngoingEvent extends Component {
                 <div className="flex justify-between items-center mt-6">
                   <div className="align-middle">
                     <ul className="list-reset inline-flex pl-3">
-                      {event.likes.map(id => (
-                        <li
-                          key={id}
-                          className="w-6 h-6 -ml-3 bg-red border-2 border-white rounded-full shadow overflow-hidden"
-                        >
-                          <img src="/static/images/011-woman-5.svg" alt="" />
-                        </li>
-                      ))}
+                      {event.likes &&
+                        event.likes.map(id => (
+                          <li
+                            key={id}
+                            className="w-6 h-6 -ml-3 bg-red border-2 border-white rounded-full shadow overflow-hidden"
+                          >
+                            <img src="/static/images/011-woman-5.svg" alt="" />
+                          </li>
+                        ))}
                     </ul>
-                    <span className="pl-2">{event.likes.length} likes</span>
+                    <span className="pl-2">
+                      {event.likes ? event.likes.length : 0} likes
+                    </span>
                   </div>
 
                   <div className="">

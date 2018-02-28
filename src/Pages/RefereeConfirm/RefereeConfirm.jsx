@@ -14,7 +14,7 @@ const RefereeConfirm = ({ match: { params: { user, id } } }) => {
   })
     .then(() =>
       swal({
-        text: `User has been successfully. Thank you.`,
+        text: `User has been confirmed successfully. Thank you.`,
         title: 'Confirmed',
         icon: 'success',
         button: false,

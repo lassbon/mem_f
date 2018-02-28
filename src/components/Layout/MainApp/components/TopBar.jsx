@@ -25,7 +25,7 @@ const TopBar = () => (
         </span>
       </span> */}
       <span className="text-grey-darker">
-        <i className="ion-android-notifications" />
+        {/* <i className="ion-android-notifications" /> */}
       </span>
     </div>
   </div>

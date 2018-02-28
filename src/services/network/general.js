@@ -30,3 +30,9 @@ export const upload = ({ form, token }) =>
     headers: authPostRequestHeaders(token),
     method: 'POST',
   })
+
+export const confirmUser = ({ params }) =>
+  fetch(endpoints.general.referrerConfirm, {
+    body: JSON.stringify(params),
+    method: 'POST',
+  })

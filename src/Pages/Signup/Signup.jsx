@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import FormManager from 'FormManager'
 
 import RegistrationPayment from 'RegistrationPayment'
@@ -118,7 +118,7 @@ class Signup extends Component {
       stateIncrementRegistrationStage,
       stateSetLoading,
     } = this
-    const { auth, user } = this.props
+    const { auth, user, history } = this.props
     console.log('registrationStage', registrationStage)
     return (
       <div className="lg:h-screen lg:flex lg:justify-center lg:items-center">
@@ -179,7 +179,19 @@ class Signup extends Component {
                       auth={auth}
                       user={user}
                     />
-                    {registrationStage > 4 ? (
+                    {registrationStage === 5 &&
+                      (swal({
+                        text: `Please wait for the financial members to verify you.`,
+                        title: 'Paid',
+                        icon: 'success',
+                        button: 'ok',
+                        closeOnClickOutside: false,
+                      }).then(() => {
+                        history.push('/login')
+                        return null
+                      }),
+                      null)}
+                    {registrationStage > 5 ? (
                       <AnnualDuePayment
                         registrationStage={registrationStage}
                         stateIncrementRegistrationStage={
@@ -189,7 +201,7 @@ class Signup extends Component {
                         auth={auth}
                       />
                     ) : null}
-                    {registrationStage > 5 ? (
+                    {registrationStage > 6 ? (
                       <MembershipPayment
                         registrationStage={registrationStage}
                         stateIncrementRegistrationStage={
@@ -219,4 +231,4 @@ const mapStateToProps = ({ user, auth }) => ({
 
 const glueTo = connect(mapStateToProps, null)
 
-export default glueTo(Signup)
+export default withRouter(glueTo(Signup))

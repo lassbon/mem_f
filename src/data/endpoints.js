@@ -27,6 +27,7 @@ export const general = {
   validateReferee: returnFullUrl('/api/v1/validatereferee'),
   alertReferee: returnFullUrl('/api/v1/alertreferee'),
   upload: returnFullUrl('/api/v1/user/upload'),
+  referrerConfirm: returnFullUrl('/api/v1/referrer'),
 }
 
 export const events = {

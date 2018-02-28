@@ -12,6 +12,9 @@ import Signup from 'Pages/Signup'
 import Timeline from 'scenes/mainSections/Timeline'
 import Profile from 'scenes/mainSections/Profile'
 import Events from 'scenes/mainSections/Events'
+import Payment from 'scenes/mainSections/Payment'
+
+import RefereeConfirm from 'Pages/RefereeConfirm'
 
 const App = () => {
   return (
@@ -80,7 +83,11 @@ const App = () => {
         <Route
           exact
           path="/app/payment"
-          render={props => <MainApp>{/* <Profile {...props} /> */}</MainApp>}
+          render={props => (
+            <MainApp>
+              <Payment {...props} />
+            </MainApp>
+          )}
         />
 
         <Route
@@ -91,6 +98,12 @@ const App = () => {
               <Events {...props} />
             </MainApp>
           )}
+        />
+
+        <Route
+          exact
+          path="/confirm/:id/:user"
+          render={props => <RefereeConfirm {...props} />}
         />
 
         <Route exact path="/general" component={General} />

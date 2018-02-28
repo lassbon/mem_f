@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
 import PaystackButton from 'react-paystack'
 
@@ -7,9 +8,20 @@ import PaystackButton from 'react-paystack'
 import network from 'services/network'
 import requestHandler from 'helpers/requestHandler'
 
-const callback = ({ params, token }, stateIncrementRegistrationStage) => {
+const callback = (
+  { params, token },
+  stateIncrementRegistrationStage,
+  getUserDetails
+) => {
   return requestHandler(network.general.alertReferee)({ params, token })
-    .then(stateIncrementRegistrationStage)
+    .then(() => Promise.resolve(stateIncrementRegistrationStage()))
+    .then(() =>
+      requestHandler(network.user.updateUserDetails)({
+        id: params.id,
+        params: { regState: 5 },
+        token,
+      }).then(() => getUserDetails)
+    )
     .catch(console.error)
 }
 const close = () => {}
@@ -24,6 +36,7 @@ const amount = 5000 * 100
 const RegistrationPayment = ({
   registrationStage,
   auth: { token },
+  getUserDetails,
   user: { email, id },
   stateIncrementRegistrationStage,
 }) => {
@@ -51,7 +64,8 @@ const RegistrationPayment = ({
         callback={() =>
           callback(
             { params: { id, regState: 5 }, token },
-            stateIncrementRegistrationStage
+            stateIncrementRegistrationStage,
+            getUserDetails
           )
         }
         close={close}
@@ -65,4 +79,16 @@ const RegistrationPayment = ({
   )
 }
 
-export default RegistrationPayment
+const mapDispatchToProps = dispatch => ({
+  getUserDetails: (id, token) =>
+    dispatch(async (dispatch, getState, { network }) => {
+      const response = await requestHandler(network.user.getUserDetails)({
+        id,
+        token,
+      })
+      return dispatch(receivedUserDetails(response))
+      // receivedUserDetails
+    }),
+})
+
+export default connect(null, mapDispatchToProps)(RegistrationPayment)

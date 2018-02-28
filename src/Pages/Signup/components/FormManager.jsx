@@ -178,37 +178,37 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
 
 const financialMembersFormInitialValues = {
   financialMemberId1: '',
-  financialMemberEmail1: '',
+  referee1: '',
   financialMemberId2: '',
-  financialMemberEmail2: '',
+  referee2: '',
   regState: 4,
 }
 
 const financialMembersFormValidationFunctions = {
   financialMemberId1: notEmptyOrNumber,
-  financialMemberEmail1: String.isEmailLike,
+  referee1: String.isEmailLike,
   financialMemberId2: notEmptyOrNumber,
-  financialMemberEmail2: String.isEmailLike,
+  referee2: String.isEmailLike,
 }
 
 const financialMembersErrorMessages = {
   financialMemberId1: `Please enter a financial member's ID`,
-  financialMemberEmail1: 'Please enter a valid email address',
+  referee1: 'Please enter a valid email address',
   financialMemberId2: `Please enter a financial member's ID`,
-  financialMemberEmail2: 'Please enter a valid email address',
+  referee2: 'Please enter a valid email address',
 }
 
 const financialMembersSubmit = (params, { token, id }) => {
   return Promise.all([
     requestHandler(network.general.validateReferee)({
       params: {
-        email: params.financialMemberEmail1,
+        email: params.referee1,
       },
       token,
     }),
     requestHandler(network.general.validateReferee)({
       params: {
-        email: params.financialMemberEmail2,
+        email: params.referee2,
       },
       token,
     }),

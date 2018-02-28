@@ -43,17 +43,14 @@ const FinancialMembersForm = ({
             Representative's Email
           </label>
           <StyledInput
-            name="financialMemberEmail1"
+            name="referee1"
             type="text"
             placeholder="Representative's Email"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.financialMemberEmail1}
+            value={values.referee1}
           />
-          <InputError
-            touched={touched.financialMemberEmail1}
-            error={errors.financialMemberEmail1}
-          />
+          <InputError touched={touched.referee1} error={errors.referee1} />
         </fieldset>
       </div>
       <div className="lg:w-1/2 lg:h-full ml-6">
@@ -82,17 +79,14 @@ const FinancialMembersForm = ({
             Representative's Email
           </label>
           <StyledInput
-            name="financialMemberEmail2"
+            name="referee2"
             type="text"
             placeholder="Representative's Email"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.financialMemberEmail2}
+            value={values.referee2}
           />
-          <InputError
-            touched={touched.financialMemberEmail2}
-            error={errors.financialMemberEmail2}
-          />
+          <InputError touched={touched.referee2} error={errors.referee2} />
         </fieldset>
       </div>
     </div>

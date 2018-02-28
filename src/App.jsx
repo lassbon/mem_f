@@ -106,7 +106,7 @@ const App = () => {
           render={props => <RefereeConfirm {...props} />}
         />
 
-        <Route exact path="/general" component={General} />
+        <Route exact path="\/" render={() => <Redirect to="/login" />} />
       </Switch>
     </div>
   )

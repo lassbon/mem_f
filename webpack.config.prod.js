@@ -8,7 +8,6 @@ const merge = require('webpack-merge')
 const common = require('./webpack.config.common.js')
 
 module.exports = merge(common, {
-  devtool: 'source-map',
   entry: './src/index.js',
   plugins: [
     new CopyWebpackPlugin([{ from: 'src/static', to: 'static' }]),

@@ -7,6 +7,14 @@
   margin-bottom: @ml 3rem;
 }
 
+.lg\:mt-12 {
+  margin-top: @ml 3rem;
+}
+
+.lg\:mt-16 {
+  margin-top: @ml 4rem;
+}
+
 .lg\:mx-16 {
   margin-right: @ml 4rem;
   margin-left: @ml 4rem;
@@ -17,6 +25,10 @@
   padding-left: @ml 3rem;
 }
 
+.lg\:pl-12 {
+  padding-left: @ml 3rem;
+}
+
 .lg\:py-12 {
   padding-top: @ml 3rem;
   padding-bottom: @ml 3rem;
@@ -24,6 +36,10 @@
 
 .lg\:p-12 {
   padding: @ml 3rem;
+}
+
+.lg\:pl-16 {
+  padding-left: @ml 4rem;
 }
 
 .lg\:px-16 {

@@ -1,12 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import jwt from 'jsonwebtoken'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import persistState from 'redux-localstorage'
 import { AppContainer } from 'react-hot-loader'
 
 // ------ paystack -----------------
@@ -17,7 +12,6 @@ import { AppContainer } from 'react-hot-loader'
 // import './normalize.css'
 import './css/imports.css'
 import App from './App'
-import rootReducer from './rootReducer'
 import store from 'redux/store'
 
 const renderApp = Component =>

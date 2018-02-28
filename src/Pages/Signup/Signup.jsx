@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import FormManager from 'FormManager'
 
@@ -8,16 +9,19 @@ import MembershipPayment from 'MembershipPayment'
 
 import './styles.css'
 
+// Data
+
 const noOfForms = 4
 const registrationStageTitles = [
   'Company details',
-  'Company size',
+  'Membership category',
   'Company rep',
   'Referrals',
   'Registration fee',
   'Annual fee',
   'Membership fee',
 ]
+const loadingText = 'Checking and submitting your details, please wait.'
 
 // Templates
 
@@ -86,27 +90,36 @@ const canRenderFormManager = registrationStage => registrationStage < noOfForms
 
 class Signup extends Component {
   state = {
-    registrationStage: -1,
+    registrationStage: this.props.user.regState || -1,
+    loading: false,
   }
-  state_incrementRegistrationStage = () =>
+  stateIncrementRegistrationStage = () =>
     this.setState(state => ({
       ...state,
       registrationStage: state.registrationStage + 1,
     }))
-  state_setRegistrationStage = registrationStage =>
+  stateSetRegistrationStage = registrationStage =>
     typeof registrationStage === 'number' &&
     !Number.isNaN(registrationStage) &&
     this.setState(state => ({
       ...state,
       registrationStage,
     }))
+  stateSetLoading = loading => this.setState(state => ({ ...state, loading }))
 
   handleProgressBarClick = ({ currentTarget: { dataset: { index } } }) => {
-    this.state_setRegistrationStage(Number(index))
+    if (true) return
+    this.stateSetRegistrationStage(Number(index))
   }
   render() {
-    const { registrationStage } = this.state
-
+    const { registrationStage, loading } = this.state
+    const {
+      handleProgressBarClick,
+      stateIncrementRegistrationStage,
+      stateSetLoading,
+    } = this
+    const { auth, user } = this.props
+    console.log('registrationStage', registrationStage)
     return (
       <div className="lg:h-screen lg:flex lg:justify-center lg:items-center">
         <section className="w-3/4">
@@ -121,9 +134,9 @@ class Signup extends Component {
             <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
               Signup
             </h2>
-            <p className="text-sm text-grey-dark">
+            {/* <p className="text-sm text-grey-dark">
               Please enter your email and password
-            </p>
+            </p> */}
           </header>
           <ul className="list-reset flex text-xxs text-grey hind uppercase">
             {registrationStageTitles.map((title, index) => (
@@ -140,24 +153,51 @@ class Signup extends Component {
             ))}
           </ul>
           <ul className="list-reset lg:flex lg:bg-pink-lighter lg:text-white rounded-sm overflow-hidden">
-            {populateProgressBar(
-              registrationStage,
-              this.handleProgressBarClick
-            )}
+            {populateProgressBar(registrationStage, handleProgressBarClick)}
           </ul>
           <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">
             <div>
               <div className=" lg:w-full">
                 {canRenderFormManager(registrationStage) && (
-                  <FormManager registrationStage={registrationStage + 1} />
+                  <FormManager
+                    registrationStage={registrationStage + 1}
+                    loading={loading}
+                    loadingText={loadingText}
+                    stateIncrementRegistrationStage={
+                      stateIncrementRegistrationStage
+                    }
+                    stateSetLoading={stateSetLoading}
+                  />
                 )}
                 {registrationStage > 3 ? (
                   <div className="flex">
                     <RegistrationPayment
                       registrationStage={registrationStage}
+                      stateIncrementRegistrationStage={
+                        stateIncrementRegistrationStage
+                      }
+                      auth={auth}
+                      user={user}
                     />
                     {registrationStage > 4 ? (
-                      <AnnualDuePayment registrationStage={registrationStage} />
+                      <AnnualDuePayment
+                        registrationStage={registrationStage}
+                        stateIncrementRegistrationStage={
+                          stateIncrementRegistrationStage
+                        }
+                        user={user}
+                        auth={auth}
+                      />
+                    ) : null}
+                    {registrationStage > 5 ? (
+                      <MembershipPayment
+                        registrationStage={registrationStage}
+                        stateIncrementRegistrationStage={
+                          stateIncrementRegistrationStage
+                        }
+                        user={user}
+                        auth={auth}
+                      />
                     ) : null}
                   </div>
                 ) : null}
@@ -172,4 +212,11 @@ class Signup extends Component {
   componentDidMount() {}
 }
 
-export default Signup
+const mapStateToProps = ({ user, auth }) => ({
+  auth,
+  user,
+})
+
+const glueTo = connect(mapStateToProps, null)
+
+export default glueTo(Signup)

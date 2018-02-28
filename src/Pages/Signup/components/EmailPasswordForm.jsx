@@ -10,13 +10,15 @@ const EmailPasswordForm = ({
   touched,
   errors,
   handleChange,
+  loading,
+  loadingText,
 }) => {
   return (
     <form action="" onSubmit={handleSubmit}>
       <div className="pb-4">
         <fieldset className="lg:w-1/2 mb-6">
           <label htmlFor="" className="mb-4 text-xs text-grey">
-            E-mail
+            Company E-mail
           </label>
           <StyledInput
             name="email"
@@ -63,7 +65,7 @@ const EmailPasswordForm = ({
         </div>
       </div>
 
-      <ButtonFixedWidthRadiusXS>
+      <ButtonFixedWidthRadiusXS loading={loading} loadingText={loadingText}>
         <span className="">Continue</span>
         <i className="ion-ios-arrow-thin-right ml-4" />
       </ButtonFixedWidthRadiusXS>

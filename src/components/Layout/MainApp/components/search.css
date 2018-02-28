@@ -1,0 +1,17 @@
+.topbar-search {
+  .react-autosuggest__suggestions-container.react-autosuggest__suggestions-container--open {
+    position: absolute;
+    width: 33vw;
+    height: calc(100vh - 64px);
+    background-color: white;
+    top: 100%;
+    left: 0;
+    overflow-y: scroll;
+  }
+
+  .react-autosuggest__suggestions-list {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+  }
+}

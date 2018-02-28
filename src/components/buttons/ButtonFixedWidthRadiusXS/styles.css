@@ -1,4 +1,4 @@
-/* .button-fixed-width-small-radius {
+.loading.button-fixed-width-small-radius {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
@@ -10,7 +10,17 @@
   position: relative;
 }
 
-.button-fixed-width-small-radius::after {
+.loading.button-fixed-width-small-radius::before {
+  content: attr(data-loading-text);
+  white-space: nowrap;
+  font-size: 0.75rem;
+  position: absolute;
+  right: -1rem;
+  transform: translateX(100%);
+  color: #000;
+}
+
+.loading.button-fixed-width-small-radius::after {
   content: '';
   position: absolute;
   top: -7px;
@@ -22,10 +32,10 @@
   width: 12px;
   border-radius: 50%;
   background-color: #fff;
-  animation: rot 3s linear infinite;
+  animation: rot 2s linear infinite;
 }
 
-.button-fixed-width-small-radius {
+.loading.button-fixed-width-small-radius {
   transition: border-radius 0.2s, width 0.2s;
 }
 
@@ -36,4 +46,4 @@
   100% {
     transform: translateX(-50%) rotate(360deg);
   }
-} */
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import Search from './Search'
 
 const TopBar = () => (
-  <div className="lg:flex items-center text-sm lg:lt-shadow relative">
+  <div className="lg:flex items-center text-sm lg:lt-shadow relative z-40">
     <div className="lg:w-1/6">
       <Search />
     </div>

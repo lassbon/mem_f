@@ -1,6 +1,9 @@
 @import './uppy.css';
+@import './simpleScrollbar';
+@import './reactSelect';
 
 @import './variables.css';
+@import './reset.css';
 @import './typography.css';
 @import './shadows.css';
 @import './spacing.css';

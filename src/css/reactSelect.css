@@ -1,0 +1,19 @@
+.Select-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  padding: 0.35rem 0.5rem;
+  position: relative;
+  border: 1px solid #dae1e7;
+  letter-spacing: initial;
+  font-size: inherit;
+  text-transform: inherit;
+  font-family: inherit;
+  border-radius: 0.125rem;
+}
+
+.Select-multi-value-wrapper {
+  flex-grow: 1;
+  position: relative;
+}

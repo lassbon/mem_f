@@ -11,7 +11,7 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'src'),
     hot: true,
     port: 3000,
-    open: true,
+    open: false,
     openPage: '',
     stats: {
       modules: false,
@@ -22,6 +22,7 @@ module.exports = merge(common, {
     historyApiFallback: true,
     publicPath: '/',
   },
+  devtool: 'cheap-module-eval-source-map',
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),

@@ -1,29 +1,23 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { ToastContainer } from 'react-toastify'
 import PropTypes from 'prop-types'
 
 import General from 'Layout/General'
 import MainApp from 'Layout/MainApp'
 import Login from 'Pages/Login'
+import ForgotPassword from 'Pages/ForgotPassword'
+import ResetPassword from 'pages/ResetPassword'
 import Signup from 'Pages/Signup'
 import Timeline from 'scenes/mainSections/Timeline'
 import Profile from 'scenes/mainSections/Profile'
+import Events from 'scenes/mainSections/Events'
 
-const App = ({ location }) => {
+const App = () => {
   return (
     <div>
-      <ToastContainer
-        position="top-center"
-        autoClose={30000}
-        newestOnTop={true}
-        hideProgressBar={false}
-        closeOnClick={false}
-      />
       <Switch>
         <Route
-          location={location}
           path="/login"
           exact
           render={props => (
@@ -33,14 +27,27 @@ const App = ({ location }) => {
           )}
         />
         <Route
-          location={location}
-          path="/signup"
+          path="/forgotpassword"
           exact
-          render={props => <Signup {...props} />}
+          render={props => (
+            <General>
+              <ForgotPassword {...props} />
+            </General>
+          )}
         />
+
+        <Route
+          path="/resetpassword"
+          exact
+          render={props => (
+            <General>
+              <ResetPassword {...props} />
+            </General>
+          )}
+        />
+        <Route path="/signup" exact render={props => <Signup {...props} />} />
         <Route exact path="/app" render={props => <MainApp />} />
         <Route
-          location={location}
           exact
           path="/app/timeline"
           render={props => (
@@ -51,7 +58,6 @@ const App = ({ location }) => {
         />
 
         <Route
-          location={location}
           exact
           path="/app/profile"
           render={props => (
@@ -61,16 +67,36 @@ const App = ({ location }) => {
           )}
         />
 
+        <Route
+          exact
+          path="/app/profile/:id"
+          render={props => (
+            <MainApp>
+              <Profile {...props} />
+            </MainApp>
+          )}
+        />
+
+        <Route
+          exact
+          path="/app/payment"
+          render={props => <MainApp>{/* <Profile {...props} /> */}</MainApp>}
+        />
+
+        <Route
+          exact
+          path="/app/events"
+          render={props => (
+            <MainApp>
+              <Events {...props} />
+            </MainApp>
+          )}
+        />
+
         <Route exact path="/general" component={General} />
       </Switch>
     </div>
   )
-}
-
-App.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
 }
 
 export default connect(({ user }) => ({ user }))(App)

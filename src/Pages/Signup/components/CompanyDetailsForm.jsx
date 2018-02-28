@@ -3,13 +3,52 @@ import InputError from 'components/form/InputError'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
 import StyledInput from 'components/form/StyledInput'
 
+const tradeGroups = [
+  'Agriculture',
+  'Air Transport',
+  'Air Transport Unions',
+  'Airlines',
+  'Alcoholic Beverages',
+  'Alternative Energy Production & Services',
+  'Architectural Services',
+  'Attorneys/Law Firms',
+  'Auto Dealers',
+  'Auto Manufacturers',
+  'Automotive',
+  'Banking',
+  'Bars & Restaurants',
+  'Beer',
+]
+
+const employees = [
+  '1 - 10',
+  '11 - 20',
+  '21 - 40',
+  '41 - 80',
+  '81 - 100',
+  '100 and above',
+]
+
+const returns = [
+  'N100,000 - N500,000',
+  'N501,000 - N1,000,000',
+  'N1,000,001 - N3,000,000',
+  'N3,000,001 - N5,000,000',
+  'N5,000,001 - N10,000,000',
+  'N100,000,001 and above',
+]
+
 const CompanyDetailsForm = ({
   handleSubmit,
+  loading,
+  loadingText,
   values,
   handleBlur,
   touched,
   errors,
   handleChange,
+  setFieldValue,
+  setFieldTouched,
 }) => (
   <form action="" onSubmit={handleSubmit}>
     <div className="lg:flex pb-4">
@@ -69,14 +108,25 @@ const CompanyDetailsForm = ({
           <label htmlFor="" className="mb-4 text-xs text-grey">
             Company's Business
           </label>
-          <StyledInput
+          <select
             name="companyBusiness"
-            type="text"
-            placeholder="Company Business"
+            id="companyBusiness"
+            className="w-full p-4 py-3 roboto text-base tracking-wide capitalize border border-grey-light border-solid rounded-sm"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.companyBusiness}
-          />
+            defaultValue=""
+          >
+            {[
+              <option key="placeholder" value="" disabled>
+                Select a trade group
+              </option>,
+              ...tradeGroups.map(value => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              )),
+            ]}
+          </select>
           <InputError
             touched={touched.companyBusiness}
             error={errors.companyBusiness}
@@ -88,60 +138,94 @@ const CompanyDetailsForm = ({
         <div className="p-4 bg-teal-lightest border border-grey-lighter border-solid">
           <fieldset className="mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">
-              Company's Business
+              Number of employees
             </label>
-            <StyledInput
-              name="companyBusiness"
-              type="text"
-              placeholder="Company Business"
+            <select
+              name="employees"
+              id="employees"
+              className="w-full p-4 py-3 roboto text-base tracking-wide capitalize border border-grey-light border-solid rounded-sm"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.companyBusiness}
-            />
+              defaultValue=""
+            >
+              {[
+                <option key="placeholder" value="" disabled>
+                  Select employee size
+                </option>,
+                ...employees.map(value => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                )),
+              ]}
+            </select>
+            <InputError touched={touched.employees} error={errors.employees} />
+          </fieldset>
+          <fieldset className="mb-6">
+            <label htmlFor="" className="mb-4 text-xs text-grey">
+              Company's Annual Return
+            </label>
+            <select
+              name="annualReturn"
+              id="annualReturn"
+              className="w-full p-4 py-3 roboto text-base tracking-wide capitalize border border-grey-light border-solid rounded-sm"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              defaultValue=""
+            >
+              {[
+                <option key="placeholder" value="" disabled>
+                  Select annual return range
+                </option>,
+                ...returns.map(value => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                )),
+              ]}
+            </select>
             <InputError
-              touched={touched.companyBusiness}
-              error={errors.companyBusiness}
+              touched={touched.annualReturn}
+              error={errors.annualReturn}
             />
           </fieldset>
           <fieldset className="mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">
-              Company's Business
+              Company's Annual Profit
             </label>
-            <StyledInput
-              name="companyBusiness"
-              type="text"
-              placeholder="Company Business"
+            <select
+              name="annualProfit"
+              id="annualProfit"
+              className="w-full p-4 py-3 roboto text-base tracking-wide capitalize border border-grey-light border-solid rounded-sm"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.companyBusiness}
-            />
+              defaultValue=""
+            >
+              {[
+                <option key="placeholder" value="" disabled>
+                  Select annual profit range
+                </option>,
+                ...returns.map(value => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                )),
+              ]}
+            </select>
             <InputError
-              touched={touched.companyBusiness}
-              error={errors.companyBusiness}
-            />
-          </fieldset>
-          <fieldset className="mb-6">
-            <label htmlFor="" className="mb-4 text-xs text-grey">
-              Company's Business
-            </label>
-            <StyledInput
-              name="companyBusiness"
-              type="text"
-              placeholder="Company Business"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.companyBusiness}
-            />
-            <InputError
-              touched={touched.companyBusiness}
-              error={errors.companyBusiness}
+              touched={touched.annualProfit}
+              error={errors.annualProfit}
             />
           </fieldset>
         </div>
       </div>
     </div>
 
-    <ButtonFixedWidthRadiusXS className="w-1/2">
+    <ButtonFixedWidthRadiusXS
+      className="w-1/2"
+      loading={loading}
+      loadingText={loadingText}
+    >
       <span className="">Continue</span>
       <i className="ion-ios-arrow-thin-right ml-4" />
     </ButtonFixedWidthRadiusXS>

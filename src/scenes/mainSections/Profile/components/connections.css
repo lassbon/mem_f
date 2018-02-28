@@ -1,0 +1,7 @@
+@import '../../../../css/variables.css';
+
+.empty-state-container {
+  bottom: @ml 50%;
+  left: @ml 50%;
+  transform: @ml translate(-50%, 50%);
+}

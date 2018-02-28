@@ -5,9 +5,16 @@ export const changeMainSection = ({ index: payload }) => ({
   payload,
 })
 
+// AUTH
+
 export const receivedLoginAuthDetails = obj => ({
   type: actions.RECEIVED_LOGIN_AUTH_DETAILS,
   payload: obj,
+})
+
+export const logOut = () => ({
+  type: actions.LOG_OUT,
+  payload: undefined,
 })
 
 // USERS
@@ -37,6 +44,16 @@ export const sentFriendRequest = successResponse => ({
   payload: successResponse,
 })
 
+export const acceptedFriendRequest = params => ({
+  type: actions.ACCEPTED_FRIEND_REQUEST,
+  payload: params,
+})
+
+export const canceledFriendRequest = params => ({
+  type: actions.CANCELED_FRIEND_REQUEST,
+  payload: params,
+})
+
 // SOCIAL
 
 export const receivedTimelinePosts = posts => ({
@@ -52,4 +69,28 @@ export const likedPost = successResponse => ({
 export const createdComment = obj => ({
   type: actions.CREATED_COMMENT,
   payload: obj,
+})
+
+// Event
+
+export const receivedOngoingEvents = onGoingEvents => ({
+  type: actions.RECEIVED_ONGOING_EVENTS,
+  payload: onGoingEvents,
+})
+
+export const receivedCompletedEvents = onCompletedEvents => ({
+  type: actions.RECEIVED_COMPLETED_EVENTS,
+  payload: onCompletedEvents,
+})
+
+export const likedEvent = event => ({
+  type: actions.LIKED_EVENT,
+  payload: event,
+})
+
+// Payment
+
+export const receiveMembershipPayment = payment => ({
+  type: actions.RECEIVED_MEMBERSHIP_PAYMENT,
+  payload: payment,
 })

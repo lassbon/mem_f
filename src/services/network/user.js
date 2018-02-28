@@ -62,3 +62,24 @@ export const sendFriendRequest = ({ params, token }) =>
     headers: authPostRequestHeaders(token),
     method: 'POST',
   })
+
+export const acceptFriendRequest = ({ params, token }) =>
+  fetch(endpoints.user.acceptFriendRequest, {
+    body: JSON.stringify(params),
+    headers: authPostRequestHeaders(token),
+    method: 'POST',
+  })
+
+export const cancelFriendRequest = ({ params, token }) =>
+  fetch(endpoints.user.cancelFriendRequest, {
+    body: JSON.stringify(params),
+    headers: authPostRequestHeaders(token),
+    method: 'POST',
+  })
+
+export const removeFriend = ({ params, token }) =>
+  fetch(endpoints.user.removeFriend, {
+    body: JSON.stringify(params),
+    headers: authPostRequestHeaders(token),
+    method: 'POST',
+  })

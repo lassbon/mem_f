@@ -1,3 +1,19 @@
+.featured-event-figure::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: #ff3cac; */
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 60, 172, 0.2) 0%,
+    rgba(120, 75, 160, 0.5) 50%,
+    rgba(43, 134, 197, 1) 100%
+  );
+}
+
 .featured-image-container {
-  height: 25vh;
+  height: 60vh;
 }

@@ -18,10 +18,10 @@ class Profile extends Component {
     const { user } = this.props
     return (
       <section className="lg:h-full flex">
-        <div className="flex flex-wrap  lg:w-2/3 lg:pl-16 lg:pr-4 py-6">
+        <div className="flex flex-wrap lg:h-full lg:w-2/3 lg:pl-16 lg:pr-4 py-6">
           <section
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="inline-block h-full overflow-y-scroll lg:w-3/5 mb-4 mr-4 bg-white lg:lt-shadow"
+            className="inline-block lg:h-full overflow-y-scroll lg:w-3/5 mb-4 mr-4 bg-white lg:lt-shadow relative"
           >
             {<Connections />}
           </section>

@@ -1,0 +1,8 @@
+.more-details {
+  height: calc(100% - 20%);
+  width: calc(100% - 2rem);
+  bottom: 0;
+  left: calc(50%);
+  transform: translate(-50%, 0%);
+  /* box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.1); */
+}

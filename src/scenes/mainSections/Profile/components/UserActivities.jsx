@@ -51,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
       const activity = await requestHandler(
         network.user.fetchUserSocialActivity
       )({ id, token })
+      console.log(activity)
       dispatch(receivedUserActivity(activity))
       return Promise.resolve(activity)
     }),

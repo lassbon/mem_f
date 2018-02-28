@@ -6,7 +6,7 @@ const Comment = ({ comment: { comment, companyName } }) => (
       {companyName} <span className="">said:</span>
     </div>
 
-    <div className="p-4 ml-8 border-r border-b text-grey-darkest rounded-sm">
+    <div className="p-4 ml-8 bg-grey-lighter border border-grey-light text-grey-darkest rounded-sm">
       <p>{comment}</p>
     </div>
   </li>

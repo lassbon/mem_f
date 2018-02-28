@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
+import * as actions from 'redux/actions'
 import * as generic from './generic'
 import * as auth from './auth'
 import * as user from './user'
@@ -14,6 +15,10 @@ const reducers = {
   ...social,
   ...user,
 }
-const rootReducer = combineReducers(reducers)
+const appReducer = combineReducers(reducers)
+const rootReducer = (state, action) => {
+  if (action.type === actions.LOG_OUT) state = undefined
+  return appReducer(state, action)
+}
 
 export default rootReducer

@@ -6,6 +6,7 @@ const defaults = {
   users: null,
   userActivity: null,
   friendRequests: null,
+  friends: null,
 }
 
 export const user = (state = defaults.user, action) =>
@@ -39,6 +40,44 @@ export const friendRequests = (state = defaults.friendRequests, action) => {
     const requestsListSchema = [new schema.Entity('requests')]
     const normalizedRequests = normalize(action.payload, requestsListSchema)
     return normalizedRequests
+  }
+
+  if (
+    action.type === actions.CANCELED_FRIEND_REQUEST ||
+    action.type === actions.ACCEPTED_FRIEND_REQUEST
+  ) {
+    const newRequests = state.result.filter(id => id !== action.payload.id)
+    return {
+      ...state,
+      result: newRequests,
+    }
+  }
+  return state
+}
+
+export const friends = (state = defaults.friends, action) => {
+  if (action.type === actions.RECEIVED_USER_ACTIVITY) {
+    const friendsListSchema = [new schema.Entity('friends')]
+    const normalizedFriends = normalize(
+      action.payload.friends,
+      friendsListSchema
+    )
+    return normalizedFriends
+  }
+
+  if (action.type === actions.ACCEPTED_FRIEND_REQUEST) {
+    const { friend } = action.payload
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        friends: {
+          ...state.entities.friends,
+          [friend.id]: friend,
+        },
+      },
+      result: [friend.id, ...state.result],
+    }
   }
   return state
 }

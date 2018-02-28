@@ -33,7 +33,7 @@ const renderSuggestion = (
             </span>
           </p>
           <div>
-            <Link to={`/app/profile/${id}`}>See profile</Link>
+            {/* <Link to={`/app/profile/${id}`}>See profile</Link> */}
 
             <button
               onClick={() =>
@@ -42,7 +42,7 @@ const renderSuggestion = (
                   auth.token
                 )
               }
-              className="px-4 py-1 bg-white lg:lt-shadow text-grey-darker"
+              className="px-3 py-1 bg-pink text-white text-xs"
             >
               Connect
             </button>

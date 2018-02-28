@@ -1,17 +1,6 @@
 import React from 'react'
 
-const Connection = ({
-  acceptFriendRequest,
-  cancelFriendRequest,
-  request,
-  requester: { companyName, companyPhone, email },
-  token,
-}) => {
-  const params = {
-    requester: request.requester,
-    requestee: request.requestee,
-  }
-
+const Friend = ({ friend: { companyName, companyPhone, email } }) => {
   return (
     <li className="px-8 py-6 pb-4 border-b border-grey-lighter">
       <figure className="flex">
@@ -36,7 +25,7 @@ const Connection = ({
           </p>
         </figcaption>
       </figure>
-      <div className="mt-4 text-sm">
+      {/* <div className="mt-4 text-sm">
         <button
           onClick={() => {
             acceptFriendRequest(request.id, params, token)
@@ -53,9 +42,9 @@ const Connection = ({
         >
           Reject
         </button>
-      </div>
+      </div> */}
     </li>
   )
 }
 
-export default Connection
+export default Friend

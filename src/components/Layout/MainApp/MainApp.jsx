@@ -24,7 +24,7 @@ const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
       <Circle text="Retreiving users. Please wait" />
     </div>
   ) : (
-    <div className="main-app lg:h-screen">
+    <div className="main-app lg:h-screen ">
       <TopBar />
       <div className="below-top-bar lg:flex">
         <Sidebar />

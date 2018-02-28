@@ -32,4 +32,9 @@ export const general = {
 export const events = {
   completed: returnFullUrl('/api/v1/events/completed'),
   ongoing: returnFullUrl('/api/v1/events/ongoing'),
+  likeEvent: returnFullUrl('/api/v1/events/like'),
+}
+
+export const payment = {
+  membership: returnFullUrl('/api/v1/userpayments/memberships'),
 }

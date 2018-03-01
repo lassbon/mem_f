@@ -65,21 +65,21 @@ const populateProgressBar = (registrationStage, onClick) =>
       <CompletedStageProgressBar
         key={index}
         style={style}
-        onClick={onClick}
+        // onClick={onClick}
         data-index={index}
       />
     ) : registrationStage === index ? (
       <PresentStageProgressBar
         key={index}
         style={style}
-        onClick={onClick}
+        // onClick={onClick}
         data-index={index}
       />
     ) : (
       <FutureStageProgressBar
         key={index}
         style={style}
-        onClick={onClick}
+        // onClick={onClick}
         data-index={index}
       />
     )
@@ -108,7 +108,6 @@ class Signup extends Component {
   stateSetLoading = loading => this.setState(state => ({ ...state, loading }))
 
   handleProgressBarClick = ({ currentTarget: { dataset: { index } } }) => {
-    if (true) return
     this.stateSetRegistrationStage(Number(index))
   }
   render() {

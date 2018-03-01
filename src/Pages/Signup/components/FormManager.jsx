@@ -345,8 +345,8 @@ const FormManager = props => {
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
             .then(registrationSubmitCallbacks[registrationStage])
             .catch(err => {
-              console.error('custom', err)
-              // toast.error(err.message)
+              // console.error('custom', err)
+              toast.error(err.message)
             })
             .then(() => {
               stateSetLoading(false)

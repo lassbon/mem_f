@@ -191,7 +191,7 @@ class Login extends Component {
                   }}
                 />
               </div>
-              <div className=" justify-center lg:w-3/5">
+              <div className="lg:w-2/5">
                 <img
                   src="/static/images/undraw_safe_bnk7.svg"
                   alt=""

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
+import { ToastContainer, toast } from 'react-toastify'
 import swal from 'sweetalert'
 
 //Components
@@ -67,7 +68,11 @@ class ForgotPassword extends Component {
                           closeOnClickOutside: false,
                         })
                       )
-                      .catch()
+                      .catch(error =>
+                        toast.error(
+                          error.message || 'An error occured. Please try again.'
+                        )
+                      )
                       .then(() => stateSetSubmitingEmail(false))
                   }}
                   validate={value => {

@@ -10,6 +10,7 @@ import { AppContainer } from 'react-hot-loader'
 
 // import './index.css'
 // import './normalize.css'
+import registerServiceWorker from './registerServiceWorker'
 import './css/imports.css'
 import App from './App'
 import store from 'redux/store'
@@ -33,3 +34,4 @@ if (module.hot) {
     import('App').then(app => renderApp(app.default))
   })
 }
+registerServiceWorker()

@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import General from 'Layout/General'
 import MainApp from 'Layout/MainApp'
 import Login from 'Pages/Login'
+import OldmemberLogin from 'Pages/oldmember/Login'
+import OldmemberSignup from 'Pages/oldmember/signup'
 import ForgotPassword from 'Pages/ForgotPassword'
 import ResetPassword from 'Pages/ResetPassword'
 import Signup from 'Pages/Signup'
@@ -106,7 +108,33 @@ const App = () => {
           render={props => <RefereeConfirm {...props} />}
         />
 
-        <Route exact path="\/" render={() => <Redirect to="/login" />} />
+        <Route
+          path="/oldmember/login"
+          exact
+          render={props => (
+            <General>
+              <OldmemberLogin {...props} />
+            </General>
+          )}
+        />
+        <Route
+          path="/oldmember/signup"
+          exact
+          render={props => (
+            <General>
+              <OldmemberSignup {...props} />
+            </General>
+          )}
+        />
+        <Route
+          exact
+          path="\/"
+          render={props => (
+            <General>
+              <Login {...props} />
+            </General>
+          )}
+        />
       </Switch>
     </div>
   )

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import simpleScrollbar from 'fixed/simpleScrollbar'
+import { ToastContainer, toast } from 'react-toastify'
+import swal from 'sweetalert'
 
 import FormManager from 'FormManager'
 import RegistrationPayment from 'RegistrationPayment'
@@ -91,10 +93,9 @@ const canRenderFormManager = registrationStage => registrationStage < noOfForms
 
 class Signup extends Component {
   state = {
-    registrationStage:
-      typeof Number(this.props.user.regState) === 'number'
-        ? this.props.user.regState
-        : -1,
+    registrationStage: !Number.isNaN(Number(this.props.user.regState))
+      ? this.props.user.regState
+      : -1,
     loading: false,
   }
   stateIncrementRegistrationStage = () =>
@@ -122,7 +123,11 @@ class Signup extends Component {
       stateSetLoading,
     } = this
     const { auth, user, history } = this.props
-    console.log('registrationStage', registrationStage)
+    const { regState } = user
+    // if (regState > 8) {
+
+    // }
+
     return (
       <div ref={el => el && simpleScrollbar.initEl(el)} className="lg:h-screen">
         <div className="signup-inner-container lg:flex lg:justify-center lg:items-center overflow-y-scroll">

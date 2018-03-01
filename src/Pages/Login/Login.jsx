@@ -93,7 +93,7 @@ class Login extends Component {
           </header>
           <div className="lg:p-12 lg:lt-shadow ">
             <div className="lg:flex ">
-              <div className="lg:w-2/5">
+              <div className="lg:w-2/5 self-start">
                 <Formik
                   initialValues={formInitialValues}
                   onSubmit={values => {
@@ -191,7 +191,7 @@ class Login extends Component {
                   }}
                 />
               </div>
-              <div className="flex justify-center lg:w-3/5">
+              <div className=" justify-center lg:w-3/5">
                 <img
                   src="/static/images/undraw_safe_bnk7.svg"
                   alt=""

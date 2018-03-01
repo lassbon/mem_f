@@ -92,7 +92,7 @@ class Login extends Component {
             </p>
           </header>
           <div className="lg:p-12 lg:lt-shadow ">
-            <div className="lg:flex justify-center">
+            <div className="lg:flex justify-between">
               <div className="lg:w-2/5 self-start">
                 <Formik
                   initialValues={formInitialValues}

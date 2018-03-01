@@ -1,6 +1,7 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 console.log('direct: ', __dirname)
 
@@ -37,16 +38,10 @@ module.exports = {
       // },
       {
         test: /\.css$/,
-        use: [
-          // 'url-loader',
-          'style-loader',
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'postcss-loader',
-          },
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: ['style-loader', 'css-loader'],
+          use: 'postcss-loader',
+        }),
       },
       // {
       //   test: /\.css$/,
@@ -69,9 +64,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      hash: true,
+      hash: false,
       title: 'ACCI',
     }),
+    new ExtractTextPlugin('styles.css'),
   ],
   resolve: {
     modules: ['components', 'src/scenes', 'src', 'node_modules'],

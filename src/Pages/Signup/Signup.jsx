@@ -31,7 +31,7 @@ const PresentStageProgressBar = props => (
     {...props}
     className="progress-stage lg:w-1/7 h-8 flex justify-center items-center lg:bg-purple-dark relative cursor-pointer"
   >
-    <i className="ion-load-a" />
+    <i className="rotate-loader ion-load-a" />
     <span className="progress-stage-arrow h-8 w-8 lg:absolute lg:pin-r lg:bg-purple-dark rounded" />
   </li>
 )

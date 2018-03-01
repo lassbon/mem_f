@@ -41,3 +41,17 @@
 .registration-payment-shadow {
   box-shadow: -15px 0px 2px -5px rgba(0, 0, 0, 0.1);
 }
+
+.rotate-loader {
+  transform-origin: 50% 50%;
+  animation: rotate-loader 3s linear infinite;
+}
+
+@keyframes rotate-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -201,7 +201,7 @@ const Category = ({
         <i
           className={`${
             values.membershipPlan === name
-              ? 'ion-checkmark-round'
+              ? 'ml-4 ion-checkmark-round'
               : 'ml-4 ion-ios-circle-outline'
           } `}
         />

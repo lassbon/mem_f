@@ -14,7 +14,7 @@ class CompletedEvent extends Component {
         <div className="relative">
           <div className="rounded-lg overflow-hidden bg-white lg:lt-shadow relative">
             <div className="absolute ml-4 mt-4 px-4 py-2 bg-white rounded-full text-xs text-grey-darkest font-semibold z-20">
-              {moment(event.date).format('MMM Do YY')}
+              Completed
             </div>
             <figure className="featured-event-figure bg-grey">
               <div

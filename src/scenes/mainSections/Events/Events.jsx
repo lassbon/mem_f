@@ -43,19 +43,17 @@ const Events = ({
                 user={user}
               />
             ))}
-          </ul>
-        )}
-        {completedEvents && (
-          <ul className="list-reset flex flex-wrap">
-            {completedEvents.result.map(id => (
-              <OngoingEvent
-                key={id}
-                event={completedEvents.entities.completed[id]}
-                likeEvent={likeEvent}
-                token={token}
-                user={user}
-              />
-            ))}
+
+            {completedEvents &&
+              completedEvents.result.map(id => (
+                <OngoingEvent
+                  key={id}
+                  event={completedEvents.entities.completed[id]}
+                  likeEvent={likeEvent}
+                  token={token}
+                  user={user}
+                />
+              ))}
           </ul>
         )}
       </div>

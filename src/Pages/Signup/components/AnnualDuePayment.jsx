@@ -12,12 +12,17 @@ import network from 'services/network'
 import requestHandler from 'helpers/requestHandler'
 import prettifyMoney from 'helpers/prettifyMoney'
 
-const callback = ({ id, params, token }, stateIncrementRegistrationStage) => {
+const callback = (
+  { id, params, token },
+  stateIncrementRegistrationStage,
+  getUserDetails
+) => {
   return requestHandler(network.user.updateUserDetails)({
     id,
     params,
     token,
   })
+    .then(() => Promise.resolve(getUserDetails(id, token)))
     .then(stateIncrementRegistrationStage)
     .catch(console.error)
 }
@@ -51,12 +56,13 @@ class AnnualDuePayment extends Component {
     const {
       registrationStage,
       auth: { token },
+      getUserDetails,
       user: { email, id },
       stateIncrementRegistrationStage,
     } = this.props
     const { plan } = this.state
     return plan ? (
-      <div className={`${registrationStage > 5 ? 'opacity-50' : ''} mr-8`}>
+      <div className={`${registrationStage > 6 ? 'opacity-50' : ''} mr-8`}>
         <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
           <h4 className="hind uppercase text-xs font-normal text-grey-darker">
             Annual fee
@@ -75,13 +81,14 @@ class AnnualDuePayment extends Component {
           </div>
         </div>
         <PaystackButton
-          disabled={registrationStage > 5 ? 'disabled' : 'false'}
-          text={registrationStage > 5 ? 'Paid' : 'Pay'}
+          disabled={registrationStage > 6 ? 'disabled' : 'false'}
+          text={registrationStage > 6 ? 'Paid' : 'Pay'}
           class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-grey-darkest hind"
           callback={() =>
             callback(
               { id, params: { regState: 7 }, token },
-              stateIncrementRegistrationStage
+              stateIncrementRegistrationStage,
+              getUserDetails
             )
           }
           close={close}

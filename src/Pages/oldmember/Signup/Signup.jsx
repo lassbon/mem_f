@@ -83,7 +83,7 @@ const canRenderFormManager = registrationStage => registrationStage < noOfForms
 
 class Signup extends Component {
   state = {
-    registrationStage: -1,
+    registrationStage: 0,
     loading: false,
   }
   stateIncrementRegistrationStage = () =>

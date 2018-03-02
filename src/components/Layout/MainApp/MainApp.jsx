@@ -15,6 +15,7 @@ import { receivedUsers } from 'redux/action_creators'
 import requestHandler from 'helpers/requestHandler'
 
 const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
+  console.log(user)
   if (!user.id) return <Redirect to="/login" />
   const valid = validMember(user)
   if (valid !== true) return <Redirect to={valid} />

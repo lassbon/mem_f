@@ -6,12 +6,11 @@ import { ToastContainer, toast } from 'react-toastify'
 import swal from 'sweetalert'
 
 import FormManager from 'FormManager'
-import RegistrationPayment from 'RegistrationPayment'
-import AnnualDuePayment from 'AnnualDuePayment'
-import MembershipPayment from 'MembershipPayment'
+import PaymentManager from 'PaymentManager'
 
 import './styles.css'
 
+import { logOut } from 'redux/action_creators'
 // Data
 
 const noOfForms = 4
@@ -115,8 +114,12 @@ class Signup extends Component {
   handleProgressBarClick = ({ currentTarget: { dataset: { index } } }) => {
     this.stateSetRegistrationStage(Number(index))
   }
+  componentWillUnmount() {
+    const { logOut } = this.props
+    logOut()
+  }
   render() {
-    const { registrationStage, loading } = this.state
+    const { loading } = this.state
     const {
       handleProgressBarClick,
       stateIncrementRegistrationStage,
@@ -124,110 +127,96 @@ class Signup extends Component {
     } = this
     const { auth, user, history } = this.props
     const { regState } = user
+    const registrationStage = !Number.isNaN(Number(this.props.user.regState))
+      ? Number(regState)
+      : -1
     // if (regState > 8) {
 
     // }
 
     return (
-      <div ref={el => el && simpleScrollbar.initEl(el)} className="lg:h-screen">
-        <div className="signup-inner-container lg:flex lg:justify-center lg:items-center overflow-y-scroll">
-          <section className="w-3/4">
-            <Link
-              to="/login"
-              className="inline-block lg:mb-12 py-2 px-4 text-pink-light bg-grey-lighter rounded-sm"
-            >
-              <i className="text-base ion-arrow-left-c" />
-              <span className="ml-3 text-xs font-medium">Login</span>
-            </Link>
-            <header className="mb-8">
-              <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
-                Signup
-              </h2>
-              {/* <p className="text-sm text-grey-dark">
+      <>
+        <div className="absolute w-full pin-r pin-t mt-8 flex justify-center">
+          <div className="w-3/4 flex justify-center">
+            <img src="/static/images/logo.png" alt="" className="w-48" />
+          </div>
+        </div>
+        <div
+          ref={el => el && simpleScrollbar.initEl(el)}
+          className="lg:h-screen"
+        >
+          <div className="signup-inner-container lg:flex lg:flex-col lg:justify-center lg:items-center overflow-y-scroll">
+            <section className="w-3/4">
+              <Link
+                to="/login"
+                className="inline-block lg:mb-12 py-2 px-4 text-pink-light bg-grey-lighter rounded-sm"
+              >
+                <i className="text-base ion-arrow-left-c" />
+                <span className="ml-3 text-xs font-medium">Login</span>
+              </Link>
+              <header className="mb-8">
+                <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
+                  Signup
+                </h2>
+                {/* <p className="text-sm text-grey-dark">
               Please enter your email and password
             </p> */}
-            </header>
-            <ul className="list-reset flex text-xxs text-grey hind uppercase">
-              {registrationStageTitles.map((title, index) => (
-                <li
-                  key={title}
-                  className={`lg:w-1/7 text-center ${
-                    registrationStage === index
-                      ? 'text-sm font-semibold text-purple-dark'
-                      : ''
-                  }`}
-                >
-                  {title}
-                </li>
-              ))}
-            </ul>
-            <ul className="list-reset lg:flex lg:bg-pink-lighter lg:text-white rounded-sm overflow-hidden">
-              {populateProgressBar(registrationStage, handleProgressBarClick)}
-            </ul>
-            <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">
-              <div>
-                <div className=" lg:w-full">
-                  {canRenderFormManager(registrationStage) && (
-                    <FormManager
-                      registrationStage={registrationStage + 1}
-                      loading={loading}
-                      loadingText={loadingText}
-                      stateIncrementRegistrationStage={
-                        stateIncrementRegistrationStage
-                      }
-                      stateSetLoading={stateSetLoading}
-                    />
-                  )}
-                  {registrationStage > 3 ? (
-                    <div className="flex">
-                      <RegistrationPayment
-                        registrationStage={registrationStage}
+              </header>
+              <ul className="list-reset flex text-xxs text-grey hind uppercase">
+                {registrationStageTitles.map((title, index) => (
+                  <li
+                    key={title}
+                    className={`lg:w-1/7 text-center ${
+                      registrationStage === index
+                        ? 'text-sm font-semibold text-purple-dark'
+                        : ''
+                    }`}
+                  >
+                    {title}
+                  </li>
+                ))}
+              </ul>
+              <ul className="list-reset lg:flex lg:bg-pink-lighter lg:text-white rounded-sm overflow-hidden">
+                {populateProgressBar(registrationStage, handleProgressBarClick)}
+              </ul>
+              <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">
+                <div>
+                  <div className=" lg:w-full">
+                    {canRenderFormManager(registrationStage) && (
+                      <FormManager
+                        registrationStage={registrationStage + 1}
+                        loading={loading}
+                        loadingText={loadingText}
                         stateIncrementRegistrationStage={
                           stateIncrementRegistrationStage
                         }
+                        stateSetLoading={stateSetLoading}
+                      />
+                    )}
+                    {registrationStage > 3 ? (
+                      <PaymentManager
                         auth={auth}
+                        registrationStage={registrationStage}
+                        stateSetLoading={stateSetLoading}
+                        stateIncrementRegistrationStage={
+                          stateIncrementRegistrationStage
+                        }
                         user={user}
                       />
-                      {registrationStage === 5 &&
-                        (swal({
-                          text: `Please wait for the financial members to verify you.`,
-                          title: 'Paid',
-                          icon: 'success',
-                          button: 'ok',
-                          closeOnClickOutside: false,
-                        }).then(() => {
-                          history.push('/login')
-                          return null
-                        }),
-                        null)}
-                      {registrationStage > 5 ? (
-                        <AnnualDuePayment
-                          registrationStage={registrationStage}
-                          stateIncrementRegistrationStage={
-                            stateIncrementRegistrationStage
-                          }
-                          user={user}
-                          auth={auth}
-                        />
-                      ) : null}
-                      {registrationStage > 6 ? (
-                        <MembershipPayment
-                          registrationStage={registrationStage}
-                          stateIncrementRegistrationStage={
-                            stateIncrementRegistrationStage
-                          }
-                          user={user}
-                          auth={auth}
-                        />
-                      ) : null}
-                    </div>
-                  ) : null}
+                    ) : null}
+                  </div>
                 </div>
               </div>
+            </section>
+            <div className="align-align-middle mt-8 pt-8 text-xs text-grey">
+              Built and Powered by{' '}
+              <a href="https://karixchange.com" className="text-red-light">
+                karixchange
+              </a>
             </div>
-          </section>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -239,6 +228,9 @@ const mapStateToProps = ({ user, auth }) => ({
   user,
 })
 
-const glueTo = connect(mapStateToProps, null)
+const mapDispatchToProps = dispatch => ({
+  logOut: () => dispatch(logOut()),
+})
+const glueTo = connect(mapStateToProps, mapDispatchToProps)
 
 export default withRouter(glueTo(Signup))

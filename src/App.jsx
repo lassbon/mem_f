@@ -109,7 +109,7 @@ const App = () => {
         />
 
         <Route
-          path="/oldmember/login"
+          path="/oldmember/login/:memberId"
           exact
           render={props => (
             <General>

@@ -5,7 +5,9 @@ import { Link, withRouter } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
 import { ToastContainer, toast } from 'react-toastify'
+import { decode, encode } from 'base-64'
 
+console.log(encode('ABUCCI/MEM/000000'))
 //Components
 import Form from './components/Form'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
@@ -36,17 +38,17 @@ const goToSignupOrApp = (
 const minPasswordLength = 6
 
 const formInitialValues = {
-  email: '',
+  membershipId: '',
   password: '',
 }
 
 const validationFunctions = {
-  email: String.isEmailLike,
+  membershipId: id => !!id,
   password: password => String.length.gte(password, minPasswordLength),
 }
 
 const errorMessages = {
-  email: 'Please enter a valid email.',
+  membershipId: 'Please enter a valid email.',
   password: 'Please enter a password that is at least 6 characters.',
 }
 
@@ -62,7 +64,11 @@ class Login extends Component {
   stateSetLoading = attemptingLogin =>
     this.setState(state => ({ ...state, attemptingLogin }))
   render() {
-    const { attemptLogin, getUserDetails } = this.props
+    const {
+      attemptLogin,
+      getUserDetails,
+      match: { params: { memberId } },
+    } = this.props
     const { attemptingLogin } = this.state
     const { stateSetLoading } = this
     return (
@@ -88,9 +94,13 @@ class Login extends Component {
             <div className="lg:flex justify-between">
               <div className="lg:w-2/5 self-start">
                 <Formik
-                  initialValues={formInitialValues}
+                  initialValues={{
+                    ...formInitialValues,
+                    membershipId: decode(memberId),
+                  }}
                   onSubmit={values => {
                     stateSetLoading(true)
+                    const { history } = this.props
                     attemptLogin(values)
                       .then(() => {
                         const { auth: { user: { id }, token } } = this.props
@@ -98,7 +108,8 @@ class Login extends Component {
                       })
                       .then(data => {
                         const { history } = this.props
-                        goToSignupOrApp(history, data.payload)
+                        history.push('/oldmember/signup')
+                        // goToSignupOrApp(history, data.payload)
                         return Promise.resolve('')
                       })
                       .catch(error => {
@@ -134,9 +145,10 @@ class Login extends Component {
                               htmlFor=""
                               className="mb-4 text-xs text-grey"
                             >
-                              E-mail
+                              Membership ID
                             </label>
                             <input
+                              disabled
                               name="membershipId"
                               type="membershipId"
                               placeholder="Membership Id"

@@ -345,7 +345,7 @@ const FormManager = props => {
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
             .then(registrationSubmitCallbacks[registrationStage])
             .catch(err => {
-              // console.error('custom', err)
+              console.error('custom', err)
               toast.error(err.message)
             })
             .then(() => {
@@ -372,10 +372,17 @@ const mapDispatchToProps = dispatch => ({
   emailPasswordSubmit: params =>
     dispatch((dispatch, getState, { network }) =>
       requestHandler(network.user.registerUser)({ params })
-        .then(() => requestHandler(network.login)({ params }))
-        .then(loginResponseData =>
-          dispatch(receivedLoginAuthDetails(loginResponseData))
-        )
+        .then(() => requestHandler(network.login.login)({ params }))
+        .then(loginResponseData => {
+          return requestHandler(network.user.getUserDetails)({
+            id: loginResponseData.user.id,
+            token: loginResponseData.token,
+          }).then(userResponseData => {
+            dispatch(receivedUserDetails(userResponseData))
+            dispatch(receivedLoginAuthDetails(loginResponseData))
+            return Promise.resolve(loginResponseData)
+          })
+        })
     ),
   getUserDetails: (id, token) =>
     dispatch(async (dispatch, getState, { network }) => {

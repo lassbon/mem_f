@@ -1,4 +1,4 @@
-import login from './login'
+import * as login from './login'
 import * as user from './user'
 import * as social from './social'
 import * as general from './general'

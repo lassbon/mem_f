@@ -7,9 +7,14 @@ export const changeMainSection = ({ index: payload }) => ({
 
 // AUTH
 
-export const receivedLoginAuthDetails = obj => ({
+export const receivedLoginAuthDetails = auth => ({
   type: actions.RECEIVED_LOGIN_AUTH_DETAILS,
-  payload: obj,
+  payload: auth,
+})
+
+export const receivedOldMemberLoginAuthDetails = auth => ({
+  type: actions.RECEIVED_OLD_USER_LOGIN_DETAILS,
+  payload: auth,
 })
 
 export const logOut = () => ({

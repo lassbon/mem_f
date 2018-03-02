@@ -58,6 +58,7 @@ const CompanyDetailsForm = ({
             Company Name
           </label>
           <StyledInput
+            disabled
             name="companyName"
             type="text"
             placeholder="Company name"
@@ -109,6 +110,7 @@ const CompanyDetailsForm = ({
             Company's Business
           </label>
           <select
+            disabled
             name="companyBusiness"
             id="companyBusiness"
             className="w-full p-4 py-3 roboto text-base tracking-wide capitalize border border-grey-light border-solid rounded-sm"
@@ -133,7 +135,7 @@ const CompanyDetailsForm = ({
           />
         </fieldset>
       </div>
-      <div className="lg:w-1/2 lg:h-full ml-6">
+      <div className="hidden lg:w-1/2 lg:h-full ml-6">
         <span className="mb-4 text-xs text-grey-darker">Earnings and Size</span>
         <div className="p-4 bg-teal-lightest border border-grey-lighter border-solid">
           <fieldset className="mb-6">

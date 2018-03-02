@@ -13,6 +13,9 @@ export const user = {
   acceptFriendRequest: returnFullUrl('/api/v1/social/accept'),
   cancelFriendRequest: returnFullUrl('/api/v1/social/cancel'),
   removeFriend: returnFullUrl('/api/v1/social/remove'),
+  oldmember: {
+    login: returnFullUrl('/api/v1/auth/oldmember'),
+  },
 }
 
 export const social = {

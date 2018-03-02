@@ -38,7 +38,7 @@ const PostForm = ({ fetchPosts, id, token }) => (
         .then(console.log)
         .catch(error => console.error(error))
         .then(() => {
-          setFieldValue('submitingMessage', 'Upadting your timeline')
+          setFieldValue('submitingMessage', 'Updating your timeline')
           return fetchPosts(token)
         })
         .then(() => {

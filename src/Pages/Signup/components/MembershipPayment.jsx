@@ -15,16 +15,31 @@ import requestHandler from 'helpers/requestHandler'
 import prettifyMoney from 'helpers/prettifyMoney'
 
 const close = () => {}
-const callback = (history, stateIncrementRegistrationStage) => {
-  stateIncrementRegistrationStage()
-  return swal({
-    text: `Thank you for completing the registration process. Click 'ok' to continue`,
-    title: 'Welcome',
-    icon: 'success',
-    button: {
-      text: 'ok',
-    },
-  }).then(() => history.push('/app/timeline'))
+const callback = (
+  getUserDetails,
+  history,
+  stateIncrementRegistrationStage,
+  { id, token }
+) => {
+  requestHandler(network.user.updateUserDetails)({
+    id,
+    params: { regState: 8 },
+    token,
+  })
+    .then(() => getUserDetails(id, token))
+
+    .then(() => {
+      stateIncrementRegistrationStage()
+      return swal({
+        text: `Thank you for completing the registration process. Click 'ok' to continue`,
+        title: 'Welcome',
+        icon: 'success',
+        button: {
+          text: 'ok',
+        },
+      })
+    })
+    .then(() => history.push('/app/timeline'))
 }
 
 // Data
@@ -56,12 +71,13 @@ class MemberShipPayment extends Component {
       history,
       registrationStage,
       auth: { token },
+      getUserDetails,
       user: { email, id },
       stateIncrementRegistrationStage,
     } = this.props
     const { plan } = this.state
     return plan ? (
-      <div className={`${registrationStage > 6 ? 'opacity-50' : ''} mr-8`}>
+      <div className={`${registrationStage > 7 ? 'opacity-50' : ''} mr-8`}>
         <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
           <h4 className="hind uppercase text-xs font-normal text-grey-darker">
             Annual fee
@@ -80,10 +96,15 @@ class MemberShipPayment extends Component {
           </div>
         </div>
         <PaystackButton
-          disabled={registrationStage > 6 ? 'disabled' : 'false'}
-          text={registrationStage > 6 ? 'Paid' : 'Pay'}
+          disabled={registrationStage > 7 ? 'disabled' : 'false'}
+          text={registrationStage > 7 ? 'Paid' : 'Pay'}
           class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-grey-darkest hind"
-          callback={() => callback(history, stateIncrementRegistrationStage)}
+          callback={() =>
+            callback(getUserDetails, history, stateIncrementRegistrationStage, {
+              id,
+              token,
+            })
+          }
           close={close}
           reference={new Date().valueOf() + ''}
           email={email}

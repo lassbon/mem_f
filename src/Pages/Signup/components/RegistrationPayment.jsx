@@ -20,7 +20,7 @@ const callback = (
         id: params.id,
         params: { regState: 5 },
         token,
-      }).then(() => getUserDetails)
+      }).then(() => getUserDetails(params.id, token))
     )
     .catch(console.error)
 }
@@ -79,16 +79,4 @@ const RegistrationPayment = ({
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  getUserDetails: (id, token) =>
-    dispatch(async (dispatch, getState, { network }) => {
-      const response = await requestHandler(network.user.getUserDetails)({
-        id,
-        token,
-      })
-      return dispatch(receivedUserDetails(response))
-      // receivedUserDetails
-    }),
-})
-
-export default connect(null, mapDispatchToProps)(RegistrationPayment)
+export default RegistrationPayment

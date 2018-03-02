@@ -9,8 +9,8 @@ const validMember = ({
   if (regState < 8) return '/signup'
   if (!verified) return '/signup'
   if (!approved) return '/signup'
-  if (membershipDue !== 'paid') return '/signup'
-  if (membershipFee !== 'paid') return '/signup'
+  // if (membershipDue !== 'paid') return '/signup'
+  // if (membershipFee !== 'paid') return '/signup'
   return true
 }
 

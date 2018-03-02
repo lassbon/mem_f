@@ -109,10 +109,10 @@ class Login extends Component {
                         return Promise.resolve('')
                       })
                       .catch(error => {
-                        toast.error(
-                          error.message || 'An error occured. Please try again.'
-                        )
-                        // console.error(error.message)
+                        // toast.error(
+                        //   error.message || 'An error occured. Please try again.'
+                        // )
+                        console.error(error.message)
                         return Promise.resolve('')
                       })
                       .then(data => {
@@ -162,7 +162,7 @@ class Login extends Component {
                               htmlFor=""
                               className="mb-4 text-xs text-grey"
                             >
-                              Passwor
+                              Password
                             </label>
                             <input
                               name="password"
@@ -210,7 +210,7 @@ const mapStateToProps = ({ auth }) => ({ auth })
 const mapDispatchToProps = dispatch => ({
   attemptLogin: params =>
     dispatch(async (dispatch, getState, { network }) => {
-      const response = await network.login({ params })
+      const response = await network.login.login({ params })
       const [networkResponse, data] = await Promise.all([
         response,
         response.json(),

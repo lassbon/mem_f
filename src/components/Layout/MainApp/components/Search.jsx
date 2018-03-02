@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Formik } from 'formik'
 import requestHandler from 'helpers/requestHandler'
 import Autosuggest from 'react-autosuggest'
+import { ToastContainer, toast } from 'react-toastify'
+
 import './search.css'
 
 // Helper
@@ -11,6 +13,10 @@ import './search.css'
 import { receivedUsers, sentFriendRequest } from 'redux/action_creators'
 
 const onSuggestionSelected = () => 'selected'
+const toastOptions = {
+  position: toast.POSITION.TOP_CENTER,
+  autoClose: 3 * 60 * 60,
+}
 const onSuggestionsClearRequested = () => {}
 const getSuggestionValue = ({ companyName }) => companyName
 const renderSuggestion = (
@@ -111,6 +117,7 @@ class Search extends Component {
     return (
       reduxUsers && (
         <>
+          <ToastContainer {...toastOptions} />
           <form className="topbar-search flex items-center px-6 bg-grey-lighter text-grey-darker relative z-20">
             <span className="text-sm">
               <i className="ion-ios-search-strong" />

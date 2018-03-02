@@ -44,7 +44,22 @@ const callback = (
 
 // Data
 
-const metadata = {}
+const metadata = {
+  custom_fields: [
+    {
+      display_name: 'Membership ID',
+
+      variable_name: 'membership_id',
+
+      value: '2348012345678',
+    },
+    {
+      display_name: 'Membership ID',
+      variable_name: 'membership_id',
+      value: '2348012345678',
+    },
+  ],
+}
 const kobo = 100
 
 // Component!!!

@@ -140,7 +140,7 @@ class Timeline extends Component {
                       {companyName}
                     </p>
                     <p className="text-xs text-grey-darker">
-                      @1:25pm on the 23rd of Jan
+                      {moment().format('MMMM Do YYYY, h:mm:ss a')}
                     </p>
                   </div>
                   <PostForm />

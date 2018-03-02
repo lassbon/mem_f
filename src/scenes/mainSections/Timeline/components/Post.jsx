@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Comments from './Comments'
+import moment from 'moment'
 
 import requestHandler from 'helpers/requestHandler'
 import { likedPost } from 'redux/action_creators'
@@ -8,7 +9,7 @@ import { likedPost } from 'redux/action_creators'
 const Post = ({
   auth,
   likePost,
-  post: { comments, id, likes, postImage, postText },
+  post: { comments, createdAt, id, likes, postImage, postText },
   user,
 }) => {
   return !user ? null : (
@@ -23,7 +24,7 @@ const Post = ({
             <p className="mb-1 text-purple-light capitalize">
               {user.companyName}
             </p>
-            <p className=" text-grey-darker">@1:25pm on the 23rd of Jan</p>
+            <p className=" text-grey-darker">{moment(createdAt).fromNow()}</p>
           </div>
           {postImage ? (
             <div

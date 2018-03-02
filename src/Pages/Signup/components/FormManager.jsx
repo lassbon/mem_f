@@ -364,24 +364,23 @@ const FormManager = props => {
         key={registrationStage}
         initialValues={currenrFormInitialValues}
         onSubmit={values => {
-          console.log(values)
-          console.log(registrationStage)
+          // console.log(values)
+          // console.log(registrationStage)
           stateSetLoading(true)
           registrationFormsSubmitFuntions[registrationStage](values)
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
             .then(registrationSubmitCallbacks[registrationStage])
             .catch(err => {
-              console.error('custom', err)
-              toast.error(err.message)
+              // console.error('custom', err)
+              // toast.error(err.message)
             })
             .then(() => {
               stateSetLoading(false)
             })
         }}
-        validate={nameToValues => (
-          console.log(nameToValues),
+        validate={nameToValues =>
           validateInputs(nameToValues, validationFunctions, errorMessages)
-        )}
+        }
         render={props => (
           <CurrentForm {...props} loading={loading} loadingText={loadingText} />
         )}

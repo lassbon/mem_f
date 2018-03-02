@@ -8,15 +8,15 @@ const General = ({ children }) => (
     </aside>
     <main className="lg:w-4/5 lg:h-full flex justify-center items-center relative">
       <div className="absolute w-full pin-r pin-t mt-8 flex justify-center items-center">
-        <div className="w-3/4 flex justify-center">
-          <img src="/static/images/logo.png" alt="" className="w-48" />
+        <div className="w-3/4 flex justify-end">
+          <img src="/static/images/logo.png" alt="" className="w-64" />
         </div>
       </div>
 
       <div className="w-full mt-8 relative">
         {children}
         <div className="w-full flex justify-center pin-r pin-b align-middle mt-8 text-xs text-grey">
-          Built and Powered by{' '}
+          Designed and Powered by{' '}
           <a href="https://karixchange.com" className="ml-2 text-red-light">
             karixchange
           </a>

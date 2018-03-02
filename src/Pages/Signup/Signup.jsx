@@ -137,8 +137,8 @@ class Signup extends Component {
     return (
       <>
         <div className="absolute w-full pin-r pin-t mt-8 flex justify-center">
-          <div className="w-3/4 flex justify-center">
-            <img src="/static/images/logo.png" alt="" className="w-48" />
+          <div className="w-3/4 flex justify-end">
+            <img src="/static/images/logo.png" alt="" className="w-64" />
           </div>
         </div>
         <div
@@ -209,7 +209,7 @@ class Signup extends Component {
               </div>
             </section>
             <div className="align-align-middle mt-8 pt-8 text-xs text-grey">
-              Built and Powered by{' '}
+              Designed and Powered by{' '}
               <a href="https://karixchange.com" className="text-red-light">
                 karixchange
               </a>

@@ -203,8 +203,8 @@ class CompanyRepresentativesForm extends Component {
                   />
 
                   <div
-                    name="companyRepCVUrl"
-                    id="companyRepCVUrl"
+                    name="companyRepCVUrl1"
+                    id="companyRepCVUrl1"
                     className="flex items-center justify-between mb-4 bg-white shadow rounded overflow-hidden border border-dashed border-grey cursor-pointer relative"
                   >
                     <div className="flex items-center p-2">
@@ -223,7 +223,7 @@ class CompanyRepresentativesForm extends Component {
                         />
                       </i>
                       <label htmlFor="" className=" text-sm text-grey-darker">
-                        {values.companyRepCVUrl || `Rep's Curriculum Vitae`}
+                        {values.companyRepCVUrl1 || `Rep's Curriculum Vitae`}
                       </label>
                     </div>
 
@@ -234,8 +234,8 @@ class CompanyRepresentativesForm extends Component {
                       <i className="ion-ios-cloud-upload-outline" />
                     </button>
                     <input
-                      name="companyRepCVUrl"
-                      id="companyRepCVUrl"
+                      name="companyRepCVUrl1"
+                      id="companyRepCVUrl1"
                       onChange={e => {
                         let reader = new FileReader()
                         let file = e.target.files[0]

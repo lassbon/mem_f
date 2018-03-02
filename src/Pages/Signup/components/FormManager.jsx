@@ -63,14 +63,14 @@ const emailPasswordErrorMessages = {
 }
 
 const emailPasswordSubmitCallback = responseData => {
-  return swal({
-    content: emailSubmitPopupContent,
-    title: 'Registered',
-    icon: 'success',
-    button: {
-      text: 'ok',
-    },
-  })
+  // return swal({
+  //   content: emailSubmitPopupContent,
+  //   title: 'Registered',
+  //   icon: 'success',
+  //   button: {
+  //     text: 'ok',
+  //   },
+  // })
 }
 
 // Company details form stuff
@@ -141,7 +141,7 @@ const companyRepresentativesFormInitialValues = {
   companyRepEmail1: '',
   companyRepPhone1: '',
   companyRepPassportUrl1: '',
-  companyRepCVUrl: '',
+  companyRepCVUrl1: '',
   companyCOIUrl: '',
 
   companyRepPassportUrl1File: '',
@@ -164,7 +164,7 @@ const companyRepresentativesFormValidationFunctions = {
   companyRepEmail1: String.isEmailLike,
   companyRepPhone1: validatePhoneNumer,
   companyRepPassportUrl1: makeBool,
-  companyRepCVUrl: makeBool,
+  companyRepCVUrl1: makeBool,
   companyCOIUrl: makeBool,
   companyRepName2: null,
   companyRepPhone2: null,
@@ -178,7 +178,7 @@ const companyRepresentativesErrorMessages = {
   companyRepEmail1: 'Please enter a valid email address',
   companyRepPhone1: 'Please enter a valid 11 digit phone number',
   companyRepPassportUrl1: `Please upload the representative's passport photograph`,
-  companyRepCVUrl: `Please upload the representative's curriculum vitae`,
+  companyRepCVUrl1: `Please upload the representative's curriculum vitae`,
   companyCOIUrl: `Please upload you companys CAC`,
   companyRepName2: null,
   companyRepPhone2: null,
@@ -191,7 +191,7 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
     ...data,
     companyRepPassportUrl1: data.companyRepPassportUrl1File,
-    companyRepCVUrl: data.companyRepCVUrlFile,
+    companyRepCVUrl1: data.companyRepCVUrlFile,
     companyCOIUrl: data.companyCOIUrlFile,
     companyRepPassportUrl2: data.companyRepPassportUrl2File,
     companyRepCVUrl2: data.companyRepCVUrl2File,

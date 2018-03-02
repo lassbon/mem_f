@@ -28,20 +28,6 @@ const close = () => {}
 
 // Data
 
-const metadata = {
-  custom_fields: [
-    {
-      display_name: 'Payment For',
-      variable_name: 'registration',
-      value: 'registration',
-    },
-    {
-      display_name: 'Membership ID',
-      variable_name: 'membership_id',
-      value: '2348012345678',
-    },
-  ],
-}
 const amount = 5000 * 100
 
 // Component!!!
@@ -53,6 +39,20 @@ const RegistrationPayment = ({
   user: { email, id },
   stateIncrementRegistrationStage,
 }) => {
+  const metadata = {
+    custom_fields: [
+      {
+        display_name: 'Payment For',
+        variable_name: 'registration',
+        value: 'registration',
+      },
+      {
+        display_name: 'Membership ID',
+        variable_name: 'membership_id',
+        value: id,
+      },
+    ],
+  }
   return (
     <div className={`${registrationStage > 4 ? 'opacity-50' : ''} mr-8`}>
       <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">

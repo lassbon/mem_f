@@ -44,22 +44,6 @@ const callback = (
 
 // Data
 
-const metadata = {
-  custom_fields: [
-    {
-      display_name: 'Membership ID',
-
-      variable_name: 'membership_id',
-
-      value: '2348012345678',
-    },
-    {
-      display_name: 'Membership ID',
-      variable_name: 'membership_id',
-      value: '2348012345678',
-    },
-  ],
-}
 const kobo = 100
 
 // Component!!!
@@ -91,6 +75,24 @@ class MemberShipPayment extends Component {
       stateIncrementRegistrationStage,
     } = this.props
     const { plan } = this.state
+    const metadata = {
+      custom_fields: [
+        {
+          display_name: 'Payment For',
+
+          variable_name: 'membership',
+
+          value: 'membership',
+        },
+        {
+          display_name: 'Membership ID',
+
+          variable_name: 'membership_id',
+
+          value: id,
+        },
+      ],
+    }
     return plan ? (
       <div className={`${registrationStage > 7 ? 'opacity-50' : ''} mr-8`}>
         <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">

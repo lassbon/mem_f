@@ -109,7 +109,7 @@ class MemberShipPayment extends Component {
           reference={new Date().valueOf() + ''}
           email={email}
           amount={plan.fee * kobo}
-          paystackkey="pk_test_29cf8e5e061acc51789cea04daaf4ca60acc6b80"
+          paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
           metadata={metadata}
           // plan={}
         />

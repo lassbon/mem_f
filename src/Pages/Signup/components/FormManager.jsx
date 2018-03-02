@@ -137,40 +137,66 @@ const membershipCategorySubmitCallback = () => {}
 // Company representatives form stuff
 
 const companyRepresentativesFormInitialValues = {
-  representativeName1: '',
-  representativeEmail1: '',
-  representativePhone1: '',
-  representativePassport: '',
-  representativeCV: '',
-  CAC: '',
+  companyRepName1: '',
+  companyRepEmail1: '',
+  companyRepPhone1: '',
+  companyRepPassportUrl1: '',
+  companyRepCVUrl: '',
+  companyCOIUrl: '',
+
+  companyRepPassportUrl1File: '',
+  companyRepCVUrlFile: '',
+  companyCOIUrlFile: '',
+
+  companyRepName2: '',
+  companyRepPhone2: '',
+  companyRepEmail2: '',
+  companyRepPassportUrl2: '',
+  companyRepCVUrl2: '',
+
+  companyRepPassportUrl2File: '',
+  companyRepCVUrl2File: '',
   regState: 3,
 }
 
 const companyRepresentativesFormValidationFunctions = {
-  representativeName1: notEmptyOrNumber,
-  representativeEmail1: String.isEmailLike,
-  representativePhone1: validatePhoneNumer,
-  representativePassport: makeBool,
-  representativeCV: makeBool,
-  CAC: makeBool,
+  companyRepName1: notEmptyOrNumber,
+  companyRepEmail1: String.isEmailLike,
+  companyRepPhone1: validatePhoneNumer,
+  companyRepPassportUrl1: makeBool,
+  companyRepCVUrl: makeBool,
+  companyCOIUrl: makeBool,
+  companyRepName2: null,
+  companyRepPhone2: null,
+  companyRepEmail2: null,
+  companyRepPassportUrl2: null,
+  companyRepCVUrl2: null,
 }
 
 const companyRepresentativesErrorMessages = {
-  representativeName1: 'Please enter a full name',
-  representativeEmail1: 'Please enter a valid email address',
-  representativePhone1: 'Please enter a valid 11 digit phone number',
-  representativePassport: `Please upload the representative's passport photograph`,
-  representativeCV: `Please upload the representative's curriculum vitae`,
-  CAC: `Please upload you companys CAC`,
+  companyRepName1: 'Please enter a full name',
+  companyRepEmail1: 'Please enter a valid email address',
+  companyRepPhone1: 'Please enter a valid 11 digit phone number',
+  companyRepPassportUrl1: `Please upload the representative's passport photograph`,
+  companyRepCVUrl: `Please upload the representative's curriculum vitae`,
+  companyCOIUrl: `Please upload you companys CAC`,
+  companyRepName2: null,
+  companyRepPhone2: null,
+  companyRepEmail2: null,
+  companyRepPassportUrl2: null,
+  companyRepCVUrl2: null,
 }
 
 const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
-    representativeName1: data.representativeName1,
-    representativeEmail1: data.representativeEmail1,
-    representativePhone1: data.representativePhone1,
-    regState: data.regState,
+    ...data,
+    companyRepPassportUrl1: data.companyRepPassportUrl1File,
+    companyRepCVUrl: data.companyRepCVUrlFile,
+    companyCOIUrl: data.companyCOIUrlFile,
+    companyRepPassportUrl2: data.companyRepPassportUrl2File,
+    companyRepCVUrl2: data.companyRepCVUrl2File,
   }
+  // const params = data
   return requestHandler(network.user.updateUserDetails)({ id, params, token })
 }
 
@@ -352,9 +378,10 @@ const FormManager = props => {
               stateSetLoading(false)
             })
         }}
-        validate={nameToValues =>
+        validate={nameToValues => (
+          console.log(nameToValues),
           validateInputs(nameToValues, validationFunctions, errorMessages)
-        }
+        )}
         render={props => (
           <CurrentForm {...props} loading={loading} loadingText={loadingText} />
         )}

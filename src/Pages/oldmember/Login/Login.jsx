@@ -7,7 +7,7 @@ import { String } from 'valib'
 import { ToastContainer, toast } from 'react-toastify'
 import { decode, encode } from 'base-64'
 
-console.log(encode('ABUCCI/MEM/000000'))
+console.log(encode('ABUCCI/MEM/000056'))
 //Components
 import Form from './components/Form'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
@@ -15,9 +15,10 @@ import InputError from 'form/InputError'
 
 //helpers
 import {
-  receivedLoginAuthDetails,
+  receivedOldMemberLoginAuthDetails,
   receivedUserDetails,
 } from 'redux/action_creators'
+import requestHandler from 'helpers/requestHandler'
 
 const registrationLength = 7
 const goToSignupOrApp = (
@@ -113,10 +114,10 @@ class Login extends Component {
                         return Promise.resolve('')
                       })
                       .catch(error => {
-                        toast.error(
-                          error.message || 'An error occured. Please try again.'
-                        )
-                        // console.error(error.message)
+                        // toast.error(
+                        //   error.message || 'An error occured. Please try again.'
+                        // )
+                        console.error(error.message)
                         return Promise.resolve('')
                       })
                       .then(data => {
@@ -215,13 +216,11 @@ const mapStateToProps = ({ auth }) => ({ auth })
 const mapDispatchToProps = dispatch => ({
   attemptLogin: params =>
     dispatch(async (dispatch, getState, { network }) => {
-      const response = await network.login({ params })
-      const [networkResponse, data] = await Promise.all([
-        response,
-        response.json(),
-      ])
-      if (!networkResponse.ok) throw new Error(data.err)
-      return dispatch(receivedLoginAuthDetails(data))
+      const response = await requestHandler(network.login.oldUserLogin)({
+        params,
+      })
+      dispatch(receivedOldMemberLoginAuthDetails(response))
+      return Promise.resolve(response)
     }),
   getUserDetails: (id, token) =>
     dispatch(async (dispatch, getState, { network }) => {

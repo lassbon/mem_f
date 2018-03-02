@@ -1,6 +1,7 @@
 // Vendors
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
 import InputError from 'components/form/InputError'
@@ -34,57 +35,7 @@ const toastOptions = {
   autoClose: 3 * 60 * 60,
 }
 
-const emailSubmitPopupContent = document.createElement('div')
-emailSubmitPopupContent.setAttribute(
-  'class',
-  'text-sm text-grey-darker text-left'
-)
-emailSubmitPopupContent.innerHTML = `\nYou have been successfully registered. \n\n Please complete the registration steps that follow to become an approved member of ACCI. <div className='mt-3 text-xs text-grey'> You can stop the process at anytime. Login anytime to continue.</div>`
-
-// Email and Password Form stuff
-
-const emailPasswordFormInitialValues = {
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
-
-const emailPasswordValidationFunctions = {
-  email: String.isEmailLike,
-  password: password => String.length.gte(password, minPasswordLength),
-  confirmPassword: (confirmPassword, { password }) =>
-    confirmPassword === password,
-}
-
-const emailPasswordErrorMessages = {
-  email: 'Please enter a valid email.',
-  password: 'Please enter a password that is at least 6 characters.',
-  confirmPassword: 'Passwords must match',
-}
-
-const emailPasswordSubmitCallback = responseData => {
-  return swal({
-    content: emailSubmitPopupContent,
-    title: 'Registered',
-    icon: 'success',
-    button: {
-      text: 'ok',
-    },
-  })
-}
-
 // Company details form stuff
-
-const CompanyDetailsFormInitialValues = {
-  companyName: '',
-  companyAddress: '',
-  companyPhone: '',
-  companyBusiness: '',
-  employees: '',
-  annualReturn: '',
-  annualProfit: '',
-  regState: 1,
-}
 
 const companyDetailsValidationFunctions = {
   companyName: notEmptyOrNumber,
@@ -113,155 +64,82 @@ const companyDetailsSubmit = (params, { id, token }) => {
 const companyDetailsSubmitCallback = companyDetailsResponse =>
   toast.success('Details')
 
-// Membership category stuff
-
-const membershipCategoryFormInitialValues = {
-  membershipPlan: '',
-  regState: 2,
-}
-
-const membershipCategoryValidationFunctions = {
-  membershipPlan: notEmptyOrNumber,
-}
-
-const membershipCategoryErrorMessages = {
-  membershipPlan: 'Please select a category',
-}
-
-const membershipCategorySubmit = (params, { id, token }) => {
-  return requestHandler(network.user.updateUserDetails)({ id, params, token })
-}
-
-const membershipCategorySubmitCallback = () => {}
-
 // Company representatives form stuff
 
 const companyRepresentativesFormInitialValues = {
-  representativeName1: '',
-  representativeEmail1: '',
-  representativePhone1: '',
-  representativePassport: '',
-  representativeCV: '',
-  CAC: '',
-  regState: 3,
+  companyRepName1: '',
+  companyRepEmail1: '',
+  companyRepPhone1: '',
+  companyRepPassportUrl1: '',
+  companyRepCVUrl: '',
+  companyCOIUrl: '',
+
+  companyRepPassportUrl1File: '',
+  companyRepCVUrlFile: '',
+  companyCOIUrlFile: '',
+
+  companyRepName2: '',
+  companyRepPhone2: '',
+  companyRepEmail2: '',
+  companyRepPassportUrl2: '',
+  companyRepCVUrl2: '',
+
+  companyRepPassportUrl2File: '',
+  companyRepCVUrl2File: '',
+  regState: 8,
 }
 
 const companyRepresentativesFormValidationFunctions = {
-  representativeName1: notEmptyOrNumber,
-  representativeEmail1: String.isEmailLike,
-  representativePhone1: validatePhoneNumer,
-  representativePassport: makeBool,
-  representativeCV: makeBool,
-  CAC: makeBool,
+  companyRepName1: notEmptyOrNumber,
+  companyRepEmail1: String.isEmailLike,
+  companyRepPhone1: validatePhoneNumer,
+  companyRepPassportUrl1: makeBool,
+  companyRepCVUrl: makeBool,
+  companyCOIUrl: makeBool,
+  companyRepName2: null,
+  companyRepPhone2: null,
+  companyRepEmail2: null,
+  companyRepPassportUrl2: null,
+  companyRepCVUrl2: null,
 }
 
 const companyRepresentativesErrorMessages = {
-  representativeName1: 'Please enter a full name',
-  representativeEmail1: 'Please enter a valid email address',
-  representativePhone1: 'Please enter a valid 11 digit phone number',
-  representativePassport: `Please upload the representative's passport photograph`,
-  representativeCV: `Please upload the representative's curriculum vitae`,
-  CAC: `Please upload you companys CAC`,
+  companyRepName1: 'Please enter a full name',
+  companyRepEmail1: 'Please enter a valid email address',
+  companyRepPhone1: 'Please enter a valid 11 digit phone number',
+  companyRepPassportUrl1: `Please upload the representative's passport photograph`,
+  companyRepCVUrl: `Please upload the representative's curriculum vitae`,
+  companyCOIUrl: `Please upload you companys CAC`,
+  companyRepName2: null,
+  companyRepPhone2: null,
+  companyRepEmail2: null,
+  companyRepPassportUrl2: null,
+  companyRepCVUrl2: null,
 }
 
 const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
-    representativeName1: data.representativeName1,
-    representativeEmail1: data.representativeEmail1,
-    representativePhone1: data.representativePhone1,
-    regState: data.regState,
+    ...data,
+    companyRepPassportUrl1: data.companyRepPassportUrl1File,
+    companyRepCVUrl: data.companyRepCVUrlFile,
+    companyCOIUrl: data.companyCOIUrlFile,
+    companyRepPassportUrl2: data.companyRepPassportUrl2File,
+    companyRepCVUrl2: data.companyRepCVUrl2File,
   }
+  // const params = data
   return requestHandler(network.user.updateUserDetails)({ id, params, token })
-}
-
-// Financial members form stuff
-
-const financialMembersFormInitialValues = {
-  financialMemberId1: '',
-  referee1: '',
-  financialMemberId2: '',
-  referee2: '',
-  regState: 4,
-}
-
-const financialMembersFormValidationFunctions = {
-  financialMemberId1: notEmptyOrNumber,
-  referee1: String.isEmailLike,
-  financialMemberId2: notEmptyOrNumber,
-  referee2: String.isEmailLike,
-}
-
-const financialMembersErrorMessages = {
-  financialMemberId1: `Please enter a financial member's ID`,
-  referee1: 'Please enter a valid email address',
-  financialMemberId2: `Please enter a financial member's ID`,
-  referee2: 'Please enter a valid email address',
-}
-
-const financialMembersSubmit = (params, { token, id }) => {
-  return Promise.all([
-    requestHandler(network.general.validateReferee)({
-      params: {
-        email: params.referee1,
-      },
-      token,
-    }),
-    requestHandler(network.general.validateReferee)({
-      params: {
-        email: params.referee2,
-      },
-      token,
-    }),
-  ])
-    .then(arr => {
-      const error = arr.some(({ status }) => status === 'error')
-      if (error) {
-        throw new Error(error)
-        return
-      }
-      return Promise.resolve(arr)
-    })
-    .then(() => {
-      return requestHandler(network.user.updateUserDetails)({
-        id,
-        params,
-        token,
-      })
-    })
 }
 
 // Registration process
 
-const registrationForms = [
-  EmailPasswordForm,
-  CompanyDetailsForm,
-  MembershipCategory,
-  CompanyRepresentativesForm,
-  FinancialMembersForm,
-]
-
-const registrationFormsInitialValues = [
-  emailPasswordFormInitialValues,
-  CompanyDetailsFormInitialValues,
-  membershipCategoryFormInitialValues,
-  companyRepresentativesFormInitialValues,
-  financialMembersFormInitialValues,
-]
-
 const registrationFormValidationFunctions = [
-  emailPasswordValidationFunctions,
   companyDetailsValidationFunctions,
-  membershipCategoryValidationFunctions,
   companyRepresentativesFormValidationFunctions,
-  financialMembersFormValidationFunctions,
 ]
 
 const registrationFormsErrorMessages = [
-  emailPasswordErrorMessages,
   companyDetailsErrorMessages,
-  membershipCategoryErrorMessages,
   companyRepresentativesErrorMessages,
-  financialMembersErrorMessages,
 ]
 
 // Registration helper functions
@@ -288,24 +166,32 @@ const FormManager = props => {
     emailPasswordSubmit,
     auth,
     getUserDetails,
+    user: { companyName, companyAddress, companyPhone, companyBusiness },
   } = props
+  const CompanyDetailsFormInitialValues = {
+    companyName,
+    companyAddress,
+    companyPhone,
+    companyBusiness,
+    regState: 1,
+  }
+  const registrationFormsInitialValues = [
+    CompanyDetailsFormInitialValues,
+    companyRepresentativesFormInitialValues,
+  ]
+  const registrationForms = [CompanyDetailsForm, CompanyRepresentativesForm]
+
   const CurrentForm = registrationForms[registrationStage]
   const currenrFormInitialValues =
     registrationFormsInitialValues[registrationStage]
   const validationFunctions =
     registrationFormValidationFunctions[registrationStage]
   const errorMessages = registrationFormsErrorMessages[registrationStage]
+
   const registrationFormsSubmitFuntions = [
-    emailPasswordSubmit,
     params => {
       const { user: { id }, token } = auth
       return companyDetailsSubmit(params, { id, token }).then(() => {
-        return getUserDetails(id, token)
-      })
-    },
-    params => {
-      const { user: { id }, token } = auth
-      return membershipCategorySubmit(params, { id, token }).then(() => {
         return getUserDetails(id, token)
       })
     },
@@ -315,21 +201,8 @@ const FormManager = props => {
         return getUserDetails(id, token)
       })
     },
-    params => {
-      const { user: { id }, token } = auth
-      return financialMembersSubmit(params, { id, token }).then(() => {
-        return getUserDetails(id, token)
-      })
-    },
-    financialMembersSubmit,
   ]
-  const registrationSubmitCallbacks = [
-    emailPasswordSubmitCallback,
-    () => {},
-    () => {},
-    () => {},
-    () => {},
-  ]
+  const registrationSubmitCallbacks = [() => {}, () => {}, () => {}, () => {}]
 
   return (
     <>
@@ -349,12 +222,18 @@ const FormManager = props => {
               toast.error(err.message)
             })
             .then(() => {
+              const { history, user: { regState } } = this.props
+
+              if (Number(regState) === 8) history.push('/login')
+
               stateSetLoading(false)
+              console.log()
             })
         }}
-        validate={nameToValues =>
+        validate={nameToValues => (
+          console.log(nameToValues),
           validateInputs(nameToValues, validationFunctions, errorMessages)
-        }
+        )}
         render={props => (
           <CurrentForm {...props} loading={loading} loadingText={loadingText} />
         )}
@@ -390,4 +269,4 @@ const mapDispatchToProps = dispatch => ({
 
 const glueTo = connect(mapStateToProps, mapDispatchToProps)
 
-export default glueTo(FormManager)
+export default withRouter(glueTo(FormManager))

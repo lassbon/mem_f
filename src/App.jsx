@@ -120,11 +120,7 @@ const App = () => {
         <Route
           path="/oldmember/signup"
           exact
-          render={props => (
-            <General>
-              <OldmemberSignup {...props} />
-            </General>
-          )}
+          render={props => <OldmemberSignup {...props} />}
         />
         <Route
           exact

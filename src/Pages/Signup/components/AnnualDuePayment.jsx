@@ -32,6 +32,7 @@ const close = () => {}
 
 const metadata = {}
 const kobo = 100
+// pk_test_29cf8e5e061acc51789cea04daaf4ca60acc6b80
 
 // Component!!!
 
@@ -61,45 +62,50 @@ class AnnualDuePayment extends Component {
       stateIncrementRegistrationStage,
     } = this.props
     const { plan } = this.state
+
     return plan ? (
-      <div className={`${registrationStage > 6 ? 'opacity-50' : ''} mr-8`}>
-        <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
-          <h4 className="hind uppercase text-xs font-normal text-grey-darker">
-            Annual fee
-          </h4>
+      (console.log(plan.paystack.data.plan_code),
+      (
+        <div className={`${registrationStage > 6 ? 'opacity-50' : ''} mr-8`}>
+          <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
+            <h4 className="hind uppercase text-xs font-normal text-grey-darker">
+              Annual fee
+            </h4>
 
-          <div className="">
-            <b className="text-4xl py-4 font-bold text-pink-dark">
-              N{prettifyMoney(plan.due)}
-            </b>
-          </div>
+            <div className="">
+              <b className="text-4xl py-4 font-bold text-pink-dark">
+                N{prettifyMoney(plan.due)}
+              </b>
+            </div>
 
-          <div className="mb-8 font-semibold text-grey-darker">
-            <span className="mt-4 text-grey font-normal">To cover</span>
-            <hr />
-            cost your annual membership fee
+            <div className="mb-8 font-semibold text-grey-darker">
+              <span className="mt-4 text-grey font-normal">To cover</span>
+              <hr />
+              cost your annual membership fee
+            </div>
           </div>
+          <PaystackButton
+            disabled={registrationStage > 6 ? 'disabled' : 'false'}
+            text={registrationStage > 6 ? 'Paid' : 'Pay'}
+            class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-grey-darkest hind"
+            callback={() =>
+              callback(
+                { id, params: { regState: 7 }, token },
+                stateIncrementRegistrationStage,
+                getUserDetails
+              )
+            }
+            close={close}
+            reference={new Date().valueOf() + ''}
+            email={email}
+            amount={plan.due * kobo}
+            paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
+            plan={plan.paystack.data.plan_code}
+            metadata={metadata}
+            // plan={}
+          />
         </div>
-        <PaystackButton
-          disabled={registrationStage > 6 ? 'disabled' : 'false'}
-          text={registrationStage > 6 ? 'Paid' : 'Pay'}
-          class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-grey-darkest hind"
-          callback={() =>
-            callback(
-              { id, params: { regState: 7 }, token },
-              stateIncrementRegistrationStage,
-              getUserDetails
-            )
-          }
-          close={close}
-          reference={new Date().valueOf() + ''}
-          email={email}
-          amount={plan.due * kobo}
-          paystackkey="pk_test_29cf8e5e061acc51789cea04daaf4ca60acc6b80"
-          metadata={metadata}
-          // plan={}
-        />
-      </div>
+      ))
     ) : (
       <div className="flex justify-center py-6">
         <Circle text="Retrieving membership plan details. Please wait" />

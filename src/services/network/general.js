@@ -24,9 +24,9 @@ export const alertReferee = ({ params, token }) =>
     method: 'POST',
   })
 
-export const upload = ({ form, token }) =>
+export const upload = ({ form: body, token }) =>
   fetch(endpoints.general.upload, {
-    body: JSON.stringify(form),
+    body,
     headers: authPostRequestHeaders(token),
     method: 'POST',
   })

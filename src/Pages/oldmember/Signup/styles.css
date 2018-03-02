@@ -2,6 +2,10 @@
   min-height: 100vh;
 }
 
+.signup-box {
+  max-height: 70vh;
+}
+
 .signup-box::after,
 .signup-box::before {
   content: '';

@@ -117,6 +117,7 @@ const CompanyDetailsForm = ({
             onChange={handleChange}
             onBlur={handleBlur}
             defaultValue=""
+            value={values.companyBusiness}
           >
             {[
               <option key="placeholder" value="" disabled>

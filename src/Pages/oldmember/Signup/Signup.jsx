@@ -83,7 +83,7 @@ const canRenderFormManager = registrationStage => registrationStage < noOfForms
 
 class Signup extends Component {
   state = {
-    registrationStage: 0,
+    registrationStage: this.props.user.regState,
     loading: false,
   }
   stateIncrementRegistrationStage = () =>
@@ -148,12 +148,15 @@ class Signup extends Component {
             <ul className="list-reset lg:flex lg:bg-pink-lighter lg:text-white rounded-sm overflow-hidden">
               {populateProgressBar(registrationStage, handleProgressBarClick)}
             </ul>
-            <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">
+            <div
+              ref={el => el && simpleScrollbar.initEl(el)}
+              className="signup-box lg:overflow-y-scroll lg:p-12 lg:lt-shadow lg:bg-white relative"
+            >
               <div>
                 <div className=" lg:w-full">
                   {canRenderFormManager(registrationStage) && (
                     <FormManager
-                      registrationStage={registrationStage + 1}
+                      registrationStage={registrationStage}
                       loading={loading}
                       loadingText={loadingText}
                       stateIncrementRegistrationStage={

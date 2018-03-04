@@ -183,7 +183,7 @@ class CompanyRepresentativesForm extends Component {
                         let reader = new FileReader()
                         let file = e.target.files[0]
                         if (file.size > 500000) {
-                          toast('Image size too large.')
+                          toast('Image size is greater than 500kb.')
                           return 
                         }
 
@@ -247,7 +247,7 @@ class CompanyRepresentativesForm extends Component {
                         let reader = new FileReader()
                         let file = e.target.files[0]
                         if (file.size > 500000) {
-                          toast('Document size too large.')
+                          toast('Document size is greater than 500kb.')
                           return 
                         }
 
@@ -311,7 +311,7 @@ class CompanyRepresentativesForm extends Component {
                         let reader = new FileReader()
                         let file = e.target.files[0]
                         if (file.size > 500000) {
-                          toast('Document size too large.')
+                          toast('Document size is greater than 500kb.')
                           return 
                         }
 
@@ -430,7 +430,7 @@ class CompanyRepresentativesForm extends Component {
                           let reader = new FileReader()
                           let file = e.target.files[0]
                           if (file.size > 500000) {
-                          toast('Image size too large.')
+                          toast('Image size is greater than 500kb.')
                           return 
                         }
 
@@ -492,7 +492,7 @@ class CompanyRepresentativesForm extends Component {
                           let reader = new FileReader()
                           let file = e.target.files[0]
                           if (file.size > 500000) {
-                          toast('Document size too large.')
+                          toast('Document size is greater than 500kb.')
                           return 
                         }
 

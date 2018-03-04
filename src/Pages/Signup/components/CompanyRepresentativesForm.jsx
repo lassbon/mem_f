@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { toast } from 'react-toastify'
+
 import InputError from 'components/form/InputError'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
 import StyledInput from 'components/form/StyledInput'
@@ -180,6 +182,10 @@ class CompanyRepresentativesForm extends Component {
                       onChange={e => {
                         let reader = new FileReader()
                         let file = e.target.files[0]
+                        if (file.size > 500000) {
+                          toast('Image size too large.')
+                          return 
+                        }
 
                         reader.onloadend = () => {
                           setFieldValue(
@@ -189,7 +195,8 @@ class CompanyRepresentativesForm extends Component {
                         }
                         reader.readAsDataURL(file)
 
-                        handleChange(e)
+                        // handleChange(e)
+                        setFieldValue('companyRepPassportUrl1', file.name)
                       }}
                       onBlur={handleBlur}
                       type="file"
@@ -239,13 +246,19 @@ class CompanyRepresentativesForm extends Component {
                       onChange={e => {
                         let reader = new FileReader()
                         let file = e.target.files[0]
+                        if (file.size > 500000) {
+                          toast('Document size too large.')
+                          return 
+                        }
 
                         reader.onloadend = () => {
                           setFieldValue('companyRepCVUrlFile', reader.result)
                         }
                         reader.readAsDataURL(file)
 
-                        handleChange(e)
+                        // handleChange(e)
+                        setFieldValue('companyRepCVUrl1', file.name)
+
                       }}
                       onBlur={handleBlur}
                       type="file"
@@ -292,15 +305,22 @@ class CompanyRepresentativesForm extends Component {
                       name="companyCOIUrl"
                       id="companyCOIUrl"
                       onChange={e => {
-                        handleChange(e)
+                        
+                        // handleChange(e)
 
                         let reader = new FileReader()
                         let file = e.target.files[0]
+                        if (file.size > 500000) {
+                          toast('Document size too large.')
+                          return 
+                        }
 
                         reader.onloadend = () => {
                           setFieldValue('companyCOIUrlFile', reader.result)
                         }
                         reader.readAsDataURL(file)
+                        setFieldValue('companyCOIUrl', file.name)
+
                       }}
                       onBlur={handleBlur}
                       type="file"
@@ -405,10 +425,14 @@ class CompanyRepresentativesForm extends Component {
                         name="companyRepPassportUrl2"
                         id="companyRepPassportUrl2"
                         onChange={e => {
-                          handleChange(e)
+                          // handleChange(e)
 
                           let reader = new FileReader()
                           let file = e.target.files[0]
+                          if (file.size > 500000) {
+                          toast('Image size too large.')
+                          return 
+                        }
 
                           reader.onloadend = () => {
                             setFieldValue(
@@ -417,6 +441,7 @@ class CompanyRepresentativesForm extends Component {
                             )
                           }
                           reader.readAsDataURL(file)
+                          setFieldValue('companyRepPassportUrl2', file.name)
                         }}
                         type="file"
                         className="absolute pin-t pin-l w-full h-full opacity-0"
@@ -462,15 +487,21 @@ class CompanyRepresentativesForm extends Component {
                         name="companyRepCVUrl2"
                         id="companyRepCVUrl2"
                         onChange={e => {
-                          handleChange(e)
+                          // handleChange(e)
 
                           let reader = new FileReader()
                           let file = e.target.files[0]
+                          if (file.size > 500000) {
+                          toast('Document size too large.')
+                          return 
+                        }
 
                           reader.onloadend = () => {
                             setFieldValue('companyRepCVUrl2File', reader.result)
                           }
                           reader.readAsDataURL(file)
+                          setFieldValue('companyRepCVUrl2', file.name)
+
                         }}
                         type="file"
                         className="absolute pin-t pin-l w-full h-full opacity-0"

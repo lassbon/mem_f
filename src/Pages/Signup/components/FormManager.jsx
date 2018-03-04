@@ -372,7 +372,7 @@ const FormManager = props => {
             .then(registrationSubmitCallbacks[registrationStage])
             .catch(err => {
               // console.error('custom', err)
-              // toast.error(err.message)
+              toast.error(err.message)
             })
             .then(() => {
               stateSetLoading(false)

@@ -104,7 +104,7 @@ class MemberShipPayment extends Component {
       <div className={`${registrationStage > 7 ? 'opacity-50' : ''} mr-8`}>
         <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
           <h4 className="hind uppercase text-xs font-normal text-grey-darker">
-            Annual fee
+            Membership fee
           </h4>
 
           <div className="">

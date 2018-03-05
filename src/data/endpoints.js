@@ -41,4 +41,5 @@ export const events = {
 
 export const payment = {
   membership: returnFullUrl('/api/v1/userpayments/memberships'),
+  unsubscribeDue: returnFullUrl('/api/v1/unsubscribe')
 }

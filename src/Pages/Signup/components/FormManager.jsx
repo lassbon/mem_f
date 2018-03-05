@@ -189,7 +189,12 @@ const companyRepresentativesErrorMessages = {
 
 const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
-    ...data,
+    companyRepName1: data.companyRepName1,
+    companyRepEmail1: data.companyRepEmail1,
+    companyRepPhone1: data.companyRepPhone1,
+    companyRepName2: data.companyRepName2,
+    companyRepPhone2: data.companyRepPhone2,
+    companyRepEmail2: data.companyRepEmail2
   }
 
   const fileParams = {

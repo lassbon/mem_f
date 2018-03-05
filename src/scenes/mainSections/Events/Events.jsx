@@ -43,7 +43,12 @@ const Events = ({
                 user={user}
               />
             ))}
+          </ul>
+        )}
 
+        <section className='mt-8'>
+          <h3 className='my-2 p-2 py-4 bg-grey-light text-center text-grey-darker uppercase font-normal hind text-sm'>Completed Events</h3>
+          <ul className="list-reset flex flex-wrap justify-center">
             {completedEvents &&
               completedEvents.result.map(id => (
                 <OngoingEvent
@@ -55,7 +60,7 @@ const Events = ({
                 />
               ))}
           </ul>
-        )}
+        </section>
       </div>
     </div>
   )

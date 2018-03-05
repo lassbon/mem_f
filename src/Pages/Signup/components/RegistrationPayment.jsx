@@ -70,9 +70,8 @@ const RegistrationPayment = ({
           cost of the verification process
         </p>
       </div>
-      <PaystackButton
-        disabled={registrationStage > 4 ? 'disabled' : 'false'}
-        text={registrationStage > 4 ? 'Paid' : 'Pay'}
+      {registrationStage < 4 && <PaystackButton
+        text='Pay'
         class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
         callback={() =>
           callback(
@@ -87,7 +86,7 @@ const RegistrationPayment = ({
         amount={amount}
         paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
         metadata={metadata}
-      />
+      />}
     </div>
   )
 }

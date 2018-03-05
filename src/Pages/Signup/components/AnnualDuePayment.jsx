@@ -84,9 +84,8 @@ class AnnualDuePayment extends Component {
               cost your annual membership fee
             </div>
           </div>
-          <PaystackButton
-            disabled={registrationStage > 6 ? 'disabled' : 'false'}
-            text={registrationStage > 6 ? 'Paid' : 'Pay'}
+          {registrationStage < 6 && <PaystackButton
+            text='Pay'
             class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
             callback={() =>
               callback(
@@ -103,7 +102,7 @@ class AnnualDuePayment extends Component {
             plan={plan.paystack.data.plan_code}
             metadata={metadata}
             // plan={}
-          />
+          />}
         </div>
       ))
     ) : (

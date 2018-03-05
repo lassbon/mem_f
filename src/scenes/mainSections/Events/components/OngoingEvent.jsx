@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import swal from 'sweetalert'
+
 import './ongoingEvent.css'
+
+import PaystackButton from 'react-paystack'
+
+import prettifyMoney from 'helpers/prettifyMoney'
+
+const callback = () => {
+  swal({
+    text: 'Event paid for successfully.',
+    title: 'Paid',
+    icon: 'success',
+    button: {
+      text: 'ok',
+    },
+  })
+}
+
+const close = () => { }
 
 class OngoingEvent extends Component {
   state = {
@@ -11,6 +30,21 @@ class OngoingEvent extends Component {
   render() {
     const { event, likeEvent, token, user } = this.props
     const { expanded } = this.state
+
+    const metadata = {
+      custom_fields: [
+        {
+          display_name: "Payment For",
+          variable_name: event.title,
+          value: `event_${event.id}`
+        },
+        {
+          display_name: 'Membership ID',
+          variable_name: 'membership_id',
+          value: user.id,
+        },
+      ],
+    }
     return (
       <li className="lg:w-1/3 lg:pr-8 mb-8 relative">
         <div className="relative">
@@ -38,8 +72,8 @@ class OngoingEvent extends Component {
                 {event.likes && event.likes.includes(user.id) ? (
                   <i className="ion-android-favorite text-purple-light" />
                 ) : (
-                  <i className="ion-android-favorite-outline" />
-                )}
+                    <i className="ion-android-favorite-outline" />
+                  )}
               </button>
               <figcaption className="absolute pin-b w-full p-6 text-white text-sm">
                 <h4 className="mb-2 text-xl font-normal">{event.title}</h4>
@@ -88,7 +122,37 @@ class OngoingEvent extends Component {
                   <i className="ion-ios-arrow-down" />
                 </span>
               </button>
-              <p className=" text-sm roboto">{event.description}</p>
+              <div className='mb-4 text-xs'>
+                <span >Description</span>
+                <p className=" text-base roboto">{event.description}</p>
+              </div>
+              <div className='mt-4 text-xs'>
+                <span>Fee</span>
+                <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
+              </div>
+              <div className='mt-4 text-xs'>
+                <span>Venue</span>
+                <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
+              </div>
+              <div className='mt-8'>
+                <PaystackButton
+                  text='Book'
+                  class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
+                  callback={() =>
+                    callback(
+                      { params: { id: user.id, regState: 5 }, token: user.token },
+                      // stateIncrementRegistrationStage,
+                      // getUserDetails
+                    )
+                  }
+                  close={close}
+                  reference={new Date().valueOf() + ''}
+                  email={user.email}
+                  amount={event.fee * 100}
+                  paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
+                  metadata={metadata}
+                />
+              </div>
             </div>
           )}
         </div>

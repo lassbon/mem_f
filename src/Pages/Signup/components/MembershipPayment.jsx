@@ -14,6 +14,13 @@ import network from 'services/network'
 import requestHandler from 'helpers/requestHandler'
 import prettifyMoney from 'helpers/prettifyMoney'
 
+const emailSubmitPopupContent = document.createElement('div')
+emailSubmitPopupContent.setAttribute(
+  'class',
+  'text-sm text-grey-darker text-left'
+)
+emailSubmitPopupContent.innerHTML = `\nYou have been successfully registered. \n\n Please complete the registration steps that follow to become an approved member of ACCI. <div className='mt-3 text-xs text-grey'> You can stop the process at anytime. Login anytime to continue.</div>`
+
 const close = () => {}
 const callback = (
   getUserDetails,
@@ -31,13 +38,13 @@ const callback = (
     .then(() => {
       stateIncrementRegistrationStage()
       return swal({
-        text: `Thank you for completing the registration process. Click 'ok' to continue`,
-        title: 'Welcome',
-        icon: 'success',
-        button: {
-          text: 'ok',
-        },
-      })
+          content: emailSubmitPopupContent,
+          title: 'Registered',
+          icon: 'success',
+          button: {
+            text: 'ok',
+          },
+        })
     })
     .then(() => history.push('/app/timeline'))
 }
@@ -112,9 +119,8 @@ class MemberShipPayment extends Component {
             cost of your membership plan
           </div>
         </div>
-        <PaystackButton
-          disabled={registrationStage > 7 ? 'disabled' : 'false'}
-          text={registrationStage > 7 ? 'Paid' : 'Pay'}
+        {registrationStage < 8 && <PaystackButton
+          text='Pay'
           class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
           callback={() =>
             callback(getUserDetails, history, stateIncrementRegistrationStage, {
@@ -129,7 +135,7 @@ class MemberShipPayment extends Component {
           paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
           metadata={metadata}
           // plan={}
-        />
+        />}
       </div>
     ) : (
       <div className="flex justify-center py-6">

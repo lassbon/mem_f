@@ -42,7 +42,7 @@ const Connections = ({
                 })}
               </ul>
             )}
-          {friendRequests.result.length === 0 && !friends ? (
+          {friendRequests.result.length === 0 || !friends ? (
             <div className="empty-state-container absolute lg:w-full lg:px-12 lg:mt-8">
               <figure className="flex flex-col justify-center items-center">
                 <div className="w-1/3">

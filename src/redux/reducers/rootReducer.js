@@ -6,11 +6,13 @@ import * as auth from './auth'
 import * as user from './user'
 import * as social from './social'
 import * as event from './event'
+import * as hack from './hack'
 
 const reducers = {
   ...auth,
   ...event,
   ...generic,
+  ...hack,
   routing: routerReducer,
   ...social,
   ...user,

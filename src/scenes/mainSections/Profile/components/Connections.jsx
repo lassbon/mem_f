@@ -12,12 +12,14 @@ import requestHandler from 'helpers/requestHandler'
 import {
   acceptedFriendRequest,
   canceledFriendRequest,
+  changeSearchBarKey,
   receivedFriendRequests,
 } from 'redux/action_creators'
 
 const Connections = ({
   acceptFriendRequest,
   cancelFriendRequest,
+  changeSearchBarKey,
   fetchFriendRequests,
   friends,
   friendRequests,
@@ -29,8 +31,11 @@ const Connections = ({
   return (
     friendRequests && (
       <>
-        <h3 className="px-8 py-6 border-b border-grey-lighter text-grey-dark font-normal text-sm">
-          Connections
+        <h3 className="flex justify-between items-center px-8 py-6 border-b border-grey-lighter text-grey-darker font-normal text-sm">
+          <span>Connections</span>
+          <span className=''>
+          <button onClick={() => changeSearchBarKey(Math.random())} className='px-4 py-2 bg-grey text-white rounded-sm'>Add Connection</button>
+          </span>
         </h3>
         <div>
           {friends &&
@@ -48,8 +53,11 @@ const Connections = ({
                 <div className="w-1/3">
                   <img src="/static/images/empty.svg" alt="" />
                 </div>
-                <figcaption className="pt-4 text-grey-darker">
-                  You don't have any connections
+                <figcaption className="text-center pt-4 text-grey-darker">
+                  <p className='mb-4'>You don't have any connections</p>
+                  <span className=''>
+          <button onClick={() => changeSearchBarKey(Math.random())} className='px-4 py-2 bg-pink-dark text-white rounded-sm'>Add Connection</button>
+          </span>
                 </figcaption>
               </figure>
             </div>
@@ -119,6 +127,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(canceledFriendRequest({ ...params, id: requestId }))
       return response
     }),
+  changeSearchBarKey: (key) => dispatch(changeSearchBarKey(key))
 })
 
 const glueTo = connect(mapStateToProps, mapDispatchToProps)

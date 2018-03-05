@@ -126,11 +126,11 @@ class Timeline extends Component {
           >
             <div className="lg:h-full lg:py-8 lg:px-12 relative">
               <div className="flex pb-4 border-b border-grey-lighter relative">
-                <span className="w-8 mr-4">
+                <span className="w-24 mr-4">
                   {!!profileImage ? <img src={profileImage} alt="" className="relative"/> : <img
                     src="/static/images/033-boy.svg"
                     alt=""
-                    className="w-8"
+                    className=""
                   />}
                 </span>
 

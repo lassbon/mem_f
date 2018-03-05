@@ -15,8 +15,8 @@ const Post = ({
   return !user ? null : (
     <li className="lg:mt-16 cursor-pointer">
       <div className="flex">
-        <span className="w-8 mr-4">
-          {!!user.profileImage ? <img src={user.profileImage} alt="" className="relative"/> : <img src="/static/images/011-woman-5.svg" alt="" className="w-8" />}
+        <span className="w-24 mr-4">
+          {!!user.profileImage ? <img src={user.profileImage} alt="" className="relative"/> : <img src="/static/images/011-woman-5.svg" alt="" className="" />}
         </span>
 
         <div className="flex-grow">
@@ -28,9 +28,11 @@ const Post = ({
           </div>
           {postImage ? (
             <div
-              style={{ backgroundImage: `url(${postImage})` }}
-              className="h-64 bg-bottom bg-cover"
-            />
+              style={{ 
+                // backgroundImage: `url(${postImage})` 
+                }}
+              className=" bg-bottom bg-cover"
+            ><img style={{minWidth: '100%'}} src={postImage} alt=""/>  </div>
           ) : null}
           <div className="w-full p-6 py-4 mb-4 roboto text-lg leading-normal text-grey-darker bg-white lg:lt-shadow rounded-sm">
             {postText.split('\n').map((paragraph, index) => (

@@ -99,3 +99,11 @@ export const receiveMembershipPayment = payment => ({
   type: actions.RECEIVED_MEMBERSHIP_PAYMENT,
   payload: payment,
 })
+
+
+// Hack
+
+export const changeSearchBarKey = key => ({
+  type: actions.CHANGE_SEARCHBAR_KEY,
+  payload: key
+})

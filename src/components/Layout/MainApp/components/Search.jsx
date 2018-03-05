@@ -77,6 +77,7 @@ class Search extends Component {
       id => this.props.users.entities.users[id]
     ),
   }
+  elements = {}
   stateSetSearchTerm = searchTerm => {
     this.setState(state => ({ ...state, searchTerm }))
   }
@@ -103,7 +104,13 @@ class Search extends Component {
     )
     this.stateSetUsers(filteredUsers)
   }
-  componentDidUpdate(prevProps, prevState) {}
+  searchInput = (obj) => this.elements.searchInput = obj.input
+  componentDidUpdate(prevProps, prevState) {
+    const { searchKey } = this.props
+    if (searchKey !== prevProps.searchKey) {
+      this.elements.searchInput.focus()
+    }
+  }
   render() {
     const {
       auth,
@@ -130,12 +137,15 @@ class Search extends Component {
               renderSuggestion={suggestion =>
                 renderSuggestion(suggestion, auth, sendFriendRequest)
               }
+              ref ={this.searchInput}
+
               shouldRenderSuggestions={shouldRenderSuggestions}
               inputProps={{
                 onChange: handleSearchInputChange,
                 value: searchTerm,
                 className:
                   'w-full py-6 px-4 font-normal text-sm text-grey-darker capitalize',
+                  autoFocus: 'autofocus',
               }}
             />
             <button>
@@ -151,8 +161,9 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, user, users }) => ({
+const mapStateToProps = ({ auth, searchBar: {key}, user, users }) => ({
   auth,
+  searchKey: key,
   user,
   users,
 })

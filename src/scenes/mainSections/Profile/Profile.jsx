@@ -21,13 +21,13 @@ class Profile extends Component {
         <div className="flex flex-wrap lg:h-full lg:w-2/3 lg:pl-16 lg:pr-4 py-6">
           <section
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="inline-block lg:h-full overflow-y-scroll lg:w-3/5 mb-4 mr-4 bg-white lg:lt-shadow relative"
+            className="inline-block lg:h-full overflow-y-scroll lg:flex-grow mb-4 mr-4 bg-white lg:lt-shadow relative"
           >
             {<Connections />}
           </section>
-          <section className="inline-block h-auto lg:flex-grow mb-4 p-4 bg-white lg:lt-shadow">
+          {/* <section className="inline-block h-auto lg:flex-grow mb-4 p-4 bg-white lg:lt-shadow">
             <i />
-          </section>
+          </section> */}
         </div>
         <aside
           ref={el => el && simpleScrollbar.initEl(el)}

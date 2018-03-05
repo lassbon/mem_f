@@ -16,11 +16,11 @@ const TopBar = ({ match }) => {
   const title = pageTitles[currentPath]
 
   return (
-    <div className="lg:flex items-center text-sm lg:lt-shadow relative z-40">
+    <div className="lg:flex items-center text-sm bg-blue-lighter lg:lt-shadow relative z-40">
       <div className="lg:w-1/6">
         <Search />
       </div>
-      <div className="flex flex-grow items-center lg:px-16 hind text-grey-dark">
+      <div className="flex flex-grow items-center lg:px-16 hind text-white">
         <span className="mr-4 text-xl">
           <i className="ion-ios-list-outline" />
         </span>

@@ -118,7 +118,7 @@ class Search extends Component {
       reduxUsers && (
         <>
           <ToastContainer {...toastOptions} />
-          <form className="topbar-search flex items-center px-6 bg-grey-lighter text-grey-darker relative z-20">
+          <form className="topbar-search flex items-center px-6 bg-pink-lighter text-grey-darker relative z-20">
             <span className="text-sm">
               <i className="ion-ios-search-strong" />
             </span>

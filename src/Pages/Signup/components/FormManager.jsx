@@ -194,7 +194,8 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
     companyRepPhone1: data.companyRepPhone1,
     companyRepName2: data.companyRepName2,
     companyRepPhone2: data.companyRepPhone2,
-    companyRepEmail2: data.companyRepEmail2
+    companyRepEmail2: data.companyRepEmail2,
+    regState: data.regState
   }
 
   const fileParams = {

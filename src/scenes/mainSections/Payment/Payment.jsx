@@ -16,7 +16,7 @@ class Payment extends Component {
     return requestHandler(network.payment.unsubscribeDue)({ params, token}).then(() => Promise.resolve(this.stateSetLoading(false))).catch((error) => console.error(error))
   }
   render() {
-    const { user } = this.props
+    const { auth, user } = this.props
     const { loading } = this.state
     console.log(user)
     return <div className="flex flex-wrap lg:px-16 py-8">
@@ -89,7 +89,7 @@ class Payment extends Component {
             </figure>
             <div className="w-1/4">N50,000</div>
             <div className="w-1/3 ">
-              <ButtonFixedWidthRadiusXS onClick={() => this.unsubscribe({ id: user.id}, user.token)} loading={loading} loadingText='Unsubscribing. Please wait...'>
+              <ButtonFixedWidthRadiusXS onClick={() => this.unsubscribe({ id: user.id}, auth.token)} loading={loading} loadingText='Unsubscribing. Please wait...'>
                 <span className="">Unsubscribe</span>
                 <i className="ion-ios-arrow-thin-right ml-4" />
               </ButtonFixedWidthRadiusXS>
@@ -108,7 +108,8 @@ class Payment extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ auth, user }) => ({
+  auth,
   user,
 })
 

@@ -190,14 +190,24 @@ const companyRepresentativesErrorMessages = {
 const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
     ...data,
+  }
+
+  const fileParams = {
     companyRepPassportUrl1: data.companyRepPassportUrl1File,
     companyRepCVUrl1: data.companyRepCVUrlFile,
     companyCOIUrl: data.companyCOIUrlFile,
     companyRepPassportUrl2: data.companyRepPassportUrl2File,
     companyRepCVUrl2: data.companyRepCVUrl2File,
   }
+
+  return Promise.all(Object.keys(fileParams).map((key) => {
+    if (!fileParams[key]) return Promise.resolve('')
+    return requestHandler(network.user.updateUserDetails)({ id, params: {
+      [key]: fileParams[key]
+    }, token })
+  }))
+  .then(() => requestHandler(network.user.updateUserDetails)({ id, params, token }))
   // const params = data
-  return requestHandler(network.user.updateUserDetails)({ id, params, token })
 }
 
 // Financial members form stuff

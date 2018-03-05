@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Payment = () => (
+const Payment = ({ user }) => (
   <div className="flex flex-wrap lg:px-16 py-8">
     <div className="lg:w-1/2 pr-6 mb-6">
       <div className="lg:lt-shadow bg-white rounded p-px">
@@ -12,7 +13,7 @@ const Payment = () => (
           <figure className="flex-grow flex items-center">
             {/* <div className="h-24 w-16 rounded bg-teal-dark" /> */}
             <figcaption className=" text-sm">
-              <p className="text-grey-darkest">Gold Membership subscription</p>
+              <p className="text-grey-darkest">{user.membershipPlan} Membership subscription</p>
               <p>02/03/2018</p>
             </figcaption>
           </figure>
@@ -80,4 +81,10 @@ const Payment = () => (
   </div>
 )
 
-export default Payment
+const mapStateToProps = ({ user }) => ({
+  user,
+})
+
+const glueTo = connect(mapStateToProps, null)
+
+export default glueTo(Payment)

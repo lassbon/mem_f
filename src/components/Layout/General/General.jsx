@@ -17,7 +17,7 @@ const General = ({ children }) => (
       <div className="w-full mt-8 relative">
         {children}
         <div className="w-full flex justify-center pin-r pin-b align-middle mt-8 text-xs text-grey">
-          Designed and Powered by{' '}
+          Designed by{' '}
           <a href="https://karixchange.com" className="ml-2 text-red-light">
             karixchange
           </a>

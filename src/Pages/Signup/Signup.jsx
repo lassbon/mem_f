@@ -209,7 +209,7 @@ class Signup extends Component {
               </div>
             </section>
             <div className="align-align-middle mt-8 pt-8 text-xs text-grey">
-              Designed and Powered by{' '}
+              Designed by{' '}
               <a href="https://karixchange.com" className="text-red-light">
                 karixchange
               </a>

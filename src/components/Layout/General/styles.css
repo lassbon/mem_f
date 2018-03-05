@@ -2,7 +2,7 @@
 
 .general {
   .sidebar {
-    background: linear-gradient(
+    /* background: linear-gradient(
         135deg,
         rgba(215, 65, 113, 1) 0%,
         rgba(215, 65, 113, 0.93) 27%,
@@ -13,6 +13,40 @@
       url('/static/images/taylor_grote_415993__toHF1(1).jpg');
     background-position: 0% 0%, 30% 0%;
     background-size: cover, auto 100%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+  }
+
+  .sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+
+    height: 40rem;
+    width: 40rem;
+    border-radius: 50%;
+
+    background-color: #d5c67a;
+  }
+
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 10rem;
+    height: 10rem;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+    background-color: #15566f;
+  }
+
+  .login-side {
+    background-image: url(static/images/acc-slide-5.png);
   }
 }

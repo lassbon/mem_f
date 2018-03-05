@@ -91,9 +91,9 @@ class Login extends Component {
               Please enter your email and password
             </p>
           </header>
-          <div className="lg:p-12 lg:lt-shadow ">
-            <div className="lg:flex justify-between">
-              <div className="lg:w-2/5 self-start">
+          <div className="lg:p-12 lg:lt-shadow relative">
+            <div className="lg:flex justify-between ">
+              <div className="lg:w-1/2 pr-8 self-start">
                 <Formik
                   initialValues={formInitialValues}
                   onSubmit={values => {
@@ -191,12 +191,15 @@ class Login extends Component {
                   }}
                 />
               </div>
-              <div className="lg:w-2/5">
-                <img
+              <div className="lg:w-1/2 flex justify-center items-center text-white text-3xl font-bold absolute pin-t pin-r h-full bg-grey login-side">
+                {/* <img
                   src="/static/images/undraw_safe_bnk7.svg"
                   alt=""
                   className="lg:w-64"
-                />
+                /> */}
+                <div className='w-2/3 text-center'>
+                  Welcome to ACCI membership platform
+                </div>
               </div>
             </div>
           </div>

@@ -145,7 +145,7 @@ class Search extends Component {
                 value: searchTerm,
                 className:
                   'w-full py-6 px-4 font-normal text-sm text-grey-darker capitalize',
-                  autoFocus: 'autofocus',
+                  // autoFocus: 'autofocus',
               }}
             />
             <button>

@@ -114,7 +114,7 @@ class Timeline extends Component {
   }
   render() {
     const { loadingPosts } = this.state
-    const { posts, user: { companyName }, users } = this.props
+    const { posts, user: { companyName, profileImage }, users } = this.props
     return (
       <>
         <ToastContainer {...toastOptions} />
@@ -127,11 +127,11 @@ class Timeline extends Component {
             <div className="lg:h-full lg:py-8 lg:px-12 relative">
               <div className="flex pb-4 border-b border-grey-lighter relative">
                 <span className="w-8 mr-4">
-                  <img
+                  {!!profileImage ? <img src={profileImage} alt="" className="relative"/> : <img
                     src="/static/images/033-boy.svg"
                     alt=""
                     className="w-8"
-                  />
+                  />}
                 </span>
 
                 <div className="flex-grow">

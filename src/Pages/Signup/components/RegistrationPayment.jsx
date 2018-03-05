@@ -64,11 +64,11 @@ const RegistrationPayment = ({
           <b className="text-4xl py-4 font-bold text-pink-dark">N5,000</b>
         </div>
 
-        <p className="mb-8 font-semibold text-grey-darker">
+        {/* <p className="mb-8 font-semibold text-grey-darker">
           <span className="mt-4 text-grey font-normal">To cover</span>
           <br />
           cost of the verification process
-        </p>
+        </p> */}
       </div>
       {registrationStage < 5 && <PaystackButton
         text='Pay'

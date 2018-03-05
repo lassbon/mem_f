@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import prettifyMoney from 'helpers/prettifyMoney'
 
 class CompletedEvent extends Component {
   state = {
@@ -86,7 +87,18 @@ class CompletedEvent extends Component {
                   <i className="ion-ios-arrow-down" />
                 </span>
               </button>
-              <p className=" text-sm roboto">{event.description}</p>
+              <div className='mb-4 text-xs'>
+                <span >Description</span>
+                <p className=" text-base roboto">{event.description}</p>
+              </div>
+              <div className='mt-4 text-xs'>
+                <span>Fee</span>
+                <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
+              </div>
+              <div className='mt-4 text-xs'>
+                <span>Venue</span>
+                <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
+              </div>
             </div>
           )}
         </div>

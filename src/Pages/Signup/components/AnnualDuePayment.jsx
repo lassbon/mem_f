@@ -78,11 +78,11 @@ class AnnualDuePayment extends Component {
               </b>
             </div>
 
-            <div className="mb-8 font-semibold text-grey-darker">
+            {/* <div className="mb-8 font-semibold text-grey-darker">
               <span className="mt-4 text-grey font-normal">To cover</span>
               <hr />
               cost your annual membership fee
-            </div>
+            </div> */}
           </div>
           {registrationStage < 7 && <PaystackButton
             text='Pay'

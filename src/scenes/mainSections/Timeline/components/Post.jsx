@@ -16,7 +16,7 @@ const Post = ({
     <li className="lg:mt-16 cursor-pointer">
       <div className="flex">
         <span className="w-8 mr-4">
-          <img src="/static/images/011-woman-5.svg" alt="" className="w-8" />
+          {!!user.profileImage ? <img src={user.profileImage} alt="" className="relative"/> : <img src="/static/images/011-woman-5.svg" alt="" className="w-8" />}
         </span>
 
         <div className="flex-grow">

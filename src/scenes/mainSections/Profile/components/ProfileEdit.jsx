@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
 import { String } from 'valib'
+import { toast } from 'react-toastify'
 
 // Components
 import InputError from 'components/form/InputError'
@@ -35,6 +36,7 @@ const formErrors = {
   companyAddress: 'Please enter a valid physical address',
   companyPhone: 'Please enter a valid 11 digit phone number',
   profileImage: 'Please add a profile picture',
+  profileImageName: 'Please add a profile picture'
 }
 
 const submitCallback = companyDetailsResponse => toast.success('Details')
@@ -72,20 +74,42 @@ const Form = ({
   handleSubmit,
   touched,
   values,
+  setFieldValue,
 }) => (
   <form className="p-8 lg:px-12" onSubmit={handleSubmit}>
     <fieldset className="mb-6">
       <label htmlFor="" className="mb-4 text-xs text-grey">
         Profile Image
       </label>
+      <div className='w-24'>
+        <img src={values.profileImage} alt=""/>
+      </div>
       <StyledInput
-        disabled
+        // disabled
+        id="profileImage"
         name="profileImage"
-        type="text"
+        type="file"
         placeholder="Profile Image"
-        onChange={handleChange}
+        onChange={(e) => {
+          let reader = new FileReader()
+          let file = e.target.files[0]
+          if (file.size > 500000) {
+            toast('Image size is greater than 500kb.')
+            return 
+          }
+          console.log(file)
+
+          reader.onloadend = () => {
+            setFieldValue(
+              'profileImage',
+              reader.result
+            )
+          }
+          reader.readAsDataURL(file)
+          // setFieldValue('profileImageName', file.name)
+        }}
         onBlur={handleBlur}
-        value={values.profileImage}
+        value={values.profileImageName}
       />
       <InputError touched={touched.profileImage} error={errors.profileImage} />
     </fieldset>

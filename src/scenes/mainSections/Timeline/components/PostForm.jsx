@@ -76,7 +76,7 @@ const Form = ({
         value={values.postText}
         id="postText"
         rows="10"
-        className="w-full h-64 px-6 py-4 pb-8 roboto text-lg leading-normal text-grey-darker border-r-2 border-b-2 border-dotted border-grey-light lg:lt-shadow rounded-sm"
+        className="w-full h-32 px-6 py-4 pb-8 roboto text-lg leading-normal text-grey-darker border-r-2 border-b-2 border-dotted border-grey-light lg:lt-shadow rounded-sm"
       />
       <div className="flex flex-nowrap justify-between items-center w-full absolute pin-b pin-l px-6 pb-3">
         <div className="flex items-center bg-blue-lightest text-xs text-grey-darker cursor-pointer relative">

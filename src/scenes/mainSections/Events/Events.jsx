@@ -51,7 +51,7 @@ const Events = ({
           <ul className="list-reset flex flex-wrap justify-center">
             {completedEvents &&
               completedEvents.result.map(id => (
-                <OngoingEvent
+                <CompletedEvent
                   key={id}
                   event={completedEvents.entities.completed[id]}
                   likeEvent={likeEvent}

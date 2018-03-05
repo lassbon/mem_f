@@ -113,11 +113,11 @@ class MemberShipPayment extends Component {
             </b>
           </div>
 
-          <div className="mb-8 font-semibold text-grey-darker">
+          {/* <div className="mb-8 font-semibold text-grey-darker">
             <span className="mt-4 text-grey font-normal">To cover</span>
             <hr />
             cost of your membership plan
-          </div>
+          </div> */}
         </div>
         {registrationStage < 8 && <PaystackButton
           text='Pay'

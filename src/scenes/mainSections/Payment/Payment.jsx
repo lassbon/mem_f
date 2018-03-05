@@ -83,7 +83,7 @@ class Payment extends Component {
             <figure className="flex-grow flex items-center">
               {/* <div className="h-24 w-16 rounded bg-teal-dark" /> */}
               <figcaption className=" text-sm">
-                <p className="text-grey-darkest">Annual due</p>
+                <p className="text-grey-darkest">Annual dues</p>
                 <p>02/03/2018</p>
               </figcaption>
             </figure>

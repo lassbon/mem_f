@@ -9,7 +9,7 @@ import ProfileEdit from 'ProfileEdit'
 const UserProfile = ({
   editing,
   stateSetEdit,
-  user: { companyName, companyAddress, companyPhone, email },
+  user: { companyName, companyAddress, companyPhone, email, profileImage },
 }) => (
   <div className="bg-yellow-lightest">
     {editing && <ProfileEdit stateSetEdit={stateSetEdit} />}
@@ -18,7 +18,7 @@ const UserProfile = ({
         <div className="flex">
           <div className="w-24 mb-4  mr-4 bg-red-lighter rounded border-8 border-solid border-white overflow-hidden relative">
             <div className="w-full h-full absolute pin-t pin-l -mt-8 bg-yellow-light rounded-full" />
-            <img src="/static/images/033-boy.svg" alt="" className="relative" />
+            {!!profileImage ? <img src={profileImage} alt="" className="relative"/> : <img src="/static/images/033-boy.svg" alt="" className="relative"/>}
           </div>
           <div className="py-4 text-grey-dark">
             <span onClick={() => stateSetEdit(true)}>

@@ -36,23 +36,7 @@ const Payment = ({ user }) => {
           </figure>
           <div className="w-1/4">N500,000</div>
           <div className="w-1/4 text-pink">
-          <PaystackButton
-                  text='Book'
-                  class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
-                  callback={() =>
-                    callback(
-                      { params: { id: user.id, regState: 5 }, token: user.token },
-                      // stateIncrementRegistrationStage,
-                      // getUserDetails
-                    )
-                  }
-                  close={close}
-                  reference={new Date().valueOf() + ''}
-                  email={user.email}
-                  amount={event.fee * 100}
-                  paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
-                  metadata={metadata}
-                />
+            -
           </div>
         </div>
         <div className="flex justify-end p-4">

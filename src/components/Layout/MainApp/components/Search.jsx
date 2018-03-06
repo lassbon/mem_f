@@ -50,7 +50,7 @@ const renderSuggestion = (
                   toast.success('Connection request sent')
                 })
                 .catch(err => {
-                  toast.error('Connection request sent')
+                  toast.error(error.message)
                 })
               }
               className="px-3 py-1 bg-pink text-white text-xs"

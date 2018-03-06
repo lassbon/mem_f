@@ -46,7 +46,12 @@ const renderSuggestion = (
                 sendFriendRequest(
                   { requestee: id, requester: auth.user.id },
                   auth.token
-                )
+                ).then(() => {
+                  toast.success('Connection request sent')
+                })
+                .catch(err => {
+                  toast.error('Connection request sent')
+                })
               }
               className="px-3 py-1 bg-pink text-white text-xs"
             >
@@ -145,6 +150,7 @@ class Search extends Component {
                 value: searchTerm,
                 className:
                   'w-full py-6 px-4 font-normal text-sm text-grey-darker capitalize',
+                  placeholder: 'Add connection'
                   // autoFocus: 'autofocus',
               }}
             />

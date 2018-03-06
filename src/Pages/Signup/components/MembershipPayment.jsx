@@ -14,20 +14,23 @@ import network from 'services/network'
 import requestHandler from 'helpers/requestHandler'
 import prettifyMoney from 'helpers/prettifyMoney'
 
-const emailSubmitPopupContent = document.createElement('div')
-emailSubmitPopupContent.setAttribute(
-  'class',
-  'text-sm text-grey-darker text-left'
-)
-emailSubmitPopupContent.innerHTML = `\nYou have been successfully registered. \n\n Please complete the registration steps that follow to become an approved member of ACCI. <div className='mt-3 text-xs text-grey'> You can stop the process at anytime. Login anytime to continue.</div>`
+
+
 
 const close = () => {}
 const callback = (
   getUserDetails,
   history,
   stateIncrementRegistrationStage,
-  { id, token }
+  { companyName, id, membershipId, token }
 ) => {
+  const emailSubmitPopupContent = document.createElement('div')
+emailSubmitPopupContent.setAttribute(
+  'class',
+  'text-sm text-grey-darker text-left'
+)
+  emailSubmitPopupContent.innerHTML = `\nCongratulations ${companyName} you are now a member of ACCI. Your Membership ID is ${membershipId}`
+
   requestHandler(network.user.updateUserDetails)({
     id,
     params: { regState: 8 },
@@ -78,7 +81,7 @@ class MemberShipPayment extends Component {
       registrationStage,
       auth: { token },
       getUserDetails,
-      user: { email, id },
+      user: { companyName, email, id, membershipId },
       stateIncrementRegistrationStage,
     } = this.props
     const { plan } = this.state
@@ -124,7 +127,9 @@ class MemberShipPayment extends Component {
           class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
           callback={() =>
             callback(getUserDetails, history, stateIncrementRegistrationStage, {
+              companyName,
               id,
+              membershipId,
               token,
             })
           }

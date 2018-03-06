@@ -22,7 +22,7 @@ const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
   if (users === null) fetchUsers(token)
   return !users ? (
     <div className="flex justify-center py-6 text-dark-grey">
-      <Circle text="Retreiving users. Please wait" />
+      <Circle text="retrieving users. Please wait" />
     </div>
   ) : (
     <div className="main-app lg:h-screen ">

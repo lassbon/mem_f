@@ -9,7 +9,7 @@ import ProfileEdit from 'ProfileEdit'
 const UserProfile = ({
   editing,
   stateSetEdit,
-  user: { companyName, companyAddress, companyPhone, email, profileImage },
+  user: { companyName, companyAddress, companyPhone, email, membershipId, profileImage },
 }) => (
   <div className="bg-yellow-lightest">
     {editing && <ProfileEdit stateSetEdit={stateSetEdit} />}
@@ -35,6 +35,10 @@ const UserProfile = ({
         </figcaption>
       </figure>
       <div className="py-2 text-sm text-grey-darker">
+      <div className="mt-6">
+          <h6 className="mb-1 text-xs font-semibold hind text-grey">Membership Id</h6>
+          <p>{membershipId}</p>
+        </div>
         <div className="mt-6">
           <h6 className="mb-1 text-xs font-semibold hind text-grey">Email</h6>
           <p>{email}</p>

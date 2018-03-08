@@ -50,7 +50,9 @@ class ResetPassword extends Component {
             <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
               {/* Login  */}
             </h2>
-            <p className="text-sm text-grey-dark">Please enter your email</p>
+            <p className="text-sm text-grey-dark">
+              Please enter your new password
+            </p>
           </header>
           <div className="lg:p-12 lg:lt-shadow ">
             <div className="lg:flex ">

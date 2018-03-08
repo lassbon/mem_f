@@ -32,8 +32,9 @@ const goToSignupOrApp = (
     verified,
   }
 ) => {
+  console.log('old login regstate', regState)
   if (regState > registrationLength) return history.push('/app/timeline')
-  return history.push('/signup')
+  return history.push('/oldmember/signup')
 }
 
 const minPasswordLength = 6
@@ -109,8 +110,7 @@ class Login extends Component {
                       })
                       .then(data => {
                         const { history } = this.props
-                        history.push('/oldmember/signup')
-                        // goToSignupOrApp(history, data.payload)
+                        goToSignupOrApp(history, data.payload)
                         return Promise.resolve('')
                       })
                       .catch(error => {

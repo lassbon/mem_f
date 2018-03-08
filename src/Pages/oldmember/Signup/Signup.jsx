@@ -154,18 +154,17 @@ class Signup extends Component {
             >
               <div>
                 <div className=" lg:w-full">
-                  {canRenderFormManager(registrationStage) && (
-                    <FormManager
-                      registrationStage={registrationStage}
-                      loading={loading}
-                      loadingText={loadingText}
-                      stateIncrementRegistrationStage={
-                        stateIncrementRegistrationStage
-                      }
-                      stateSetLoading={stateSetLoading}
-                    />
-                  )}
-                  {registrationStage > 3 ? (
+                  <FormManager
+                    registrationStage={registrationStage}
+                    loading={loading}
+                    loadingText={loadingText}
+                    stateIncrementRegistrationStage={
+                      stateIncrementRegistrationStage
+                    }
+                    stateSetLoading={stateSetLoading}
+                  />
+
+                  {/* {registrationStage > 3 ? (
                     <div className="flex">
                       <RegistrationPayment
                         registrationStage={registrationStage}
@@ -208,7 +207,7 @@ class Signup extends Component {
                         />
                       ) : null}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </div>
               </div>
             </div>

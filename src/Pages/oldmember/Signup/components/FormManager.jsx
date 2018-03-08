@@ -66,29 +66,6 @@ const companyDetailsSubmitCallback = companyDetailsResponse =>
 
 // Company representatives form stuff
 
-const companyRepresentativesFormInitialValues = {
-  companyRepName1: '',
-  companyRepEmail1: '',
-  companyRepPhone1: '',
-  companyRepPassportUrl1: '',
-  companyRepCVUrl: '',
-  companyCOIUrl: '',
-
-  companyRepPassportUrl1File: '',
-  companyRepCVUrlFile: '',
-  companyCOIUrlFile: '',
-
-  companyRepName2: '',
-  companyRepPhone2: '',
-  companyRepEmail2: '',
-  companyRepPassportUrl2: '',
-  companyRepCVUrl2: '',
-
-  companyRepPassportUrl2File: '',
-  companyRepCVUrl2File: '',
-  regState: 8,
-}
-
 const companyRepresentativesFormValidationFunctions = {
   companyRepName1: notEmptyOrNumber,
   companyRepEmail1: String.isEmailLike,
@@ -166,27 +143,60 @@ const FormManager = props => {
     emailPasswordSubmit,
     auth,
     getUserDetails,
-    user: { companyName, companyAddress, companyPhone, companyBusiness },
+    user: {
+      companyName,
+      companyAddress,
+      companyPhone,
+      companyBusiness,
+      companyRepName1,
+      companyRepEmail1,
+      companyRepPhone1,
+      companyRepPassportUrl1,
+      companyRepCVUrl1,
+      companyCOIUrl,
+    },
   } = props
   const CompanyDetailsFormInitialValues = {
     companyName,
     companyAddress,
     companyPhone,
     companyBusiness,
-    regState: 1,
+    regState: 4,
   }
+
+  const companyRepresentativesFormInitialValues = {
+    companyRepName1: companyRepName1 || '',
+    companyRepEmail1: companyRepEmail1 || '',
+    companyRepPhone1: companyRepPhone1 || '',
+    companyRepPassportUrl1: companyRepPassportUrl1 || '',
+    companyRepCVUrl1: companyRepCVUrl1 || '',
+    companyCOIUrl: companyCOIUrl || '',
+
+    companyRepPassportUrl1File: companyRepPassportUrl1 || '',
+    companyRepCVUrlFile: companyRepCVUrl1 || '',
+    companyCOIUrlFile: companyCOIUrl || '',
+
+    companyRepName2: '',
+    companyRepPhone2: '',
+    companyRepEmail2: '',
+    companyRepPassportUrl2: '',
+    companyRepCVUrl2: '',
+
+    companyRepPassportUrl2File: '',
+    companyRepCVUrl2File: '',
+    regState: 8,
+  }
+
   const registrationFormsInitialValues = [
     CompanyDetailsFormInitialValues,
     companyRepresentativesFormInitialValues,
   ]
   const registrationForms = [CompanyDetailsForm, CompanyRepresentativesForm]
-
-  const CurrentForm = registrationForms[registrationStage]
-  const currenrFormInitialValues =
-    registrationFormsInitialValues[registrationStage]
-  const validationFunctions =
-    registrationFormValidationFunctions[registrationStage]
-  const errorMessages = registrationFormsErrorMessages[registrationStage]
+  const stage = Math.floor(registrationStage / 4)
+  const CurrentForm = registrationForms[stage]
+  const currenrFormInitialValues = registrationFormsInitialValues[stage]
+  const validationFunctions = registrationFormValidationFunctions[stage]
+  const errorMessages = registrationFormsErrorMessages[stage]
 
   const registrationFormsSubmitFuntions = [
     params => {
@@ -214,9 +224,11 @@ const FormManager = props => {
           console.log(values)
           console.log(registrationStage)
           stateSetLoading(true)
-          registrationFormsSubmitFuntions[registrationStage](values)
+          registrationFormsSubmitFuntions[stage](values)
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
-            .then(registrationSubmitCallbacks[registrationStage])
+            .then(res =>
+              Promise.resolve(registrationSubmitCallbacks[stage](res))
+            )
             .catch(err => {
               // console.error('custom', err)
               toast.error(err.message)

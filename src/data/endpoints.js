@@ -6,7 +6,7 @@ export const user = {
   idedUser: (strs, id) => returnFullUrl('/api/v1/user/') + id,
   user: returnFullUrl('/api/v1/user/'),
   resetPassword: returnFullUrl('/api/v1/user/reset'),
-  changePassword: returnFullUrl('/api/v1/change'),
+  changePassword: returnFullUrl('/api/v1/user/change'),
   friendRequests: (strs, id) => returnFullUrl('/api/v1/social/requests/') + id,
   activity: (strs, id) => returnFullUrl('/api/v1/useractivity/') + id,
   sendFriendRequest: returnFullUrl('/api/v1/social/request'),
@@ -41,5 +41,5 @@ export const events = {
 
 export const payment = {
   membership: returnFullUrl('/api/v1/userpayments/memberships'),
-  unsubscribeDue: returnFullUrl('/api/v1/unsubscribe')
+  unsubscribeDue: returnFullUrl('/api/v1/unsubscribe'),
 }

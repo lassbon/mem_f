@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // Components
 
@@ -9,7 +10,14 @@ import ProfileEdit from 'ProfileEdit'
 const UserProfile = ({
   editing,
   stateSetEdit,
-  user: { companyName, companyAddress, companyPhone, email, membershipId, profileImage },
+  user: {
+    companyName,
+    companyAddress,
+    companyPhone,
+    email,
+    membershipId,
+    profileImage,
+  },
 }) => (
   <div className="bg-yellow-lightest">
     {editing && <ProfileEdit stateSetEdit={stateSetEdit} />}
@@ -18,11 +26,23 @@ const UserProfile = ({
         <div className="flex">
           <div className="w-24 mb-4  mr-4 bg-red-lighter rounded border-8 border-solid border-white overflow-hidden relative">
             <div className="w-full h-full absolute pin-t pin-l -mt-8 bg-yellow-light rounded-full" />
-            {!!profileImage ? <img src={profileImage} alt="" className="relative"/> : <img src="/static/images/033-boy.svg" alt="" className="relative"/>}
+            {!!profileImage ? (
+              <img src={profileImage} alt="" className="relative" />
+            ) : (
+              <img
+                src="/static/images/033-boy.svg"
+                alt=""
+                className="relative"
+              />
+            )}
           </div>
           <div className="py-4 text-grey-dark">
-            <span onClick={() => stateSetEdit(true)}>
-              <i className="ion-edit" />
+            <span onClick={() => stateSetEdit(true)} className="">
+              <i className="ion-edit mr-1" />
+              Edit profile
+            </span>
+            <span className="block mt-4 text-xs">
+              <Link to="/forgotpassword">Change password</Link>
             </span>
           </div>
         </div>
@@ -35,8 +55,10 @@ const UserProfile = ({
         </figcaption>
       </figure>
       <div className="py-2 text-sm text-grey-darker">
-      <div className="mt-6">
-          <h6 className="mb-1 text-xs font-semibold hind text-grey">Membership Id</h6>
+        <div className="mt-6">
+          <h6 className="mb-1 text-xs font-semibold hind text-grey">
+            Membership Id
+          </h6>
           <p>{membershipId}</p>
         </div>
         <div className="mt-6">

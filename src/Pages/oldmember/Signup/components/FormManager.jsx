@@ -1,7 +1,7 @@
 // Vendors
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
 import InputError from 'components/form/InputError'
@@ -98,7 +98,7 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
   const params = {
     ...data,
     companyRepPassportUrl1: data.companyRepPassportUrl1File,
-    companyRepCVUrl: data.companyRepCVUrlFile,
+    companyRepCVUrl1: data.companyRepCVUrlFile,
     companyCOIUrl: data.companyCOIUrlFile,
     companyRepPassportUrl2: data.companyRepPassportUrl2File,
     companyRepCVUrl2: data.companyRepCVUrl2File,
@@ -169,8 +169,8 @@ const FormManager = props => {
     companyRepEmail1: companyRepEmail1 || '',
     companyRepPhone1: companyRepPhone1 || '',
     companyRepPassportUrl1: companyRepPassportUrl1 || '',
-    companyRepCVUrl1: companyRepCVUrl1 || '',
-    companyCOIUrl: companyCOIUrl || '',
+    companyRepCVUrl1: '',
+    companyCOIUrl: '',
 
     companyRepPassportUrl1File: companyRepPassportUrl1 || '',
     companyRepCVUrlFile: companyRepCVUrl1 || '',
@@ -214,6 +214,7 @@ const FormManager = props => {
   ]
   const registrationSubmitCallbacks = [() => {}, () => {}, () => {}, () => {}]
 
+  if (stage > 1) return <Redirect to="/app/timeline" />
   return (
     <>
       <ToastContainer {...toastOptions} />

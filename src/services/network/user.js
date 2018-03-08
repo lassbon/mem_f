@@ -41,7 +41,7 @@ export const resetPassword = ({ params }) =>
 export const changePassword = ({ params }) =>
   fetch(endpoints.user.changePassword, {
     body: JSON.stringify(params),
-    method: 'POST',
+    method: 'PUT',
   })
 
 export const fetchUserSocialActivity = ({ id, token }) =>

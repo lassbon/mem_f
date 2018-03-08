@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
 import swal from 'sweetalert'
@@ -21,7 +21,7 @@ class ResetPassword extends Component {
   stateSetSubmitingEmail = submitingEmail =>
     this.setState(state => ({ ...state, submitingEmail }))
   render() {
-    const { location: { search } } = this.props
+    const { history, location: { search } } = this.props
     const { submitingEmail } = this.state
     const { stateSetSubmitingEmail } = this
     const formInitialValues = {
@@ -67,12 +67,15 @@ class ResetPassword extends Component {
                           text: `Password changed successfully.`,
                           title: 'Updated',
                           icon: 'success',
-                          button: false,
+                          button: 'ok',
                           closeOnClickOutside: false,
                         })
                       )
                       .catch()
-                      .then(() => stateSetSubmitingEmail(false))
+                      .then(() => {
+                        stateSetSubmitingEmail(false)
+                        history.push('/login')
+                      })
                   }}
                   validate={values => {
                     const errors = {}
@@ -168,4 +171,4 @@ class ResetPassword extends Component {
   }
 }
 
-export default ResetPassword
+export default withRouter(ResetPassword)

@@ -221,14 +221,15 @@ const FormManager = props => {
         key={registrationStage}
         initialValues={currenrFormInitialValues}
         onSubmit={values => {
-          console.log(values)
-          console.log(registrationStage)
+          // console.log(values)
+          // console.log(registrationStage)
           stateSetLoading(true)
           registrationFormsSubmitFuntions[stage](values)
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
-            .then(res =>
-              Promise.resolve(registrationSubmitCallbacks[stage](res))
-            )
+            .then(res => {
+              stateSetLoading(false)
+              // return Promise.resolve(registrationSubmitCallbacks[stage](res))
+            })
             .catch(err => {
               // console.error('custom', err)
               toast.error(err.message)
@@ -239,13 +240,13 @@ const FormManager = props => {
               if (Number(regState) === 8) history.push('/login')
 
               stateSetLoading(false)
-              console.log()
+              // console.log()
             })
         }}
-        validate={nameToValues => (
-          console.log(nameToValues),
+        validate={nameToValues =>
+          // console.log(nameToValues),
           validateInputs(nameToValues, validationFunctions, errorMessages)
-        )}
+        }
         render={props => (
           <CurrentForm {...props} loading={loading} loadingText={loadingText} />
         )}

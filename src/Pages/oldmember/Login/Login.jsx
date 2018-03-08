@@ -7,7 +7,7 @@ import { String } from 'valib'
 import { ToastContainer, toast } from 'react-toastify'
 import { decode, encode } from 'base-64'
 
-console.log(encode('ABUCCI/MEM/000056'))
+// console.log(encode('ABUCCI/MEM/000056'))
 //Components
 import Form from './components/Form'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
@@ -32,7 +32,7 @@ const goToSignupOrApp = (
     verified,
   }
 ) => {
-  console.log('old login regstate', regState)
+  // console.log('old login regstate', regState)
   if (regState > registrationLength) return history.push('/app/timeline')
   return history.push('/oldmember/signup')
 }

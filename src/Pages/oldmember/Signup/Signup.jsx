@@ -104,14 +104,15 @@ class Signup extends Component {
     this.stateSetRegistrationStage(Number(index))
   }
   render() {
-    const { registrationStage, loading } = this.state
+    const { loading } = this.state
     const {
       handleProgressBarClick,
       stateIncrementRegistrationStage,
       stateSetLoading,
     } = this
     const { auth, user, history } = this.props
-    console.log('registrationStage', registrationStage)
+    const registrationStage = user.regState
+    // console.log('registrationStage', registrationStage)
     return (
       <div ref={el => el && simpleScrollbar.initEl(el)} className="lg:h-screen">
         <div className="signup-inner-container lg:flex lg:justify-center lg:items-center overflow-y-scroll">

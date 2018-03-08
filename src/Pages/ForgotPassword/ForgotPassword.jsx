@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Formik } from 'formik'
 import { String } from 'valib'
 import { ToastContainer, toast } from 'react-toastify'
@@ -26,6 +26,7 @@ class ForgotPassword extends Component {
   stateSetSubmitingEmail = submitingEmail =>
     this.setState(state => ({ ...state, submitingEmail }))
   render() {
+    const { history } = this.props
     const { submitingEmail } = this.state
     const { stateSetSubmitingEmail } = this
     return (
@@ -64,7 +65,7 @@ class ForgotPassword extends Component {
                           text: `A reset password link has been sent to your mail.`,
                           title: 'Sent',
                           icon: 'success',
-                          button: false,
+                          button: 'ok',
                           closeOnClickOutside: false,
                         })
                       )
@@ -73,7 +74,10 @@ class ForgotPassword extends Component {
                           error.message || 'An error occured. Please try again.'
                         )
                       )
-                      .then(() => stateSetSubmitingEmail(false))
+                      .then(() => {
+                        history.push('/login')
+                        stateSetSubmitingEmail(false)
+                      })
                   }}
                   validate={value => {
                     const errors = {}
@@ -142,4 +146,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default ForgotPassword
+export default withRouter(ForgotPassword)

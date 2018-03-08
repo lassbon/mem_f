@@ -68,7 +68,7 @@ class Login extends Component {
     return (
       <div className="lg:h-full lg:flex lg:justify-center lg:items-center">
         <ToastContainer {...toastOptions} />
-        <section className="w-3/4">
+        <section className="lg:w-3/4 px-6 lg:px-0">
           <Link
             to="/signup"
             className="inline-block align-middle lg:mb-12 py-2 px-4 text-white bg-pink-light rounded-sm"
@@ -83,9 +83,9 @@ class Login extends Component {
             <span className="text-xs font-medium">Forgot password</span>
             <i className="text-base ml-3 ion-arrow-right-c" />
           </Link>
-          <header className="mb-6">
+          <header className="py-8 lg:py-0 mb-6">
             <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
-              Login into your dashboard
+              Log into your dashboard
             </h2>
             <p className="text-sm text-grey-dark">
               Please enter your email and password
@@ -191,13 +191,13 @@ class Login extends Component {
                   }}
                 />
               </div>
-              <div className="lg:w-1/2 flex justify-center items-center text-white text-3xl font-bold absolute pin-t pin-r h-full bg-grey login-side">
+              <div className="lg:w-1/2 flex justify-center items-center text-white text-3xl font-bold lg:absolute pin-t pin-r h-full p-8 lg:p-0 mt-6 lg:mt-0 bg-grey login-side">
                 {/* <img
                   src="/static/images/undraw_safe_bnk7.svg"
                   alt=""
                   className="lg:w-64"
                 /> */}
-                <div className='w-2/3 text-center'>
+                <div className="w-2/3 text-center">
                   Welcome to ACCI membership platform
                 </div>
               </div>

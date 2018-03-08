@@ -27,19 +27,10 @@ module.exports = {
       // },
       {
         test: /\.css$/,
-        use:
-          process.env.NODE_ENV === 'development'
-            ? [
-              'style-loader',
-              'css-loader',
-              {
-                loader: 'postcss-loader',
-              },
-            ]
-            : ExtractTextPlugin.extract({
-              fallback: ['style-loader', 'css-loader'],
-              use: 'postcss-loader',
-            }),
+        use: ExtractTextPlugin.extract({
+          fallback: ['style-loader', 'css-loader'],
+          use: 'postcss-loader',
+        }),
       },
       // {
       //   test: /\.css$/,

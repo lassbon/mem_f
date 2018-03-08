@@ -30,7 +30,7 @@ class ForgotPassword extends Component {
     const { stateSetSubmitingEmail } = this
     return (
       <div className="lg:h-full lg:flex lg:justify-center lg:items-center">
-        <section className="w-3/4">
+        <section className="lg:w-3/4 lg:px-0 px-6">
           <Link
             to="/signup"
             className="inline-block align-middle lg:mb-12 py-2 px-4 text-white bg-pink-light rounded-sm"
@@ -45,7 +45,7 @@ class ForgotPassword extends Component {
             <span className="text-xs font-medium">Login</span>
             <i className="text-base ml-3 ion-arrow-right-c" />
           </Link>
-          <header className="mb-6">
+          <header className=" lg:mt-0 mt-8 lg:mb-6 mb-3">
             <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
               {/* Login  */}
             </h2>
@@ -92,7 +92,7 @@ class ForgotPassword extends Component {
                   }) => {
                     return (
                       <form action="" onSubmit={handleSubmit}>
-                        <div className="pb-4">
+                        <div className="lg:pb-4 pb-0">
                           <fieldset className="mb-6">
                             <label
                               htmlFor=""
@@ -127,7 +127,7 @@ class ForgotPassword extends Component {
                   }}
                 />
               </div>
-              <div className="flex justify-center lg:w-3/5">
+              <div className="flex justify-center lg:w-3/5 lg:mt-0 pt-8">
                 <img
                   src="/static/images/undraw_safe_bnk7.svg"
                   alt=""

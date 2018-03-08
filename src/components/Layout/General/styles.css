@@ -28,6 +28,7 @@
     border-radius: 50%;
 
     background-color: #d5c67a;
+    display: @ms none;
   }
 
   .sidebar::before {
@@ -44,6 +45,7 @@
 
     transform: translate(-50%, -50%);
     background-color: #15566f;
+    display: @ms none;
   }
 
   .login-side {

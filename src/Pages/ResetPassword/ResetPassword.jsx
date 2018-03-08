@@ -64,8 +64,8 @@ class ResetPassword extends Component {
                     requestHandler(network.user.changePassword)({ params })
                       .then(() =>
                         swal({
-                          text: `A reset password link has been sent to your mail.`,
-                          title: 'Sent',
+                          text: `Password changed successfully.`,
+                          title: 'Updated',
                           icon: 'success',
                           button: false,
                           closeOnClickOutside: false,

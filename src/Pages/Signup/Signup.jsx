@@ -30,27 +30,27 @@ const loadingText = 'Checking and submitting your details, please wait.'
 const PresentStageProgressBar = props => (
   <li
     {...props}
-    className="progress-stage lg:w-1/7 h-8 flex justify-center items-center lg:bg-purple-dark relative cursor-pointer"
+    className="progress-stage lg:w-1/7 w-full h-8 flex justify-center items-center bg-purple-dark relative cursor-pointer"
   >
     <i className="rotate-loader ion-load-a" />
-    <span className="progress-stage-arrow h-8 w-8 lg:absolute lg:pin-r lg:bg-purple-dark rounded" />
+    <span className="progress-stage-arrow h-8 w-8 absolute pin-r bg-purple-dark rounded" />
   </li>
 )
 
 const CompletedStageProgressBar = props => (
   <li
     {...props}
-    className="progress-stage lg:w-1/7 h-8 flex justify-center items-center lg:bg-purple-dark relative cursor-pointer"
+    className="progress-stage lg:w-1/7 w-full h-8 flex justify-center items-center bg-purple-dark relative cursor-pointer"
   >
     <i className="ion-checkmark-round" />
-    <span className="progress-stage-arrow h-8 w-8 lg:absolute lg:pin-r lg:bg-purple-dark rounded" />
+    <span className="progress-stage-arrow h-8 w-8 absolute pin-r bg-purple-dark rounded" />
   </li>
 )
 
 const FutureStageProgressBar = props => (
   <li
     {...props}
-    className="progress-stage lg:w-1/7 h-8 flex justify-center items-center lg:bg-pink-lighter border-r border-pink-lighter border-solid text-pink-light relative cursor-pointer"
+    className="progress-stage lg:w-1/7 w-full h-8 flex justify-center items-center bg-pink-lighter border-r border-pink-lighter border-solid text-pink-light relative cursor-pointer"
   >
     <i className="ion-record dot-font-size" />
     {/* <span className="progress-stage-arrow h-8 w-8 lg:absolute lg:pin-r lg:bg-pink rounded" /> */}
@@ -136,17 +136,21 @@ class Signup extends Component {
 
     return (
       <>
-        <div className="absolute w-full pin-r pin-t mt-8 flex justify-center">
-          <div className="w-3/4 flex justify-end">
-            <img src="/static/images/logo.png" alt="" className="w-64" />
+        <div className="lg:absolute w-full pin-r pin-t lg:mt-8 lg:flex justify-center">
+          <div className="p-4 lg:w-3/4 lg:flex justify-end">
+            <img
+              src="/static/images/logo.png"
+              alt=""
+              className="w-32 lg:w-64"
+            />
           </div>
         </div>
         <div
           ref={el => el && simpleScrollbar.initEl(el)}
-          className="lg:h-screen"
+          className="mt-6 lg:h-screen"
         >
           <div className="signup-inner-container lg:flex lg:flex-col lg:justify-center lg:items-center overflow-y-scroll">
-            <section className="w-3/4">
+            <section className="px-6 lg:w-3/4">
               <Link
                 to="/login"
                 className="inline-block lg:mb-12 py-2 px-4 text-pink-light bg-grey-lighter rounded-sm"
@@ -154,7 +158,7 @@ class Signup extends Component {
                 <i className="text-base ion-arrow-left-c" />
                 <span className="ml-3 text-xs font-medium">Login</span>
               </Link>
-              <header className="mb-8">
+              <header className="mt-8 lg:mt-4 mb-8">
                 <h2 className="mb-1 hind text-3xl font-bold tracking-tight text-grey-darker">
                   Signup
                 </h2>
@@ -176,7 +180,7 @@ class Signup extends Component {
                   </li>
                 ))}
               </ul>
-              <ul className="list-reset lg:flex lg:bg-pink-lighter lg:text-white rounded-sm overflow-hidden">
+              <ul className="list-reset flex bg-pink-lighter text-white rounded-sm overflow-hidden">
                 {populateProgressBar(registrationStage, handleProgressBarClick)}
               </ul>
               <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">

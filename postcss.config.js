@@ -9,7 +9,6 @@ const unnest = require('postcss-nested')
 
 module.exports = {
   plugins: [
-    tailwindcss('./tailwind.config.js'),
     unnest,
     autoprefixer,
     postcssImport,
@@ -17,5 +16,6 @@ module.exports = {
     simplevariables,
     packMedia,
     clean,
+    tailwindcss('./tailwind.config.js'),
   ],
 }

@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
+import { firebaseReducer } from 'react-redux-firebase'
+
 import * as actions from 'redux/actions'
 import * as generic from './generic'
 import * as auth from './auth'
@@ -11,6 +13,7 @@ import * as hack from './hack'
 const reducers = {
   ...auth,
   ...event,
+  fbDb: firebaseReducer,
   ...generic,
   ...hack,
   routing: routerReducer,

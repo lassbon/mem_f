@@ -24,7 +24,7 @@ const renderBasedOnCategoriesState = (
   if (loading)
     return (
       <div className="flex justify-center py-6">
-        <Circle text="retrieving membership categories. Please wait" />
+        <Circle text="Retrieving membership categories. Please wait" />
       </div>
     )
   return (

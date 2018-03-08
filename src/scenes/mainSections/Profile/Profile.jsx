@@ -17,8 +17,8 @@ class Profile extends Component {
   render() {
     const { user } = this.props
     return (
-      <section className="lg:h-full flex">
-        <div className="flex flex-wrap lg:h-full lg:w-2/3 lg:pl-16 lg:pr-4 py-6">
+      <section className="lg:h-full flex lg:px-16">
+        <div className="flex flex-wrap lg:h-full lg:w-1/2 lg:pr-2 py-6">
           <section
             ref={el => el && simpleScrollbar.initEl(el)}
             className="inline-block lg:h-full overflow-y-scroll lg:flex-grow mb-4 mr-4 bg-white lg:lt-shadow relative"
@@ -31,7 +31,7 @@ class Profile extends Component {
         </div>
         <aside
           ref={el => el && simpleScrollbar.initEl(el)}
-          className="lg:w-1/3 lg:h-full lg:overflow-y-scroll bg-grey-lightest"
+          className="lg:w-1/2 lg:h-full lg:overflow-y-scroll py-6"
         >
           <UserProfile
             editing={this.state.editing}

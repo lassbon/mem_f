@@ -1,6 +1,8 @@
 import React from 'react'
+import { compose } from 'redux'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { firebaseConnect } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
 
 import General from 'Layout/General'
@@ -136,4 +138,10 @@ const App = () => {
   )
 }
 
-export default connect(({ user }) => ({ user }))(App)
+const mapStateToProps = ({ user }) => ({ user })
+
+const glueTo = connect(mapStateToProps, null)
+
+const enhance = compose(glueTo, firebaseConnect(['chats', 'users', 'messages']))
+
+export default enhance(App)

@@ -47,6 +47,6 @@
   }
 
   .login-side {
-    background-image: url(static/images/acc-slide-5.png);
+    background-image: url(/static/images/acc-slide-5.png);
   }
 }

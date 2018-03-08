@@ -19,7 +19,7 @@ const callback = () => {
   })
 }
 
-const close = () => { }
+const close = () => {}
 
 class OngoingEvent extends Component {
   state = {
@@ -34,9 +34,9 @@ class OngoingEvent extends Component {
     const metadata = {
       custom_fields: [
         {
-          display_name: "Payment For",
+          display_name: 'Payment For',
           variable_name: event.title,
-          value: `event_${event.id}`
+          value: `event_${event.id}`,
         },
         {
           display_name: 'Membership ID',
@@ -46,7 +46,7 @@ class OngoingEvent extends Component {
       ],
     }
     return (
-      <li className="lg:w-1/3 lg:pr-8 mb-8 relative">
+      <li className="lg:w-1/2 lg:pr-8 mb-8 relative">
         <div className="relative">
           <div className="rounded-lg overflow-hidden bg-white lg:lt-shadow relative">
             <div className="absolute ml-4 mt-4 px-4 py-2 bg-white rounded-full text-xs text-grey-darkest font-semibold z-20">
@@ -72,8 +72,8 @@ class OngoingEvent extends Component {
                 {event.likes && event.likes.includes(user.id) ? (
                   <i className="ion-android-favorite text-purple-light" />
                 ) : (
-                    <i className="ion-android-favorite-outline" />
-                  )}
+                  <i className="ion-android-favorite-outline" />
+                )}
               </button>
               <figcaption className="absolute pin-b w-full p-6 text-white text-sm">
                 <h4 className="mb-2 text-xl font-normal">{event.title}</h4>
@@ -122,25 +122,28 @@ class OngoingEvent extends Component {
                   <i className="ion-ios-arrow-down" />
                 </span>
               </button>
-              <div className='mb-4 text-xs'>
-                <span >Description</span>
+              <div className="mb-4 text-xs">
+                <span>Description</span>
                 <p className=" text-base roboto">{event.description}</p>
               </div>
-              <div className='mt-4 text-xs'>
+              <div className="mt-4 text-xs">
                 <span>Fee</span>
                 <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
               </div>
-              <div className='mt-4 text-xs'>
+              <div className="mt-4 text-xs">
                 <span>Venue</span>
                 <p className=" text-base roboto">N{prettifyMoney(event.fee)}</p>
               </div>
-              <div className='mt-8'>
+              <div className="mt-8">
                 <PaystackButton
-                  text='Book'
+                  text="Book"
                   class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
                   callback={() =>
                     callback(
-                      { params: { id: user.id, regState: 5 }, token: user.token },
+                      {
+                        params: { id: user.id, regState: 5 },
+                        token: user.token,
+                      }
                       // stateIncrementRegistrationStage,
                       // getUserDetails
                     )

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 import { array, any } from 'prop-types'
 
+import Chat from 'Chat'
 import Sidebar from 'Sidebar'
 import TopBar from 'TopBar'
 import Circle from 'loaders/Circle'
@@ -15,23 +16,30 @@ import { receivedUsers } from 'redux/action_creators'
 import requestHandler from 'helpers/requestHandler'
 
 const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
-  console.log(user)
+  // console.log(user)
   if (!user.id) return <Redirect to="/login" />
   const valid = validMember(user)
   if (valid !== true) return <Redirect to={valid} />
   if (users === null) fetchUsers(token)
   return !users ? (
     <div className="flex justify-center py-6 text-dark-grey">
-      <Circle text="retrieving users. Please wait" />
+      <Circle text="Retrieving users. Please wait" />
     </div>
   ) : (
-    <div className="main-app lg:h-screen ">
-      <TopBar />
-      <div className="below-top-bar lg:flex">
-        <Sidebar />
-        <main className="lg:w-5/6 lg:h-full">{children}</main>
+    <>
+      <div className="lg:flex main-app lg:h-screen ">
+        <div className="lg:w-3/4">
+          <TopBar />
+          <div className="below-top-bar lg:flex">
+            <Sidebar />
+            <main className="lg:w-3/4 lg:h-full">{children}</main>
+          </div>
+        </div>
+        <div className="lg:w-1/4 lg:h-full">
+          <Chat />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

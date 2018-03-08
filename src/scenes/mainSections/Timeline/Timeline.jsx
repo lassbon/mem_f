@@ -27,7 +27,7 @@ const renderBasedPostsState = (loading, { posts, users }) => {
   if (!posts)
     return (
       <div className="flex justify-center py-6">
-        <Circle text="Retreiving posts. Please wait" />
+        <Circle text="Retrieving posts. Please wait" />
       </div>
     )
   if (posts.result.length === 0) return <EmptyPaper />
@@ -119,19 +119,19 @@ class Timeline extends Component {
       <>
         <ToastContainer {...toastOptions} />
 
-        <section className="lg:flex lg:h-full">
+        <section className=" lg:h-full">
           <div
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="lg:h-full lg:w-3/4 bg-grey-lightest border-r border-grey-light"
+            className="lg:h-full bg-grey-lighter border-r border-grey-light"
           >
             <div className="lg:h-full lg:py-8 lg:px-12 relative">
               <div className="flex pb-4 border-b border-grey-lighter relative">
-                <span className="w-24 mr-4">
-                  {!!profileImage ? <img src={profileImage} alt="" className="relative"/> : <img
-                    src="/static/images/033-boy.svg"
-                    alt=""
-                    className=""
-                  />}
+                <span className="w-24 h-24 mr-4 rounded-full overflow-hidden">
+                  {!!profileImage ? (
+                    <img src={profileImage} alt="" className="relative" />
+                  ) : (
+                    <img src="/static/images/033-boy.svg" alt="" className="" />
+                  )}
                 </span>
 
                 <div className="flex-grow">
@@ -153,9 +153,9 @@ class Timeline extends Component {
             </div>
           </div>
 
-          <aside className="lg:w-1/4 lg:h-full lg:bg-grey-lightest">
+          {/* <aside className="lg:w-1/4 lg:h-full lg:bg-grey-lightest">
             <div> </div>
-          </aside>
+          </aside> */}
         </section>
       </>
     )

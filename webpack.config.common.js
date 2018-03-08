@@ -13,17 +13,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(jpe?g|png|gif|ttf|woff|eot|bmp|woff2)$/i,
-      //   loader: require.resolve('url-loader'),
-      //   options: {
-      //     limit: 10000,
-      //     name:
-      //       process.env.NODE_ENV === 'development'
-      //         ? path.resolve(__dirname,'[path]/[name].[ext]'
-      //         : '/public/media/[name].[ext]',
-      //   },
-      // },
       {
         test: /\.(ttf|woff|eot|bmp|woff2)$/i,
         loader: 'file-loader?name=/static/icons/[name].[ext]',
@@ -38,10 +27,19 @@ module.exports = {
       // },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: ['style-loader', 'css-loader'],
-          use: 'postcss-loader',
-        }),
+        use:
+          process.env.NODE_ENV === 'development'
+            ? [
+              'style-loader',
+              'css-loader',
+              {
+                loader: 'postcss-loader',
+              },
+            ]
+            : ExtractTextPlugin.extract({
+              fallback: ['style-loader', 'css-loader'],
+              use: 'postcss-loader',
+            }),
       },
       // {
       //   test: /\.css$/,

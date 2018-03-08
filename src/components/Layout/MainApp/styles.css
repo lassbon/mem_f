@@ -1,7 +1,8 @@
 @import '../../../css/variables.css';
 
 .main-app {
-  .below-top-bar {
-    height: calc(100vh - 64px);
-  }
+}
+
+.below-top-bar {
+  height: @ml calc(100vh - 64px);
 }

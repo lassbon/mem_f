@@ -42,7 +42,12 @@ const UserProfile = ({
               Edit profile
             </span>
             <span className="block mt-4 text-xs">
-              <Link to="/forgotpassword">Change password</Link>
+              <Link
+                to="/forgotpassword"
+                className="p-1 px-2 bg-pink-dark text-white rounded-sm"
+              >
+                Change password
+              </Link>
             </span>
           </div>
         </div>

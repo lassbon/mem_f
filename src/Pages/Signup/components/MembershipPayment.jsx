@@ -14,9 +14,6 @@ import network from 'services/network'
 import requestHandler from 'helpers/requestHandler'
 import prettifyMoney from 'helpers/prettifyMoney'
 
-
-
-
 const close = () => {}
 const callback = (
   getUserDetails,
@@ -25,10 +22,10 @@ const callback = (
   { companyName, id, membershipId, token }
 ) => {
   const emailSubmitPopupContent = document.createElement('div')
-emailSubmitPopupContent.setAttribute(
-  'class',
-  'text-sm text-grey-darker text-left'
-)
+  emailSubmitPopupContent.setAttribute(
+    'class',
+    'text-sm text-grey-darker text-left'
+  )
   emailSubmitPopupContent.innerHTML = `\nCongratulations ${companyName} you are now a member of ACCI. Your Membership ID is ${membershipId}`
 
   requestHandler(network.user.updateUserDetails)({
@@ -41,13 +38,13 @@ emailSubmitPopupContent.setAttribute(
     .then(() => {
       stateIncrementRegistrationStage()
       return swal({
-          content: emailSubmitPopupContent,
-          title: 'Registered',
-          icon: 'success',
-          button: {
-            text: 'ok',
-          },
-        })
+        content: emailSubmitPopupContent,
+        title: 'Registered',
+        icon: 'success',
+        button: {
+          text: 'ok',
+        },
+      })
     })
     .then(() => history.push('/app/timeline'))
 }
@@ -115,32 +112,45 @@ class MemberShipPayment extends Component {
               N{prettifyMoney(plan.fee)}
             </b>
           </div>
-
+          <div className="">
+            <img
+              src="/static/images/credit-card-1.png"
+              alt=""
+              className="w-32"
+            />
+          </div>
           {/* <div className="mb-8 font-semibold text-grey-darker">
             <span className="mt-4 text-grey font-normal">To cover</span>
             <hr />
             cost of your membership plan
           </div> */}
         </div>
-        {registrationStage < 8 && <PaystackButton
-          text='Pay'
-          class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
-          callback={() =>
-            callback(getUserDetails, history, stateIncrementRegistrationStage, {
-              companyName,
-              id,
-              membershipId,
-              token,
-            })
-          }
-          close={close}
-          reference={new Date().valueOf() + ''}
-          email={email}
-          amount={plan.fee * kobo}
-          paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
-          metadata={metadata}
-          // plan={}
-        />}
+        {registrationStage < 8 && (
+          <PaystackButton
+            text="Pay"
+            class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
+            callback={() =>
+              callback(
+                getUserDetails,
+                history,
+                stateIncrementRegistrationStage,
+                {
+                  companyName,
+                  id,
+                  membershipId,
+                  token,
+                }
+              )
+            }
+            close={close}
+            reference={new Date().valueOf() + ''}
+            email={email}
+            amount={plan.fee * kobo}
+            paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
+            metadata={metadata}
+            // plan={}
+          />
+        )}
       </div>
     ) : (
       <div className="flex justify-center py-6">

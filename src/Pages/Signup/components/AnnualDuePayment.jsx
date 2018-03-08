@@ -77,6 +77,13 @@ class AnnualDuePayment extends Component {
                 N{prettifyMoney(plan.due)}
               </b>
             </div>
+            <div className="">
+              <img
+                src="/static/images/credit-card-1.png"
+                alt=""
+                className="w-32"
+              />
+            </div>
 
             {/* <div className="mb-8 font-semibold text-grey-darker">
               <span className="mt-4 text-grey font-normal">To cover</span>
@@ -84,25 +91,27 @@ class AnnualDuePayment extends Component {
               cost your annual membership fee
             </div> */}
           </div>
-          {registrationStage < 7 && <PaystackButton
-            text='Pay'
-            class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
-            callback={() =>
-              callback(
-                { id, params: { regState: 7 }, token },
-                stateIncrementRegistrationStage,
-                getUserDetails
-              )
-            }
-            close={close}
-            reference={new Date().valueOf() + ''}
-            email={email}
-            amount={plan.due * kobo}
-            paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
-            plan={plan.paystack.data.plan_code}
-            metadata={metadata}
-            // plan={}
-          />}
+          {registrationStage < 7 && (
+            <PaystackButton
+              text="Pay"
+              class="flex justify-center button-fixed-width-small-radius w-32 py-3 shadow-lg text-base text-center rounded-sm bg-blue-lighter text-white hind"
+              callback={() =>
+                callback(
+                  { id, params: { regState: 7 }, token },
+                  stateIncrementRegistrationStage,
+                  getUserDetails
+                )
+              }
+              close={close}
+              reference={new Date().valueOf() + ''}
+              email={email}
+              amount={plan.due * kobo}
+              paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
+              plan={plan.paystack.data.plan_code}
+              metadata={metadata}
+              // plan={}
+            />
+          )}
         </div>
       ))
     ) : (

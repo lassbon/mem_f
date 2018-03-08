@@ -35,7 +35,7 @@ class Payment extends Component {
                   <p className="text-grey-darkest">
                     {user.membershipPlan} Membership subscription
                   </p>
-                  <p>02/03/2018</p>
+                  {/* <p>02/03/2018</p> */}
                 </figcaption>
               </figure>
               <div className="w-1/4">N500,000</div>
@@ -60,7 +60,7 @@ class Payment extends Component {
                 {/* <div className="h-24 w-16 rounded bg-teal-dark" /> */}
                 <figcaption className=" text-sm">
                   <p className="text-grey-darkest">Registration payment</p>
-                  <p>02/03/2018</p>
+                  {/* <p>02/03/2018</p> */}
                 </figcaption>
               </figure>
               <div className="w-1/4">N5,000</div>
@@ -86,7 +86,7 @@ class Payment extends Component {
                 {/* <div className="h-24 w-16 rounded bg-teal-dark" /> */}
                 <figcaption className=" text-sm">
                   <p className="text-grey-darkest">Annual dues</p>
-                  <p>02/03/2018</p>
+                  {/* <p>02/03/2018</p> */}
                 </figcaption>
               </figure>
               <div className="w-1/4">N50,000</div>

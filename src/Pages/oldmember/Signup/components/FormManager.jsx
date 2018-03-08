@@ -134,6 +134,7 @@ const validateInputs = (nameToValues, validationFunctions, errorMessages) =>
 
 const FormManager = props => {
   const {
+    history,
     loading,
     loadingText,
     registrationStage,
@@ -236,7 +237,7 @@ const FormManager = props => {
               toast.error(err.message)
             })
             .then(() => {
-              const { history, user: { regState } } = this.props
+              const { user: { regState } } = props
 
               if (Number(regState) === 8) history.push('/login')
 

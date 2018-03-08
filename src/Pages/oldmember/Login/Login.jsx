@@ -7,7 +7,7 @@ import { String } from 'valib'
 import { ToastContainer, toast } from 'react-toastify'
 import { decode, encode } from 'base-64'
 
-// console.log(encode('ABUCCI/MEM/000056'))
+// console.log(encode('ABUCCI/MEM/000007'))
 //Components
 import Form from './components/Form'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'

@@ -10,7 +10,7 @@ import swal from 'sweetalert'
 // Components
 
 import EmailPasswordForm from 'EmailPasswordForm'
-import MembershipCategory from 'MembershipCategory'
+// import MembershipCategory from 'MembershipCategory'
 import CompanyDetailsForm from 'CompanyDetailsForm'
 import CompanyRepresentativesForm from 'CompanyRepresentativesForm'
 import FinancialMembersForm from 'FinancialMembersForm'

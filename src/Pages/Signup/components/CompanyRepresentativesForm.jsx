@@ -141,7 +141,7 @@ class CompanyRepresentativesForm extends Component {
                 />
               </fieldset>
             </div>
-            <div className="lg:w-1/2 lg:h-full ml-6">
+            <div className="lg:w-1/2 lg:h-full lg:ml-6">
               <span className="mb-4 text-xs text-grey-darker">Documents</span>
               <div className="p-4 py-6 bg-teal-lightest border border-grey-lighter border-solid rounder-sm">
                 <fieldset className="">
@@ -184,7 +184,7 @@ class CompanyRepresentativesForm extends Component {
                         let file = e.target.files[0]
                         if (file.size > 500000) {
                           toast('Image size is greater than 500kb.')
-                          return 
+                          return
                         }
 
                         reader.onloadend = () => {
@@ -248,7 +248,7 @@ class CompanyRepresentativesForm extends Component {
                         let file = e.target.files[0]
                         if (file.size > 500000) {
                           toast('Document size is greater than 500kb.')
-                          return 
+                          return
                         }
 
                         reader.onloadend = () => {
@@ -258,7 +258,6 @@ class CompanyRepresentativesForm extends Component {
 
                         // handleChange(e)
                         setFieldValue('companyRepCVUrl1', file.name)
-
                       }}
                       onBlur={handleBlur}
                       type="file"
@@ -305,14 +304,13 @@ class CompanyRepresentativesForm extends Component {
                       name="companyCOIUrl"
                       id="companyCOIUrl"
                       onChange={e => {
-                        
                         // handleChange(e)
 
                         let reader = new FileReader()
                         let file = e.target.files[0]
                         if (file.size > 500000) {
                           toast('Document size is greater than 500kb.')
-                          return 
+                          return
                         }
 
                         reader.onloadend = () => {
@@ -320,7 +318,6 @@ class CompanyRepresentativesForm extends Component {
                         }
                         reader.readAsDataURL(file)
                         setFieldValue('companyCOIUrl', file.name)
-
                       }}
                       onBlur={handleBlur}
                       type="file"
@@ -393,7 +390,7 @@ class CompanyRepresentativesForm extends Component {
                 />
               </fieldset>
             </div>
-            <div className="flex-grow lg:h-full ml-6">
+            <div className="flex-grow lg:h-full lg:ml-6">
               <span className="mb-4 text-xs text-grey-darker">Documents</span>
               <div className="p-4 py-6 bg-teal-lightest border border-grey-lighter border-solid rounder-sm">
                 <fieldset className="">
@@ -430,9 +427,9 @@ class CompanyRepresentativesForm extends Component {
                           let reader = new FileReader()
                           let file = e.target.files[0]
                           if (file.size > 500000) {
-                          toast('Image size is greater than 500kb.')
-                          return 
-                        }
+                            toast('Image size is greater than 500kb.')
+                            return
+                          }
 
                           reader.onloadend = () => {
                             setFieldValue(
@@ -492,16 +489,15 @@ class CompanyRepresentativesForm extends Component {
                           let reader = new FileReader()
                           let file = e.target.files[0]
                           if (file.size > 500000) {
-                          toast('Document size is greater than 500kb.')
-                          return 
-                        }
+                            toast('Document size is greater than 500kb.')
+                            return
+                          }
 
                           reader.onloadend = () => {
                             setFieldValue('companyRepCVUrl2File', reader.result)
                           }
                           reader.readAsDataURL(file)
                           setFieldValue('companyRepCVUrl2', file.name)
-
                         }}
                         type="file"
                         className="absolute pin-t pin-l w-full h-full opacity-0"

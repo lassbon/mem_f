@@ -21,9 +21,9 @@ class Payment extends Component {
     const { loading } = this.state
     console.log(user)
     return (
-      <div className="flex flex-wrap lg:px-16 py-8">
-        <div className="lg:w-4/5 pr-6 mb-6">
-          <div className="lg:lt-shadow bg-white rounded p-px">
+      <div className="lg:flex flex-wrap lg:px-16 px-6 py-8">
+        <div className="lg:w-4/5 lg:pr-6 mb-6">
+          <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-pink rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>
               <span className="w-1/4">Fee</span>
@@ -49,8 +49,8 @@ class Payment extends Component {
             </div>
           </div>
         </div>
-        <div className="lg:w-4/5 pr-6 mb-6">
-          <div className="lg:lt-shadow bg-white rounded p-px">
+        <div className="lg:w-4/5 lg:pr-6 mb-6">
+          <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-purple-light rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>
               <span className="w-1/4">Fee</span>
@@ -74,14 +74,14 @@ class Payment extends Component {
             </div>
           </div>
         </div>
-        <div className="lg:w-4/5 pr-6 mb-6">
-          <div className="lg:lt-shadow bg-white rounded p-px">
+        <div className="lg:w-4/5 lg:pr-6 mb-6">
+          <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-teal rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>
               <span className="w-1/4">Fee</span>
               <span className="w-1/3">Actions</span>
             </div>
-            <div className="p-4 flex items-center text-grey-darker border-b border-grey-lighter">
+            <div className="p-4 lg:flex items-center text-grey-darker border-b border-grey-lighter">
               <figure className="flex-grow flex items-center">
                 {/* <div className="h-24 w-16 rounded bg-teal-dark" /> */}
                 <figcaption className=" text-sm">
@@ -96,8 +96,8 @@ class Payment extends Component {
                   loading={loading}
                   loadingText="Unsubscribing. Please wait..."
                 >
-                  <span className="">Unsubscribe</span>
-                  <i className="ion-ios-arrow-thin-right ml-4" />
+                  <span className="text-xs">Unsubscribe</span>
+                  <i className="ion-ios-arrow-thin-right lg:ml-4 ml-2 text-sm" />
                 </ButtonFixedWidthRadiusXS>
               </div>
             </div>

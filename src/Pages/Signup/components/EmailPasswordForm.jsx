@@ -31,7 +31,7 @@ const EmailPasswordForm = ({
           <InputError touched={touched.email} error={errors.email} />
         </fieldset>
         <div className="lg:flex">
-          <fieldset className="lg:w-1/2 block mr-3 mb-6">
+          <fieldset className="lg:w-1/2 block lg:mr-3 mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">
               Password
             </label>
@@ -45,7 +45,7 @@ const EmailPasswordForm = ({
             />
             <InputError touched={touched.password} error={errors.password} />
           </fieldset>
-          <fieldset className="lg:w-1/2 flex-1 block ml-3 mb-6">
+          <fieldset className="lg:w-1/2 flex-1 block lg:ml-3 mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">
               Confirm Password
             </label>

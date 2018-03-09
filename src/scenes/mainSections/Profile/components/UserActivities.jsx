@@ -33,8 +33,6 @@ const UserActivities = ({
             ))}
         </ul>
       </div>
-
-      <div />
     </>
   )
 }

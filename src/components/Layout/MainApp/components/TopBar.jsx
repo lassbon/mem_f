@@ -17,10 +17,10 @@ const TopBar = ({ match }) => {
 
   return (
     <div className="lg:flex items-center text-sm bg-blue-lighter lg:lt-shadow relative z-40">
-      <div className="lg:w-1/4">
+      <div className="w-full lg:w-1/4">
         <Search />
       </div>
-      <div className="flex flex-grow items-center lg:px-16 hind text-white">
+      <div className="flex flex-grow items-center lg:px-16 px-6 py-4 lg:py-0 hind text-white">
         <span className="mr-4 text-xl">
           <i className="ion-ios-list-outline" />
         </span>

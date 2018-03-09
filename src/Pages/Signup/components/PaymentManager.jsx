@@ -18,7 +18,7 @@ const PaymentManager = ({
   user,
 }) => (
   <>
-    <div className="flex">
+    <div className="flex lg:flex-nowrap flex-wrap">
       <RegistrationPayment
         getUserDetails={getUserDetails}
         registrationStage={registrationStage}

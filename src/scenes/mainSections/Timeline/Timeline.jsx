@@ -124,9 +124,9 @@ class Timeline extends Component {
             ref={el => el && simpleScrollbar.initEl(el)}
             className="lg:h-full bg-grey-lighter border-r border-grey-light"
           >
-            <div className="lg:h-full lg:py-8 lg:px-12 relative">
-              <div className="flex pb-4 border-b border-grey-lighter relative">
-                <span className="w-24 h-24 mr-4 rounded-full overflow-hidden">
+            <div className="lg:h-full lg:py-8 lg:px-12 px-6 relative">
+              <div className="flex lg:pb-4 border-b border-grey-lighter relative">
+                <span className="lg:w-24 lg:h-24 w-8 h-8 mr-4 rounded-full overflow-hidden">
                   {!!profileImage ? (
                     <img src={profileImage} alt="" className="relative" />
                   ) : (

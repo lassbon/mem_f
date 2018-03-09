@@ -149,7 +149,7 @@ class Signup extends Component {
           ref={el => el && simpleScrollbar.initEl(el)}
           className="mt-6 lg:h-screen"
         >
-          <div className="signup-inner-container lg:flex lg:flex-col lg:justify-center lg:items-center overflow-y-scroll">
+          <div className="signup-inner-container lg:flex lg:flex-col lg:justify-center lg:items-center lg:overflow-y-scroll">
             <section className="px-6 lg:w-3/4">
               <Link
                 to="/login"
@@ -173,7 +173,7 @@ class Signup extends Component {
                     className={`lg:w-1/7 text-center ${
                       registrationStage === index
                         ? 'text-sm font-semibold text-purple-dark'
-                        : ''
+                        : 'hidden lg:inline'
                     }`}
                   >
                     {title}
@@ -185,7 +185,7 @@ class Signup extends Component {
               </ul>
               <div className="signup-box lg:p-12 lg:lt-shadow lg:bg-white relative">
                 <div>
-                  <div className=" lg:w-full">
+                  <div className="px-6 py-4 lg:p-0 lg:w-full">
                     {canRenderFormManager(registrationStage) && (
                       <FormManager
                         registrationStage={registrationStage + 1}
@@ -212,7 +212,7 @@ class Signup extends Component {
                 </div>
               </div>
             </section>
-            <div className="align-align-middle mt-8 pt-8 text-xs text-grey">
+            <div className="text-center mt-8 pt-8 lg:pb-0 pb-6 text-xs text-grey">
               Designed by{' '}
               <a href="https://karixchange.com" className="text-red-light">
                 karixchange

@@ -31,10 +31,15 @@ const Connections = ({
   return (
     friendRequests && (
       <>
-        <h3 className="flex justify-between items-center px-8 py-6 border-b border-grey-lighter text-grey-darker font-normal text-sm">
+        <h3 className="flex justify-between items-center lg:px-8 py-6 border-b border-grey-lighter text-grey-darker font-normal text-sm">
           <span>Connections</span>
-          <span className=''>
-          <button onClick={() => changeSearchBarKey(Math.random())} className='px-4 py-2 bg-grey text-white rounded-sm'>Add Connection</button>
+          <span className="">
+            <button
+              onClick={() => changeSearchBarKey(Math.random())}
+              className="px-4 py-2 bg-grey text-white rounded-sm"
+            >
+              Add Connection
+            </button>
           </span>
         </h3>
         <div>
@@ -48,16 +53,21 @@ const Connections = ({
               </ul>
             )}
           {friendRequests.result.length === 0 || !friends ? (
-            <div className="empty-state-container absolute lg:w-full lg:px-12 lg:mt-8">
+            <div className="empty-state-container lg:absolute lg:w-full lg:px-12 lg:mt-8 py-6">
               <figure className="flex flex-col justify-center items-center">
                 <div className="w-1/3">
                   <img src="/static/images/empty.svg" alt="" />
                 </div>
                 <figcaption className="text-center pt-4 text-grey-darker">
-                  <p className='mb-4'>You don't have any connections</p>
-                  <span className=''>
-          <button onClick={() => changeSearchBarKey(Math.random())} className='px-4 py-2 bg-pink-dark text-white rounded-sm'>Add Connection</button>
-          </span>
+                  <p className="mb-4">You don't have any connections</p>
+                  <span className="">
+                    <button
+                      onClick={() => changeSearchBarKey(Math.random())}
+                      className="px-4 py-2 bg-pink-dark text-white rounded-sm"
+                    >
+                      Add Connection
+                    </button>
+                  </span>
                 </figcaption>
               </figure>
             </div>
@@ -127,7 +137,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(canceledFriendRequest({ ...params, id: requestId }))
       return response
     }),
-  changeSearchBarKey: (key) => dispatch(changeSearchBarKey(key))
+  changeSearchBarKey: key => dispatch(changeSearchBarKey(key)),
 })
 
 const glueTo = connect(mapStateToProps, mapDispatchToProps)

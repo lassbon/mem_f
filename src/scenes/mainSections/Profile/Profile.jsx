@@ -17,11 +17,11 @@ class Profile extends Component {
   render() {
     const { user } = this.props
     return (
-      <section className="lg:h-full flex lg:px-16">
-        <div className="flex flex-wrap lg:h-full lg:w-1/2 lg:pr-2 py-6">
+      <section className="lg:h-full lg:flex lg:px-16">
+        <div className="lg:flex flex-wrap lg:h-full lg:w-1/2 lg:pr-2 py-6">
           <section
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="inline-block lg:h-full overflow-y-scroll lg:flex-grow mb-4 mr-4 bg-white lg:lt-shadow relative"
+            className="lg:inline-block lg:h-full lg:overflow-y-scroll lg:p-0 px-6 lg:flex-grow lg:mb-4 lg:mr-4 bg-white lg:lt-shadow relative"
           >
             {<Connections />}
           </section>

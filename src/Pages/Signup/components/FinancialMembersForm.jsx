@@ -53,7 +53,7 @@ const FinancialMembersForm = ({
           <InputError touched={touched.referee1} error={errors.referee1} />
         </fieldset>
       </div>
-      <div className="lg:w-1/2 lg:h-full ml-6">
+      <div className="lg:w-1/2 lg:h-full lg:ml-6">
         <h4 className="mb-4 text-xs text-grey-darkest hind uppercase">
           Financial member 2
         </h4>

@@ -21,8 +21,8 @@ const UserProfile = ({
 }) => (
   <div className="bg-yellow-lightest">
     {editing && <ProfileEdit stateSetEdit={stateSetEdit} />}
-    <section className="py-6 lg:px-12 bg-pink-lightest">
-      <figure className="inline-block pb-6 border-b border-grey-light">
+    <section className="lg:py-6 lg:px-12 py-8 px-6 bg-pink-lightest">
+      <figure className="lg:inline-block pb-6 border-b border-grey-light">
         <div className="flex">
           <div className="w-24 mb-4  mr-4 bg-red-lighter rounded border-8 border-solid border-white overflow-hidden relative">
             <div className="w-full h-full absolute pin-t pin-l -mt-8 bg-yellow-light rounded-full" />
@@ -76,7 +76,7 @@ const UserProfile = ({
         </div>
       </div>
     </section>
-    <section className="py-6 lg:px-12">
+    <section className="py-6 px-6 lg:px-12">
       <UserActivities />
     </section>
   </div>

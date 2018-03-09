@@ -10,7 +10,7 @@ class Comments extends Component {
       <div className="lg:pr-8 relative">
         <span className="absolute h-full pin-t pin-l ml-2 border-r-2 border-yellow-light border-dashed" />
         <div className="mb-2 relative">
-          <span className="text-2xl text-blue-lighter">
+          <span className="lg:text-2xl text-blue-lighter">
             <i className="ion-chatbubbles" />
           </span>
           <span className="ml-1 text-sm text-grey-dark font-normal">

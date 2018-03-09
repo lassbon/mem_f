@@ -1,9 +1,11 @@
+@import '../../../css/variables.css';
+
 .signup-inner-container {
-  min-height: 100vh;
+  min-height: @ml 100vh;
 }
 
 .signup-box {
-  max-height: 70vh;
+  max-height: @ml 70vh;
 }
 
 .signup-box::after,

@@ -21,7 +21,7 @@ const Post = ({
               ? user.profileImage
               : '/static/images/011-woman-5.svg',
           }}
-          className="w-24 h-24 mr-4 rounded-full overflow-hidden"
+          className="lg:w-24 lg:h-24 w-8 h-8 mr-4 rounded-full overflow-hidden"
         >
           {!!user.profileImage ? (
             <img src={user.profileImage} alt="" className="relative" />
@@ -56,7 +56,7 @@ const Post = ({
               </p>
             ))}
           </div>
-          <div className="flex  text-sm text-grey-dark">
+          <div className="flex text-sm text-grey-dark">
             <div
               onClick={() =>
                 likePost(
@@ -69,14 +69,14 @@ const Post = ({
               }
               className="mx-4"
             >
-              <span className="text-2xl text-blue-lighter">
+              <span className="lg:text-2xl text-sm text-blue-lighter">
                 <i className="ion-thumbsup" />
               </span>
               <span className="ml-1 text-sm text-grey-dark font-normal">
                 {likes ? likes.length : '0'}
               </span>
             </div>
-            <div className="mx-4 flex-grow">
+            <div className="lg:mx-4 flex-grow">
               <Comments comments={comments} postId={id} />
             </div>
           </div>

@@ -31,9 +31,9 @@ const Events = ({
       ref={el => el && simpleScrollbar.initEl(el)}
       className="lg:w-full lg:h-full overflow-y-scroll"
     >
-      <div className="lg:px-16 lg:py-6 ">
+      <div className="lg:px-16 lg:py-6 p-8">
         {ongoingEvents && (
-          <ul className="list-reset flex flex-wrap">
+          <ul className="list-reset lg:flex flex-wrap">
             {ongoingEvents.result.map(id => (
               <OngoingEvent
                 key={id}
@@ -46,9 +46,11 @@ const Events = ({
           </ul>
         )}
 
-        <section className='mt-8'>
-          <h3 className='my-2 p-2 py-4 bg-grey-light text-center text-grey-darker uppercase font-normal hind text-sm'>Completed Events</h3>
-          <ul className="list-reset flex flex-wrap justify-center">
+        <section className="mt-8">
+          <h3 className="my-2 p-2 py-4 bg-grey-light text-center text-grey-darker uppercase font-normal hind text-sm">
+            Completed Events
+          </h3>
+          <ul className="list-reset lg:flex flex-wrap justify-center">
             {completedEvents &&
               completedEvents.result.map(id => (
                 <CompletedEvent

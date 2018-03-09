@@ -31,14 +31,14 @@ const renderSuggestion = (
       </div>
       <figcaption className="flex-grow text-sm">
         <h6 className="text-sm">{companyName}</h6>
-        <div className="flex justify-between">
+        <div className="lg:flex justify-between">
           <p>
             <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
             <span className="ml-3 text-grey-dark text-xxs">
               {membershipPlan || 'Not a '} Memeber
             </span>
           </p>
-          <div>
+          <div className="mt-2 lg:mt-0">
             {/* <Link to={`/app/profile/${id}`}>See profile</Link> */}
 
             <button
@@ -46,12 +46,13 @@ const renderSuggestion = (
                 sendFriendRequest(
                   { requestee: id, requester: auth.user.id },
                   auth.token
-                ).then(() => {
-                  toast.success('Connection request sent')
-                })
-                .catch(err => {
-                  toast.error(error.message)
-                })
+                )
+                  .then(() => {
+                    toast.success('Connection request sent')
+                  })
+                  .catch(err => {
+                    toast.error(error.message)
+                  })
               }
               className="px-3 py-1 bg-pink text-white text-xs"
             >
@@ -59,12 +60,12 @@ const renderSuggestion = (
             </button>
           </div>
         </div>
-        <p className="flex justify-between mt-4">
-          <span className="flex pr-6 justify-center">
+        <p className="lg:flex justify-between mt-4">
+          <span className="flex pr-6 lg:justify-center">
             <i className="ion-ios-email text-grey text-base" />
             <span className="ml-3 text-xs">{email}</span>
           </span>
-          <span className="flex pl-6 justify-center border-l border-grey-light">
+          <span className="flex lg:pl-6 lg:justify-center lg:border-l lg:border-grey-light">
             <i className="ion-ios-telephone text-grey text-base" />
             <span className="ml-3 text-xs">{companyPhone}</span>
           </span>
@@ -109,7 +110,7 @@ class Search extends Component {
     )
     this.stateSetUsers(filteredUsers)
   }
-  searchInput = (obj) => this.elements.searchInput = obj.input
+  searchInput = obj => (this.elements.searchInput = obj.input)
   componentDidUpdate(prevProps, prevState) {
     const { searchKey } = this.props
     if (searchKey !== prevProps.searchKey) {
@@ -142,16 +143,15 @@ class Search extends Component {
               renderSuggestion={suggestion =>
                 renderSuggestion(suggestion, auth, sendFriendRequest)
               }
-              ref ={this.searchInput}
-
+              ref={this.searchInput}
               shouldRenderSuggestions={shouldRenderSuggestions}
               inputProps={{
                 onChange: handleSearchInputChange,
                 value: searchTerm,
                 className:
                   'w-full py-6 px-4 font-normal text-sm text-grey-darker capitalize',
-                  placeholder: 'Add connection'
-                  // autoFocus: 'autofocus',
+                placeholder: 'Add connection',
+                // autoFocus: 'autofocus',
               }}
             />
             <button>
@@ -167,7 +167,7 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, searchBar: {key}, user, users }) => ({
+const mapStateToProps = ({ auth, searchBar: { key }, user, users }) => ({
   auth,
   searchKey: key,
   user,

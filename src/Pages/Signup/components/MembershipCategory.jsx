@@ -153,7 +153,7 @@ const Category = ({
     onClick={() => {
       setFieldValue('membershipPlan', name)
     }}
-    className={`membership-option lg:h-full lg:w-1/4 border-4 border-grey-lighter overflow-y-hidden cursor-pointer relative ${
+    className={`membership-option lg:h-full lg:w-1/4 border-4 border-grey-lighter overflow-y-hidden cursor-pointer relative lg:p-0 p-6 mb-4 ${
       recommended
         ? 'bg-pink-light text-white z-30 active'
         : 'bg-grey-lightest text-grey-darker'
@@ -161,7 +161,7 @@ const Category = ({
   >
     <div
       ref={ref => ref && simpleScrollbar.initEl(ref)}
-      className="lg:h-full overflow-y-scroll"
+      className="lg:h-full overflow-y-scroll lg:mb-0 mb-8"
     >
       <div className="flex flex-col justify-center items-center lg:py-8 lg:mb-6">
         {recommended && (

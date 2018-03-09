@@ -195,7 +195,7 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
     companyRepName2: data.companyRepName2,
     companyRepPhone2: data.companyRepPhone2,
     companyRepEmail2: data.companyRepEmail2,
-    regState: data.regState
+    regState: data.regState,
   }
 
   const fileParams = {
@@ -206,13 +206,20 @@ const companyRepresentativesSubmit = (data, { id, token }) => {
     companyRepCVUrl2: data.companyRepCVUrl2File,
   }
 
-  return Promise.all(Object.keys(fileParams).map((key) => {
-    if (!fileParams[key]) return Promise.resolve('')
-    return requestHandler(network.user.updateUserDetails)({ id, params: {
-      [key]: fileParams[key]
-    }, token })
-  }))
-  .then(() => requestHandler(network.user.updateUserDetails)({ id, params, token }))
+  return Promise.all(
+    Object.keys(fileParams).map(key => {
+      if (!fileParams[key]) return Promise.resolve('')
+      return requestHandler(network.user.updateUserDetails)({
+        id,
+        params: {
+          [key]: fileParams[key],
+        },
+        token,
+      })
+    })
+  ).then(() =>
+    requestHandler(network.user.updateUserDetails)({ id, params, token })
+  )
   // const params = data
 }
 

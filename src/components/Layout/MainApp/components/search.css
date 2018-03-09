@@ -1,7 +1,12 @@
+@import '../../../../css/variables.css';
+
 .topbar-search {
+  .react-autosuggest__container {
+    flex-grow: 1;
+  }
   .react-autosuggest__suggestions-container.react-autosuggest__suggestions-container--open {
     position: absolute;
-    width: 33vw;
+    width: @ms 100% @ml 33vw;
     height: calc(100vh - 64px);
     background-color: white;
     top: 100%;

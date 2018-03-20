@@ -43,3 +43,8 @@ export const payment = {
   membership: returnFullUrl('/api/v1/userpayments/memberships'),
   unsubscribeDue: returnFullUrl('/api/v1/unsubscribe'),
 }
+
+export const news = {
+  allNews: returnFullUrl('/api/v1/news'),
+  singleNews: (strs, id) => returnFullUrl('/api/v1/news/') + id,
+}

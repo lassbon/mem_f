@@ -8,6 +8,7 @@ const ChatsList = ({ getProps, users }) => {
         const friend = users.entities.users[id]
         return (
           <li
+            key={id}
             onClick={() => openChat(friend.id)}
             className="flex items-center py-4 border-b border-grey-light text-grey-dark cursor-pointer"
           >

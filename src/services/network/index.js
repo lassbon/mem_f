@@ -4,5 +4,6 @@ import * as social from './social'
 import * as general from './general'
 import * as event from './event'
 import * as payment from './payment'
+import * as news from './news'
 
-export default { event, login, user, social, general, payment }
+export default { event, login, user, social, general, news, payment }

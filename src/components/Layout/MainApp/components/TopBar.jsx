@@ -7,6 +7,8 @@ const pageTitles = {
   profile: 'Profile',
   events: 'Events',
   payment: 'Payments',
+  news: 'News',
+  projects: 'Projects',
 }
 
 const TopBar = ({ match }) => {

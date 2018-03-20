@@ -100,10 +100,16 @@ export const receiveMembershipPayment = payment => ({
   payload: payment,
 })
 
-
 // Hack
 
 export const changeSearchBarKey = key => ({
   type: actions.CHANGE_SEARCHBAR_KEY,
-  payload: key
+  payload: key,
+})
+
+// News
+
+export const receivedAllNews = news => ({
+  type: actions.RECEIVED_ALL_NEWS,
+  payload: news,
 })

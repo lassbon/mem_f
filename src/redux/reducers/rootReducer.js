@@ -9,6 +9,7 @@ import * as user from './user'
 import * as social from './social'
 import * as event from './event'
 import * as hack from './hack'
+import * as news from './news'
 
 const reducers = {
   ...auth,
@@ -16,6 +17,7 @@ const reducers = {
   fbDb: firebaseReducer,
   ...generic,
   ...hack,
+  ...news,
   routing: routerReducer,
   ...social,
   ...user,

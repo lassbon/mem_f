@@ -13,10 +13,14 @@ import OldmemberSignup from 'Pages/oldmember/Signup'
 import ForgotPassword from 'Pages/ForgotPassword'
 import ResetPassword from 'Pages/ResetPassword'
 import Signup from 'Pages/Signup'
+import NewsItem from 'pages/NewsItem'
+
 import Timeline from 'scenes/mainSections/Timeline'
 import Profile from 'scenes/mainSections/Profile'
 import Events from 'scenes/mainSections/Events'
 import Payment from 'scenes/mainSections/Payment'
+import News from 'scenes/mainSections/News'
+import Projects from 'scenes/mainSections/Projects'
 
 import RefereeConfirm from 'Pages/RefereeConfirm'
 
@@ -100,6 +104,36 @@ const App = () => {
           render={props => (
             <MainApp>
               <Events {...props} />
+            </MainApp>
+          )}
+        />
+
+        <Route
+          exact
+          path="/app/projects"
+          render={props => (
+            <MainApp>
+              <Projects {...props} />
+            </MainApp>
+          )}
+        />
+
+        <Route
+          exact
+          path="/app/news"
+          render={props => (
+            <MainApp>
+              <News {...props} />
+            </MainApp>
+          )}
+        />
+
+        <Route
+          exact
+          path="/app/news/:id"
+          render={props => (
+            <MainApp>
+              <NewsItem {...props} />
             </MainApp>
           )}
         />

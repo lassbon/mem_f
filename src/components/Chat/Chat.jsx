@@ -154,9 +154,9 @@ class Chat extends Component {
 
 const Chats = ({ chats, chattingWith, messages, user: { id } }) => {
   console.log('chatting with', chattingWith)
-  const chatted = chats[id][chattingWith]
+  const chatted = chats[id]
   if (!chatted) return 'Start chatting'
-  const myChats = chatted.messages
+  const myChats = chatted[chattingWith].messages
   const chatsArray = Object.values(myChats).map(value => messages[value])
   console.log('chatsArray', chatsArray)
   return (

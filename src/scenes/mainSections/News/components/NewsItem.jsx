@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 const NewsItem = ({ news: { author, body, createdAt, id, image, title } }) => {
@@ -17,7 +18,9 @@ const NewsItem = ({ news: { author, body, createdAt, id, image, title } }) => {
         </figure>
         <div className="flex-grow p-8 py-6">
           <h3 className="mb-2 text-3xl hind">{title}</h3>
-          <div className="text-grey text-sm mb-6">{createdAt}</div>
+          <div className="text-grey text-sm mb-6">
+            {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+          </div>
           <p className="text-sm text-grey-darker tracking-tight leading-normal">
             {body}
           </p>

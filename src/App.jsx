@@ -13,7 +13,7 @@ import OldmemberSignup from 'Pages/oldmember/Signup'
 import ForgotPassword from 'Pages/ForgotPassword'
 import ResetPassword from 'Pages/ResetPassword'
 import Signup from 'Pages/Signup'
-import NewsItem from 'pages/NewsItem'
+// import NewsItem from 'pages/NewsItem'
 
 import Timeline from 'scenes/mainSections/Timeline'
 import Profile from 'scenes/mainSections/Profile'
@@ -128,7 +128,7 @@ const App = () => {
           )}
         />
 
-        <Route
+        {/* <Route
           exact
           path="/app/news/:id"
           render={props => (
@@ -136,7 +136,7 @@ const App = () => {
               <NewsItem {...props} />
             </MainApp>
           )}
-        />
+        /> */}
 
         <Route
           exact

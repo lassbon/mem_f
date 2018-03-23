@@ -22,14 +22,15 @@ const NewsItem = ({ news: { author, body, createdAt, id, image, title } }) => {
             {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
           </div>
           <p className="text-sm text-grey-darker tracking-tight leading-normal">
-            {body}
+            {body.substring(0, 180)}
+            {body.length > 180 ? '...' : ''}
           </p>
-          {/* <Link
+          <Link
             to={`/app/news/${id}`}
             className="inline-block text-pink-dark mt-8 mb-4 text-sm"
           >
             Read more
-          </Link> */}
+          </Link>
         </div>
       </div>
     </li>

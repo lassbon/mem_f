@@ -126,7 +126,7 @@ class Timeline extends Component {
           >
             <div className="lg:h-full lg:py-8 lg:px-12 px-6 relative">
               <div className="flex lg:pb-4 border-b border-grey-lighter relative">
-                <span className="lg:w-24 lg:h-24 w-8 h-8 mr-4 rounded-full overflow-hidden">
+                <span className="lg:w-24 w-8 mr-4 rounded-lg overflow-hidden">
                   {!!profileImage ? (
                     <img src={profileImage} alt="" className="relative" />
                   ) : (

@@ -21,7 +21,7 @@ const Post = ({
               ? user.profileImage
               : '/static/images/011-woman-5.svg',
           }}
-          className="lg:w-24 lg:h-24 w-8 h-8 mr-4 rounded-full overflow-hidden"
+          className="lg:w-24 w-8 mr-4 rounded-lg overflow-hidden"
         >
           {!!user.profileImage ? (
             <img src={user.profileImage} alt="" className="relative" />

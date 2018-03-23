@@ -26,7 +26,7 @@ const TopBar = ({ match }) => {
         <span className="mr-4 text-xl">
           <i className="ion-ios-list-outline" />
         </span>
-        <h2 className="font-semibold">{title ? `Your ${title}` : ''}</h2>
+        <h2 className="font-semibold">{title ? `${title}` : ''}</h2>
       </div>
       <div className="flex items-center lg:px-16 text-2xl">
         {/* <span className="inline-block mr-8 flex justify-center items-center roboto uppercase font-semibold text-grey-dark text-xs">

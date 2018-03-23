@@ -19,61 +19,7 @@ const toastOptions = {
 }
 const onSuggestionsClearRequested = () => {}
 const getSuggestionValue = ({ companyName }) => companyName
-const renderSuggestion = (
-  { companyPhone, companyName, email, id, membershipPlan },
-  auth,
-  sendFriendRequest
-) => (
-  <div className="block pt-2 px-4 border-t border-grey-lighter bg-grey-lighter">
-    <figure className="flex px-8 py-6 bg-white">
-      <div className="w-8 mr-4">
-        <img src="/static/images/011-woman-5.svg" alt="" className="" />
-      </div>
-      <figcaption className="flex-grow text-sm">
-        <h6 className="text-sm">{companyName}</h6>
-        <div className="lg:flex justify-between">
-          <p>
-            <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
-            <span className="ml-3 text-grey-dark text-xxs">
-              {membershipPlan || 'Not a '} Memeber
-            </span>
-          </p>
-          <div className="mt-2 lg:mt-0">
-            {/* <Link to={`/app/profile/${id}`}>See profile</Link> */}
 
-            <button
-              onClick={() =>
-                sendFriendRequest(
-                  { requestee: id, requester: auth.user.id },
-                  auth.token
-                )
-                  .then(() => {
-                    toast.success('Connection request sent')
-                  })
-                  .catch(err => {
-                    toast.error(error.message)
-                  })
-              }
-              className="px-3 py-1 bg-pink text-white text-xs"
-            >
-              Connect
-            </button>
-          </div>
-        </div>
-        <p className="lg:flex justify-between mt-4">
-          <span className="flex pr-6 lg:justify-center">
-            <i className="ion-ios-email text-grey text-base" />
-            <span className="ml-3 text-xs">{email}</span>
-          </span>
-          <span className="flex lg:pl-6 lg:justify-center lg:border-l lg:border-grey-light">
-            <i className="ion-ios-telephone text-grey text-base" />
-            <span className="ml-3 text-xs">{companyPhone}</span>
-          </span>
-        </p>
-      </figcaption>
-    </figure>
-  </div>
-)
 const shouldRenderSuggestions = () => true
 
 class Search extends Component {
@@ -126,7 +72,65 @@ class Search extends Component {
       users: reduxUsers,
     } = this.props
     const { searchTerm, users } = this.state
-    const { handleSearchInputChange } = this
+    const { handleSearchInputChange, stateSetSearchTerm } = this
+
+    const renderSuggestion = (
+      { companyPhone, companyName, email, id, membershipPlan },
+      auth,
+      sendFriendRequest
+    ) => (
+      <div className="block pt-2 px-4 border-t border-grey-lighter bg-grey-lighter">
+        <figure className="flex px-8 py-6 bg-white">
+          <div className="w-8 mr-4">
+            <img src="/static/images/011-woman-5.svg" alt="" className="" />
+          </div>
+          <figcaption className="flex-grow text-sm">
+            <h6 className="text-sm">{companyName}</h6>
+            <div className="lg:flex justify-between">
+              <p>
+                <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
+                <span className="ml-3 text-grey-dark text-xxs">
+                  {membershipPlan || 'Not a '} Memeber
+                </span>
+              </p>
+              <div className="mt-2 lg:mt-0">
+                {/* <Link to={`/app/profile/${id}`}>See profile</Link> */}
+
+                <button
+                  onClick={() =>
+                    sendFriendRequest(
+                      { requestee: id, requester: auth.user.id },
+                      auth.token
+                    )
+                      .then(() => {
+                        toast.success('Connection request sent')
+                        stateSetSearchTerm('')
+                      })
+                      .catch(err => {
+                        stateSetSearchTerm('')
+                        toast.error(error.message)
+                      })
+                  }
+                  className="px-3 py-1 bg-pink text-white text-xs"
+                >
+                  Connect
+                </button>
+              </div>
+            </div>
+            <p className="lg:flex justify-between mt-4">
+              <span className="flex pr-6 lg:justify-center">
+                <i className="ion-ios-email text-grey text-base" />
+                <span className="ml-3 text-xs">{email}</span>
+              </span>
+              <span className="flex lg:pl-6 lg:justify-center lg:border-l lg:border-grey-light">
+                <i className="ion-ios-telephone text-grey text-base" />
+                <span className="ml-3 text-xs">{companyPhone}</span>
+              </span>
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+    )
     return (
       reduxUsers && (
         <>
@@ -143,7 +147,7 @@ class Search extends Component {
               renderSuggestion={suggestion =>
                 renderSuggestion(suggestion, auth, sendFriendRequest)
               }
-              ref={this.searchInput}
+              ref={el => !!el && this.searchInput}
               shouldRenderSuggestions={shouldRenderSuggestions}
               inputProps={{
                 onChange: handleSearchInputChange,

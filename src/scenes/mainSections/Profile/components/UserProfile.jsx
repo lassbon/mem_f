@@ -23,7 +23,7 @@ const UserProfile = ({
     {editing && <ProfileEdit stateSetEdit={stateSetEdit} />}
     <section className="lg:py-6 lg:px-12 py-8 px-6 bg-pink-lightest">
       <figure className="lg:inline-block pb-6 border-b border-grey-light">
-        <div className="flex">
+        <div className="">
           <div className="w-24 mb-4  mr-4 bg-red-lighter rounded border-8 border-solid border-white overflow-hidden relative">
             <div className="w-full h-full absolute pin-t pin-l -mt-8 bg-yellow-light rounded-full" />
             {!!profileImage ? (
@@ -36,8 +36,8 @@ const UserProfile = ({
               />
             )}
           </div>
-          <div className="py-4 text-grey-dark">
-            <span onClick={() => stateSetEdit(true)} className="">
+          <div className="pb-4 text-grey-dark">
+            <span onClick={() => stateSetEdit(true)} className="pointer">
               <i className="ion-edit mr-1" />
               Edit profile
             </span>

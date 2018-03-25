@@ -26,6 +26,8 @@ const enhancer = dev
 const initialState = undefined
 const store = createStore(rootReducer, initialState, enhancer)
 
-// store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => {
+  window.postMessage(store.getState(), '*')
+})
 
 export default store

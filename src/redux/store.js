@@ -27,7 +27,7 @@ const initialState = undefined
 const store = createStore(rootReducer, initialState, enhancer)
 
 store.subscribe(() => {
-  window.postMessage(store.getState(), '*')
+  window.postMessage(JSON.stringify(store.getState()), '*')
 })
 
 export default store

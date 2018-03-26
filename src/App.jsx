@@ -14,6 +14,7 @@ import ForgotPassword from 'Pages/ForgotPassword'
 import ResetPassword from 'Pages/ResetPassword'
 import Signup from 'Pages/Signup'
 import NewsItem from 'Pages/NewsItem'
+import Project from 'Pages/Project'
 
 import Timeline from 'scenes/mainSections/Timeline'
 import Profile from 'scenes/mainSections/Profile'
@@ -114,6 +115,16 @@ const App = () => {
           render={props => (
             <MainApp>
               <Projects {...props} />
+            </MainApp>
+          )}
+        />
+
+        <Route
+          exact
+          path="/app/projects/:status/:id"
+          render={props => (
+            <MainApp>
+              <Project {...props} />
             </MainApp>
           )}
         />

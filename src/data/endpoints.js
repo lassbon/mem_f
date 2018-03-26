@@ -39,6 +39,15 @@ export const events = {
   likeEvent: returnFullUrl('/api/v1/events/like'),
 }
 
+export const projects = {
+  completed: returnFullUrl('/api/v1/projects/completed'),
+  ongoing: returnFullUrl('/api/v1/projects/ongoing'),
+  like: returnFullUrl('/api/v1/projects/like'),
+  ongoingProject: (strs, id) => returnFullUrl('/api/v1/projects/ongoing/') + id,
+  completedProject: (strs, id) =>
+    returnFullUrl('/api/v1/projects/completed/') + id,
+}
+
 export const payment = {
   membership: returnFullUrl('/api/v1/userpayments/memberships'),
   unsubscribeDue: returnFullUrl('/api/v1/unsubscribe'),

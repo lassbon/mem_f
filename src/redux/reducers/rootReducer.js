@@ -8,6 +8,7 @@ import * as auth from './auth'
 import * as user from './user'
 import * as social from './social'
 import * as event from './event'
+import * as projects from './projects'
 import * as hack from './hack'
 import * as news from './news'
 
@@ -18,6 +19,7 @@ const reducers = {
   ...generic,
   ...hack,
   ...news,
+  ...projects,
   routing: routerReducer,
   ...social,
   ...user,

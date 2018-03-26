@@ -93,6 +93,18 @@ export const likedEvent = event => ({
   payload: event,
 })
 
+// Project
+
+export const receivedOngoingProjects = ongoingProjects => ({
+  type: actions.RECEIVED_ONGOING_PROJECTS,
+  payload: ongoingProjects,
+})
+
+export const receivedCompletedProjects = completedProjects => ({
+  type: actions.RECEIVED_COMPLETED_PROJECTS,
+  payload: completedProjects,
+})
+
 // Payment
 
 export const receiveMembershipPayment = payment => ({

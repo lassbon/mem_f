@@ -41,7 +41,7 @@ const MainNav = () => (
           <span className="">Event</span>
         </Link>
       </li>
-      {/* <li className="mb-4 border-b border-solid border-grey-lighter">
+      <li className="mb-4 border-b border-solid border-grey-lighter">
         <Link to="/app/projects" className="flex items-center  pb-4">
           {' '}
           <span className="inline-block w-8 mr-4">
@@ -49,7 +49,7 @@ const MainNav = () => (
           </span>
           <span className="">Projects</span>
         </Link>
-      </li> */}
+      </li>
       <li className="mb-4 border-b border-solid border-grey-lighter">
         <Link to="/app/news" className="flex items-center  pb-4">
           {' '}

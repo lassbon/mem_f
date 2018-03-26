@@ -13,12 +13,12 @@ const Friend = ({ friend: { companyName, companyPhone, email } }) => {
             <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
             <span className="ml-3 text-grey-dark text-xxs">Gold Memeber</span>
           </p>
-          <p className="flex justify-center mt-4">
+          <p className="flex flex-wrap mt-4">
             <span className="flex pr-6 justify-center">
               <i className="ion-ios-email text-grey text-base" />
               <span className="ml-3 text-xs">{email}</span>
             </span>
-            <span className="flex pl-6 justify-center border-l border-grey-light">
+            <span className="flex justify-center ">
               <i className="ion-ios-telephone text-grey text-base" />
               <span className="ml-3 text-xs">{companyPhone}</span>
             </span>

@@ -44,6 +44,28 @@ const Connections = ({
         </h3>
         <div>
           {friends &&
+            friends.result.length === 0 &&
+            friendRequests.result.length === 0 && (
+              <div className="empty-state-container lg:absolute lg:w-full lg:px-12 lg:mt-8 py-6">
+                <figure className="flex flex-col justify-center items-center">
+                  <div className="w-1/3">
+                    <img src="/static/images/empty.svg" alt="" />
+                  </div>
+                  <figcaption className="text-center pt-4 text-grey-darker">
+                    <p className="mb-4">You don't have any connections</p>
+                    <span className="">
+                      <button
+                        onClick={() => changeSearchBarKey(Math.random())}
+                        className="px-4 py-2 bg-pink-dark text-white rounded-sm"
+                      >
+                        Add Connection
+                      </button>
+                    </span>
+                  </figcaption>
+                </figure>
+              </div>
+            )}
+          {friends &&
             friends.result.length > -1 && (
               <ul className="list-reset">
                 {friends.result.map(id => {
@@ -52,26 +74,7 @@ const Connections = ({
                 })}
               </ul>
             )}
-          {friendRequests.result.length === 0 || !friends ? (
-            <div className="empty-state-container lg:absolute lg:w-full lg:px-12 lg:mt-8 py-6">
-              <figure className="flex flex-col justify-center items-center">
-                <div className="w-1/3">
-                  <img src="/static/images/empty.svg" alt="" />
-                </div>
-                <figcaption className="text-center pt-4 text-grey-darker">
-                  <p className="mb-4">You don't have any connections</p>
-                  <span className="">
-                    <button
-                      onClick={() => changeSearchBarKey(Math.random())}
-                      className="px-4 py-2 bg-pink-dark text-white rounded-sm"
-                    >
-                      Add Connection
-                    </button>
-                  </span>
-                </figcaption>
-              </figure>
-            </div>
-          ) : (
+          {friendRequests.result.length === 0 || !friends ? null : (
             <ul className="list-reset">
               {friendRequests.result.map(id => {
                 const request = friendRequests.entities.requests[id]

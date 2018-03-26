@@ -109,9 +109,9 @@ class Login extends Component {
                         return Promise.resolve('')
                       })
                       .catch(error => {
-                        // toast.error(
-                        //   error.message || 'An error occured. Please try again.'
-                        // )
+                        toast.error(
+                          error.message || 'An error occured. Please try again.'
+                        )
                         console.error(error.message)
                         return Promise.resolve('')
                       })

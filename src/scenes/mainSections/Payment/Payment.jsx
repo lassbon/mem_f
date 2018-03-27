@@ -22,7 +22,7 @@ class Payment extends Component {
     console.log(user)
     return (
       <div className="lg:flex flex-wrap lg:px-16 px-6 py-8">
-        <div className="lg:w-4/5 lg:pr-6 mb-6">
+        <div className="lg:w-1/2 lg:pr-6 mb-6">
           <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-pink rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>
@@ -49,7 +49,7 @@ class Payment extends Component {
             </div>
           </div>
         </div>
-        <div className="lg:w-4/5 lg:pr-6 mb-6">
+        <div className="lg:w-1/2 lg:pr-6 mb-6">
           <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-purple-light rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>
@@ -74,7 +74,7 @@ class Payment extends Component {
             </div>
           </div>
         </div>
-        <div className="lg:w-4/5 lg:pr-6 mb-6">
+        <div className="lg:w-1/2 lg:pr-6 mb-6">
           <div className="lg:lt-shadow shadow-md bg-white rounded p-px">
             <div className="flex p-4 bg-teal rounded text-xs text-white capitalize">
               <span className="flex-grow">Type</span>

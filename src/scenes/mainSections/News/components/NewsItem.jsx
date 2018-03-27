@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const NewsItem = ({ news: { author, body, createdAt, id, image, title } }) => {
   return (
-    <li className="lg:w-1/2 lg:pl-4 mb-6">
+    <li className="lg:w-1/3 lg:pl-4 mb-6">
       <div className=" bg-white lg:lt-shadow">
         <figure
           style={

@@ -21,12 +21,15 @@ class Chat extends Component {
   state = {
     chatting: false,
     chattingWith: '',
+    expanded: false,
     sendingMessage: false,
   }
   stateSetChatting = chatting =>
     this.setState(state => ({ ...state, chatting }))
   stateSetChattingWith = chattingWith =>
     this.setState(state => ({ ...state, chattingWith }))
+  stateSetExpanded = expanded =>
+    this.setState(state => ({ ...state, expanded }))
   openChat = id => {
     this.stateSetChatting(true)
     this.stateSetChattingWith(id)
@@ -52,34 +55,41 @@ class Chat extends Component {
   }
   render() {
     const { chats, firebase, messages, user, users } = this.props
-    const { chatting, chattingWith } = this.state
+    const { chatting, chattingWith, expanded } = this.state
     // console.log('firebase', firebase)
     const chatsListGetProps = () => ({
       openChat: this.openChat,
     })
-    return (
-      <div className="chat lg:h-full  z-50 ">
-        <header className="py-6 text-center">
-          <h2 className="text-grey-dark text-sm font-normal">
-            {chatting ? (
-              <button onClick={() => this.stateSetChatting(false)}>
-                <div>
-                  <span>
-                    <i className="ion-arrow-left-c" />
-                  </span>
-                  {users.entities.users[chattingWith].email}
-                </div>
-              </button>
-            ) : (
-              'Chat'
-            )}
-          </h2>
-        </header>
+    return expanded ? (
+      <div
+        style={
+          {
+            // height: 'calc(100vh - (68 * 2))',
+          }
+        }
+        className="chat below-top-bar lg:bg-white z-50 relative"
+      >
         {!chatting && (
           <div
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="below-top-bar bg-grey-lighter overflow-y-scroll"
+            className="lg:h-full bg-white shadow-lg overflow-y-scroll"
           >
+            <header className="py-6 text-center">
+              <h2 className="text-grey-dark text-sm font-normal">
+                {chatting ? (
+                  <button onClick={() => this.stateSetChatting(false)}>
+                    <div>
+                      <span>
+                        <i className="ion-arrow-left-c" />
+                      </span>
+                      {users.entities.users[chattingWith].email}
+                    </div>
+                  </button>
+                ) : (
+                  'Chat'
+                )}
+              </h2>
+            </header>
             <ChatsList getProps={chatsListGetProps} users={users} />
           </div>
         )}
@@ -147,6 +157,23 @@ class Chat extends Component {
         {/* <button className="w-12 h-12 rounded-full bg-red-light text-white">
           <i className="ion-chatboxes" />
         </button> */}
+        <div className="absolute pin-b pin-r mb-8 mr-8 z-40">
+          <button
+            onClick={() => this.stateSetExpanded(false)}
+            className="w-16 h-16 rounded-full bg-red-light lg:lt-shadow text-lg"
+          >
+            <i className="text-white ion-close-round" />
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div>
+        <button
+          onClick={() => this.stateSetExpanded(true)}
+          className="w-16 h-16 mb-8 mr-8 rounded-full bg-blue-lighter lg:lt-shadow text-lg"
+        >
+          <i className="text-white ion-chatbubbles" />
+        </button>
       </div>
     )
   }

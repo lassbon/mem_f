@@ -2,7 +2,7 @@ import React from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 
 const toastOptions = {
-  position: toast.POSITION.TOP_CENTER,
+  position: toast.POSITION.BOTTOM_CENTER,
   autoClose: 3 * 60 * 60,
 }
 

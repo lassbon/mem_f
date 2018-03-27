@@ -105,6 +105,16 @@ export const receivedCompletedProjects = completedProjects => ({
   payload: completedProjects,
 })
 
+export const likedProject = project => ({
+  type: actions.LIKED_PROJECT,
+  payload: project,
+})
+
+export const createdProjectComment = project => ({
+  type: actions.CREATED_PROJECT_COMMENT,
+  payload: project,
+})
+
 // Payment
 
 export const receiveMembershipPayment = payment => ({

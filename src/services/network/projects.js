@@ -26,3 +26,17 @@ export const fetchCompletedProject = ({ id, token }) =>
     headers: authGetRequestHeaders(token),
     method: 'GET',
   })
+
+export const likeProject = ({ params, token }) =>
+  fetch(endpoints.projects.likeProject, {
+    body: JSON.stringify(params),
+    headers: authPostRequestHeaders(token),
+    method: 'POST',
+  })
+
+export const createComment = ({ params, token }) =>
+  fetch(endpoints.projects.comments, {
+    body: JSON.stringify(params),
+    headers: authPostRequestHeaders(token),
+    method: 'POST',
+  })

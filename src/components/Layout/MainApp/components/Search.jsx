@@ -147,7 +147,7 @@ class Search extends Component {
               renderSuggestion={suggestion =>
                 renderSuggestion(suggestion, auth, sendFriendRequest)
               }
-              ref={el => !!el && this.searchInput}
+              ref={el => !!el && this.searchInput(el)}
               shouldRenderSuggestions={shouldRenderSuggestions}
               inputProps={{
                 onChange: handleSearchInputChange,

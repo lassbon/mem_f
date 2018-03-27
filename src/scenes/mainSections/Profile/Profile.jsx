@@ -21,7 +21,7 @@ class Profile extends Component {
         <div className="lg:flex flex-wrap lg:h-full lg:w-1/2 lg:pr-2 py-6">
           <section
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="lg:inline-block lg:h-full lg:overflow-y-scroll lg:p-0 px-6 lg:flex-grow lg:mb-4 lg:mr-4 bg-white lg:lt-shadow relative"
+            className="lg:h-full overflow-y-scroll lg:p-0 px-6 lg:flex-grow  lg:mr-4 bg-white lg:lt-shadow relative"
           >
             {<Connections />}
           </section>

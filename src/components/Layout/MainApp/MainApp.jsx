@@ -28,14 +28,14 @@ const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
   ) : (
     <>
       <div className="lg:flex main-app lg:h-screen ">
-        <div className="lg:w-3/4">
+        <div className="lg:w-full">
           <TopBar />
           <div className="below-top-bar lg:flex">
             <Sidebar />
-            <main className="lg:w-3/4 lg:h-full">{children}</main>
+            <main className="lg:w-4/5 lg:h-full">{children}</main>
           </div>
         </div>
-        <div className="lg:w-1/4 lg:h-full">
+        <div className="absolute pin-b pin-r z-50">
           <Chat />
         </div>
       </div>

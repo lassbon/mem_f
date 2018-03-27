@@ -119,10 +119,10 @@ class Timeline extends Component {
       <>
         <ToastContainer {...toastOptions} />
 
-        <section className=" lg:h-full">
+        <section className=" lg:h-full bg-grey-lighter">
           <div
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="lg:h-full bg-grey-lighter border-r border-grey-light"
+            className="lg:w-3/4 lg:h-full "
           >
             <div className="lg:h-full lg:py-8 lg:px-12 px-6 relative">
               <div className="flex lg:pb-4 border-b border-grey-lighter relative">

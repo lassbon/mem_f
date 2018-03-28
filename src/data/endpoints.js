@@ -55,6 +55,8 @@ export const payment = {
 }
 
 export const news = {
-  allNews: returnFullUrl('/api/v1/news'),
-  singleNews: (strs, id) => returnFullUrl('/api/v1/news/') + id,
+  allNews: returnFullUrl('/api/v1/getnews'),
+  singleNews: (strs, id) => returnFullUrl('/api/v1/getnews/') + id,
+  comments: returnFullUrl('/api/v1/news/comment'),
+  likeNews: returnFullUrl('/api/v1/news/like'),
 }

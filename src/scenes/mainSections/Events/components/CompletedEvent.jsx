@@ -11,7 +11,7 @@ class CompletedEvent extends Component {
     const { event, likeEvent, token, user } = this.props
     const { expanded } = this.state
     return (
-      <li className="lg:w-1/2 lg:pr-8 mb-6 relative">
+      <li className="lg:w-1/3 lg:pr-8 mb-6 relative">
         <div className="relative">
           <div className="rounded-lg overflow-hidden bg-white lg:lt-shadow relative">
             <div className="absolute ml-4 mt-4 px-4 py-2 bg-white rounded-full text-xs text-grey-darkest font-semibold z-20">

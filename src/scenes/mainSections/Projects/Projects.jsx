@@ -74,7 +74,9 @@ const Projects = ({
                         {/* <span>End date</span> */}
                       </div>
 
-                      <p className="mt-4">{project.description}</p>
+                      <p className="mt-4">
+                        {project.description.replace('ACCI ', '')}
+                      </p>
                     </div>
                   </div>
                 </Link>

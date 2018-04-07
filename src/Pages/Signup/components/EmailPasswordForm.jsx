@@ -18,7 +18,7 @@ const EmailPasswordForm = ({
       <div className="pb-4">
         <fieldset className="lg:w-1/2 mb-6">
           <label htmlFor="" className="mb-4 text-xs text-grey">
-            Company E-mail
+            Your E-mail
           </label>
           <StyledInput
             name="email"

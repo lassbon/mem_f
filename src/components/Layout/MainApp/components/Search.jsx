@@ -136,7 +136,7 @@ class Search extends Component {
         <>
           <ToastContainer {...toastOptions} />
           <form className="topbar-search flex items-center px-6 bg-pink-lighter text-grey-darker relative z-20">
-            <span className="text-sm">
+            <span className="text-sm text-white">
               <i className="ion-ios-search-strong" />
             </span>
             <Autosuggest
@@ -153,7 +153,7 @@ class Search extends Component {
                 onChange: handleSearchInputChange,
                 value: searchTerm,
                 className:
-                  'w-full py-6 px-4 font-normal text-sm text-grey-darker capitalize',
+                  'w-full py-6 px-4 font-normal text-sm text-white capitalize',
                 placeholder: 'Add connection',
                 // autoFocus: 'autofocus',
               }}

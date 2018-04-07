@@ -191,14 +191,14 @@ class Login extends Component {
                   }}
                 />
               </div>
-              <div className="lg:w-1/2 flex justify-center items-center text-white text-3xl font-bold lg:absolute pin-t pin-r h-full p-8 lg:p-0 mt-6 lg:mt-0 bg-grey login-side">
-                {/* <img
-                  src="/static/images/undraw_safe_bnk7.svg"
-                  alt=""
-                  className="lg:w-64"
-                /> */}
+              <div className="lg:w-1/2 flex flex-col justify-center items-center text-white text-3xl font-bold lg:absolute pin-t pin-r h-full p-8 lg:p-0 mt-6 lg:mt-0 bg-pink-light">
+                <img
+                  src="/static/images/airbevy_logo_white.png"
+                  alt="Logo"
+                  className="lg:w-64 mb-4"
+                />
                 <div className="w-2/3 text-center">
-                  Welcome to ACCI membership platform
+                  Welcome!
                 </div>
               </div>
             </div>

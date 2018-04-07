@@ -1,4 +1,4 @@
-export const baseUrl = 'https://acciapi.ml'
+export const baseUrl = 'http://localhost:1337'
 const returnFullUrl = url => baseUrl + url
 
 export const user = {

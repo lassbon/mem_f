@@ -19,7 +19,7 @@ const PaymentManager = ({
 }) => (
   <>
     <div className="flex lg:flex-nowrap flex-wrap">
-      <RegistrationPayment
+      {/* <RegistrationPayment // registration payment
         getUserDetails={getUserDetails}
         registrationStage={registrationStage}
         stateIncrementRegistrationStage={stateIncrementRegistrationStage}
@@ -46,8 +46,8 @@ const PaymentManager = ({
           user={user}
           auth={auth}
         />
-      ) : null}
-      {registrationStage > 6 ? (
+      ) : null} */}
+      {registrationStage >= 1 ? (
         <MembershipPayment
           getUserDetails={getUserDetails}
           registrationStage={registrationStage}

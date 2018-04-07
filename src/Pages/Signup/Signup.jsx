@@ -13,14 +13,14 @@ import './styles.css'
 import { logOut } from 'redux/action_creators'
 // Data
 
-const noOfForms = 4
+const noOfForms = 1
 const registrationStageTitles = [
-  'Company details',
+  //'Company details',
   'Membership category',
-  'Company rep',
-  'Referrals',
-  'Registration fee',
-  'Annual fee',
+  //'Company rep',
+  //'Referrals',
+  //'Registration fee',
+  //'Annual fee',
   'Membership fee',
 ]
 const loadingText = 'Checking and submitting your details, please wait.'
@@ -197,7 +197,7 @@ class Signup extends Component {
                         stateSetLoading={stateSetLoading}
                       />
                     )}
-                    {registrationStage > 3 ? (
+                    {registrationStage >= 1 ? (
                       <PaymentManager
                         auth={auth}
                         registrationStage={registrationStage}

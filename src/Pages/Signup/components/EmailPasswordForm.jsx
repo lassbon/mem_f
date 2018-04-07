@@ -16,7 +16,25 @@ const EmailPasswordForm = ({
   return (
     <form action="" onSubmit={handleSubmit}>
       <div className="pb-4">
-        <fieldset className="lg:w-1/2 mb-6">
+        <div className="lg:flex">
+        <fieldset className="lg:w-1/2 block lg:mr-3 mb-6">
+          <label htmlFor="" className="mb-4 text-xs text-grey">
+            Your Name
+          </label>
+          <StyledInput
+            name="companyName"
+            type="text"
+            placeholder="Name"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.companyName}
+          />
+          <InputError
+            touched={touched.companyName}
+            error={errors.companyName}
+          />
+        </fieldset>
+        <fieldset className="lg:w-1/2 flex-1 block lg:ml-3 mb-6">
           <label htmlFor="" className="mb-4 text-xs text-grey">
             Your E-mail
           </label>
@@ -30,6 +48,7 @@ const EmailPasswordForm = ({
           />
           <InputError touched={touched.email} error={errors.email} />
         </fieldset>
+        </div>
         <div className="lg:flex">
           <fieldset className="lg:w-1/2 block lg:mr-3 mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">

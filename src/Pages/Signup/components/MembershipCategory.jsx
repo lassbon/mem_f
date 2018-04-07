@@ -83,12 +83,13 @@ class MembershipPayment extends Component {
     this.setState(state => ({ ...state, membershipCategories }))
   componentDidMount() {
     const { token } = this.props
+    console.log(token);
 
     this.stateSetLoadingLevels(true)
     requestHandler(network.general.fetchMembershipLevels)({ token })
       .then(this.stateSetMembershipCategories)
       .catch(err => {
-        toast.err(
+        toast.error(
           'Sorry, an error occured while trying to fetch membership levels. Please check your internet connection and reload the page.'
         )
       })

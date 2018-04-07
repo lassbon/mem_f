@@ -1,12 +1,12 @@
 import * as firebase from 'firebase'
 
 export const config = {
-  apiKey: 'AIzaSyAQO22DDG4BWslDZ1s48mNVgWRJjrUp6T4',
-  authDomain: 'acci-d7fb6.firebaseapp.com',
-  databaseURL: 'https://acci-d7fb6.firebaseio.com',
-  projectId: 'acci-d7fb6',
-  storageBucket: 'acci-d7fb6.appspot.com',
-  messagingSenderId: '451413706048',
+  apiKey: 'AIzaSyAokrr_wGym56A5922gW7povVtDfHwuet4',
+  authDomain: 'airbevy-fdd3d.firebaseapp.com',
+  databaseURL: 'https://airbevy-fdd3d.firebaseio.com',
+  projectId: 'airbevy-fdd3d',
+  storageBucket: 'airbevy-fdd3d.appspot.com',
+  messagingSenderId: '397376852974'
 }
 
 const app = firebase.initializeApp(config)

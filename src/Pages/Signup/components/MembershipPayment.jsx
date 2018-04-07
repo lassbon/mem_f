@@ -26,11 +26,23 @@ const callback = (
     'class',
     'text-sm text-grey-darker text-left'
   )
-  emailSubmitPopupContent.innerHTML = `\nCongratulations ${companyName} you are now a member of ACCI. Your Membership ID is ${membershipId}`
+  emailSubmitPopupContent.innerHTML = `\nCongratulations ${companyName} you are now a member of Test AirBevy organization. Your Membership ID is ${membershipId}`
 
   requestHandler(network.user.updateUserDetails)({
     id,
-    params: { regState: 8 },
+    params: { // for demo
+      regState: 8,
+      approved: true,
+      verified: true,
+      membershipDue: "paid",
+      membershipFee: "paid",
+      membershipStatus: "active",
+      referred1: true,
+      referred2: true,
+      registrationFee: "paid",
+      dueDate: `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()+1}` 
+    },
+    //params: { regState: 8 },
     token,
   })
     .then(() => getUserDetails(id, token))

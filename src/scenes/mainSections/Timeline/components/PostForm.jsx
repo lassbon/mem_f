@@ -26,6 +26,10 @@ const PostForm = ({ fetchPosts, id, token }) => (
   <Formik
     initialValues={{ ...initialValues, owner: id }}
     onSubmit={(values, { setFieldValue }) => {
+      if (!values.postText.replace(/\s/g, '').length && !values.postImagePreview.replace(/\s/g, '').length) {
+        // postText only contained whitespace (ie. spaces, tabs or line breaks)
+        return 0;
+      }
       setFieldValue('submitingPost', true)
       requestHandler(network.social.createTimelinePost)({
         params: {

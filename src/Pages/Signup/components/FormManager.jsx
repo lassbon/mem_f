@@ -44,12 +44,14 @@ emailSubmitPopupContent.innerHTML = `\nYou have been successfully registered. \n
 // Email and Password Form stuff
 
 const emailPasswordFormInitialValues = {
+  companyName: '',
   email: '',
   password: '',
   confirmPassword: '',
 }
 
 const emailPasswordValidationFunctions = {
+  companyName: notEmptyOrNumber,
   email: String.isEmailLike,
   password: password => String.length.gte(password, minPasswordLength),
   confirmPassword: (confirmPassword, { password }) =>
@@ -57,6 +59,7 @@ const emailPasswordValidationFunctions = {
 }
 
 const emailPasswordErrorMessages = {
+  companyName: 'Please enter your name',
   email: 'Please enter a valid email.',
   password: 'Please enter a password that is at least 6 characters.',
   confirmPassword: 'Passwords must match',
@@ -83,7 +86,7 @@ const CompanyDetailsFormInitialValues = {
   employees: '',
   annualReturn: '',
   annualProfit: '',
-  regState: 1,
+  regState: 1, // company details is disabled so ignore regstate
 }
 
 const companyDetailsValidationFunctions = {
@@ -117,7 +120,7 @@ const companyDetailsSubmitCallback = companyDetailsResponse =>
 
 const membershipCategoryFormInitialValues = {
   membershipPlan: '',
-  regState: 2,
+  regState: 1, // regstate set to 1 as company details is disabled, change to 2 or stage number if any stages are added before it
 }
 
 const membershipCategoryValidationFunctions = {
@@ -156,7 +159,7 @@ const companyRepresentativesFormInitialValues = {
 
   companyRepPassportUrl2File: '',
   companyRepCVUrl2File: '',
-  regState: 3,
+  regState: 2,
 }
 
 const companyRepresentativesFormValidationFunctions = {
@@ -230,7 +233,7 @@ const financialMembersFormInitialValues = {
   referee1: '',
   financialMemberId2: '',
   referee2: '',
-  regState: 4,
+  regState: 3,
 }
 
 const financialMembersFormValidationFunctions = {
@@ -279,38 +282,38 @@ const financialMembersSubmit = (params, { token, id }) => {
     })
 }
 
-// Registration process
+// Registration process (Companydetails, companyrepresentative, financial members disabled)
 
 const registrationForms = [
   EmailPasswordForm,
-  CompanyDetailsForm,
+  //CompanyDetailsForm,
   MembershipCategory,
-  CompanyRepresentativesForm,
-  FinancialMembersForm,
+  //CompanyRepresentativesForm,
+  //FinancialMembersForm,
 ]
 
 const registrationFormsInitialValues = [
   emailPasswordFormInitialValues,
-  CompanyDetailsFormInitialValues,
+  //CompanyDetailsFormInitialValues,
   membershipCategoryFormInitialValues,
-  companyRepresentativesFormInitialValues,
-  financialMembersFormInitialValues,
+  //companyRepresentativesFormInitialValues,
+  //financialMembersFormInitialValues,
 ]
 
 const registrationFormValidationFunctions = [
   emailPasswordValidationFunctions,
-  companyDetailsValidationFunctions,
+  //companyDetailsValidationFunctions,
   membershipCategoryValidationFunctions,
-  companyRepresentativesFormValidationFunctions,
-  financialMembersFormValidationFunctions,
+  //companyRepresentativesFormValidationFunctions,
+  //financialMembersFormValidationFunctions,
 ]
 
 const registrationFormsErrorMessages = [
   emailPasswordErrorMessages,
-  companyDetailsErrorMessages,
+  //companyDetailsErrorMessages,
   membershipCategoryErrorMessages,
-  companyRepresentativesErrorMessages,
-  financialMembersErrorMessages,
+  //companyRepresentativesErrorMessages,
+  //financialMembersErrorMessages,
 ]
 
 // Registration helper functions
@@ -346,12 +349,12 @@ const FormManager = props => {
   const errorMessages = registrationFormsErrorMessages[registrationStage]
   const registrationFormsSubmitFuntions = [
     emailPasswordSubmit,
-    params => {
-      const { user: { id }, token } = auth
-      return companyDetailsSubmit(params, { id, token }).then(() => {
-        return getUserDetails(id, token)
-      })
-    },
+    // params => {
+    //   const { user: { id }, token } = auth
+    //   return companyDetailsSubmit(params, { id, token }).then(() => {
+    //     return getUserDetails(id, token)
+    //   })
+    // },
     params => {
       const { user: { id }, token } = auth
       return membershipCategorySubmit(params, { id, token }).then(() => {
@@ -374,10 +377,10 @@ const FormManager = props => {
   ]
   const registrationSubmitCallbacks = [
     emailPasswordSubmitCallback,
+    //() => {},
     () => {},
-    () => {},
-    () => {},
-    () => {},
+    //() => {},
+    //() => {},
   ]
 
   return (
@@ -388,7 +391,7 @@ const FormManager = props => {
         initialValues={currenrFormInitialValues}
         onSubmit={values => {
           // console.log(values)
-          // console.log(registrationStage)
+          console.log(registrationStage)
           stateSetLoading(true)
           registrationFormsSubmitFuntions[registrationStage](values)
             .then(() => Promise.resolve(stateIncrementRegistrationStage()))
@@ -423,6 +426,7 @@ const mapDispatchToProps = dispatch => ({
       requestHandler(network.user.registerUser)({ params })
         .then(() => requestHandler(network.login.login)({ params }))
         .then(loginResponseData => {
+          dispatch(receivedLoginAuthDetails(loginResponseData)) // this because the next stage requires an API call, so update token in state
           return requestHandler(network.user.getUserDetails)({
             id: loginResponseData.user.id,
             token: loginResponseData.token,

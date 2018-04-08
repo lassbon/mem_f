@@ -45,6 +45,8 @@ emailSubmitPopupContent.innerHTML = `\nYou have been successfully registered. \n
 
 const emailPasswordFormInitialValues = {
   companyName: '',
+  companyAddress: '',
+  companyPhone: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -52,6 +54,7 @@ const emailPasswordFormInitialValues = {
 
 const emailPasswordValidationFunctions = {
   companyName: notEmptyOrNumber,
+  companyPhone: validatePhoneNumer,
   email: String.isEmailLike,
   password: password => String.length.gte(password, minPasswordLength),
   confirmPassword: (confirmPassword, { password }) =>
@@ -60,6 +63,7 @@ const emailPasswordValidationFunctions = {
 
 const emailPasswordErrorMessages = {
   companyName: 'Please enter your name',
+  companyPhone: 'Please enter a valid 11 digit phone number',
   email: 'Please enter a valid email.',
   password: 'Please enter a password that is at least 6 characters.',
   confirmPassword: 'Passwords must match',

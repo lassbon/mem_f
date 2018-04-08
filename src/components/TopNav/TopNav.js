@@ -8,7 +8,7 @@ import { logout } from '../../actions/auth'
 
 import './TopNav.css'
 
-const BASEURL = 'https://acciapi.ml/'
+const BASEURL = 'https://airbevy-api.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io'
 
 class TopNav extends React.Component {

@@ -152,7 +152,7 @@ class OngoingEvent extends Component {
                   reference={new Date().valueOf() + ''}
                   email={user.email}
                   amount={event.fee * 100}
-                  paystackkey="pk_test_3f720e9be8c5fe77ca5035fa439794538e42ab63"
+                  paystackkey="pk_test_29cf8e5e061acc51789cea04daaf4ca60acc6b80"
                   metadata={metadata}
                 />
               </div>

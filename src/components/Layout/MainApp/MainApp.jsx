@@ -57,6 +57,23 @@ const mapDispatchToProps = dispatch => ({
   fetchUsers: token =>
     dispatch(async (dispatch, getState, { network }) => {
       const users = await requestHandler(network.user.fetchUsers)({ token })
+      users.map(function(id) {
+        if  (id.profileImage && id.profileImage.substring(0, 4) !== 'data')  { // url is not a blob convert to blob
+          const xmlhttp=new XMLHttpRequest();
+          xmlhttp.open("GET", id.profileImage, true);
+          xmlhttp.onreadystatechange = function()
+          {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+              {
+                id.profileImage = xmlhttp.responseText
+                dispatch(receivedUsers(users))
+                return id
+              }
+          }
+          xmlhttp.send();
+        }
+        return id
+      })
       return dispatch(receivedUsers(users))
     }),
 })

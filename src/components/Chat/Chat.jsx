@@ -159,7 +159,10 @@ class Chat extends Component {
         </button> */}
         <div className="absolute pin-b pin-r mb-8 mr-8 z-40">
           <button
-            onClick={() => this.stateSetExpanded(false)}
+            onClick={() => {
+              this.stateSetExpanded(false)
+              this.stateSetChatting(false)
+            }}
             className="w-16 h-16 rounded-full bg-red-light lg:lt-shadow text-lg"
           >
             <i className="text-white ion-close-round" />

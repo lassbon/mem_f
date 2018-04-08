@@ -24,12 +24,13 @@ import requestHandler from 'helpers/requestHandler'
 import network from 'services/network'
 
 const renderBasedPostsState = (loading, { posts, users }) => {
-  if (!posts)
+  if (!posts) {
     return (
       <div className="flex justify-center py-6">
         <Circle text="Retrieving posts. Please wait" />
       </div>
     )
+  }
   if (posts.result.length === 0) return <EmptyPaper />
   return (
     <ul className="list-reset relative">
@@ -44,7 +45,7 @@ const renderBasedPostsState = (loading, { posts, users }) => {
   )
 }
 
-const BASEURL = 'https://acciapi.ml'
+const BASEURL = 'http://localhost:1337'
 
 const makeUppy = (
   { trigger, restrictions },
@@ -102,7 +103,7 @@ class Timeline extends Component {
 
   stateSetPosts = posts => this.setState(state => ({ ...state, posts }))
 
-  componentDidMount() {
+  componentDidMount() {    
     const { id, fetchPosts, posts, token } = this.props
 
     if (!posts) {
@@ -115,6 +116,7 @@ class Timeline extends Component {
   render() {
     const { loadingPosts } = this.state
     const { posts, user: { companyName, profileImage }, users } = this.props
+
     return (
       <>
         <ToastContainer {...toastOptions} />

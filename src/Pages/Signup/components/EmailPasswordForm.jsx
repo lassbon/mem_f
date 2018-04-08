@@ -50,6 +50,42 @@ const EmailPasswordForm = ({
         </fieldset>
         </div>
         <div className="lg:flex">
+        <fieldset className="lg:w-1/2 block lg:mr-3 mb-6">
+          <label htmlFor="" className="mb-4 text-xs text-grey">
+            Your Phone number
+          </label>
+          <StyledInput
+            name="companyPhone"
+            type="text"
+            placeholder="08000000000"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.companyPhone}
+          />
+          <InputError
+            touched={touched.companyPhone}
+            error={errors.companyPhone}
+          />
+        </fieldset>
+        <fieldset className="lg:w-1/2 flex-1 block lg:ml-3 mb-6">
+          <label htmlFor="" className="mb-4 text-xs text-grey">
+            Your Address<span>(Optional)</span>
+          </label>
+          <StyledInput
+            name="companyAddress"
+            type="text"
+            placeholder="Your address"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.companyAddress}
+          />
+          <InputError
+            touched={touched.companyAddress}
+            error={errors.companyAddress}
+          />
+        </fieldset>
+        </div>
+        <div className="lg:flex">
           <fieldset className="lg:w-1/2 block lg:mr-3 mb-6">
             <label htmlFor="" className="mb-4 text-xs text-grey">
               Password

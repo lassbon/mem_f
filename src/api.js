@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const BASEURL = "http://localhost:1337/";
-const BASEURL = 'https://acciapi.ml/'
+// const BASEURL = "https://airbevy-api.herokuapp.com/";
+const BASEURL = 'https://airbevy-api.herokuapp.com/'
 // const BASEURL = 'https://2968008f.ngrok.io/'
 
 export default {

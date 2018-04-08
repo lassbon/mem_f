@@ -13,7 +13,7 @@ const FileInput = require('uppy/lib/plugins/FileInput')
 const ProgressBar = require('uppy/lib/plugins/ProgressBar')
 // import "uppy/uppy.min.css">
 
-const BASEURL = 'https://acciapi.ml'
+const BASEURL = 'http://localhost:1337'
 
 const imageRestrictions = () => ({
   maxFileSize: 1000 * 1000,

@@ -19,14 +19,14 @@ const Post = ({
           style={{
             backgroundImage: !!user.profileImage
               ? user.profileImage
-              : '/static/images/011-woman-5.svg',
+              : '/static/images/033-boy.svg',
           }}
           className="lg:w-24 w-8 mr-4 rounded-lg overflow-hidden"
         >
           {!!user.profileImage ? (
             <img src={user.profileImage} alt="" className="relative" />
           ) : (
-            <img src="/static/images/011-woman-5.svg" alt="" className="" />
+            <img src="/static/images/033-boy.svg" alt="" className="" />
           )}
         </span>
 

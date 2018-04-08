@@ -178,7 +178,19 @@ const mapDispatchToProps = dispatch => ({
         params,
         token,
       })
-      if (response.status === 'success') dispatch(receivedUserDetails(params))
+      if (response.status === 'success') {
+        const response1 = await network.user.getUserDetails({ id, token })
+        const [networkResponse, data] = await Promise.all([
+          response1,
+          response1.json(),
+        ])
+        if (!networkResponse.ok)
+          throw new Error('An error occurred. Please try signing again.')
+        
+        dispatch(receivedUserDetails(data))
+      } else {
+        dispatch(receivedUserDetails(params))
+      }
       return Promise.resolve(response)
     }),
 })

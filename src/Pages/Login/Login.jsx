@@ -230,6 +230,19 @@ const mapDispatchToProps = dispatch => ({
       ])
       if (!networkResponse.ok)
         throw new Error('An error occurred. Please try signing again.')
+      if  (data.profileImage && data.profileImage.substring(0, 4) !== 'data')  { // url is not a blob convert to blob
+        const xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET", data.profileImage, true);
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+              data.profileImage = xmlhttp.responseText
+              dispatch(receivedUserDetails(data))
+            }
+        }
+        xmlhttp.send();
+      }
       return dispatch(receivedUserDetails(data))
     }),
 })

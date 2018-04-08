@@ -82,7 +82,11 @@ class Search extends Component {
       <div className="block pt-2 px-4 border-t border-grey-lighter bg-grey-lighter">
         <figure className="flex px-8 py-6 bg-white">
           <div className="w-8 mr-4">
-            <img src="/static/images/011-woman-5.svg" alt="" className="" />
+          {!!this.props.users.entities.users[id].profileImage ? (
+            <img src={this.props.users.entities.users[id].profileImage} alt="" className="" />
+          ) : (
+            <img src="/static/images/033-boy.svg" alt="" className="" />
+          )}
           </div>
           <figcaption className="flex-grow text-sm">
             <h6 className="text-sm">{companyName}</h6>

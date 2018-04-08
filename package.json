@@ -5,8 +5,9 @@
   "scripts": {
     "dev":
       "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
-    "postinstall":
-      "cross-env NODE_ENV=production rimraf ./dist/* -rf && webpack -p --config webpack.config.prod.js"
+    "prod":
+      "cross-env NODE_ENV=production rimraf ./dist/* -rf && webpack -p --config webpack.config.prod.js",
+    "postinstall": "yarn prod"
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],

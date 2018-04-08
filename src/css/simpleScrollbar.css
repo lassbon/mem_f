@@ -43,7 +43,7 @@
   display: @ml none;
 }
 
-.ss-container: @mlhover .ss-scroll {
+.ss-container @mlhover .ss-scroll {
   opacity: @ml 1;
 }
 

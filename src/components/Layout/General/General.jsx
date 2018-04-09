@@ -7,7 +7,7 @@ const General = ({ children }) => (
       {/* <img src="/static/images/logo.png" alt="" /> */}
       <div className="lg:absolute w-full pin-r pin-t lg:mt-8 lg:flex justify-center items-center sm:z-10">
         <div className="p-4 lg:w-3/4 lg:flex justify-end">
-          <img src="/static/images/logo.png" alt="" className="w-32 lg:w-64" />
+          <img src="/static/images/logo.png" alt="" className="w-32 lg:w-64 lg:self-start" />
         </div>
       </div>
 

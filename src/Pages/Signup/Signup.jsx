@@ -141,7 +141,7 @@ class Signup extends Component {
             <img
               src="/static/images/logo.png"
               alt=""
-              className="w-32 lg:w-64"
+              className="w-32 lg:w-64 lg:self-start"
             />
           </div>
         </div>

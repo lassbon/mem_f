@@ -193,7 +193,7 @@ class Login extends Component {
               </div>
               <div className="lg:w-1/2 flex flex-col justify-center items-center text-white text-3xl font-bold lg:absolute pin-t pin-r h-full p-8 lg:p-0 mt-6 lg:mt-0 bg-pink-light">
                 <img
-                  src="/static/images/airbevy_logo_white.png"
+                  src="/static/images/logo_white.png"
                   alt="Logo"
                   className="lg:w-64 mb-4"
                 />

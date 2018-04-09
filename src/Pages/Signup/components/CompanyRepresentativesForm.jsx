@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
-
 import InputError from 'components/form/InputError'
 import ButtonFixedWidthRadiusXS from 'components/buttons/ButtonFixedWidthRadiusXS'
 import StyledInput from 'components/form/StyledInput'
-
 import Uppy from 'uppy/lib/core'
 import Dashboard from 'uppy/lib/plugins/Dashboard'
 import XHRUpload from 'uppy/lib/plugins/XHRUpload'

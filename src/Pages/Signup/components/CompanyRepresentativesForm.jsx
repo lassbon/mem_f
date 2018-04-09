@@ -15,7 +15,7 @@ const FileInput = require('uppy/lib/plugins/FileInput')
 const ProgressBar = require('uppy/lib/plugins/ProgressBar')
 // import "uppy/uppy.min.css">
 
-const BASEURL = 'http://localhost:1337'
+const BASEURL = 'https://airbevy-api.herokuapp.com'
 
 const imageRestrictions = () => ({
   maxFileSize: 1000 * 1000,

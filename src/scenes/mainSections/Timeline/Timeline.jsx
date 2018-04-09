@@ -45,7 +45,7 @@ const renderBasedPostsState = (loading, { posts, users }) => {
   )
 }
 
-const BASEURL = 'http://localhost:1337'
+const BASEURL = 'https://airbevy-api.herokuapp.com'
 
 const makeUppy = (
   { trigger, restrictions },

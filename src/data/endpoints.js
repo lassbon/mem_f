@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:1337'
+export const baseUrl = 'https://airbevy-api.herokuapp.com'
 const returnFullUrl = url => baseUrl + url
 
 export const user = {

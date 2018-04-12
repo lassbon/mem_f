@@ -5,7 +5,7 @@ import Comment from './Comment'
 
 class Comments extends Component {
   render() {
-    const { comments, auth: { token, user: { id } }, postId } = this.props
+    const { comments, auth: { token, user: { id } }, postId, users } = this.props
     return (
       <div className="lg:pr-8 relative">
         <span className="absolute h-full pin-t pin-l ml-2 border-r-2 border-yellow-light border-dashed" />
@@ -21,8 +21,8 @@ class Comments extends Component {
           <CommentForm ownerId={id} postId={postId} token={token} />
         </div>
         <ul className="list-reset my-8 relative">
-          {comments.map(comment => (
-            <Comment key={comment.id} comment={comment} />
+          {comments.reverse().map(comment => (
+            <Comment key={comment.id} comment={comment} user={users.entities.users[comment.owner]} />
           ))}
         </ul>
       </div>
@@ -30,8 +30,9 @@ class Comments extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, user }) => ({
+const mapStateToProps = ({ auth, users }) => ({
   auth,
+  users
 })
 
 const glueTo = connect(mapStateToProps, null)

@@ -110,7 +110,7 @@ class Search extends Component {
                         toast.success('Connection request sent')
                         stateSetSearchTerm('')
                       })
-                      .catch(err => {
+                      .catch(error => {
                         stateSetSearchTerm('')
                         toast.error(error.message)
                       })

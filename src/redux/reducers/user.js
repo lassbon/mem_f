@@ -66,17 +66,19 @@ export const friends = (state = defaults.friends, action) => {
   }
 
   if (action.type === actions.ACCEPTED_FRIEND_REQUEST) {
+    console.log(action.payload)
     const { friend } = action.payload
+    //console.log(friend)
     return {
       ...state,
       entities: {
         ...state.entities,
         friends: {
           ...state.entities.friends,
-          [friend.id]: friend,
+          [action.payload.id]: action.payload,
         },
       },
-      result: [friend.id, ...state.result],
+      result: [action.payload.id, ...state.result],
     }
   }
   return state

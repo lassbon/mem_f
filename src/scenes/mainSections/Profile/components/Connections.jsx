@@ -43,10 +43,37 @@ const Connections = ({
           </span>
         </h3>
         <div>
+        {friends &&
+            friends.result.length > -1 && (
+              <ul className="list-reset">
+                {friends.result.map(id => {
+                  const friend = friends.entities.friends[id]
+                  return <Friend key={id} friend={friend} />
+                })}
+              </ul>
+            )}
+          {friendRequests.result.length === 0 || !friends ? null : (
+            <ul className="list-reset">
+              {friendRequests.result.map(id => {
+                const request = friendRequests.entities.requests[id]
+                console.log(request)
+                return (
+                  <Connection
+                    key={id}
+                    token={token}
+                    request={request}
+                    requester={users.entities.users[request.requester]}
+                    cancelFriendRequest={cancelFriendRequest}
+                    acceptFriendRequest={acceptFriendRequest}
+                  />
+                )
+              })}
+            </ul>
+          )}
           {friends &&
             friends.result.length === 0 &&
             friendRequests.result.length === 0 && (
-              <div className="empty-state-container lg:absolute lg:w-full lg:px-12 lg:mt-8 py-6">
+              <div className="lg:absolute lg:w-full lg:px-12 lg:mt-8 py-6">
                 <figure className="flex flex-col justify-center items-center">
                   <div className="w-1/3">
                     <img src="/static/images/empty.svg" alt="" />
@@ -65,32 +92,6 @@ const Connections = ({
                 </figure>
               </div>
             )}
-          {friends &&
-            friends.result.length > -1 && (
-              <ul className="list-reset">
-                {friends.result.map(id => {
-                  const friend = friends.entities.friends[id]
-                  return <Friend key={id} friend={friend} />
-                })}
-              </ul>
-            )}
-          {friendRequests.result.length === 0 || !friends ? null : (
-            <ul className="list-reset">
-              {friendRequests.result.map(id => {
-                const request = friendRequests.entities.requests[id]
-                return (
-                  <Connection
-                    key={id}
-                    token={token}
-                    request={request}
-                    requester={users.entities.users[request.requester]}
-                    cancelFriendRequest={cancelFriendRequest}
-                    acceptFriendRequest={acceptFriendRequest}
-                  />
-                )
-              })}
-            </ul>
-          )}
         </div>
       </>
     )

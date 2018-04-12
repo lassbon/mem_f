@@ -1,17 +1,21 @@
 import React from 'react'
 
-const Friend = ({ friend: { companyName, companyPhone, email } }) => {
+const Friend = ({ friend: { companyName, companyPhone, email, membershipPlan, profileImage } }) => {
   return (
     <li className="px-8 py-6 pb-4 border-b border-grey-lighter">
       <figure className="flex">
         <div className="w-8 mr-4">
-          <img src="/static/images/011-woman-5.svg" alt="" className="" />
+        {profileImage ? (
+            <img src={profileImage} alt="" className="relative" />
+          ) : (
+            <img src="/static/images/033-boy.svg" alt="" className="" />
+          )}
         </div>
         <figcaption className="text-sm">
           <h6 className="text-sm">{companyName}</h6>
           <p className="">
             <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
-            <span className="ml-3 text-grey-dark text-xxs">Gold Memeber</span>
+            <span className="ml-3 text-grey-dark text-xxs">{membershipPlan} Memeber</span>
           </p>
           <p className="flex flex-wrap mt-4">
             <span className="flex pr-6 justify-center">

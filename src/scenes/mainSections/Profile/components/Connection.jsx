@@ -10,7 +10,7 @@ const Connection = ({
   acceptFriendRequest,
   cancelFriendRequest,
   request,
-  requester: { companyName, companyPhone, email },
+  requester: { companyName, companyPhone, email, membershipPlan, profileImage },
   token,
 }) => {
   const params = {
@@ -23,22 +23,26 @@ const Connection = ({
       <ToastContainer {...toastOptions} />
       <figure className="flex">
         <div className="w-8 mr-4">
-          <img src="/static/images/011-woman-5.svg" alt="" className="" />
+        {profileImage ? (
+            <img src={profileImage} alt="" className="relative" />
+          ) : (
+            <img src="/static/images/033-boy.svg" alt="" className="" />
+          )}
         </div>
         <figcaption className="text-sm">
           <h6 className="text-sm">{companyName}</h6>
           <p className="">
             <i className="inline-block w-2 h-2 rounded-full bg-yellow-dark" />
-            <span className="ml-3 text-grey-dark text-xxs">Gold Memeber</span>
+            <span className="ml-3 text-grey-dark text-xxs">{membershipPlan} Memeber</span>
           </p>
           <p className="flex flex-wrap mt-4">
             <span className="flex justify-center">
               <i className="ion-ios-email text-grey text-base" />
               <span className="ml-3 text-xs">{email}</span>
             </span>
-            <span className="flex justify-center">
+            <span className="flex justify-center ml-3">
               <i className="ion-ios-telephone text-grey text-base" />
-              <span className="ml-3 text-xs">{companyPhone}</span>
+              <span className="ml-1 text-xs">{companyPhone}</span>
             </span>
           </p>
         </figcaption>
@@ -46,11 +50,13 @@ const Connection = ({
       <div className="mt-4 text-sm">
         <button
           onClick={() => {
+            console.log('request: '); console.log(request)
             acceptFriendRequest(request.id, params, token)
               .then(() => {
                 toast.success('Request accepted')
               })
               .catch(error => {
+                console.log(error)
                 toast.error(
                   error.message || 'An error occured. Please try again.'
                 )

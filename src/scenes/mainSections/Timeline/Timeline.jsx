@@ -23,7 +23,7 @@ import { receivedTimelinePosts } from 'redux/action_creators'
 import requestHandler from 'helpers/requestHandler'
 import network from 'services/network'
 
-const renderBasedPostsState = (loading, { posts, users }) => {
+const renderBasedPostsState = (loading, { posts, users, userId }) => {
   if (!posts) {
     return (
       <div className="flex justify-center py-6">
@@ -38,7 +38,8 @@ const renderBasedPostsState = (loading, { posts, users }) => {
         <Post
           key={id}
           post={posts.entities.posts[id]}
-          user={users.entities.users[posts.entities.posts[id].owner]}
+          owner={users.entities.users[posts.entities.posts[id].owner]}
+          userId={userId}
         />
       ))}
     </ul>
@@ -115,7 +116,7 @@ class Timeline extends Component {
   }
   render() {
     const { loadingPosts } = this.state
-    const { posts, user: { companyName, profileImage }, users } = this.props
+    const { posts, user: { companyName, profileImage, id }, users } = this.props
 
     return (
       <>
@@ -150,7 +151,7 @@ class Timeline extends Component {
               </div>
               <div className="relative pb-8">
                 <span className="absolute h-full pin-t pin-l ml-4 border-r border-grey-light border-dashed" />
-                {renderBasedPostsState(loadingPosts, { posts, users })}
+                {renderBasedPostsState(loadingPosts, { posts, users, id })}
               </div>
             </div>
           </div>

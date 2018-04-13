@@ -67,15 +67,33 @@ class Chat extends Component {
             // height: 'calc(100vh - (68 * 2))',
           }
         }
-        className="chat below-top-bar lg:bg-white z-50 relative"
+        className="chat below-top-bar bg-white z-50 relative border-grey-lighter border-t-4"
       >
+      {/* <header className="below-top-bar py-3 text-center bg-blue-lighter">
+        {!chatting && <i className="text-white ion-chatbubbles" /> }              
+        <h2 className="text-white font-normal text-base inline-block ml-2">
+          {chatting ? (
+            <button onClick={() => this.stateSetChatting(false)}>
+              <div>
+                <span>
+                  <i className="ion-arrow-left-c" />
+                </span>
+                {users.entities.users[chattingWith].email}
+              </div>
+            </button>
+          ) : (
+            'Chat'
+          )}
+        </h2>
+      </header> */}
         {!chatting && (
           <div
             ref={el => el && simpleScrollbar.initEl(el)}
-            className="lg:h-full bg-white shadow-lg overflow-y-scroll"
+            className="h-full bg-white shadow-lg overflow-y-scroll"
           >
-            <header className="py-6 text-center">
-              <h2 className="text-grey-dark text-sm font-normal">
+            <header className="py-3 text-center bg-blue-lighter">
+              <i className="text-white ion-chatbubbles" />
+              <h2 className="text-white font-normal text-base inline-block ml-2">
                 {chatting ? (
                   <button onClick={() => this.stateSetChatting(false)}>
                     <div>
@@ -90,7 +108,7 @@ class Chat extends Component {
                 )}
               </h2>
             </header>
-            <ChatsList getProps={chatsListGetProps} users={users} />
+            <ChatsList getProps={chatsListGetProps} users={users} chats={chats} user={user} messages={messages}/>
           </div>
         )}
         {chatting && (
@@ -98,6 +116,32 @@ class Chat extends Component {
             ref={el => el && simpleScrollbar.initEl(el)}
             className="below-top-bar"
           >
+          <header className="py-3 text-center bg-blue-lighter">
+            <button onClick={() => this.stateSetChatting(false)} className="float-left ml-4">
+              <div className="text-white font-normal text-xl">
+                <span>
+                  <i className="ion-arrow-left-c" />
+                </span>                
+              </div>
+            </button>
+            {!!users.entities.users[chattingWith].profileImage ? (
+              <img className="w-6 h-6 rounded-full mr-2" src={users.entities.users[chattingWith].profileImage} alt="Avatar" />
+            ) :
+            <img className="w-6 h-6 rounded-full mr-2" src="/static/images/011-woman-5.svg" alt="Avatar" />
+            }
+              <h2 className="text-white font-normal text-base inline-block">
+                {users.entities.users[chattingWith].companyName}
+              </h2>
+              <button
+            onClick={() => {
+              this.stateSetExpanded(false)
+              this.stateSetChatting(false)
+            }}
+            className="float-right mr-4"
+          >
+            <i className="text-white ion-close-round" />
+          </button>
+            </header>
             <div className="below-top-bar flex flex-col justify-end">
               <div className="p-4">
                 {isLoaded(chats) ? (
@@ -107,6 +151,7 @@ class Chat extends Component {
                       chats={chats}
                       messages={messages}
                       user={user}
+                      users={users}
                     />
                   ) : (
                     'Start chatting'
@@ -157,7 +202,8 @@ class Chat extends Component {
         {/* <button className="w-12 h-12 rounded-full bg-red-light text-white">
           <i className="ion-chatboxes" />
         </button> */}
-        <div className="absolute pin-b pin-r mb-8 mr-8 z-40">
+        {!chatting && (
+          <div className="absolute pin-b pin-r mb-8 mr-8 z-40">
           <button
             onClick={() => {
               this.stateSetExpanded(false)
@@ -168,6 +214,7 @@ class Chat extends Component {
             <i className="text-white ion-close-round" />
           </button>
         </div>
+        )}        
       </div>
     ) : (
       <div>
@@ -182,10 +229,12 @@ class Chat extends Component {
   }
 }
 
-const Chats = ({ chats, chattingWith, messages, user: { id } }) => {
+const Chats = ({ chats, chattingWith, messages, user: { id, profileImage }, users }) => {
   console.log('chatting with', chattingWith)
   const chatted = chats[id]
-  if (!chatted) return 'Start chatting'
+  console.log(chatted)
+  if (!chatted) return <p className="text-xs italic text-grey ml-4">Type your message and send to start chatting!</p>
+  if (chatted[chattingWith] === undefined) return <p className="text-xs italic text-grey ml-4">Type your message and send to start chatting!</p>
   const myChats = chatted[chattingWith].messages
   const chatsArray = Object.values(myChats).map(value => messages[value])
   console.log('chatsArray', chatsArray)
@@ -199,13 +248,21 @@ const Chats = ({ chats, chattingWith, messages, user: { id } }) => {
           <li
             key={messageId}
             className={`flex mt-4 ${fromMe ? 'justify-end' : 'justify-start'}`}
-          >
+          > <div>            
+              {!!profileImage && fromMe ? (
+              <img className="w-10 h-10 rounded-full mr-4 inline-block" src={profileImage} alt="Avatar" />
+            ) : users.entities.users[chattingWith].profileImage && !fromMe ? (
+              <img className="w-10 h-10 rounded-full mr-4" src={users.entities.users[chattingWith].profileImage} alt="Avatar" />
+            ) :
+            <img className="w-10 h-10 rounded-full mr-4" src="/static/images/011-woman-5.svg" alt="Avatar" />
+            }
+          </div>
             <div
-              className={`lg:w-3/4 p-4 ${
-                fromMe ? 'bg-grey-lighter' : 'lg:lt-shadow'
+              className={`rounded-lg lg:w-3/4 p-4 ${
+                fromMe ? 'bg-grey-lighter' : 'lg:lt-shadow bg-pink-lightest'
               }`}
             >
-              <p>{content}</p>
+              <p className="inline-block break-words">{content}</p>
             </div>
           </li>
         )

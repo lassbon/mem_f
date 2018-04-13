@@ -56,8 +56,8 @@ const mapStateToProps = ({ auth, user, users }) => ({
 const mapDispatchToProps = dispatch => ({
   fetchUsers: token =>
     dispatch(async (dispatch, getState, { network }) => {
-      const users = await requestHandler(network.user.fetchUsers)({ token })
-      users.map(function(id) {
+      const users = await requestHandler(network.user.fetchUsers)({ token })      
+      users.sort((a,b) => {return (a.companyName > b.companyName) ? 1 : ((b.companyName > a.companyName) ? -1 : 0);} ).map(function(id) {
         if  (id.profileImage && id.profileImage.substring(0, 4) !== 'data')  { // url is not a blob convert to blob
           const xmlhttp=new XMLHttpRequest();
           xmlhttp.open("GET", id.profileImage, true);

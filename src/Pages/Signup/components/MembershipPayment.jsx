@@ -71,7 +71,30 @@ class MemberShipPayment extends Component {
   state = {
     plan: null,
   }
-  stateSetPlan = plan => this.setState(state => ({ ...state, plan }))
+  stateSetPlan = plan => {
+    this.setState(state => ({ ...state, plan }))
+    if(plan && plan.fee === 0)  { // no charge regisiter and redirect to home
+      const {
+        history,
+        auth: { token },
+        getUserDetails,
+        user: { companyName, email, id, membershipId },
+        stateIncrementRegistrationStage,
+      } = this.props
+      callback(
+        getUserDetails,
+        history,
+        stateIncrementRegistrationStage,
+        {
+          companyName,
+          id,
+          membershipId,
+          token,
+        }
+      )
+      
+    }
+  }
   componentDidMount() {
     const { user: { membershipPlan }, auth: { token } } = this.props
     requestHandler(network.general.fetchMembershipLevels)({ token })
@@ -112,7 +135,7 @@ class MemberShipPayment extends Component {
         },
       ],
     }
-    return plan ? (
+    return plan && plan.fee != 0 ? (
       <div className={`${registrationStage > 7 ? 'opacity-50' : ''} mr-8`}>
         <div className="registration-payment-shadow lg:w-64 lg:h-64 mb-8 p-8 flex flex-col justify-between items-center bg-white border border-pink border-solid">
           <h4 className="hind uppercase text-xs font-normal text-grey-darker">
@@ -121,7 +144,7 @@ class MemberShipPayment extends Component {
 
           <div className="">
             <b className="text-4xl py-4 font-bold text-pink-dark">
-              N{prettifyMoney(plan.fee)}
+              {plan.fee != 0 ? "N"+prettifyMoney(plan.fee) : "FREE" }
             </b>
           </div>
           <div className="">

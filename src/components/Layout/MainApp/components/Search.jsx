@@ -31,6 +31,7 @@ class Search extends Component {
   }
   elements = {}
   stateSetSearchTerm = searchTerm => {
+    searchTerm = '' ? toast.success('Connection request sent') : searchTerm // this does a bind to toast show the event is registered
     this.setState(state => ({ ...state, searchTerm }))
   }
   stateSetUsers = users => {

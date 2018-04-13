@@ -10,21 +10,22 @@ const Post = ({
   auth,
   likePost,
   post: { comments, createdAt, id, likes, postImage, postText },
-  user,
+  owner,
+  userId,
 }) => {
-  return !user ? null : (
+  return !owner ? null : (
     <li className="lg:mt-16 cursor-pointer">
       <div className="flex">
         <span
           style={{
-            backgroundImage: !!user.profileImage
-              ? user.profileImage
+            backgroundImage: !!owner.profileImage
+              ? owner.profileImage
               : '/static/images/033-boy.svg',
           }}
           className="lg:w-24 w-8 mr-4 rounded-lg overflow-hidden"
         >
-          {!!user.profileImage ? (
-            <img src={user.profileImage} alt="" className="relative" />
+          {!!owner.profileImage ? (
+            <img src={owner.profileImage} alt="" className="relative" />
           ) : (
             <img src="/static/images/033-boy.svg" alt="" className="" />
           )}
@@ -33,7 +34,7 @@ const Post = ({
         <div className="flex-grow">
           <div className="mb-4 text-xs">
             <p className="mb-1 text-purple-light capitalize">
-              {user.companyName}
+              {owner.companyName}
             </p>
             <p className=" text-grey-darker">{moment(createdAt).fromNow()}</p>
           </div>
@@ -62,7 +63,7 @@ const Post = ({
                 likePost(
                   {
                     id: id,
-                    liker: user.id,
+                    liker: userId,
                   },
                   auth.token
                 )

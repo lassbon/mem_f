@@ -58,7 +58,7 @@ class Project extends Component {
   }
   render() {
     const { liking, loading, project } = this.state
-    const { auth: { token }, likeProject, user } = this.props
+    const { auth: { token }, likeProject, user, users } = this.props
 
     return loading && !project ? (
       <div className="flex justify-center py-6">
@@ -73,7 +73,7 @@ class Project extends Component {
           className="lg:h-full overflow-y-scroll bg-grey-lighter "
         >
           <div className="py-8 lg:px-16">
-            <div className=" flex justify-center items-center bg-white lg:lt-shadow relative">
+            <div className=" flex lg:flex-row flex-col justify-center items-center bg-white lg:lt-shadow relative">
               <figure className="lg:w-1/2 relative">
                 <img src={project.banner} alt="" />
                 <figcaption
@@ -186,7 +186,7 @@ class Project extends Component {
                 </div>
                 <ul className="list-reset my-8 relative">
                   {project.comments.map(comment => (
-                    <Comment key={comment.id} comment={comment} />
+                    <Comment key={comment.id} comment={comment} user={users.entities.users[comment.owner]} />
                   ))}
                   {/* <li className=" mt-6">
                   <div className="text-grey-dark">
@@ -207,9 +207,10 @@ class Project extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, user }) => ({
+const mapStateToProps = ({ auth, user, users }) => ({
   auth,
   user,
+  users,
 })
 
 const mapDispatchToProps = dispatch => ({

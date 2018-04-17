@@ -47,7 +47,7 @@ const Projects = ({
             const project = ongoingProjects.entities.ongoing[id]
 
             return (
-              <li className="lg:w-1/3 pr-4 mb-6">
+              <li key={id} className="lg:w-1/3 pr-4 mb-6">
                 <Link
                   to={`projects/ongoing/${id}`}
                   className="w-full flex justify-center items-center bg-white shadow-lg"
@@ -68,7 +68,7 @@ const Projects = ({
                     <div className="p-4 lg:px-8 lg:py-6 text-xs text-grey-darker">
                       <div className="pb-4 border-b border-grey-light font-bold roboto">
                         <span>{project.date}</span>
-                        <span className="mx-4">
+                        <span className="mx-4">View project details&nbsp;
                           <i className="ion-arrow-right-c" />
                         </span>
                         {/* <span>End date</span> */}

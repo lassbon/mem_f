@@ -46,7 +46,7 @@ class OngoingEvent extends Component {
       ],
     }
     return (
-      <li className="lg:w-1/3 lg:pr-8 mb-8 relative">
+      <li className="lg:w-1/2 lg:pr-8 mb-8 relative">
         <div className="relative">
           <div className="rounded-lg overflow-hidden bg-white lg:lt-shadow relative">
             <div className="absolute ml-4 mt-4 px-4 py-2 bg-white rounded-full text-xs text-grey-darkest font-semibold z-20">
@@ -112,10 +112,10 @@ class OngoingEvent extends Component {
             </figure>
           </div>
           {expanded && (
-            <div className="more-details absolute px-8 py-6 rounded-b-none bg-white rounded-lg z-20">
+            <div className="more-details absolute px-8 py-6 rounded-b-none bg-white rounded-lg z-20 overflow-y-scroll">
               <button
                 onClick={() => this.stateSetExpanded(false)}
-                className="absolute pin-b pin-r mr-4 mb-6 px-3 py-1 rounded text-xs text-purple-darker"
+                className="absolute pin-t pin-r mr-4 mt-6 px-3 py-1 rounded text-xs text-purple-darker"
               >
                 Hide
                 <span className="ml-2">
@@ -123,8 +123,8 @@ class OngoingEvent extends Component {
                 </span>
               </button>
               <div className="mb-4 text-xs">
-                <span>Description</span>
-                <p className=" text-base roboto">{event.description}</p>
+                <h1 className=" text-base roboto mb-8">Description</h1>
+                <p className=" text-base roboto text-justify">{event.description}</p>
               </div>
               <div className="mt-4 text-xs">
                 <span>Fee</span>

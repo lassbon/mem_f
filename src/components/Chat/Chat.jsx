@@ -91,7 +91,7 @@ class Chat extends Component {
             ref={el => el && simpleScrollbar.initEl(el)}
             className="h-full bg-white shadow-lg overflow-y-scroll"
           >
-            <header className="fixed z-50 py-3 text-center bg-blue-lighter" style={{ width: '20rem' }}>
+            <header className="fixed z-50 py-4 -mt-2 text-center bg-blue-lighter" style={{ width: '20rem' }}>
               <i className="text-white ion-chatbubbles" />
               <h2 className="text-white font-normal text-base inline-block ml-2">
                 {chatting ? (

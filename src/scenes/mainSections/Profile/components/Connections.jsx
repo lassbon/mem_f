@@ -47,7 +47,7 @@ const Connections = ({
             friends.result.length > -1 && (
               <ul className="list-reset">
                 {friends.result.map(id => {
-                  const friend = friends.entities.friends[id]
+                  const friend = users.entities.users[id]
                   return <Friend key={id} friend={friend} />
                 })}
               </ul>

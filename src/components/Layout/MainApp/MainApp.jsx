@@ -35,7 +35,7 @@ const MainApp = ({ children, auth: { token }, fetchUsers, user, users }) => {
             <main className="lg:w-4/5 lg:h-full">{children}</main>
           </div>
         </div>
-        <div className="fixed pin-b pin-r z-50">
+        <div className="fixed pin-b pin-r z-50 h-full overflow-y-scroll below-top-bar bg-white">
           <Chat />
         </div>
       </div>

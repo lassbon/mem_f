@@ -91,7 +91,7 @@ class Chat extends Component {
             ref={el => el && simpleScrollbar.initEl(el)}
             className="h-full bg-white shadow-lg overflow-y-scroll"
           >
-            <header className="py-3 text-center bg-blue-lighter">
+            <header className="fixed z-50 py-3 text-center bg-blue-lighter" style={{ width: '20rem' }}>
               <i className="text-white ion-chatbubbles" />
               <h2 className="text-white font-normal text-base inline-block ml-2">
                 {chatting ? (
@@ -116,7 +116,7 @@ class Chat extends Component {
             ref={el => el && simpleScrollbar.initEl(el)}
             className="below-top-bar"
           >
-          <header className="py-3 text-center bg-blue-lighter">
+          <header className="py-3 text-center bg-blue-lighter fixed -mt-2 border-grey-lighter border-t-4" style={{width: '20.6rem'}}>
             <button onClick={() => this.stateSetChatting(false)} className="float-left ml-4">
               <div className="text-white font-normal text-xl">
                 <span>
@@ -139,11 +139,10 @@ class Chat extends Component {
             }}
             className="float-right mr-4"
           >
-            <i className="text-white ion-close-round" />
+            <i className="text-white ion-close-round mr-4" />
           </button>
             </header>
-            <div className="below-top-bar flex flex-col justify-end">
-              <div className="p-4">
+              <div className="p-4 h-full overflow-y-scroll">
                 {isLoaded(chats) ? (
                   !isEmpty(chats) ? (
                     <Chats
@@ -158,18 +157,23 @@ class Chat extends Component {
                   )
                 ) : null}
               </div>
-              <div className="">
+              <div className="fixed pin-b bg-white" style={{ width: '20rem' }}>
                 <Formik
                   initialValues={{ message: '' }}
                   onSubmit={(values, { setFieldValue }) => {
-                    // console.log(values)
-                    this.submitNewChatMessage(
-                      values.message,
-                      chattingWith
-                    ).then(() => {
+                    let sendText = values.message;                    
+                    if (sendText.replace(/\s/g,'').length < 1) { // empty text
+                      return null;
+                    } else {
+                      // console.log(values)
+                      this.submitNewChatMessage(
+                        values.message,
+                        chattingWith
+                      ).then(() => {
                       // console.log('got here')
-                      setFieldValue('message', '')
-                    })
+                        setFieldValue('message', '')
+                      })
+                    }                    
                   }}
                   render={({
                     handleBlur,
@@ -186,14 +190,23 @@ class Chat extends Component {
                           onBlur={handleBlur}
                           onChange={handleChange}
                           value={values.message}
-                          className="w-full px-8 py-4 rounded-full shadow border border-grey-light text-sm"
+                          className="w-full pl-4 py-4 rounded-full shadow border border-grey-light text-sm"
+                          style={{ paddingRight: '3.5rem' }}
                         />
+                        <button type="submit" className="absolute pin-r pin-b mb-4 mr-4 bg-blue-lighter text-white w-12" style={{
+                            display: 'inherit',
+                            height: '3.1rem',
+                            borderBottomRightRadius: '100px',
+                            borderTopRightRadius: '100px',
+                            WebkitBoxSizing: 'border-box',
+                            MozBoxSizing: 'border-box',
+                            boxSizing: 'border-box',
+                          }}><span className="text-lg"><i className="ion-android-send"></i></span></button>
                       </form>
                     )
                   }}
-                />
+                />                
               </div>
-            </div>
           </section>
         )}
         {/* 
@@ -203,7 +216,7 @@ class Chat extends Component {
           <i className="ion-chatboxes" />
         </button> */}
         {!chatting && (
-          <div className="absolute pin-b pin-r mb-8 mr-8 z-40">
+          <div className="fixed pin-b pin-r mb-8 mr-8 z-40">
           <button
             onClick={() => {
               this.stateSetExpanded(false)
@@ -217,7 +230,7 @@ class Chat extends Component {
         )}        
       </div>
     ) : (
-      <div>
+      <div className="fixed pin-b pin-r   z-40">
         <button
           onClick={() => this.stateSetExpanded(true)}
           className="w-16 h-16 mb-8 mr-8 rounded-full bg-blue-lighter lg:lt-shadow text-lg"
@@ -233,13 +246,13 @@ const Chats = ({ chats, chattingWith, messages, user: { id, profileImage }, user
   console.log('chatting with', chattingWith)
   const chatted = chats[id]
   console.log(chatted)
-  if (!chatted) return <p className="text-xs italic text-grey ml-4">Type your message and send to start chatting!</p>
-  if (chatted[chattingWith] === undefined) return <p className="text-xs italic text-grey ml-4">Type your message and send to start chatting!</p>
+  if (!chatted) return <p style={{ marginTop: '5rem' }} className="text-xs italic text-grey px-2">Type your message and send to start chatting!</p>
+  if (chatted[chattingWith] === undefined) return <p style={{ marginTop: '5rem' }} className="text-xs italic text-grey px-2">Type your message and send to start chatting!</p>
   const myChats = chatted[chattingWith].messages
   const chatsArray = Object.values(myChats).map(value => messages[value])
   console.log('chatsArray', chatsArray)
   return (
-    <ul className="list-reset">
+    <ul className="list-reset" style={{width: '17.5rem', marginBottom: '5rem', marginTop: '5rem'}}>
       {chatsArray.map(mes => {
         if (!mes) return null
         const { content, by, id: messageId } = mes
@@ -258,8 +271,8 @@ const Chats = ({ chats, chattingWith, messages, user: { id, profileImage }, user
             }
           </div>
             <div
-              className={`rounded-lg lg:w-3/4 p-4 ${
-                fromMe ? 'bg-grey-lighter' : 'lg:lt-shadow bg-pink-lightest'
+              className={`rounded-lg w-3/4 p-4 ${
+                fromMe ? 'bg-grey-lighter' : 'lt-shadow bg-pink-lightest'
               }`}
             >
               <p className="inline-block break-words">{content}</p>

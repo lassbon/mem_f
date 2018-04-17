@@ -8,7 +8,7 @@ import { logOut } from 'redux/action_creators'
 
 const navList = ['Timeline']
 const Sidebar = ({ history, logOut }) => (
-  <aside className="lg:flex lg:flex-col lg:justify-between lg:sidebar lg:w-1/5 lg:h-full overflow-hidden border-r border-solid border-grey-lighter bg-pink-lightest">
+  <aside className="lg:flex lg:flex-col lg:justify-between lg:sidebar lg:w-1/5 lg:h-full overflow-hidden border-r border-solid border-grey-lighter bg-pink-lightest hidden">
     <MainNav />
     <ul className="list-reset py-3 px-2 text-sm roboto">
       <li

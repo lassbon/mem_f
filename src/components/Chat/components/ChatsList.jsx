@@ -6,7 +6,7 @@ const ChatsList = ({ getProps, users, chats, user, messages }) => {
   console.log(user)
 
   return (
-    <ul className="list-reset  px-8 py-4">
+    <ul className="list-reset pt-8 px-8 py-4">
       {users.result.map(id => {
         const friend = users.entities.users[id]
         if (friend.id === user.id) { // user cannot chat with himself (should have tried this though, weird results I imagine :-D )
@@ -33,7 +33,7 @@ const ChatsList = ({ getProps, users, chats, user, messages }) => {
               />
             </div>
             <div className="flex-grow relative">
-              <h5 className="mb-1 roboto">{friend.companyName}</h5>
+              <h5 className="mb-1 roboto" style={{ marginRight: '4rem' }}>{friend.companyName}</h5>
               {chatsArray != null ?              
                 <p className="text-xs text-grey-darker">{lastChatContent.substring(0,26)+"..."}</p>
               :
@@ -41,7 +41,7 @@ const ChatsList = ({ getProps, users, chats, user, messages }) => {
               }               
               <span className="absolute pin-r pin-t text-xs text-grey">
               {chatsArray != null ?              
-                new Date(chatsArray[chatsArray.length - 1].createdAt).setHours(0,0,0,0) == new Date().setHours(0,0,0,0) ? new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric'}).format(lastChatDate) : new Intl.DateTimeFormat().format(lastChatDate)
+                new Date(chatsArray[chatsArray.length - 1].createdAt).setHours(0,0,0,0) == new Date().setHours(0,0,0,0) ? new Intl.DateTimeFormat('en-GB', {hour: 'numeric', minute: 'numeric'}).format(lastChatDate) : new Intl.DateTimeFormat().format(lastChatDate)
               :
               ""
               }                

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { logout } from '../../actions/auth'
+import { logOut } from 'redux/action_creators'
 
 import './TopNav.css'
 
@@ -65,7 +65,7 @@ class TopNav extends React.Component {
           />
         </Menu.Item>
         <Menu.Menu position="right">
-          {/* <Menu.Item name="friends">
+          <Menu.Item name="friends">
             <Icon style={{ color: '#3a3a3a' }} name="users" size="large" />
             <Label color="red" floating circular size="mini">
               {this.state.friends.length}
@@ -82,8 +82,8 @@ class TopNav extends React.Component {
             <Dropdown text="" floating>
               <Dropdown.Menu>{notifs}</Dropdown.Menu>
             </Dropdown>
-          </Menu.Item> */}
-          <Menu.Item onClick={() => this.props.logout()}>
+          </Menu.Item>
+          <Menu.Item onClick={() => this.props.logOut()}>
             <Button>Logout</Button>
           </Menu.Item>
         </Menu.Menu>
@@ -98,6 +98,7 @@ class TopNav extends React.Component {
     let url = `${BASEURL}api/v1/notifications`
     this.fetchApi(url).then(
       function(arr) {
+        console.log(arr)
         this.setState({
           notifications: arr.data,
         })
@@ -160,7 +161,7 @@ TopNav.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }).isRequired,
-  logout: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -169,4 +170,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { logout })(TopNav)
+export default connect(mapStateToProps, { logOut })(TopNav)

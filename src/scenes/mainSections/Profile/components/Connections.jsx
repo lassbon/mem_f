@@ -6,6 +6,7 @@ import './connections.css'
 // Components
 import Connection from './Connection'
 import Friend from './Friend'
+import MyFriendRequests from './MyFriendRequests'
 
 // Helpers
 import requestHandler from 'helpers/requestHandler'
@@ -14,6 +15,8 @@ import {
   canceledFriendRequest,
   changeSearchBarKey,
   receivedFriendRequests,
+  receivedMyFriendRequests,
+  updateNotification,
 } from 'redux/action_creators'
 
 const Connections = ({
@@ -21,13 +24,15 @@ const Connections = ({
   cancelFriendRequest,
   changeSearchBarKey,
   fetchFriendRequests,
+  fetchMyFriendRequests,
   friends,
   friendRequests,
+  myFriendRequests,
   id,
   token,
   users,
 }) => {
-  !friendRequests && fetchFriendRequests(id, token)
+  (!friendRequests && fetchFriendRequests(id, token)) || (!myFriendRequests && fetchMyFriendRequests(id, token))
   return (
     friendRequests && (
       <>
@@ -42,21 +47,12 @@ const Connections = ({
             </button>
           </span>
         </h3>
-        <div>
-        {friends &&
-            friends.result.length > -1 && (
-              <ul className="list-reset">
-                {friends.result.map(id => {
-                  const friend = users.entities.users[id]
-                  return <Friend key={id} friend={friend} />
-                })}
-              </ul>
-            )}
-          {friendRequests.result.length === 0 || !friends ? null : (
+        <div>                    
+          {friendRequests === null || friendRequests.result.length === 0 ? null : (
             <ul className="list-reset">
+            <div className="bg-pink-lightest text-sm py-2 px-2" >Friend requests from other members</div>
               {friendRequests.result.map(id => {
                 const request = friendRequests.entities.requests[id]
-                console.log(request)
                 return (
                   <Connection
                     key={id}
@@ -67,9 +63,28 @@ const Connections = ({
                     acceptFriendRequest={acceptFriendRequest}
                   />
                 )
-              })}
+              })}                     
             </ul>
           )}
+          {myFriendRequests === null || myFriendRequests.result.length === 0 ? null : (
+            <ul className="list-reset">
+            <div className="bg-pink-lightest text-sm py-2 px-2" >Your Friend Requests</div>
+              {myFriendRequests.result.map(id => {
+                const request = myFriendRequests.entities.requests[id]
+                return <MyFriendRequests key={id} friendRequest={users.entities.users[request.requestee]} />
+              })}
+            </ul>
+          )} 
+          {friends &&
+            friends.result.length > -1 && (
+              <ul className="list-reset">
+              <div className="bg-pink-lightest text-sm py-2 px-2" >Your Friends</div>
+                {friends.result.map(id => {
+                  const friend = users.entities.users[id]
+                  return <Friend key={id} friend={friend} />
+                })}
+              </ul>
+            )}
           {friends &&
             friends.result.length === 0 &&
             friendRequests.result.length === 0 && (
@@ -102,10 +117,12 @@ const mapStateToProps = ({
   auth: { token, user: { id } },
   friends,
   friendRequests,
+  myFriendRequests,
   users,
 }) => ({
   friends,
   friendRequests,
+  myFriendRequests,
   id,
   token,
   users,
@@ -119,6 +136,20 @@ const mapDispatchToProps = dispatch => ({
         token,
       })
       dispatch(receivedFriendRequests(requests))
+      // for (var key in requests) { // Already done in MainApp.jsx 
+      //   if (requests.hasOwnProperty(key)) {
+      //     dispatch(updateNotification({type: 'friendRequest', message: requests[key].requester}))
+      //   }
+      // }      
+      return Promise.resolve(requests)
+    }),
+  fetchMyFriendRequests: (id, token) =>
+    dispatch(async (dispatch, getState, { network }) => {
+      const requests = await requestHandler(network.user.fetchMyFriendRequests)({
+        id,
+        token,
+      })
+      dispatch(receivedMyFriendRequests(requests))
       return Promise.resolve(requests)
     }),
   acceptFriendRequest: (requestId, params, token) =>
@@ -129,6 +160,7 @@ const mapDispatchToProps = dispatch => ({
       })
       if (response.status === 'success')
         dispatch(acceptedFriendRequest({ ...params, id: requestId }))
+        dispatch(updateNotification({type: 'friendRequest', message: params.requester }))
       return response
     }),
   cancelFriendRequest: (requestId, params, token) =>
@@ -137,8 +169,10 @@ const mapDispatchToProps = dispatch => ({
         params,
         token,
       })
-      if (response.status === 'success')
+      if (response.status === 'success')  {
         dispatch(canceledFriendRequest({ ...params, id: requestId }))
+        dispatch(updateNotification({type: 'friendRequest', message: params.requester }))
+      }
       return response
     }),
   changeSearchBarKey: key => dispatch(changeSearchBarKey(key)),

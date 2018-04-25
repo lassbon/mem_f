@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Comments from './Comments'
 import moment from 'moment'
+import { ToastContainer, toast } from 'react-toastify'
 
 import requestHandler from 'helpers/requestHandler'
 import { likedPost } from 'redux/action_creators'
+
+const toastOptions = {
+  position: toast.POSITION.TOP_CENTER,
+  autoClose: 3 * 60 * 60,
+}
 
 const Post = ({
   auth,
@@ -13,8 +19,9 @@ const Post = ({
   owner,
   userId,
 }) => {
-  return !owner ? null : (
+  return !owner ? null : (    
     <li className="lg:mt-16 cursor-pointer">
+    <ToastContainer {...toastOptions} />
       <div className="flex">
         <span
           style={{
@@ -94,13 +101,17 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = dispatch => ({
   likePost: (params, token) =>
     dispatch(async (dispatch, getState, { network }) => {
-      const response = await requestHandler(network.social.likePost)({
-        params,
-        token,
-      })
-      if (response.status === 'success')
-        dispatch(likedPost({ ...response, ...params }))
-      return Promise.resolve(response)
+      try {
+        const response = await requestHandler(network.social.likePost)({
+          params,
+          token,
+        })
+        if (response.status === 'success')
+          dispatch(likedPost({ ...response, ...params }))
+        return Promise.resolve(response)
+      } catch (error) {
+        toast.error(error.message)
+      }      
     }),
 })
 

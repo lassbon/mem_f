@@ -13,6 +13,7 @@ export const completedEvents = (state = defaults.completedEvents, action) => {
     return completedEvents
   }
   if (action.type === actions.LIKED_EVENT) {
+    if (!state.entities.completed) return state;
     const event = state.entities.completed[action.payload.id]
     if (event) {
       const updatedEvent = {
@@ -41,6 +42,7 @@ export const ongoingEvents = (state = defaults.ongoingEvents, action) => {
     return ongoingEvents
   }
   if (action.type === actions.LIKED_EVENT) {
+    if (!state.entities.ongoing) return state;
     const event = state.entities.ongoing[action.payload.id]
     if (event) {
       const updatedEvent = {

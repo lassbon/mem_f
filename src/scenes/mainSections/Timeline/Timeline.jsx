@@ -23,7 +23,8 @@ import { receivedTimelinePosts } from 'redux/action_creators'
 import requestHandler from 'helpers/requestHandler'
 import network from 'services/network'
 
-const renderBasedPostsState = (loading, { posts, users, userId }) => {
+const renderBasedPostsState = (loading, { posts, users, id }) => {
+  const userId = id;
   if (!posts) {
     return (
       <div className="flex justify-center py-6">
@@ -117,6 +118,7 @@ class Timeline extends Component {
   render() {
     const { loadingPosts } = this.state
     const { posts, user: { companyName, profileImage, id }, users } = this.props
+    
 
     return (
       <>

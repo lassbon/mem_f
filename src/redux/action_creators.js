@@ -44,6 +44,11 @@ export const receivedFriendRequests = requests => ({
   payload: requests,
 })
 
+export const receivedMyFriendRequests = requests => ({
+  type: actions.RECEIVED_MY_FRIEND_REQUESTS,
+  payload: requests,
+})
+
 export const sentFriendRequest = successResponse => ({
   type: actions.SENT_FRIEND_REQUEST,
   payload: successResponse,
@@ -58,6 +63,12 @@ export const canceledFriendRequest = params => ({
   type: actions.CANCELED_FRIEND_REQUEST,
   payload: params,
 })
+
+export const updateNotification = params => ({
+  type: actions.UPDATE_NOTIFICATION,
+  payload: params,
+})
+
 
 // SOCIAL
 

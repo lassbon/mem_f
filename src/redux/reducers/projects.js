@@ -15,6 +15,26 @@ export const completedProjects = (
     const completedProjects = normalize(action.payload, completedProjectsSchema)
     return completedProjects
   }
+  if (action.type === actions.LIKED_PROJECT) {
+    if (!state.entities.completed) return state;
+    const project = state.entities.completed[action.payload.id]
+    if (project) {
+      const updatedProject = {
+        ...project,
+        likes: [...project.likes, action.payload.liker],
+      }
+
+      return {
+        ...state,
+        entities: {
+          completed: {
+            ...state.entities.ongoing,
+            [action.payload.id]: updatedProject,
+          },
+        },
+      }
+    }
+  }
   return state
 }
 
@@ -26,6 +46,7 @@ export const ongoingProjects = (state = defaults.ongoingProjects, action) => {
   }
 
   if (action.type === actions.LIKED_PROJECT) {
+    if (!state.entities.ongoing) return state;
     const project = state.entities.ongoing[action.payload.id]
     if (project) {
       const updatedProject = {

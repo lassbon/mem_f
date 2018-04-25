@@ -57,6 +57,12 @@ export const fetchFriendRequests = ({ id, token }) =>
     method: 'GET',
   })
 
+export const fetchMyFriendRequests = ({ id, token }) =>
+  fetch(endpoints.user.myFriendRequests`${id}`, {
+    headers: authGetRequestHeaders(token),
+    method: 'GET',
+  })
+
 export const sendFriendRequest = ({ params, token }) =>
   fetch(endpoints.user.sendFriendRequest, {
     body: JSON.stringify(params),

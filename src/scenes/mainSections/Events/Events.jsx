@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import simpleScrollbar from 'fixed/simpleScrollbar'
 import './eventsStyles.css'
+import { ToastContainer, toast } from 'react-toastify'
 
 //Component
 import OngoingEvent from 'OngoingEvent'
@@ -14,6 +15,12 @@ import {
   receivedCompletedEvents,
   receivedOngoingEvents,
 } from 'redux/action_creators'
+
+
+const toastOptions = {
+  position: toast.POSITION.TOP_CENTER,
+  autoClose: 3 * 60 * 60,
+}
 
 const Events = ({
   auth: { token },
@@ -31,6 +38,7 @@ const Events = ({
       ref={el => el && simpleScrollbar.initEl(el)}
       className="lg:w-full lg:h-full overflow-y-scroll"
     >
+      <ToastContainer {...toastOptions} />
       <div className="lg:px-16 lg:py-6 p-8">
         {ongoingEvents && (
           <ul className="list-reset lg:flex flex-wrap">
@@ -94,13 +102,18 @@ const mapDispatchToProps = dispatch => ({
     }),
   likeEvent: (params, token) =>
     dispatch(async (dispatch, getState, { network }) => {
-      console.log(params)
-      const response = await requestHandler(network.event.likeEvent)({
-        params,
-        token,
-      })
-      if (response.status === 'success') dispatch(likedEvent(params))
-      return Promise.resolve(response)
+      try {
+        console.log(params)
+        const response = await requestHandler(network.event.likeEvent)({
+          params,
+          token,
+        })
+        if (response.status === 'success') dispatch(likedEvent(params))
+        return Promise.resolve(response)
+      } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+      }      
     }),
 })
 

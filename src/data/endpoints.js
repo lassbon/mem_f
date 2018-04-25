@@ -8,6 +8,7 @@ export const user = {
   resetPassword: returnFullUrl('/api/v1/user/reset'),
   changePassword: returnFullUrl('/api/v1/user/change'),
   friendRequests: (strs, id) => returnFullUrl('/api/v1/social/requests/') + id,
+  myFriendRequests: (strs, id) => returnFullUrl('/api/v1/social/myrequests/') + id,  
   activity: (strs, id) => returnFullUrl('/api/v1/useractivity/') + id,
   sendFriendRequest: returnFullUrl('/api/v1/social/request'),
   acceptFriendRequest: returnFullUrl('/api/v1/social/accept'),

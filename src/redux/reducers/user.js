@@ -6,7 +6,12 @@ const defaults = {
   users: null,
   userActivity: null,
   friendRequests: null,
+  myFriendRequests: null,
   friends: null,
+  notifications: {
+    chatNotifications: [],
+    friendRequestNotifications: [],
+  },
 }
 
 export const user = (state = defaults.user, action) =>
@@ -55,6 +60,16 @@ export const friendRequests = (state = defaults.friendRequests, action) => {
   return state
 }
 
+export const myFriendRequests = (state = defaults.myFriendRequests, action) => {
+  if (action.type === actions.RECEIVED_MY_FRIEND_REQUESTS) {
+    const requestsListSchema = [new schema.Entity('requests')]
+    const normalizedRequests = normalize(action.payload, requestsListSchema)
+    return normalizedRequests
+  }
+
+  return state
+}
+
 export const friends = (state = defaults.friends, action) => {
   if (action.type === actions.RECEIVED_USER_ACTIVITY) {
     const friendsListSchema = [new schema.Entity('friends')]
@@ -81,5 +96,28 @@ export const friends = (state = defaults.friends, action) => {
       result: [action.payload.id, ...state.result],
     }
   }
+  return state
+}
+
+export const myNotifications = (state = defaults.notifications, action) => {
+  if (action.type === actions.UPDATE_NOTIFICATION) {
+    if (action.payload.type === 'chat') {
+      return {
+        ...state,
+        chatNotifications: [...action.payload.message]
+      }
+    } else if (action.payload.type === 'friendRequest' && state.friendRequestNotifications.indexOf(action.payload.message) < 0) {
+      return {
+        ...state,
+        friendRequestNotifications: [action.payload.message, ...state.friendRequestNotifications]
+      }
+    } else if (action.payload.type === 'friendRequest' && state.friendRequestNotifications.indexOf(action.payload.message) > -1) {
+      return {
+        ...state,
+        friendRequestNotifications: state.friendRequestNotifications.splice(state.friendRequestNotifications.indexOf(action.payload.message), 1)
+      }
+    }
+  }
+
   return state
 }

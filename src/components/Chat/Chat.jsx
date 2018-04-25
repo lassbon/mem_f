@@ -5,6 +5,9 @@ import moment from 'moment'
 import { isLoaded, isEmpty, withFirebase } from 'react-redux-firebase'
 import { Formik } from 'formik'
 import simpleScrollbar from 'fixed/simpleScrollbar'
+import {
+  updateNotification,
+} from 'redux/action_creators'
 
 import ChatsList from 'ChatsList'
 
@@ -43,20 +46,51 @@ class Chat extends Component {
       createdAt: moment().toISOString(),
       id: messageUID,
       to,
+      read: false,
     }
     // firebase.set(firebasePaths.chats(id, to, 0), messageUID)
     return Promise.all([
       firebase.push(firebasePaths.chatsFrom(id, to), messageUID),
       firebase.push(firebasePaths.chatsFrom(to, id), messageUID),
       firebase.set(firebasePaths.messages(messageUID), message).then(res => {
-        console.log(res)
+        // console.log(res)
       }),
     ])
   }
+
+  updateReadState = (messageUID) => { // mark chat as read
+    const { firebase } = this.props
+    console.log(firebase.database().ref().child('messages').push().key)
+    const path = `messages/${messageUID}/read`;
+    let update = {}
+    update[path] = true;
+    firebase.database().ref().update(update)
+  }
+
+  componentWillReceiveProps(nextProps) { // update chat notifications
+    // console.log('will receive props')
+    // console.log(nextProps)
+    const { chats, messages, user } = nextProps
+    if (messages === this.props.messages) return null
+    if (isLoaded(chats) && !isEmpty(chats)) {
+      let newChats = [];
+      for (var key in messages) {
+        if (messages.hasOwnProperty(key)) {
+          if (messages[key].to === user.id && messages[key].read != undefined && !messages[key].read) {
+            // console.log(messages[key].read)
+            newChats.push(messages[key].by)
+            //this.props.updateNotification({type: 'chat', message: messages[key].by})
+          }          
+        }
+      }
+      this.props.updateNotification({type: 'chat', message: newChats})      
+    }
+  }
+
   render() {
-    const { chats, firebase, messages, user, users } = this.props
+    const { chats, firebase, messages, user, users, chatNotifications } = this.props
     const { chatting, chattingWith, expanded } = this.state
-    // console.log('firebase', firebase)
+    
     const chatsListGetProps = () => ({
       openChat: this.openChat,
     })
@@ -108,7 +142,7 @@ class Chat extends Component {
                 )}
               </h2>
             </header>
-            <ChatsList getProps={chatsListGetProps} users={users} chats={chats} user={user} messages={messages}/>
+            <ChatsList getProps={chatsListGetProps} users={users} chats={chats} user={user} messages={messages} chatNotifications={chatNotifications} />
           </div>
         )}
         {chatting && (
@@ -151,6 +185,9 @@ class Chat extends Component {
                       messages={messages}
                       user={user}
                       users={users}
+                      chatNotifications={chatNotifications}
+                      updateNotification={this.props.updateNotification}
+                      updateReadState={this.updateReadState}
                     />
                   ) : (
                     'Start chatting'
@@ -231,6 +268,11 @@ class Chat extends Component {
       </div>
     ) : (
       <div className="fixed pin-b pin-r   z-40">
+        {chatNotifications.length > 0 ? 
+          <span className="pin-t pin-l bg-red absolute rounded-full text-white text-sm w-4 h-4 text-center">{chatNotifications.length}</span>
+          :
+          null      
+        }
         <button
           onClick={() => this.stateSetExpanded(true)}
           className="w-16 h-16 mb-8 mr-8 rounded-full bg-blue-lighter lg:lt-shadow text-lg"
@@ -242,14 +284,26 @@ class Chat extends Component {
   }
 }
 
-const Chats = ({ chats, chattingWith, messages, user: { id, profileImage }, users }) => {
-  console.log('chatting with', chattingWith)
+const Chats = ({ chats, chattingWith, messages, user: { id, profileImage }, users, chatNotifications, updateNotification, updateReadState }) => {
+  // console.log('chatting with', chattingWith)
   const chatted = chats[id]
-  console.log(chatted)
+  // console.log('chatted', chatted)
+  // console.log('chatNotifications', chatNotifications)
+  // console.log('filtered', chatNotifications.filter(value => value != chattingWith))
+  if (chatNotifications.indexOf(chattingWith) > -1) {
+    updateNotification({type: 'chat', message: chatNotifications.filter(value => value != chattingWith)})
+    //updateReadState()
+  }  
   if (!chatted) return <p style={{ marginTop: '5rem' }} className="text-xs italic text-grey px-2">Type your message and send to start chatting!</p>
   if (chatted[chattingWith] === undefined) return <p style={{ marginTop: '5rem' }} className="text-xs italic text-grey px-2">Type your message and send to start chatting!</p>
   const myChats = chatted[chattingWith].messages
-  const chatsArray = Object.values(myChats).map(value => messages[value])
+  const chatsArray = Object.values(myChats).map(value => {
+    if (!messages[value].read && messages[value].by != id) {
+      console.log('setting read state', id);
+      updateReadState(value)
+    }    
+    return messages[value]
+  })
   console.log('chatsArray', chatsArray)
   return (
     <ul className="list-reset" style={{width: '17.5rem', marginBottom: '5rem', marginTop: '5rem'}}>
@@ -288,13 +342,21 @@ const mapStateToProps = ({
   fbDb: { data: { chats, messages } },
   user,
   users,
+  myNotifications: {chatNotifications,}
 }) => ({
   chats,
   messages,
   user,
   users,
+  chatNotifications,
 })
 
-const glueTo = compose(withFirebase, connect(mapStateToProps, null))
+const mapDispatchToProps = dispatch => ({
+  updateNotification: (obj) => {
+    dispatch(updateNotification(obj))
+  }
+})
+
+const glueTo = compose(withFirebase, connect(mapStateToProps, mapDispatchToProps))
 
 export default glueTo(Chat)

@@ -107,17 +107,20 @@ class Project extends Component {
                           liker: user.id,
                         },
                         token
-                      )
-                        .then(response => {
+                      ).then(response => {
+                          response.id = project.id; // id and liker not being returned from the back end, set here directly
+                          response.liker = user.id;
                           const oldLikes = !!project.likes ? project.likes : []
                           const updatedProject = {
                             ...project,
                             likes: [response, ...oldLikes],
                           }
-                          setProject(updatedProject)
+                          this.stateSetProject(updatedProject)
                           toast.success('Project liked')
                         })
-                        .catch(() => {})
+                        .catch((error) => {
+                          console.log(error)
+                        })
                         .then(() => {
                           this.stateSetLiking(false)
                         })
@@ -236,12 +239,20 @@ const mapDispatchToProps = dispatch => ({
     }),
   likeProject: (data, token) =>
     dispatch(async (dispatch, getState, { network }) => {
-      const response = await requestHandler(network.projects.likeProject)({
-        params: data,
-        token,
-      })
-      // dispatch(likedProject(response))
-      return Promise.resolve(response)
+      try {
+        const response = await requestHandler(network.projects.likeProject)({
+          params: data,
+          token,
+        })
+        if (response.status === 'success') { 
+          dispatch(likedProject(params))
+        }
+        return Promise.resolve(response)
+      } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+      }
+      
     }),
 })
 
